@@ -18,19 +18,20 @@ public class SanPham {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public long id;
-    public String tenSanPham;
+    public String tenSP;
     public int soLuong;
     public int trangThai;
 
     public SanPham() {
     }
 
-    public SanPham(long id, String tenSanPham, int soLuong, int trangThai) {
+    public SanPham(long id, String tenSP, int soLuong, int trangThai) {
         this.id = id;
-        this.tenSanPham = tenSanPham;
+        this.tenSP = tenSP;
         this.soLuong = soLuong;
         this.trangThai = trangThai;
     }
+
 
     public long getId() {
         return id;
@@ -40,13 +41,15 @@ public class SanPham {
         this.id = id;
     }
 
-    public String getTenSanPham() {
-        return tenSanPham;
+    public String getTenSP() {
+        return tenSP;
     }
 
-    public void setTenSanPham(String tenSanPham) {
-        this.tenSanPham = tenSanPham;
+    public void setTenSP(String tenSP) {
+        this.tenSP = tenSP;
     }
+
+
 
     public int getSoLuong() {
         return soLuong;
