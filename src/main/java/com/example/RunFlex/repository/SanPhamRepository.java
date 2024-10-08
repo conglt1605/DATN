@@ -5,7 +5,9 @@
 package com.example.RunFlex.repository;
 
 import com.example.RunFlex.model.SanPham;
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -14,5 +16,6 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface SanPhamRepository extends JpaRepository<SanPham, Long>{
-    
+    @Query(value = "Select * From SanPham where TrangThai = 1",nativeQuery = true)
+    List<SanPham> getAll();
 }

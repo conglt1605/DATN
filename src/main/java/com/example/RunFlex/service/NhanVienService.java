@@ -20,7 +20,7 @@ public class NhanVienService {
     private NhanVienRepository nhanvienRepository;
    
    public List<NhanVien> getAll(){
-       return nhanvienRepository.findAll();
+       return nhanvienRepository.getAll();
    }
    
    public NhanVien add(NhanVien nhanVien){
@@ -40,11 +40,12 @@ public class NhanVienService {
        nhanVienUpdate.setNgaySinh(nhanVien.getNgaySinh());
        nhanVienUpdate.setNgayTuyenDung(nhanVien.getNgayTuyenDung());
        nhanVienUpdate.setNgayNghiViec(nhanVien.getNgayNghiViec());
-       nhanVienUpdate.setTrangThai(nhanVien.getTrangThai());
        return nhanvienRepository.save(nhanVienUpdate);
    }
    
    public void delete(Long id){
-       nhanvienRepository.deleteById(id);
+       NhanVien nhanVienUpdate = nhanvienRepository.findById(id).orElseThrow();
+       nhanVienUpdate.setTrangThai(0);
+       nhanvienRepository.save(nhanVienUpdate);
    }
 }
