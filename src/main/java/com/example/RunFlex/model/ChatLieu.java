@@ -11,23 +11,22 @@ import jakarta.persistence.Id;
 
 /**
  *
- * @author Admin
+ * @author Cong
  */
 @Entity
-public class MauSac {
-    @Id
+public class ChatLieu {
+        @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public long id;
-    public String tenMauSac;
+    public String tenChatLieu;
     public int trangThai;
 
-    public MauSac() {
+    public ChatLieu() {
     }
 
-
-    public MauSac(long id, String tenMauSac, int trangThai) {
+    public ChatLieu(long id, String tenChatLieu, int trangThai) {
         this.id = id;
-        this.tenMauSac = tenMauSac;
+        this.tenChatLieu = tenChatLieu;
         this.trangThai = trangThai;
     }
 
@@ -35,25 +34,24 @@ public class MauSac {
         return id;
     }
 
-    public String getTenMauSac() {
-        return tenMauSac;
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getTenChatLieu() {
+        return tenChatLieu;
+    }
+
+    public void setTenChatLieu(String tenChatLieu) {
+        this.tenChatLieu = tenChatLieu;
     }
 
     public int getTrangThai() {
         return trangThai;
     }
 
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public void setTenMauSac(String tenMauSac) {
-        this.tenMauSac = tenMauSac;
-    }
-
     public void setTrangThai(int trangThai) {
         this.trangThai = trangThai;
     }
-
-
+    
 }

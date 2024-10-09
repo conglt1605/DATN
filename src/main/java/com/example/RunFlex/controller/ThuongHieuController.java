@@ -5,7 +5,9 @@
 package com.example.RunFlex.controller;
 
 import com.example.RunFlex.model.MauSac;
+import com.example.RunFlex.model.ThuongHieu;
 import com.example.RunFlex.service.MauSacService;
+import com.example.RunFlex.service.ThuongHieuService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,33 +22,32 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  *
- * @author Admin
+ * @author Cong
  */
 @RestController
-@Controller
-@RequestMapping("/mausac")
-public class MauSacController {
+@RequestMapping("/thuonghieu")
+public class ThuongHieuController {
 
     @Autowired
-    private MauSacService mauSacService;
+    private ThuongHieuService thuongHieuService;
 
     @GetMapping()
-    public List<MauSac> getAll() {
-        return mauSacService.getAll();
+    public List<ThuongHieu> getAll() {
+        return thuongHieuService.getAll();
     }
 
     @PostMapping()
-    public MauSac add(@RequestBody MauSac mauSac) {
-        return mauSacService.add(mauSac);
+    public ThuongHieu add(@RequestBody ThuongHieu thuongHieu) {
+        return thuongHieuService.add(thuongHieu);
     }
 
     @PutMapping("/{id}")
-    public MauSac update(@RequestBody MauSac mauSac, @PathVariable Long id) {
-        return mauSacService.update(id, mauSac);
+    public ThuongHieu update(@RequestBody ThuongHieu thuongHieu, @PathVariable Long id) {
+        return thuongHieuService.update(id, thuongHieu);
     }
 
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) {
-        mauSacService.delete(id);
+        thuongHieuService.delete(id);
     }
 }

@@ -11,23 +11,23 @@ import jakarta.persistence.Id;
 
 /**
  *
- * @author Admin
+ * @author Cong
  */
 @Entity
-public class MauSac {
+public class KichCo {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public long id;
-    public String tenMauSac;
+    public int soKichCo;
     public int trangThai;
 
-    public MauSac() {
+    public KichCo() {
     }
 
-
-    public MauSac(long id, String tenMauSac, int trangThai) {
+    public KichCo(long id, int soKichCo, int trangThai) {
         this.id = id;
-        this.tenMauSac = tenMauSac;
+        this.soKichCo = soKichCo;
         this.trangThai = trangThai;
     }
 
@@ -35,25 +35,25 @@ public class MauSac {
         return id;
     }
 
-    public String getTenMauSac() {
-        return tenMauSac;
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public int getSoKichCo() {
+        return soKichCo;
+    }
+
+    public void setSoKichCo(int soKichCo) {
+        this.soKichCo = soKichCo;
     }
 
     public int getTrangThai() {
         return trangThai;
     }
 
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public void setTenMauSac(String tenMauSac) {
-        this.tenMauSac = tenMauSac;
-    }
-
     public void setTrangThai(int trangThai) {
         this.trangThai = trangThai;
     }
-
-
+    
+    
 }
