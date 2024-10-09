@@ -8,6 +8,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import java.util.Date;
 
 /**
@@ -29,20 +32,21 @@ public class HoaDon {
     private int tongSoTien;
     private String moTa;
     private int trangThai;
+        @ManyToOne
+    @JoinColumn(name = "ID_NhanVien")
+    private NhanVien nhanVien;
     
-//    @ManyToOne
-//    @JoinColumn(name = "ID_Voucher")
-//    private Voucher voucher;
-//    
-//    @ManyToOne
-//    @JoinColumn(name = "ID_NhanVien")
-//    private NhanVien nhanVien;
-//    
+    @ManyToOne
+    @JoinColumn(name = "ID_Voucher")
+    private Voucher voucher;
+    
+
+    
 
     public HoaDon() {
     }
 
-    public HoaDon(Long id, String phuongThucThanhToan, String hinhThucMuaHang, int phiShip, Date ngayTao, Date ngayHoanTra, Date ngayGiaoHang, String diaChiGiaoHang, int tongSoTien, String moTa, int trangThai) {
+    public HoaDon(Long id, String phuongThucThanhToan, String hinhThucMuaHang, int phiShip, Date ngayTao, Date ngayHoanTra, Date ngayGiaoHang, String diaChiGiaoHang, int tongSoTien, String moTa, int trangThai, Voucher voucher, NhanVien nhanVien) {
         this.id = id;
         this.phuongThucThanhToan = phuongThucThanhToan;
         this.hinhThucMuaHang = hinhThucMuaHang;
@@ -54,7 +58,11 @@ public class HoaDon {
         this.tongSoTien = tongSoTien;
         this.moTa = moTa;
         this.trangThai = trangThai;
+        this.voucher = voucher;
+        this.nhanVien = nhanVien;
     }
+
+
 
     public Long getId() {
         return id;
@@ -142,6 +150,22 @@ public class HoaDon {
 
     public void setTrangThai(int trangThai) {
         this.trangThai = trangThai;
+    }
+
+    public Voucher getVoucher() {
+        return voucher;
+    }
+
+    public void setVoucher(Voucher voucher) {
+        this.voucher = voucher;
+    }
+
+    public NhanVien getNhanVien() {
+        return nhanVien;
+    }
+
+    public void setNhanVien(NhanVien nhanVien) {
+        this.nhanVien = nhanVien;
     }
 
     

@@ -8,6 +8,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import java.sql.Date;
 
 /**
@@ -26,7 +27,7 @@ public class NhanVien {
     private String email;
     private String soDienThoai;
     private String diaChi;
-    private Date ngaySinh;
+    private Date ngaySinh;  
     private Date ngayTuyenDung;
     private Date ngayNghiViec;
     private int trangThai;
@@ -56,6 +57,11 @@ public class NhanVien {
     public void setId(Long id) {
         this.id = id;
     }
+
+
+
+
+
 
     public String getMaNhanVien() {
         return maNhanVien;

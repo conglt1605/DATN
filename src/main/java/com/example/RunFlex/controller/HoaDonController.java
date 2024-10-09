@@ -8,6 +8,7 @@ import com.example.RunFlex.model.HoaDon;
 import com.example.RunFlex.model.SanPham;
 import com.example.RunFlex.service.HoaDonService;
 import java.util.List;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,7 +27,7 @@ public class HoaDonController {
     private HoaDonService hoaDonService;
     
     @GetMapping()
-    public List<HoaDon> getAll(){
+    public List<Map<String,Object>> getAll(){
         return hoaDonService.getAll();
     }
     

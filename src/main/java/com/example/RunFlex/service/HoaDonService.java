@@ -11,6 +11,7 @@ import com.example.RunFlex.repository.NhanVienRepository;
 import java.util.Date;
 
 import java.util.List;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,8 +24,8 @@ public class HoaDonService {
      @Autowired 
     private HoaDonRepository hoaDonRepository;
    
-   public List<HoaDon> getAll(){
-       return hoaDonRepository.findAll();
+   public List<Map<String,Object>> getAll(){
+       return hoaDonRepository.getAll();
    }
    
    public HoaDon add(HoaDon hoaDon){
