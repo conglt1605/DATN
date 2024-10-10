@@ -11,51 +11,48 @@ import jakarta.persistence.Id;
 
 /**
  *
- * @author Cong
+ * @author Admin
  */
 @Entity
-public class SanPham {
+public class DeGiay {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public long id;
-    public String tenSanPham;
+    public String tenDeGiay;
     public int trangThai;
 
-    public SanPham() {
+    public DeGiay() {
     }
 
-    public SanPham(long id, String tenSanPham, int trangThai) {
+    public DeGiay(long id, String tenDeGiay, int trangThai) {
         this.id = id;
-        this.tenSanPham = tenSanPham;
+        this.tenDeGiay = tenDeGiay;
         this.trangThai = trangThai;
     }
-
-
-
 
     public long getId() {
         return id;
     }
 
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getTenSanPham() {
-        return tenSanPham;
-    }
-
-    public void setTenSanPham(String tenSanPham) {
-        this.tenSanPham = tenSanPham;
+    public String getTenDeGiay() {
+        return tenDeGiay;
     }
 
     public int getTrangThai() {
         return trangThai;
     }
 
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public void setTenDeGiay(String tenDeGiay) {
+        this.tenDeGiay = tenDeGiay;
+    }
+
     public void setTrangThai(int trangThai) {
         this.trangThai = trangThai;
     }
-    
-    
+
 }

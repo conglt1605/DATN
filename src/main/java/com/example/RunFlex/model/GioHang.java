@@ -8,30 +8,32 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 
 /**
  *
  * @author Cong
  */
 @Entity
-public class SanPham {
+public class GioHang {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public long id;
-    public String tenSanPham;
     public int trangThai;
+    
+    @OneToOne
+    @JoinColumn(name = "ID_KhachHang")
+    private KhachHang khachHang;
 
-    public SanPham() {
+    public GioHang() {
     }
 
-    public SanPham(long id, String tenSanPham, int trangThai) {
+    public GioHang(long id, int trangThai, KhachHang khachHang) {
         this.id = id;
-        this.tenSanPham = tenSanPham;
         this.trangThai = trangThai;
+        this.khachHang = khachHang;
     }
-
-
-
 
     public long getId() {
         return id;
@@ -41,14 +43,6 @@ public class SanPham {
         this.id = id;
     }
 
-    public String getTenSanPham() {
-        return tenSanPham;
-    }
-
-    public void setTenSanPham(String tenSanPham) {
-        this.tenSanPham = tenSanPham;
-    }
-
     public int getTrangThai() {
         return trangThai;
     }
@@ -56,6 +50,13 @@ public class SanPham {
     public void setTrangThai(int trangThai) {
         this.trangThai = trangThai;
     }
-    
+
+    public KhachHang getKhachHang() {
+        return khachHang;
+    }
+
+    public void setKhachHang(KhachHang khachHang) {
+        this.khachHang = khachHang;
+    }
     
 }

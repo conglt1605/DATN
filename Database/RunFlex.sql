@@ -8,8 +8,7 @@ use RunFlex
 
 create table SanPham(
 ID int primary key identity(1,1),
-TenSP nvarchar(255) not null,
-SoLuong int not null,
+TenSanPham nvarchar(255) not null,
 TrangThai int not null
 )
 
@@ -109,7 +108,7 @@ TrangThai int not null
 
 create table GioHang(
 ID int primary key identity(1,1),
-ID_KhachHang int not null,
+ID_KhachHang int not null unique,
 TrangThai int not null
 foreign key (ID_KhachHang) references KhachHang(ID)
 )
@@ -120,7 +119,7 @@ ID_NhanVien int not null,
 ID_Voucher int null,
 PhuongThucThanhToan nvarchar(255) not null,
 HinhThucMuaHang nvarchar(255) not null,
-PhiShip varchar(20) not null,
+PhiShip varchar(20) ,
 NgayTao date not null,
 NgayHoanTra date ,
 NgayGiaoHang date ,

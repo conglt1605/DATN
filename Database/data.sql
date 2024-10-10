@@ -1,16 +1,16 @@
 ﻿-- Dữ liệu bảng SanPham (Giày thể thao)
-INSERT INTO SanPham (TenSP, SoLuong, TrangThai)
+INSERT INTO SanPham (TenSanPham,  TrangThai)
 VALUES
-('Nike Air Max 97', 50, 1),
-('Adidas Ultraboost 21', 30, 1),
-('Puma RS-X', 40, 1),
-('New Balance 574', 25, 1),
-('Reebok Nano X1', 35, 1),
-('Asics Gel-Nimbus 23', 20, 1),
-('Under Armour HOVR Phantom', 10, 1),
-('Saucony Endorphin Pro', 15, 1),
-('Mizuno Wave Rider 25', 60, 1),
-('Hoka One One Clifton 8', 45, 1);
+('Nike Air Max 97',  1),
+('Adidas Ultraboost 21', 1),
+('Puma RS-X', 1),
+('New Balance 574',  1),
+('Reebok Nano X1', 1),
+('Asics Gel-Nimbus 23', 1),
+('Under Armour HOVR Phantom', 1),
+('Saucony Endorphin Pro',  1),
+('Mizuno Wave Rider 25', 1),
+('Hoka One One Clifton 8', 1);
 
 -- Dữ liệu bảng MauSac (Màu sắc cho giày thể thao)
 INSERT INTO MauSac (TenMauSac, TrangThai)
@@ -195,18 +195,18 @@ VALUES
 (10, 1);
 
 -- Dữ liệu bảng HoaDon (Hóa đơn)
-INSERT INTO HoaDon (ID_NhanVien, ID_Voucher, PhuongThucThanhToan, HinhThucMuaHang, PhiShip, NgayTao, NgayDatHang, NgayHoanTra, NgayGiaoHang, DiaChiGiaoHang, TongSoTien, MoTa, TrangThai)
+INSERT INTO HoaDon (ID_NhanVien, ID_Voucher, PhuongThucThanhToan, HinhThucMuaHang, PhiShip, NgayTao, NgayHoanTra, NgayGiaoHang, DiaChiGiaoHang, TongSoTien, MoTa, TrangThai)
 VALUES
-(1, 1, 'Chuyển khoản', 'Online', '0', '2024-01-01', '2024-01-02', NULL, '2024-01-05', 'Hà Nội', '1000000', 'Thanh toán thành công', 1),
-(2, 2, 'Tiền mặt', 'Offline', '0', '2024-01-03', '2024-01-04', NULL, '2024-01-07', 'Hồ Chí Minh', '1500000', 'Thanh toán thành công', 1),
-(3, 3, 'Chuyển khoản', 'Online', '0', '2024-01-05', '2024-01-06', NULL, '2024-01-08', 'Đà Nẵng', '2000000', 'Thanh toán thành công', 1),
-(4, 4, 'Tiền mặt', 'Offline', '0', '2024-01-07', '2024-01-08', NULL, '2024-01-10', 'Cần Thơ', '2500000', 'Thanh toán thành công', 1),
-(5, 5, 'Chuyển khoản', 'Online', '0', '2024-01-09', '2024-01-10', NULL, '2024-01-12', 'Nha Trang', '3000000', 'Thanh toán thành công', 1),
-(6, 6, 'Chuyển khoản', 'Online', '50000', '2024-01-11', '2024-01-12', NULL, '2024-01-15', 'Huế', '3500000', 'Thanh toán thành công', 1),
-(7, 7, 'Tiền mặt', 'Offline', '50000', '2024-01-13', '2024-01-14', NULL, '2024-01-17', 'Hà Nội', '4000000', 'Thanh toán thành công', 1),
-(8, 8, 'Chuyển khoản', 'Online', '50000', '2024-01-15', '2024-01-16', NULL, '2024-01-19', 'Hồ Chí Minh', '4500000', 'Thanh toán thành công', 1),
-(9, 9, 'Tiền mặt', 'Offline', '50000', '2024-01-17', '2024-01-18', NULL, '2024-01-20', 'Đà Nẵng', '5000000', 'Thanh toán thành công', 1),
-(10, 10, 'Chuyển khoản', 'Online', '50000', '2024-01-19', '2024-01-20', NULL, '2024-01-22', 'Cần Thơ', '5500000', 'Thanh toán thành công', 1);
+(1, 1, 'Chuyển khoản', 'Online', '0', '2024-01-01', NULL, '2024-01-05', 'Hà Nội', '1000000', 'Thanh toán thành công', 1),
+(2, 2, 'Tiền mặt', 'Offline', '0', '2024-01-03', NULL, '2024-01-07', 'Hồ Chí Minh', '1500000', 'Thanh toán thành công', 1),
+(3, 3, 'Chuyển khoản', 'Online', '0', '2024-01-05',  NULL, '2024-01-08', 'Đà Nẵng', '2000000', 'Thanh toán thành công', 1),
+(4, 4, 'Tiền mặt', 'Offline', '0', '2024-01-07',  NULL, '2024-01-10', 'Cần Thơ', '2500000', 'Thanh toán thành công', 1),
+(5, 5, 'Chuyển khoản', 'Online', '0', '2024-01-09',  NULL, '2024-01-12', 'Nha Trang', '3000000', 'Thanh toán thành công', 1),
+(6, 6, 'Chuyển khoản', 'Online', '50000', '2024-01-11', NULL, '2024-01-15', 'Huế', '3500000', 'Thanh toán thành công', 1),
+(7, 7, 'Tiền mặt', 'Offline', '50000', '2024-01-13',  NULL, '2024-01-17', 'Hà Nội', '4000000', 'Thanh toán thành công', 1),
+(8, 8, 'Chuyển khoản', 'Online', '50000', '2024-01-15', NULL, '2024-01-19', 'Hồ Chí Minh', '4500000', 'Thanh toán thành công', 1),
+(9, 9, 'Tiền mặt', 'Offline', '50000', '2024-01-17',  NULL, '2024-01-20', 'Đà Nẵng', '5000000', 'Thanh toán thành công', 1),
+(10, 10, 'Chuyển khoản', 'Online', '50000', '2024-01-19',  NULL, '2024-01-22', 'Cần Thơ', '5500000', 'Thanh toán thành công', 1);
 
 -- Dữ liệu bảng ChiTietSanPham 
 INSERT INTO ChiTietSanPham (ID_SanPham, ID_NhanVien, ID_MauSac, ID_ThuongHieu, ID_DanhMuc, ID_ChatLieu, ID_DeGiay, ID_KichCo, ID_XuatXu, ID_AnhGiay, ID_KhuyenMai, MaSanPham, SoLuong, GiaBan, GiaNhap, DoiTuongSuDung, MoTa, NgayTao, TrangThai)

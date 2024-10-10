@@ -33,8 +33,7 @@ public class SanPhamService {
     public SanPham update(long id, SanPham sanPham) {
         SanPham sanPhamUpdate = sanPhamRepository.findById(id).orElseThrow();
 
-        sanPhamUpdate.setTenSP(sanPham.getTenSP());
-        sanPhamUpdate.setSoLuong(sanPham.getSoLuong());
+        sanPhamUpdate.setTenSanPham(sanPham.getTenSanPham());
         return sanPhamRepository.save(sanPhamUpdate);
     }
 

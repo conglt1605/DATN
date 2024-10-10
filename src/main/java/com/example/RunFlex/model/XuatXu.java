@@ -11,27 +11,25 @@ import jakarta.persistence.Id;
 
 /**
  *
- * @author Cong
+ * @author Admin
  */
 @Entity
-public class SanPham {
+public class XuatXu {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public long id;
-    public String tenSanPham;
+    public String tenXuatXu;
     public int trangThai;
 
-    public SanPham() {
+    public XuatXu() {
     }
 
-    public SanPham(long id, String tenSanPham, int trangThai) {
+    public XuatXu(long id, String tenXuatXu, int trangThai) {
         this.id = id;
-        this.tenSanPham = tenSanPham;
+        this.tenXuatXu = tenXuatXu;
         this.trangThai = trangThai;
     }
-
-
-
 
     public long getId() {
         return id;
@@ -41,12 +39,12 @@ public class SanPham {
         this.id = id;
     }
 
-    public String getTenSanPham() {
-        return tenSanPham;
+    public String getTenXuatXu() {
+        return tenXuatXu;
     }
 
-    public void setTenSanPham(String tenSanPham) {
-        this.tenSanPham = tenSanPham;
+    public void setTenXuatXu(String tenXuatXu) {
+        this.tenXuatXu = tenXuatXu;
     }
 
     public int getTrangThai() {
@@ -56,6 +54,6 @@ public class SanPham {
     public void setTrangThai(int trangThai) {
         this.trangThai = trangThai;
     }
-    
-    
+
+
 }
