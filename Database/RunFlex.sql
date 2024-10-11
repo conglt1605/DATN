@@ -168,12 +168,12 @@ foreign key (ID_KhuyenMai) references KhuyenMai(ID)
 create table ChiTietGioHang(
 ID int primary key identity(1,1),
 ID_GioHang int not null,
-ID_SanPhamChiTiet int not null,
+ID_ChiTietSanPham int not null,
 SoLuong varchar(20) not null,
 NgayTao date not null,
 TrangThai int not null
 foreign key (ID_GioHang) references GioHang(ID),
-foreign key (ID_SanPhamChiTiet) references ChiTietSanPham(ID)
+foreign key (ID_ChiTietSanPham) references ChiTietSanPham(ID)
 )
 
 create table ChiTietHoaDon(

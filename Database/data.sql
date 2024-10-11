@@ -233,7 +233,7 @@ VALUES
 (10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 'SP20', 90, '4200000', '3500000', 'Nam', 'Giày thể thao nam Vans Old Skool', '2024-01-20', 1);
 
 -- Dữ liệu bảng ChiTietGioHang (Chi tiết giỏ hàng)
-INSERT INTO ChiTietGioHang (ID_GioHang, ID_SanPhamChiTiet, SoLuong, NgayTao, TrangThai)
+INSERT INTO ChiTietGioHang (ID_GioHang, ID_ChiTietSanPham, SoLuong, NgayTao, TrangThai)
 VALUES
 (1, 1, '2', '2024-01-01', 1),
 (2, 2, '1', '2024-01-02', 1),
