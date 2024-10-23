@@ -22,5 +22,14 @@ public interface HoaDonRepository extends JpaRepository<HoaDon, Long> {
             + "from hoadon hd "
             + "join nhanvien nv on hd.ID_NhanVien=nv.ID "
             + "join voucher vc on hd.ID_Voucher=vc.ID", nativeQuery = true)
-    List<Map<String,Object>> getAll();
+    List<Map<String, Object>> getAll();
+
+    @Query(value = "SELECT \n"
+            + "YEAR(NgayTao) AS Nam, \n"
+            + "MONTH(NgayTao) AS Thang,\n"
+            + "SUM(CAST(TongSoTien AS NUMERIC(18,2))) AS TongTien \n"
+            + "FROM HoaDon \n"
+            + "GROUP BY YEAR(NgayTao), MONTH(NgayTao)\n "
+            + "ORDER BY Nam, Thang;", nativeQuery = true)
+    List<Map<String, Object>> getDoanhThu();
 }

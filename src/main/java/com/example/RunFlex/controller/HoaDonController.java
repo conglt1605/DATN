@@ -31,6 +31,12 @@ public class HoaDonController {
         return hoaDonService.getAll();
     }
     
+    @GetMapping("/doanhthu")
+    public List<Map<String,Object>> getDoanhThu(){
+        return hoaDonService.getDoanhThu();
+    }
+    
+    
     @PostMapping()
     public HoaDon add(@RequestBody HoaDon hoaDon){
         return hoaDonService.add(hoaDon);

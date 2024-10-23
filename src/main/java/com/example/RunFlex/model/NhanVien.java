@@ -24,31 +24,37 @@ public class NhanVien {
     private String tenNhanVien;
     private String matKhau;
     private String tenTaiKhoan;
+    private String cccd;
     private String email;
     private String soDienThoai;
     private String diaChi;
     private Date ngaySinh;  
     private Date ngayTuyenDung;
     private Date ngayNghiViec;
+    private int vaiTro;
     private int trangThai;
 
     public NhanVien() {
     }
 
-    public NhanVien(Long id, String maNhanVien, String tenNhanVien, String matKhau, String tenTaiKhoan, String email, String soDienThoai, String diaChi, Date ngaySinh, Date ngayTuyenDung, Date ngayNghiViec, int trangThai) {
+    public NhanVien(Long id, String maNhanVien, String tenNhanVien, String matKhau, String tenTaiKhoan, String cccd, String email, String soDienThoai, String diaChi, Date ngaySinh, Date ngayTuyenDung, Date ngayNghiViec, int vaiTro, int trangThai) {
         this.id = id;
         this.maNhanVien = maNhanVien;
         this.tenNhanVien = tenNhanVien;
         this.matKhau = matKhau;
         this.tenTaiKhoan = tenTaiKhoan;
+        this.cccd = cccd;
         this.email = email;
         this.soDienThoai = soDienThoai;
         this.diaChi = diaChi;
         this.ngaySinh = ngaySinh;
         this.ngayTuyenDung = ngayTuyenDung;
         this.ngayNghiViec = ngayNghiViec;
+        this.vaiTro = vaiTro;
         this.trangThai = trangThai;
     }
+
+
 
     public Long getId() {
         return id;
@@ -56,6 +62,22 @@ public class NhanVien {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getCccd() {
+        return cccd;
+    }
+
+    public void setCccd(String cccd) {
+        this.cccd = cccd;
+    }
+
+    public int getVaiTro() {
+        return vaiTro;
+    }
+
+    public void setVaiTro(int vaiTro) {
+        this.vaiTro = vaiTro;
     }
 
 

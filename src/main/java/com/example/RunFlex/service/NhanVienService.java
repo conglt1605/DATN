@@ -23,6 +23,22 @@ public class NhanVienService {
        return nhanvienRepository.getAll();
    }
    
+   public List<NhanVien> getNhanVienHoatDong(){
+       return nhanvienRepository.getNhanVienHoatDong();
+   }
+   
+   public List<NhanVien> getNhanVienNghiViec(){
+       return nhanvienRepository.getNhanVienNghiViec();
+   }
+   
+   public List<NhanVien> getQuanLy(){
+       return nhanvienRepository.getQuanLy();
+   }
+   
+   public List<NhanVien> getNhanVien(){
+       return nhanvienRepository.getNhanVien();
+   }
+   
    public NhanVien add(NhanVien nhanVien){
        nhanVien.setTrangThai(1);
        return nhanvienRepository.save(nhanVien);
@@ -35,12 +51,14 @@ public class NhanVienService {
        nhanVienUpdate.setTenNhanVien(nhanVien.getTenNhanVien());
        nhanVienUpdate.setMatKhau(nhanVien.getMatKhau());
        nhanVienUpdate.setTenTaiKhoan(nhanVien.getTenTaiKhoan());
+       nhanVienUpdate.setCccd(nhanVien.getCccd());
        nhanVienUpdate.setEmail(nhanVien.getEmail());
        nhanVienUpdate.setSoDienThoai(nhanVien.getSoDienThoai());
        nhanVienUpdate.setDiaChi(nhanVien.getDiaChi());
        nhanVienUpdate.setNgaySinh(nhanVien.getNgaySinh());
        nhanVienUpdate.setNgayTuyenDung(nhanVien.getNgayTuyenDung());
        nhanVienUpdate.setNgayNghiViec(nhanVien.getNgayNghiViec());
+       nhanVienUpdate.setVaiTro(nhanVien.getVaiTro());
        return nhanvienRepository.save(nhanVienUpdate);
    }
    

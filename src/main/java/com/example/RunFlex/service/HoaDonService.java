@@ -28,6 +28,10 @@ public class HoaDonService {
        return hoaDonRepository.getAll();
    }
    
+   public List<Map<String,Object>> getDoanhThu(){
+       return hoaDonRepository.getDoanhThu();
+   }
+   
    public HoaDon add(HoaDon hoaDon){
        hoaDon.setTrangThai(1);
        hoaDon.setNgayTao(new Date());

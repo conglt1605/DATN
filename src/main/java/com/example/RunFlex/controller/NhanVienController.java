@@ -30,9 +30,29 @@ public class NhanVienController {
     @Autowired
     private NhanVienService nhanvienService;
     
-    @GetMapping()
+    @GetMapping("/all")
     public List<NhanVien> getAll(){
         return nhanvienService.getAll();
+    }
+    
+    @GetMapping("/hoatdong")
+    public List<NhanVien> getNhanVienHoatDong(){
+        return nhanvienService.getNhanVienHoatDong();
+    }
+    
+    @GetMapping("/nghiviec")
+    public List<NhanVien> getNhanVienNghiViec(){
+        return nhanvienService.getNhanVienNghiViec();
+    }
+    
+    @GetMapping("/quanly")
+    public List<NhanVien> getQuanLy(){
+        return nhanvienService.getQuanLy();
+    }
+    
+    @GetMapping("/nhanvien")
+    public List<NhanVien> getNhanVien(){
+        return nhanvienService.getNhanVien();
     }
     
     @PostMapping()
