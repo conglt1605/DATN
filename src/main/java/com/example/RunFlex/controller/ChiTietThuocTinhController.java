@@ -4,10 +4,10 @@
  */
 package com.example.RunFlex.controller;
 
-import com.example.RunFlex.model.ChatLieu;
-import com.example.RunFlex.model.ChiTietGioHang;
-import com.example.RunFlex.service.ChatLieuService;
-import com.example.RunFlex.service.ChiTietGioHangService;
+import com.example.RunFlex.model.ChiTietThuocTinh;
+import com.example.RunFlex.model.DanhMuc;
+import com.example.RunFlex.service.ChiTietThuocTinhService;
+import com.example.RunFlex.service.DanhMucService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -24,28 +24,28 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Cong
  */
 @RestController
-@RequestMapping("/chitietgiohang")
-public class ChiTietGioHangController {
+@RequestMapping("/chitietthuoctinh")
+public class ChiTietThuocTinhController {
     @Autowired
-    private ChiTietGioHangService chiTietGioHangService;
+    private ChiTietThuocTinhService chiTietThuocTinhService;
 
     @GetMapping()
-    public List<ChiTietGioHang> getAll() {
-        return chiTietGioHangService.getAll();
+    public List<ChiTietThuocTinh> getAll() {
+        return chiTietThuocTinhService.getAll();
     }
 
     @PostMapping()
-    public ChiTietGioHang add(@RequestBody ChiTietGioHang chiTietGioHang) {
-        return chiTietGioHangService.add(chiTietGioHang);
+    public ChiTietThuocTinh add(@RequestBody ChiTietThuocTinh chiTietThuocTinh) {
+        return chiTietThuocTinhService.add(chiTietThuocTinh);
     }
 
     @PutMapping("/{id}")
-    public ChiTietGioHang update(@RequestBody ChiTietGioHang chiTietGioHang, @PathVariable Long id) {
-        return chiTietGioHangService.update(id, chiTietGioHang);
+    public ChiTietThuocTinh update(@RequestBody ChiTietThuocTinh chiTietThuocTinh, @PathVariable Long id) {
+        return chiTietThuocTinhService.update(id, chiTietThuocTinh);
     }
 
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) {
-        chiTietGioHangService.delete(id);
+        chiTietThuocTinhService.delete(id);
     }
 }

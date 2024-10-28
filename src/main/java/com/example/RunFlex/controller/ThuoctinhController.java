@@ -4,11 +4,11 @@
  */
 package com.example.RunFlex.controller;
 
-import com.example.RunFlex.model.MauSac;
-import com.example.RunFlex.service.MauSacService;
+import com.example.RunFlex.model.ThuocTinh;
+import com.example.RunFlex.model.ThuongHieu;
+import com.example.RunFlex.service.ThuocTinhService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,33 +20,32 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  *
- * @author Admin
+ * @author Cong
  */
 @RestController
-@Controller
-@RequestMapping("/mausac")
-public class MauSacController {
+@RequestMapping("/thuoctinh")
+public class ThuoctinhController {
 
     @Autowired
-    private MauSacService mauSacService;
+    private ThuocTinhService thuocTinhService;
 
     @GetMapping()
-    public List<MauSac> getAll() {
-        return mauSacService.getAll();
+    public List<ThuocTinh> getAll() {
+        return thuocTinhService.getAll();
     }
 
     @PostMapping()
-    public MauSac add(@RequestBody MauSac mauSac) {
-        return mauSacService.add(mauSac);
+    public ThuocTinh add(@RequestBody ThuocTinh thuocTinh) {
+        return thuocTinhService.add(thuocTinh);
     }
 
     @PutMapping("/{id}")
-    public MauSac update(@RequestBody MauSac mauSac, @PathVariable Long id) {
-        return mauSacService.update(id, mauSac);
+    public ThuocTinh update(@RequestBody ThuocTinh thuocTinh, @PathVariable Long id) {
+        return thuocTinhService.update(id, thuocTinh);
     }
 
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) {
-        mauSacService.delete(id);
+        thuocTinhService.delete(id);
     }
 }

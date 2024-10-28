@@ -8,27 +8,36 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 /**
  *
  * @author Cong
  */
 @Entity
-public class ChatLieu {
+public class ChiTietThuocTinh {
         @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public long id;
-    public String tenChatLieu;
-    public int trangThai;
+        public long  id;
+        public String  loai;
+        public int  trangThai;
+        
+        @ManyToOne
+        @JoinColumn(name = "ID_ThuocTinh")
+        private ThuocTinh thuocTinh;
 
-    public ChatLieu() {
+    public ChiTietThuocTinh() {
     }
 
-    public ChatLieu(long id, String tenChatLieu, int trangThai) {
+    public ChiTietThuocTinh(long id, String loai, int trangThai, ThuocTinh thuocTinh) {
         this.id = id;
-        this.tenChatLieu = tenChatLieu;
+        this.loai = loai;
         this.trangThai = trangThai;
+        this.thuocTinh = thuocTinh;
     }
+
+
 
     public long getId() {
         return id;
@@ -38,12 +47,12 @@ public class ChatLieu {
         this.id = id;
     }
 
-    public String getTenChatLieu() {
-        return tenChatLieu;
+    public String getLoai() {
+        return loai;
     }
 
-    public void setTenChatLieu(String tenChatLieu) {
-        this.tenChatLieu = tenChatLieu;
+    public void setLoai(String loai) {
+        this.loai = loai;
     }
 
     public int getTrangThai() {
@@ -53,5 +62,13 @@ public class ChatLieu {
     public void setTrangThai(int trangThai) {
         this.trangThai = trangThai;
     }
-    
+
+    public ThuocTinh getThuocTinh() {
+        return thuocTinh;
+    }
+
+    public void setThuocTinh(ThuocTinh thuocTinh) {
+        this.thuocTinh = thuocTinh;
+    }
+        
 }

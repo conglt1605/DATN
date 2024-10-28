@@ -1,51 +1,56 @@
 <!DOCTYPE html>
-<html ng-app="myApp">
+<html lang="vi">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quản lý Nhân Viên</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
-    <script src="js/index.js"></script>
+    <title>Thêm Sản Phẩm Mới - Admin</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 
-<body ng-controller="MainController">
-    <h1>Danh sách nhân viên</h1>
-    <table border="1">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Mã</th>
-                <th>Tên</th>
-                <th>Hành động</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr ng-repeat="nhanVien in nhanViens">
-                <td>{{ nhanVien.id }}</td>
-                <td>{{ nhanVien.maNhanVien }}</td>
-                <td>{{ nhanVien.tenNhanVien }}</td>
-                <td>
-                    <button ng-click="editData(nhanVien)">Sửa</button>
-                    <button ng-click="deleteData(nhanVien.id)">Xóa</button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+<body>
+    <h1>Thêm Sản Phẩm Mới</h1>
+    <form action="/admin/add-product" method="POST" enctype="multipart/form-data">
+        <!-- Tên Sản Phẩm -->
+        <label for="productName">Tên sản phẩm:</label>
+        <input type="text" id="productName" name="productName" required><br><br>
 
-    <h2>Thêm / Cập nhật nhân viên</h2>
-    <form>
-        <div>
-            <label>Mã:</label>
-            <input type="text" ng-model="nhanVien.ma">
-        </div>
-        <div>
-            <label>Tên:</label>
-            <input type="text" ng-model="nhanVien.ten">
-        </div>
-        <button type="button" ng-click="submitData()">Thêm mới</button>
-        <button type="button" ng-click="updateData()">Cập nhật</button>
-        <button type="button" ng-click="resetForm()">Làm mới</button>
+        <!-- Giá Sản Phẩm -->
+        <label for="price">Giá sản phẩm (VNĐ):</label>
+        <input type="number" id="price" name="price" min="0" required><br><br>
+
+        <!-- Mô Tả Sản Phẩm -->
+        <label for="description">Mô tả:</label>
+        <textarea id="description" name="description" rows="5" cols="50" placeholder="Mô tả sản phẩm..."></textarea><br><br>
+
+        <!-- Danh Mục -->
+        <label for="category">Danh mục:</label>
+        <select id="category" name="category">
+            <option value="sneaker">Sneaker</option>
+            <option value="running">Chạy bộ</option>
+            <option value="formal">Giày tây</option>
+        </select><br><br>
+
+        <!-- Số Lượng -->
+        <label for="quantity">Số lượng:</label>
+        <input type="number" id="quantity" name="quantity" min="1" required><br><br>
+
+        <!-- Ngày Thêm -->
+        <label for="addDate">Ngày thêm:</label>
+        <input type="date" id="addDate" name="addDate" required><br><br>
+
+        <!-- Ảnh Sản Phẩm -->
+        <label for="productImage">Hình ảnh:</label>
+        <input type="file" id="productImage" name="productImage" accept="image/*" required><br><br>
+
+        <!-- Trạng Thái Sản Phẩm -->
+        <label for="status">Trạng thái:</label>
+        <select id="status" name="status">
+            <option value="available">Còn hàng</option>
+            <option value="out_of_stock">Hết hàng</option>
+        </select><br><br>
+
+        <button type="submit">Thêm Sản Phẩm</button>
     </form>
 </body>
 

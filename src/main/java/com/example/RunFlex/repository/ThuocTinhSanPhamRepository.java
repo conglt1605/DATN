@@ -4,7 +4,8 @@
  */
 package com.example.RunFlex.repository;
 
-import com.example.RunFlex.model.MauSac;
+import com.example.RunFlex.model.ThuocTinh;
+import com.example.RunFlex.model.ThuocTinhSanPham;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -12,10 +13,10 @@ import org.springframework.stereotype.Repository;
 
 /**
  *
- * @author Admin
+ * @author Cong
  */
 @Repository
-public interface MauSacRepository extends JpaRepository<MauSac, Long>{
-    @Query(value = "select * from mausac where trangthai=1",nativeQuery = true)
-    List<MauSac> getAll();
+public interface ThuocTinhSanPhamRepository extends JpaRepository<ThuocTinhSanPham, Long>{
+        @Query(value = "Select * From ThuocTinhSanPham where TrangThai = 1", nativeQuery = true)
+    List<ThuocTinhSanPham> getAll();
 }

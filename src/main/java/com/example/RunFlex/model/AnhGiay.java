@@ -8,6 +8,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 /**
  *
@@ -21,15 +23,22 @@ public class AnhGiay {
     public long id;
     public String tenURL;
     public int trangThai;
+    
+    @ManyToOne
+    @JoinColumn(name = "ID_ChiTietSanPham")
+    private ChiTietSanPham chiTietSanPham;
 
     public AnhGiay() {
     }
 
-    public AnhGiay(long id, String tenURL, int trangThai) {
+    public AnhGiay(long id, String tenURL, int trangThai, ChiTietSanPham chiTietSanPham) {
         this.id = id;
         this.tenURL = tenURL;
         this.trangThai = trangThai;
+        this.chiTietSanPham = chiTietSanPham;
     }
+
+
 
     public long getId() {
         return id;
@@ -54,5 +63,14 @@ public class AnhGiay {
     public void setTrangThai(int trangThai) {
         this.trangThai = trangThai;
     }
+
+    public ChiTietSanPham getChiTietSanPham() {
+        return chiTietSanPham;
+    }
+
+    public void setChiTietSanPham(ChiTietSanPham chiTietSanPham) {
+        this.chiTietSanPham = chiTietSanPham;
+    }
+    
 
 }

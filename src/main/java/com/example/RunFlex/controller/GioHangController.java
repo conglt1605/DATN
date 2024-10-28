@@ -4,9 +4,7 @@
  */
 package com.example.RunFlex.controller;
 
-import com.example.RunFlex.model.DeGiay;
 import com.example.RunFlex.model.GioHang;
-import com.example.RunFlex.service.DeGiayService;
 import com.example.RunFlex.service.GioHangService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -5,9 +5,7 @@
 package com.example.RunFlex.service;
 
 import com.example.RunFlex.model.KichCo;
-import com.example.RunFlex.model.MauSac;
 import com.example.RunFlex.repository.KichCoRepository;
-import com.example.RunFlex.repository.MauSacRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

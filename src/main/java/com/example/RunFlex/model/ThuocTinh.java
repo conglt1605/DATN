@@ -8,26 +8,30 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import java.util.Date;
 
 /**
  *
- * @author Admin
+ * @author Cong
  */
 @Entity
-public class XuatXu {
-
+public class ThuocTinh {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public long id;
-    public String tenXuatXu;
+    public String tenThuocTinh;
+    public String moTa;
+    public Date ngayTao;
     public int trangThai;
 
-    public XuatXu() {
+    public ThuocTinh() {
     }
 
-    public XuatXu(long id, String tenXuatXu, int trangThai) {
+    public ThuocTinh(long id, String tenThuocTinh, String moTa, Date ngayTao, int trangThai) {
         this.id = id;
-        this.tenXuatXu = tenXuatXu;
+        this.tenThuocTinh = tenThuocTinh;
+        this.moTa = moTa;
+        this.ngayTao = ngayTao;
         this.trangThai = trangThai;
     }
 
@@ -39,12 +43,28 @@ public class XuatXu {
         this.id = id;
     }
 
-    public String getTenXuatXu() {
-        return tenXuatXu;
+    public String getTenThuocTinh() {
+        return tenThuocTinh;
     }
 
-    public void setTenXuatXu(String tenXuatXu) {
-        this.tenXuatXu = tenXuatXu;
+    public void setTenThuocTinh(String tenThuocTinh) {
+        this.tenThuocTinh = tenThuocTinh;
+    }
+
+    public String getMoTa() {
+        return moTa;
+    }
+
+    public void setMoTa(String moTa) {
+        this.moTa = moTa;
+    }
+
+    public Date getNgayTao() {
+        return ngayTao;
+    }
+
+    public void setNgayTao(Date ngayTao) {
+        this.ngayTao = ngayTao;
     }
 
     public int getTrangThai() {
@@ -54,6 +74,5 @@ public class XuatXu {
     public void setTrangThai(int trangThai) {
         this.trangThai = trangThai;
     }
-
-
+    
 }

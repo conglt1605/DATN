@@ -5,9 +5,7 @@
 package com.example.RunFlex.service;
 
 import com.example.RunFlex.model.AnhGiay;
-import com.example.RunFlex.model.ChatLieu;
 import com.example.RunFlex.repository.AnhGiayRepository;
-import com.example.RunFlex.repository.ChatLieuRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,6 +31,7 @@ public class AnhGiayService {
     public AnhGiay update(long id, AnhGiay anhGiay) {
         AnhGiay anhGiayUpdate = anhGiayRepository.findById(id).orElseThrow();
 
+        anhGiayUpdate.setChiTietSanPham(anhGiay.getChiTietSanPham());
         anhGiayUpdate.setTenURL(anhGiay.getTenURL());
         return anhGiayRepository.save(anhGiayUpdate);
     }

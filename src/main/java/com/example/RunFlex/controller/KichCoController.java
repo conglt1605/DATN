@@ -5,9 +5,7 @@
 package com.example.RunFlex.controller;
 
 import com.example.RunFlex.model.KichCo;
-import com.example.RunFlex.model.MauSac;
 import com.example.RunFlex.service.KichCoService;
-import com.example.RunFlex.service.MauSacService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

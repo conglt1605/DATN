@@ -5,7 +5,6 @@
 package com.example.RunFlex.repository;
 
 import com.example.RunFlex.model.KichCo;
-import com.example.RunFlex.model.MauSac;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

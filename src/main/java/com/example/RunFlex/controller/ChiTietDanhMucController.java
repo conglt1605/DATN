@@ -4,8 +4,10 @@
  */
 package com.example.RunFlex.controller;
 
-import com.example.RunFlex.model.ChiTietSanPham;
-import com.example.RunFlex.service.ChiTietSanPhamService;
+import com.example.RunFlex.model.ChiTietDanhMuc;
+import com.example.RunFlex.model.ChiTietHoaDon;
+import com.example.RunFlex.service.ChiTietDanhMucService;
+import com.example.RunFlex.service.ChiTietHoaDonService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -22,28 +24,28 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Cong
  */
 @RestController
-@RequestMapping("/chitietsanpham")
-public class ChiTietSanPhamController {
-    @Autowired
-    private ChiTietSanPhamService chiTietSanPhamService;
+@RequestMapping("/chitietdanhmuc")
+public class ChiTietDanhMucController {
+       @Autowired
+    private ChiTietDanhMucService chiTietDanhMucService;
 
     @GetMapping()
-    public List<ChiTietSanPham> getAll() {
-        return chiTietSanPhamService.getAll();
+    public List<ChiTietDanhMuc> getAll() {
+        return chiTietDanhMucService.getAll();
     }
 
     @PostMapping()
-    public ChiTietSanPham add(@RequestBody ChiTietSanPham chiTietSanPham) {
-        return chiTietSanPhamService.add(chiTietSanPham);
+    public ChiTietDanhMuc add(@RequestBody ChiTietDanhMuc chiTietDanhMuc) {
+        return chiTietDanhMucService.add(chiTietDanhMuc);
     }
 
     @PutMapping("/{id}")
-    public ChiTietSanPham update(@RequestBody ChiTietSanPham chiTietSanPham, @PathVariable Long id) {
-        return chiTietSanPhamService.update(id, chiTietSanPham);
+    public ChiTietDanhMuc update(@RequestBody ChiTietDanhMuc chiTietDanhMuc, @PathVariable Long id) {
+        return chiTietDanhMucService.update(id, chiTietDanhMuc);
     }
 
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) {
-        chiTietSanPhamService.delete(id);
+        chiTietDanhMucService.delete(id);
     }
 }

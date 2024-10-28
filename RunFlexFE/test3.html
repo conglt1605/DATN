@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thêm/Sửa sản phẩm</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f6fa;
+            padding: 40px;
+            color: #2f3640;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #34495e;
+        }
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: #34495e;
+        }
+        input[type="text"], textarea, input[type="number"] {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            background-color: #f8f9fa;
+        }
+        input[type="submit"] {
+            width: 100%;
+            padding: 15px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        input[type="submit"]:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <h1>Thêm/Sửa sản phẩm</h1>
+    <form action="submit_form.html" method="POST">
+        <label for="name">Tên sản phẩm:</label>
+        <input type="text" id="name" name="name" placeholder="Nhập tên sản phẩm" required>
+
+        <label for="description">Mô tả:</label>
+        <textarea id="description" name="description" rows="5" placeholder="Nhập mô tả sản phẩm" required></textarea>
+
+        <label for="price">Giá:</label>
+        <input type="number" id="price" name="price" step="0.01" placeholder="Nhập giá sản phẩm" required>
+
+        <input type="submit" value="Lưu sản phẩm">
+    </form>
+</body>
+</html>

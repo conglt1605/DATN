@@ -10,36 +10,36 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import java.util.Date;
 
 /**
  *
  * @author Cong
  */
 @Entity
-public class SanPham {
-    @Id
+public class ThuocTinhSanPham {
+        @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public long id;
-    public String tenSanPham;
     public int trangThai;
     
     @ManyToOne
-    @JoinColumn(name = "ID_ThuongHieu")
-    private ThuongHieu thuongHieu;
+    @JoinColumn(name = "ID_ChiTietSanPham")
+    private ChiTietSanPham chiTietSanPham;
+    
+    @ManyToOne
+    @JoinColumn(name = "ID_ChiTietThuocTinh")
+    private ChiTietThuocTinh chiTietThuocTinh;
 
-    public SanPham() {
+    public ThuocTinhSanPham() {
     }
 
-    public SanPham(long id, String tenSanPham, int trangThai, ThuongHieu thuongHieu) {
+    public ThuocTinhSanPham(long id, int trangThai, ChiTietSanPham chiTietSanPham, ChiTietThuocTinh chiTietThuocTinh) {
         this.id = id;
-        this.tenSanPham = tenSanPham;
         this.trangThai = trangThai;
-        this.thuongHieu = thuongHieu;
+        this.chiTietSanPham = chiTietSanPham;
+        this.chiTietThuocTinh = chiTietThuocTinh;
     }
-
-
-
-
 
     public long getId() {
         return id;
@@ -47,14 +47,6 @@ public class SanPham {
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public String getTenSanPham() {
-        return tenSanPham;
-    }
-
-    public void setTenSanPham(String tenSanPham) {
-        this.tenSanPham = tenSanPham;
     }
 
     public int getTrangThai() {
@@ -65,12 +57,20 @@ public class SanPham {
         this.trangThai = trangThai;
     }
 
-    public ThuongHieu getThuongHieu() {
-        return thuongHieu;
+    public ChiTietSanPham getChiTietSanPham() {
+        return chiTietSanPham;
     }
 
-    public void setThuongHieu(ThuongHieu thuongHieu) {
-        this.thuongHieu = thuongHieu;
+    public void setChiTietSanPham(ChiTietSanPham chiTietSanPham) {
+        this.chiTietSanPham = chiTietSanPham;
+    }
+
+    public ChiTietThuocTinh getChiTietThuocTinh() {
+        return chiTietThuocTinh;
+    }
+
+    public void setChiTietThuocTinh(ChiTietThuocTinh chiTietThuocTinh) {
+        this.chiTietThuocTinh = chiTietThuocTinh;
     }
     
     

@@ -4,10 +4,10 @@
  */
 package com.example.RunFlex.controller;
 
-import com.example.RunFlex.model.ChatLieu;
-import com.example.RunFlex.model.MauSac;
-import com.example.RunFlex.service.ChatLieuService;
-import com.example.RunFlex.service.MauSacService;
+import com.example.RunFlex.model.ThuocTinh;
+import com.example.RunFlex.model.ThuocTinhSanPham;
+import com.example.RunFlex.service.ThuocTinhSanPhamService;
+import com.example.RunFlex.service.ThuocTinhService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -24,29 +24,28 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Cong
  */
 @RestController
-@RequestMapping("/chatlieu")
-public class ChatLieuController {
-
-    @Autowired
-    private ChatLieuService chatLieuService;
+@RequestMapping("/thuoctinhsanpham")
+public class ThuocTinhSanPhamController {
+           @Autowired
+    private ThuocTinhSanPhamService thuocTinhSanPhamService;
 
     @GetMapping()
-    public List<ChatLieu> getAll() {
-        return chatLieuService.getAll();
+    public List<ThuocTinhSanPham> getAll() {
+        return thuocTinhSanPhamService.getAll();
     }
-
-    @PostMapping()
-    public ChatLieu add(@RequestBody ChatLieu chatLieu) {
-        return chatLieuService.add(chatLieu);
+    
+        @PostMapping()
+    public ThuocTinhSanPham add(@RequestBody ThuocTinhSanPham thuocTinhSanPham) {
+        return thuocTinhSanPhamService.add(thuocTinhSanPham);
     }
 
     @PutMapping("/{id}")
-    public ChatLieu update(@RequestBody ChatLieu chatLieu, @PathVariable Long id) {
-        return chatLieuService.update(id, chatLieu);
+    public ThuocTinhSanPham update(@RequestBody ThuocTinhSanPham thuocTinhSanPham, @PathVariable Long id) {
+        return thuocTinhSanPhamService.update(id, thuocTinhSanPham);
     }
 
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) {
-        chatLieuService.delete(id);
+        thuocTinhSanPhamService.delete(id);
     }
 }

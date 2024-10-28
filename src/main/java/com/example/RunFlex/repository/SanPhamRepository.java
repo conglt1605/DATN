@@ -16,6 +16,6 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface SanPhamRepository extends JpaRepository<SanPham, Long>{
-    @Query(value = "Select * From SanPham where TrangThai = 1",nativeQuery = true)
+    @Query(value = "Select sp.* From SanPham sp join ThuongHieu th on sp.ID_ThuongHieu=th.id where sp.TrangThai = 1",nativeQuery = true)
     List<SanPham> getAll();
 }

@@ -23,10 +23,10 @@ public class ChiTietSanPham {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String maSanPham;
+    private String tenChiTietSanPham;
     private int soLuong;
     private int giaBan;
     private int giaNhap;
-    private String doiTuongSuDung;
     private String moTa;
     private Date ngayTao;
     private int trangThai;
@@ -38,67 +38,31 @@ public class ChiTietSanPham {
     @JoinColumn(name = "ID_NhanVien")
     private NhanVien nhanVien;
     
-    @ManyToOne
-    @JoinColumn(name = "ID_MauSac")
-    private MauSac mauSac;
-    
-    @ManyToOne
-    @JoinColumn(name = "ID_ThuongHieu")
-    private ThuongHieu thuongHieu;
-    
-    @ManyToOne
-    @JoinColumn(name = "ID_DanhMuc")
-    private DanhMuc danhMuc;
-    
-    @ManyToOne
-    @JoinColumn(name = "ID_ChatLieu")
-    private ChatLieu chatLieu;
-    
-    @ManyToOne
-    @JoinColumn(name = "ID_DeGiay")
-    private DeGiay deGiay;
     
     @ManyToOne
     @JoinColumn(name = "ID_KichCo")
     private KichCo kichCo;
     
-    @ManyToOne
-    @JoinColumn(name = "ID_XuatXu")
-    private XuatXu xuatXu;
-    
-    @ManyToOne
-    @JoinColumn(name = "ID_AnhGiay")
-    private AnhGiay anhGiay;
-    
-    @ManyToOne
-    @JoinColumn(name = "ID_KhuyenMai")
-    private KhuyenMai khuyenMai;
 
     public ChiTietSanPham() {
     }
 
-    public ChiTietSanPham(Long id, String maSanPham, int soLuong, int giaBan, int giaNhap, String doiTuongSuDung, String moTa, Date ngayTao, int trangThai, SanPham sanPham, NhanVien nhanVien, MauSac mauSac, ThuongHieu thuongHieu, DanhMuc danhMuc, ChatLieu chatLieu, DeGiay deGiay, KichCo kichCo, XuatXu xuatXu, AnhGiay anhGiay, KhuyenMai khuyenMai) {
+    public ChiTietSanPham(Long id, String maSanPham, String tenChiTietSanPham, int soLuong, int giaBan, int giaNhap, String moTa, Date ngayTao, int trangThai, SanPham sanPham, NhanVien nhanVien, KichCo kichCo) {
         this.id = id;
         this.maSanPham = maSanPham;
+        this.tenChiTietSanPham = tenChiTietSanPham;
         this.soLuong = soLuong;
         this.giaBan = giaBan;
         this.giaNhap = giaNhap;
-        this.doiTuongSuDung = doiTuongSuDung;
         this.moTa = moTa;
         this.ngayTao = ngayTao;
         this.trangThai = trangThai;
         this.sanPham = sanPham;
         this.nhanVien = nhanVien;
-        this.mauSac = mauSac;
-        this.thuongHieu = thuongHieu;
-        this.danhMuc = danhMuc;
-        this.chatLieu = chatLieu;
-        this.deGiay = deGiay;
         this.kichCo = kichCo;
-        this.xuatXu = xuatXu;
-        this.anhGiay = anhGiay;
-        this.khuyenMai = khuyenMai;
     }
+
+
 
     public Long getId() {
         return id;
@@ -140,13 +104,6 @@ public class ChiTietSanPham {
         this.giaNhap = giaNhap;
     }
 
-    public String getDoiTuongSuDung() {
-        return doiTuongSuDung;
-    }
-
-    public void setDoiTuongSuDung(String doiTuongSuDung) {
-        this.doiTuongSuDung = doiTuongSuDung;
-    }
 
     public String getMoTa() {
         return moTa;
@@ -188,45 +145,6 @@ public class ChiTietSanPham {
         this.nhanVien = nhanVien;
     }
 
-    public MauSac getMauSac() {
-        return mauSac;
-    }
-
-    public void setMauSac(MauSac mauSac) {
-        this.mauSac = mauSac;
-    }
-
-    public ThuongHieu getThuongHieu() {
-        return thuongHieu;
-    }
-
-    public void setThuongHieu(ThuongHieu thuongHieu) {
-        this.thuongHieu = thuongHieu;
-    }
-
-    public DanhMuc getDanhMuc() {
-        return danhMuc;
-    }
-
-    public void setDanhMuc(DanhMuc danhMuc) {
-        this.danhMuc = danhMuc;
-    }
-
-    public ChatLieu getChatLieu() {
-        return chatLieu;
-    }
-
-    public void setChatLieu(ChatLieu chatLieu) {
-        this.chatLieu = chatLieu;
-    }
-
-    public DeGiay getDeGiay() {
-        return deGiay;
-    }
-
-    public void setDeGiay(DeGiay deGiay) {
-        this.deGiay = deGiay;
-    }
 
     public KichCo getKichCo() {
         return kichCo;
@@ -236,29 +154,15 @@ public class ChiTietSanPham {
         this.kichCo = kichCo;
     }
 
-    public XuatXu getXuatXu() {
-        return xuatXu;
+    public String getTenChiTietSanPham() {
+        return tenChiTietSanPham;
     }
 
-    public void setXuatXu(XuatXu xuatXu) {
-        this.xuatXu = xuatXu;
+    public void setTenChiTietSanPham(String tenChiTietSanPham) {
+        this.tenChiTietSanPham = tenChiTietSanPham;
     }
 
-    public AnhGiay getAnhGiay() {
-        return anhGiay;
-    }
 
-    public void setAnhGiay(AnhGiay anhGiay) {
-        this.anhGiay = anhGiay;
-    }
-
-    public KhuyenMai getKhuyenMai() {
-        return khuyenMai;
-    }
-
-    public void setKhuyenMai(KhuyenMai khuyenMai) {
-        this.khuyenMai = khuyenMai;
-    }
     
     
 }

@@ -3,9 +3,23 @@ var app = angular.module("myApp", []);
 
 app.controller("MainController", function ($scope, $http) {
   // GET: lấy dữ liệu từ API và lưu vào $scope.nhanViens
-  $http.get("http://localhost:8080/chitietsanpham").then(
+  $http.get("http://localhost:8080/nhanvien/all").then(
     function (response) {
-      $scope.chiTietSanPhams = response.data;
+      $scope.nhanViens = response.data;
+    },
+    function (error) {
+      console.error("Lỗi khi lấy dữ liệu:", error);
+    }
+  );
+
+  $http.get("http://localhost:8080/hoadon/doanhthu").then(
+    function (response) {
+      if (response.data.length > 0) {
+        $scope.TongTien = response.data[0].TongTien;
+      } else {
+        console.warn("Không có dữ liệu doanh thu.");
+      }
+      console.log(response.data);
     },
     function (error) {
       console.error("Lỗi khi lấy dữ liệu:", error);
@@ -21,11 +35,11 @@ app.controller("MainController", function ($scope, $http) {
     }
   );
 
-  $scope.nhanVien = {
-    id: null,
-    ma: "",
-    ten: "",
-  };
+  // $scope.nhanVien = {
+  //   id: null,
+  //   ma: "",
+  //   ten: "",
+  // };
 
   // POST: Thêm mới nhân viên
   $scope.submitData = function () {

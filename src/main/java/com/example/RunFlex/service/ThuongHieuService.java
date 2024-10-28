@@ -4,7 +4,6 @@
  */
 package com.example.RunFlex.service;
 
-import com.example.RunFlex.model.MauSac;
 import com.example.RunFlex.model.ThuongHieu;
 import com.example.RunFlex.repository.ThuongHieuRepository;
 import java.util.List;

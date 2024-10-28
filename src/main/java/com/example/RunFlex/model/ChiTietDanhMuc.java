@@ -16,30 +16,29 @@ import jakarta.persistence.ManyToOne;
  * @author Cong
  */
 @Entity
-public class SanPham {
+public class ChiTietDanhMuc {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public long id;
-    public String tenSanPham;
     public int trangThai;
     
+        @ManyToOne
+    @JoinColumn(name = "ID_ChiTietSanPham")
+    private ChiTietSanPham chiTietSanPham;
+
     @ManyToOne
-    @JoinColumn(name = "ID_ThuongHieu")
-    private ThuongHieu thuongHieu;
+    @JoinColumn(name = "ID_DanhMuc")
+    private DanhMuc danhMuc;
 
-    public SanPham() {
+    public ChiTietDanhMuc() {
     }
 
-    public SanPham(long id, String tenSanPham, int trangThai, ThuongHieu thuongHieu) {
+    public ChiTietDanhMuc(long id, int trangThai, ChiTietSanPham chiTietSanPham, DanhMuc danhMuc) {
         this.id = id;
-        this.tenSanPham = tenSanPham;
         this.trangThai = trangThai;
-        this.thuongHieu = thuongHieu;
+        this.chiTietSanPham = chiTietSanPham;
+        this.danhMuc = danhMuc;
     }
-
-
-
-
 
     public long getId() {
         return id;
@@ -47,14 +46,6 @@ public class SanPham {
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public String getTenSanPham() {
-        return tenSanPham;
-    }
-
-    public void setTenSanPham(String tenSanPham) {
-        this.tenSanPham = tenSanPham;
     }
 
     public int getTrangThai() {
@@ -65,14 +56,23 @@ public class SanPham {
         this.trangThai = trangThai;
     }
 
-    public ThuongHieu getThuongHieu() {
-        return thuongHieu;
+    public ChiTietSanPham getChiTietSanPham() {
+        return chiTietSanPham;
     }
 
-    public void setThuongHieu(ThuongHieu thuongHieu) {
-        this.thuongHieu = thuongHieu;
+    public void setChiTietSanPham(ChiTietSanPham chiTietSanPham) {
+        this.chiTietSanPham = chiTietSanPham;
+    }
+
+    public DanhMuc getDanhMuc() {
+        return danhMuc;
+    }
+
+    public void setDanhMuc(DanhMuc danhMuc) {
+        this.danhMuc = danhMuc;
     }
     
     
     
+
 }

@@ -6,23 +6,40 @@ drop database RunFlex
 create database RunFlex
 use RunFlex
 
-create table SanPham(
+create table ThuongHieu(
 ID int primary key identity(1,1),
-TenSanPham nvarchar(255) not null,
+TenThuongHieu nvarchar(255) not null,
 TrangThai int not null
 )
 
-create table MauSac(
-ID int primary key identity(1,1),
-TenMauSac nvarchar(255) not null,
-TrangThai int not null
-)
+-- Bảng Danh mục
+CREATE TABLE ThuocTinh (
+    ID INT PRIMARY KEY identity(1,1),
+    TenThuocTinh NVARCHAR(255) NOT NULL,
+    MoTa NVARCHAR(255),
+    NgayTao DATE NOT NULL,
+    TrangThai int NOT NULL
+);
 
-create table DeGiay(
-ID int primary key identity(1,1),
-TenDeGiay nvarchar(255) not null,
-TrangThai int not null
-)
+-- Bảng Chi tiết danh mục
+CREATE TABLE ChiTietThuocTinh (
+    ID INT PRIMARY KEY identity(1,1),
+    ID_ThuocTinh INT,
+    Loai NVARCHAR(255) NOT NULL,
+    TrangThai int NOT NULL,
+    FOREIGN KEY (ID_ThuocTinh) REFERENCES ThuocTinh(ID)
+);
+
+-- Bảng Sản phẩm
+CREATE TABLE SanPham (
+    ID INT PRIMARY KEY identity(1,1),
+    ID_ThuongHieu INT,
+    TenSanPham NVARCHAR(255) NOT NULL,
+    TrangThai int NOT NULL,
+    FOREIGN KEY (ID_ThuongHieu) REFERENCES ThuongHieu(ID)
+);
+
+
 
 create table KichCo(
 ID int primary key identity(1,1),
@@ -30,23 +47,11 @@ SoKichCo varchar(2) not null,
 TrangThai int not null
 )
 
-create table XuatXu(
-ID int primary key identity(1,1),
-TenXuatXu nvarchar(255) not null,
-TrangThai int not null
-)
 
-create table AnhGiay(
-ID int primary key identity(1,1),
-TenURL nvarchar(255) not null,
-TrangThai int not null
-)
 
-create table ChatLieu(
-ID int primary key identity(1,1),
-TenChatLieu nvarchar(255) not null,
-TrangThai int not null
-)
+
+
+
 
 create table DanhMuc(
 ID int primary key identity(1,1),
@@ -54,11 +59,7 @@ TenDanhMuc nvarchar(255) not null,
 TrangThai int not null
 )
 
-create table ThuongHieu(
-ID int primary key identity(1,1),
-TenThuongHieu nvarchar(255) not null,
-TrangThai int not null
-)
+
 
 create table KhuyenMai(
 ID int primary key identity(1,1),
@@ -97,13 +98,15 @@ MaNhanVien varchar(20) not null,
 TenNhanVien nvarchar(255) not null,
 MatKhau varchar(20) not null,
 TenTaiKhoan varchar(20) not null,
+CCCD varchar(15) not null,
 Email varchar(255) not null,
 SoDienThoai varchar(15) not null,
 DiaChi nvarchar(255) not null,
 NgaySinh date not null,
 NgayTuyenDung date not null,
 NgayNghiViec date ,
-TrangThai int not null
+VaiTro int not null, --0:quản lý, 1:nhân viên
+TrangThai int not null --1:đang hoạt động, 2:vô hiệu hóa, 0:đã xóa
 )
 
 create table GioHang(
@@ -131,39 +134,23 @@ foreign key (ID_NhanVien) references NhanVien(ID),
 foreign key (ID_Voucher) references Voucher(ID)
 )
 
-create table ChiTietSanPham(
-ID int primary key identity(1,1),
-ID_SanPham int not null,
-ID_NhanVien int not null,
-ID_MauSac int not null,
-ID_ThuongHieu int not null,
-ID_DanhMuc int not null,
-ID_ChatLieu int not null,
-ID_DeGiay int not null,
-ID_KichCo int not null,
-ID_XuatXu int not null,
-ID_AnhGiay int not null,
-ID_KhuyenMai int null,
-MaSanPham varchar(20) not null,
-SoLuong varchar(20) not null,
-GiaBan varchar(20) not null,
-GiaNhap varchar(20) not null,
-DoiTuongSuDung nvarchar(255) not null,
-MoTa nvarchar(255) not null,
-NgayTao date not null,
-TrangThai int not null
-foreign key (ID_SanPham) references SanPham(ID),
-foreign key (ID_NhanVien) references NhanVien(ID),
-foreign key (ID_MauSac) references MauSac(ID),
-foreign key (ID_ThuongHieu) references ThuongHieu(ID),
-foreign key (ID_DanhMuc) references DanhMuc(ID),
-foreign key (ID_ChatLieu) references ChatLieu(ID),
-foreign key (ID_DeGiay) references DeGiay(ID),
-foreign key (ID_KichCo) references KichCo(ID),
-foreign key (ID_XuatXu) references XuatXu(ID),
-foreign key (ID_AnhGiay) references AnhGiay(ID),
-foreign key (ID_KhuyenMai) references KhuyenMai(ID)
-)
+CREATE TABLE ChiTietSanPham (
+    ID INT PRIMARY KEY identity(1,1),
+    ID_SanPham INT,
+    ID_NhanVien INT,
+    ID_KichCo INT,
+	MaSanPham varchar(50) unique,
+    TenChiTietSanPham VARCHAR(255) NOT NULL,
+    GiaBan DECIMAL(10, 2) NOT NULL,
+    GiaNhap DECIMAL(10, 2) NOT NULL,
+    SoLuong INT NOT NULL,
+    MoTa Nvarchar(255),
+    NgayTao DATE NOT NULL,
+    TrangThai int NOT NULL,
+    FOREIGN KEY (ID_SanPham) REFERENCES SanPham(ID),
+	FOREIGN KEY (ID_KichCo) REFERENCES KichCo(ID),
+		FOREIGN KEY (ID_NhanVien) REFERENCES NhanVien(ID)
+);
 
 create table ChiTietGioHang(
 ID int primary key identity(1,1),
@@ -184,4 +171,33 @@ SoLuong varchar(20) not null,
 TrangThai int not null
 foreign key (ID_HoaDon) references HoaDon(ID),
 foreign key (ID_ChiTietSanPham) references ChiTietSanPham(ID)
+)
+
+-- Bảng Thuộc tính sản phẩm
+CREATE TABLE ThuocTinhSanPham (
+    ID INT PRIMARY KEY identity(1,1) NOT NULL,
+    ID_ChiTietSanPham INT NOT NULL,
+    ID_ChiTietThuocTinh INT NOT NULL,
+    TrangThai int NOT NULL,
+    FOREIGN KEY (ID_ChiTietSanPham) REFERENCES ChiTietSanPham(ID),
+    FOREIGN KEY (ID_ChiTietThuocTinh) REFERENCES ChiTietThuocTinh(ID),
+	UNIQUE (ID_ChiTietSanPham, ID_ChiTietThuocTinh)
+);
+
+create table ChiTietDanhMuc(
+ID INT PRIMARY KEY identity(1,1) NOT NULL,
+    ID_ChiTietSanPham INT NOT NULL,
+    ID_DanhMuc INT NOT NULL,
+	    TrangThai int NOT NULL
+		    FOREIGN KEY (ID_ChiTietSanPham) REFERENCES ChiTietSanPham(ID),
+    FOREIGN KEY (ID_DanhMuc) REFERENCES DanhMuc(ID),
+		UNIQUE (ID_ChiTietSanPham, ID_DanhMuc)
+)
+
+create table AnhGiay(
+ID int primary key identity(1,1),
+ID_ChiTietSanPham int not null,
+TenURL nvarchar(255) not null,
+TrangThai int not null
+FOREIGN KEY (ID_ChiTietSanPham) REFERENCES ChiTietSanPham(ID),
 )

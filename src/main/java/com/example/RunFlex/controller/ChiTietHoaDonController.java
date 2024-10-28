@@ -4,9 +4,7 @@
  */
 package com.example.RunFlex.controller;
 
-import com.example.RunFlex.model.ChiTietGioHang;
 import com.example.RunFlex.model.ChiTietHoaDon;
-import com.example.RunFlex.service.ChiTietGioHangService;
 import com.example.RunFlex.service.ChiTietHoaDonService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;

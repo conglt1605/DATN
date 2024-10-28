@@ -5,9 +5,7 @@
 package com.example.RunFlex.controller;
 
 import com.example.RunFlex.model.AnhGiay;
-import com.example.RunFlex.model.ChatLieu;
 import com.example.RunFlex.service.AnhGiayService;
-import com.example.RunFlex.service.ChatLieuService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;

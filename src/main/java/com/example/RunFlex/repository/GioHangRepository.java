@@ -4,7 +4,6 @@
  */
 package com.example.RunFlex.repository;
 
-import com.example.RunFlex.model.DanhMuc;
 import com.example.RunFlex.model.GioHang;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
