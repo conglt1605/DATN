@@ -37,17 +37,27 @@ public class ChiTietSanPham {
     @ManyToOne
     @JoinColumn(name = "ID_NhanVien")
     private NhanVien nhanVien;
-    
-    
+
     @ManyToOne
     @JoinColumn(name = "ID_KichCo")
     private KichCo kichCo;
+
+    @ManyToOne
+    @JoinColumn(name = "ID_DeGiay")
+    private DeGiay deGiay;
     
+    @ManyToOne  
+    @JoinColumn(name = "ID_MauSac")
+    private MauSac mauSac;
+    
+    @ManyToOne
+    @JoinColumn(name = "ID_ChatLieu")
+    private ChatLieu chatLieu;
 
     public ChiTietSanPham() {
     }
 
-    public ChiTietSanPham(Long id, String maSanPham, String tenChiTietSanPham, int soLuong, int giaBan, int giaNhap, String moTa, Date ngayTao, int trangThai, SanPham sanPham, NhanVien nhanVien, KichCo kichCo) {
+    public ChiTietSanPham(Long id, String maSanPham, String tenChiTietSanPham, int soLuong, int giaBan, int giaNhap, String moTa, Date ngayTao, int trangThai, SanPham sanPham, NhanVien nhanVien, KichCo kichCo, DeGiay deGiay, MauSac mauSac, ChatLieu chatLieu) {
         this.id = id;
         this.maSanPham = maSanPham;
         this.tenChiTietSanPham = tenChiTietSanPham;
@@ -60,6 +70,9 @@ public class ChiTietSanPham {
         this.sanPham = sanPham;
         this.nhanVien = nhanVien;
         this.kichCo = kichCo;
+        this.deGiay = deGiay;
+        this.mauSac = mauSac;
+        this.chatLieu = chatLieu;
     }
 
 
@@ -76,7 +89,7 @@ public class ChiTietSanPham {
         return maSanPham;
     }
 
-    public void setMaSanPham(String maSanPham) {
+        public void setMaSanPham(String maSanPham) {
         this.maSanPham = maSanPham;
     }
 
@@ -103,7 +116,6 @@ public class ChiTietSanPham {
     public void setGiaNhap(int giaNhap) {
         this.giaNhap = giaNhap;
     }
-
 
     public String getMoTa() {
         return moTa;
@@ -145,7 +157,6 @@ public class ChiTietSanPham {
         this.nhanVien = nhanVien;
     }
 
-
     public KichCo getKichCo() {
         return kichCo;
     }
@@ -162,7 +173,29 @@ public class ChiTietSanPham {
         this.tenChiTietSanPham = tenChiTietSanPham;
     }
 
+    public MauSac getMauSac() {
+        return mauSac;
+    }
 
-    
+    public void setMauSac(MauSac mauSac) {
+        this.mauSac = mauSac;
+    }
+
+    public DeGiay getDeGiay() {
+        return deGiay;
+    }
+
+    public void setDeGiay(DeGiay deGiay) {
+        this.deGiay = deGiay;
+    }
+
+    public ChatLieu getChatLieu() {
+        return chatLieu;
+    }
+
+    public void setChatLieu(ChatLieu chatLieu) {
+        this.chatLieu = chatLieu;
+    }
+
     
 }

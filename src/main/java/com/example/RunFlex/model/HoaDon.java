@@ -36,6 +36,10 @@ public class HoaDon {
     @JoinColumn(name = "ID_NhanVien")
     private NhanVien nhanVien;
     
+        @ManyToOne
+    @JoinColumn(name = "ID_KhachHang")
+    private KhachHang khachHang;
+    
     @ManyToOne
     @JoinColumn(name = "ID_Voucher")
     private Voucher voucher;
@@ -46,7 +50,7 @@ public class HoaDon {
     public HoaDon() {
     }
 
-    public HoaDon(Long id, String phuongThucThanhToan, String hinhThucMuaHang, int phiShip, Date ngayTao, Date ngayHoanTra, Date ngayGiaoHang, String diaChiGiaoHang, int tongSoTien, String moTa, int trangThai, Voucher voucher, NhanVien nhanVien) {
+    public HoaDon(Long id, String phuongThucThanhToan, String hinhThucMuaHang, int phiShip, Date ngayTao, Date ngayHoanTra, Date ngayGiaoHang, String diaChiGiaoHang, int tongSoTien, String moTa, int trangThai, NhanVien nhanVien, KhachHang khachHang, Voucher voucher) {
         this.id = id;
         this.phuongThucThanhToan = phuongThucThanhToan;
         this.hinhThucMuaHang = hinhThucMuaHang;
@@ -58,9 +62,12 @@ public class HoaDon {
         this.tongSoTien = tongSoTien;
         this.moTa = moTa;
         this.trangThai = trangThai;
-        this.voucher = voucher;
         this.nhanVien = nhanVien;
+        this.khachHang = khachHang;
+        this.voucher = voucher;
     }
+
+
 
 
 
@@ -166,6 +173,14 @@ public class HoaDon {
 
     public void setNhanVien(NhanVien nhanVien) {
         this.nhanVien = nhanVien;
+    }
+
+    public KhachHang getKhachHang() {
+        return khachHang;
+    }
+
+    public void setKhachHang(KhachHang khachHang) {
+        this.khachHang = khachHang;
     }
 
     

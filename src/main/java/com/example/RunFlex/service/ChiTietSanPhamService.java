@@ -35,6 +35,9 @@ public class ChiTietSanPhamService {
         chiTietSanPham.setSanPham(chiTietSanPham.getSanPham());
         chiTietSanPham.setNhanVien(chiTietSanPham.getNhanVien());
         chiTietSanPham.setKichCo(chiTietSanPham.getKichCo());
+        chiTietSanPham.setMauSac(chiTietSanPham.getMauSac());
+        chiTietSanPham.setChatLieu(chiTietSanPham.getChatLieu());
+        chiTietSanPham.setDeGiay(chiTietSanPham.getDeGiay());
         chiTietSanPham.setMaSanPham(chiTietSanPham.getMaSanPham());
         chiTietSanPham.setTenChiTietSanPham(chiTietSanPham.getTenChiTietSanPham());
         chiTietSanPham.setSoLuong(chiTietSanPham.getSoLuong());

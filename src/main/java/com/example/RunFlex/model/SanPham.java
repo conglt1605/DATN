@@ -26,19 +26,23 @@ public class SanPham {
     @ManyToOne
     @JoinColumn(name = "ID_ThuongHieu")
     private ThuongHieu thuongHieu;
+    
+    @ManyToOne
+    @JoinColumn(name = "ID_DanhMuc")
+    private DanhMuc danhMuc;
+
+    
 
     public SanPham() {
     }
 
-    public SanPham(long id, String tenSanPham, int trangThai, ThuongHieu thuongHieu) {
+    public SanPham(long id, String tenSanPham, int trangThai, ThuongHieu thuongHieu, DanhMuc danhMuc) {
         this.id = id;
         this.tenSanPham = tenSanPham;
         this.trangThai = trangThai;
         this.thuongHieu = thuongHieu;
+        this.danhMuc = danhMuc;
     }
-
-
-
 
 
     public long getId() {
@@ -71,6 +75,14 @@ public class SanPham {
 
     public void setThuongHieu(ThuongHieu thuongHieu) {
         this.thuongHieu = thuongHieu;
+    }
+
+    public DanhMuc getDanhMuc() {
+        return danhMuc;
+    }
+
+    public void setDanhMuc(DanhMuc danhMuc) {
+        this.danhMuc = danhMuc;
     }
     
     

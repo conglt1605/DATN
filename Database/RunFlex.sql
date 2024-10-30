@@ -6,9 +6,33 @@ drop database RunFlex
 create database RunFlex
 use RunFlex
 
+
+create table DanhMuc(
+ID int primary key identity(1,1),
+TenDanhMuc nvarchar(255) not null,
+TrangThai int not null
+)
 create table ThuongHieu(
 ID int primary key identity(1,1),
 TenThuongHieu nvarchar(255) not null,
+TrangThai int not null
+)
+
+create table MauSac(
+ID int primary key identity(1,1),
+TenMauSac nvarchar(255) not null,
+TrangThai int not null
+)
+
+create table ChatLieu(
+ID int primary key identity(1,1),
+TenChatLieu nvarchar(255) not null,
+TrangThai int not null
+)
+
+create table DeGiay(
+ID int primary key identity(1,1),
+TenDeGiay nvarchar(255) not null,
 TrangThai int not null
 )
 
@@ -34,9 +58,11 @@ CREATE TABLE ChiTietThuocTinh (
 CREATE TABLE SanPham (
     ID INT PRIMARY KEY identity(1,1),
     ID_ThuongHieu INT,
+    ID_DanhMuc INT,
     TenSanPham NVARCHAR(255) NOT NULL,
     TrangThai int NOT NULL,
-    FOREIGN KEY (ID_ThuongHieu) REFERENCES ThuongHieu(ID)
+    FOREIGN KEY (ID_ThuongHieu) REFERENCES ThuongHieu(ID),
+	FOREIGN KEY (ID_DanhMuc) REFERENCES DanhMuc(ID)
 );
 
 
@@ -53,11 +79,7 @@ TrangThai int not null
 
 
 
-create table DanhMuc(
-ID int primary key identity(1,1),
-TenDanhMuc nvarchar(255) not null,
-TrangThai int not null
-)
+
 
 
 
@@ -120,6 +142,7 @@ create table HoaDon(
 ID int primary key identity(1,1),
 ID_NhanVien int not null,
 ID_Voucher int null,
+ID_KhachHang int null,
 PhuongThucThanhToan nvarchar(255) not null,
 HinhThucMuaHang nvarchar(255) not null,
 PhiShip varchar(20) ,
@@ -131,7 +154,8 @@ TongSoTien varchar(20) not null,
 MoTa nvarchar(255) not null,
 TrangThai int not null --1:chưa thanh toán, 2:đã thanh toán, 3:đã hoàn tiền
 foreign key (ID_NhanVien) references NhanVien(ID),
-foreign key (ID_Voucher) references Voucher(ID)
+foreign key (ID_Voucher) references Voucher(ID),
+foreign key (ID_KhachHang) references KhachHang(ID)
 )
 
 CREATE TABLE ChiTietSanPham (
@@ -139,6 +163,9 @@ CREATE TABLE ChiTietSanPham (
     ID_SanPham INT,
     ID_NhanVien INT,
     ID_KichCo INT,
+	ID_MauSac INT,
+	ID_DeGiay INT,
+	ID_ChatLieu INT,
 	MaSanPham varchar(50) unique,
     TenChiTietSanPham VARCHAR(255) NOT NULL,
     GiaBan DECIMAL(10, 2) NOT NULL,
@@ -149,7 +176,10 @@ CREATE TABLE ChiTietSanPham (
     TrangThai int NOT NULL,
     FOREIGN KEY (ID_SanPham) REFERENCES SanPham(ID),
 	FOREIGN KEY (ID_KichCo) REFERENCES KichCo(ID),
-		FOREIGN KEY (ID_NhanVien) REFERENCES NhanVien(ID)
+		FOREIGN KEY (ID_NhanVien) REFERENCES NhanVien(ID),
+		FOREIGN KEY (ID_MauSac) REFERENCES MauSac(ID),
+		FOREIGN KEY (ID_DeGiay) REFERENCES DeGiay(ID),
+		FOREIGN KEY (ID_ChatLieu) REFERENCES ChatLieu(ID)
 );
 
 create table ChiTietGioHang(

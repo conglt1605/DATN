@@ -1,4 +1,56 @@
-﻿-- Dữ liệu bảng ThuongHieu (Thương hiệu giày thể thao)
+﻿-- Dữ liệu bảng DanhMuc (Danh mục sản phẩm giày thể thao)
+INSERT INTO DanhMuc (TenDanhMuc, TrangThai)
+VALUES
+('Chạy Bộ', 1),
+('Tập Gym', 1),
+('Bóng Đá', 1),
+('Bóng Rổ', 1),
+('Tennis', 1),
+('Cầu Lông', 1),
+('Đi Bộ', 1),
+('Thời Trang', 1),
+('Dã Ngoại', 1),
+('Leo Núi', 1);
+
+
+INSERT INTO MauSac (TenMauSac, TrangThai) VALUES
+('Đen', 1),
+('Trắng', 1),
+('Đỏ', 1),
+('Xanh dương', 1),
+('Xanh lá', 1),
+('Vàng', 1),
+('Cam', 1),
+('Xám', 1),
+('Tím', 1),
+('Hồng', 1);
+
+INSERT INTO ChatLieu (TenChatLieu, TrangThai) VALUES
+('Vải lưới', 1),
+('Da tổng hợp', 1),
+('Vải cotton', 1),
+('Da lộn', 1),
+('Cao su', 1),
+('PU Leather', 1),
+('Canvas', 1),
+('Nylon', 1),
+('Polyester', 1),
+('EVA Foam', 1);
+
+INSERT INTO DeGiay (TenDeGiay, TrangThai) VALUES
+('Đế cao su non', 1),
+('Đế PU Foam', 1),
+('Đế Boost', 1),
+('Đế EVA', 1),
+('Đế Vibram', 1),
+('Đế Flyknit', 1),
+('Đế TPU', 1),
+('Đế Carbon Fiber', 1),
+('Đế Air Max', 1),
+('Đế React', 1);
+
+
+-- Dữ liệu bảng ThuongHieu (Thương hiệu giày thể thao)
 INSERT INTO ThuongHieu (TenThuongHieu, TrangThai)
 VALUES
 ('Nike', 1),
@@ -28,13 +80,18 @@ INSERT INTO ChiTietThuocTinh (ID_ThuocTinh, Loai, TrangThai) VALUES
 (3, N'Cổ thấp', 1),
 (3, N'Cổ cao', 1);
 
--- Chèn dữ liệu vào bảng Sản Phẩm
-INSERT INTO SanPham (ID_ThuongHieu, TenSanPham, TrangThai) VALUES
-(1, N'Nike Air Max', 1),
-(2, N'Adidas UltraBoost', 1),
-(3, N'Puma Future', 1),
-(4, N'Converse Chuck Taylor', 1),
-(5, N'New Balance 574', 1);
+INSERT INTO SanPham (ID_ThuongHieu, ID_DanhMuc, TenSanPham, TrangThai) VALUES
+(1, 1, 'Nike Air Max 270', 1),
+(2, 2, 'Adidas Ultraboost 22', 1),
+(3, 1, 'Puma RS-X', 1),
+(4, 2, 'New Balance 574', 1),
+(1, 1, 'Nike Jordan 1', 1),
+(2, 2, 'Adidas NMD R1', 1),
+(5, 3, 'Asics Gel-Kayano 28', 1),
+(6, 3, 'Reebok Zig Kinetica', 1),
+(7, 4, 'Converse Chuck Taylor', 1),
+(8, 4, 'Vans Old Skool', 1);
+
 
 
 
@@ -57,19 +114,6 @@ VALUES
 
 
 
--- Dữ liệu bảng DanhMuc (Danh mục sản phẩm giày thể thao)
-INSERT INTO DanhMuc (TenDanhMuc, TrangThai)
-VALUES
-('Chạy Bộ', 1),
-('Tập Gym', 1),
-('Bóng Đá', 1),
-('Bóng Rổ', 1),
-('Tennis', 1),
-('Cầu Lông', 1),
-('Đi Bộ', 1),
-('Thời Trang', 1),
-('Dã Ngoại', 1),
-('Leo Núi', 1);
 
 
 
@@ -146,32 +190,36 @@ VALUES
 (10, 1);
 
 -- Dữ liệu bảng HoaDon (Hóa đơn)
-INSERT INTO HoaDon (ID_NhanVien, ID_Voucher, PhuongThucThanhToan, HinhThucMuaHang, PhiShip, NgayTao, NgayHoanTra, NgayGiaoHang, DiaChiGiaoHang, TongSoTien, MoTa, TrangThai)
+INSERT INTO HoaDon (
+    ID_NhanVien, ID_Voucher, ID_KhachHang, PhuongThucThanhToan, 
+    HinhThucMuaHang, PhiShip, NgayTao, NgayHoanTra, NgayGiaoHang, 
+    DiaChiGiaoHang, TongSoTien, MoTa, TrangThai
+) 
 VALUES
-(1, 1, 'Chuyển khoản', 'Online', '0', '2024-01-01', NULL, '2024-01-05', 'Hà Nội', '1000000', 'Thanh toán thành công', 1),
-(2, 2, 'Tiền mặt', 'Offline', '0', '2024-01-03', NULL, '2024-01-07', 'Hồ Chí Minh', '1500000', 'Thanh toán thành công', 1),
-(3, 3, 'Chuyển khoản', 'Online', '0', '2024-01-05',  NULL, '2024-01-08', 'Đà Nẵng', '2000000', 'Thanh toán thành công', 1),
-(4, 4, 'Tiền mặt', 'Offline', '0', '2024-01-07',  NULL, '2024-01-10', 'Cần Thơ', '2500000', 'Thanh toán thành công', 1),
-(5, 5, 'Chuyển khoản', 'Online', '0', '2024-01-09',  NULL, '2024-01-12', 'Nha Trang', '3000000', 'Thanh toán thành công', 1),
-(6, 6, 'Chuyển khoản', 'Online', '50000', '2024-01-11', NULL, '2024-01-15', 'Huế', '3500000', 'Thanh toán thành công', 1),
-(7, 7, 'Tiền mặt', 'Offline', '50000', '2024-01-13',  NULL, '2024-01-17', 'Hà Nội', '4000000', 'Thanh toán thành công', 1),
-(8, 8, 'Chuyển khoản', 'Online', '50000', '2024-01-15', NULL, '2024-01-19', 'Hồ Chí Minh', '4500000', 'Thanh toán thành công', 1),
-(9, 9, 'Tiền mặt', 'Offline', '50000', '2024-01-17',  NULL, '2024-01-20', 'Đà Nẵng', '5000000', 'Thanh toán thành công', 1),
-(10, 10, 'Chuyển khoản', 'Online', '50000', '2024-01-19',  NULL, '2024-01-22', 'Cần Thơ', '5500000', 'Thanh toán thành công', 1);
+(1, 1, 1, 'Thẻ tín dụng', 'Mua online', '30000', '2024-10-30', NULL, '2024-11-02', '123 Đường A, Quận 1', '4800000', 'Đơn hàng thanh toán online', 2),
+(2, NULL, 2, 'Tiền mặt', 'Mua tại cửa hàng', NULL, '2024-10-28', NULL, '2024-10-28', NULL, '6000000', 'Mua trực tiếp', 2),
+(3, 2, 3, 'Ví điện tử', 'Mua online', '50000', '2024-10-27', '2024-10-29', NULL, '456 Đường B, Quận 2', '5300000', 'Đơn hàng bị hoàn trả', 3),
+(1, NULL, 4, 'Chuyển khoản', 'Mua online', '40000', '2024-10-25', NULL, '2024-10-27', '789 Đường C, Quận 3', '3200000', 'Đơn hàng giao nhanh', 2),
+(2, 3, 5, 'Tiền mặt', 'Mua tại cửa hàng', NULL, '2024-10-24', NULL, '2024-10-24', NULL, '3500000', 'Mua trực tiếp', 2),
+(3, NULL, 6, 'Ví Momo', 'Mua online', '30000', '2024-10-20', NULL, '2024-10-23', '102 Đường D, Quận 4', '2900000', 'Đã giao hàng', 2),
+(4, 4, 7, 'Thẻ ATM', 'Mua online', '45000', '2024-10-18', NULL, '2024-10-21', '150 Đường E, Quận 5', '4200000', 'Giao hàng nhanh', 2),
+(1, NULL, 8, 'Chuyển khoản', 'Mua online', NULL, '2024-10-15', '2024-10-16', NULL, '50 Đường G, Quận 6', '5100000', 'Bị hoàn trả', 3),
+(5, NULL, 9, 'Tiền mặt', 'Mua tại cửa hàng', NULL, '2024-10-10', NULL, '2024-10-10', NULL, '2200000', 'Mua trực tiếp', 2),
+(3, 5, 10, 'Ví điện tử', 'Mua online', '35000', '2024-10-05', NULL, '2024-10-07', '200 Đường H, Quận 7', '2700000', 'Thanh toán thành công', 2);
 
-INSERT INTO ChiTietSanPham 
-(ID_SanPham, ID_NhanVien, ID_KichCo, MaSanPham, TenChiTietSanPham, GiaBan, GiaNhap, SoLuong, MoTa, NgayTao, TrangThai) 
+
+INSERT INTO ChiTietSanPham (ID_SanPham, ID_NhanVien, ID_KichCo, ID_MauSac, ID_DeGiay, ID_ChatLieu, MaSanPham, TenChiTietSanPham, GiaBan, GiaNhap, SoLuong, MoTa, NgayTao, TrangThai) 
 VALUES
-(1, 1, 1, 'SP001', N'Giày thể thao Nike Air Max', 2500000, 2000000, 100, N'Giày chạy bộ thoải mái và phong cách', '2024-10-01', 1),
-(1, 2, 2, 'SP002', N'Giày thể thao Adidas Ultraboost', 3000000, 2500000, 80, N'Giày với đế Boost êm ái', '2024-10-02', 1),
-(2, 1, 3, 'SP003', N'Giày thể thao Puma RS-X', 2200000, 1800000, 120, N'Phong cách retro', '2024-10-03', 1),
-(3, 3, 4, 'SP004', N'Giày thể thao Converse Chuck Taylor', 1800000, 1500000, 200, N'Huyền thoại giày canvas', '2024-10-04', 1),
-(2, 2, 5, 'SP005', N'Giày thể thao New Balance 574', 2000000, 1700000, 150, N'Kiểu dáng cổ điển và tiện dụng', '2024-10-05', 1),
-(3, 4, 1, 'SP006', N'Giày thể thao Jordan 1 Retro', 5000000, 4500000, 50, N'Biểu tượng của thời trang và thể thao', '2024-10-06', 1),
-(1, 3, 2, 'SP007', N'Giày thể thao Asics Gel-Kayano', 3200000, 2800000, 60, N'Giày hỗ trợ chạy bộ chuyên nghiệp', '2024-10-07', 1),
-(2, 1, 3, 'SP008', N'Giày thể thao Reebok Classic', 1600000, 1300000, 100, N'Phong cách cổ điển', '2024-10-08', 1),
-(3, 4, 4, 'SP009', N'Giày thể thao Vans Old Skool', 1700000, 1400000, 90, N'Giày trượt ván cổ điển', '2024-10-09', 1),
-(1, 2, 5, 'SP010', N'Giày thể thao Under Armour HOVR', 2800000, 2400000, 70, N'Giày chạy bộ với công nghệ HOVR', '2024-10-10', 1);
+(1, 1, 1, 1, 1, 1, 'NIKE270-BLK', 'Nike Air Max 270 - Đen', 4500000, 3000000, 50, 'Giày thể thao êm ái cho chạy bộ', '2024-10-30', 1),
+(1, 2, 2, 2, 1, 1, 'NIKE270-WHT', 'Nike Air Max 270 - Trắng', 4500000, 3000000, 30, 'Giày thể thao phong cách', '2024-10-30', 1),
+(2, 3, 1, 3, 2, 2, 'ADIDUB-RED', 'Adidas Ultraboost 22 - Đỏ', 5200000, 3200000, 40, 'Giày chạy bộ chuyên nghiệp', '2024-10-30', 1),
+(3, 1, 3, 4, 3, 2, 'PUMA-RSX', 'Puma RS-X - Xanh dương', 3500000, 2000000, 25, 'Giày thời trang thể thao', '2024-10-30', 1),
+(4, 2, 4, 5, 2, 3, 'NB574-GRN', 'New Balance 574 - Xanh lá', 3200000, 1800000, 20, 'Thiết kế cổ điển', '2024-10-30', 1),
+(5, 3, 5, 6, 4, 3, 'JORDAN1-YLW', 'Nike Jordan 1 - Vàng', 6000000, 4000000, 15, 'Giày bóng rổ huyền thoại', '2024-10-30', 1),
+(6, 4, 3, 7, 5, 4, 'NMD-R1-ORG', 'Adidas NMD R1 - Cam', 4900000, 3100000, 35, 'Giày công nghệ Boost', '2024-10-30', 1),
+(7, 1, 6, 8, 6, 4, 'ASICS-GEL', 'Asics Gel-Kayano 28 - Xám', 3800000, 2500000, 45, 'Hỗ trợ chân tối đa', '2024-10-30', 1),
+(8, 2, 4, 9, 7, 5, 'REEB-ZIG', 'Reebok Zig Kinetica - Tím', 3300000, 2100000, 30, 'Công nghệ đế Zig', '2024-10-30', 1),
+(9, 3, 5, 10, 8, 5, 'CONV-CT-HNG', 'Converse Chuck Taylor - Hồng', 2500000, 1500000, 60, 'Giày vải cổ cao', '2024-10-30', 1);
 
 
 -- Dữ liệu bảng ChiTietGioHang (Chi tiết giỏ hàng)
