@@ -10,6 +10,7 @@ import com.example.RunFlex.service.DanhMucService;
 import com.example.RunFlex.service.ThuongHieuService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,8 +31,9 @@ public class DanhMucController {
     private DanhMucService danhMucService;
 
     @GetMapping()
-    public List<DanhMuc> getAll() {
-        return danhMucService.getAll();
+    public ResponseEntity<List<DanhMuc>>  getAll() {
+        List<DanhMuc> danhMucs = danhMucService.getAll();
+        return ResponseEntity.ok(danhMucs);
     }
 
     @PostMapping()

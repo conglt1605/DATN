@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/chitietsanpham")
 public class ChiTietSanPhamController {
+
     @Autowired
     private ChiTietSanPhamService chiTietSanPhamService;
 
@@ -45,5 +46,16 @@ public class ChiTietSanPhamController {
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) {
         chiTietSanPhamService.delete(id);
+    }
+
+    @GetMapping("/slsp")
+    public List<Object[]> getTongSLSP() {
+        List<Object[]> tong = chiTietSanPhamService.getTongSLSP();
+        return tong;
+    }
+
+    @GetMapping("/{id}")
+    public List<ChiTietSanPham> getCTSPByID(@PathVariable Long id) {
+        return chiTietSanPhamService.getCTSPByID(id);
     }
 }

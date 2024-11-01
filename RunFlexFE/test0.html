@@ -18,7 +18,6 @@
                 <th>Mã</th>
                 <th>Tên</th>
                 <th>Hành động</th>
-                <th>{{TongTien}}</th>
             </tr>
         </thead>
         <tbody>
@@ -31,18 +30,7 @@
                     <button ng-click="deleteData(nhanVien.id)">Xóa</button>
                 </td>
             </tr>
-        </tbody>
-        <tbody>
-            <tr ng-repeat="nhanVien in quanLys">
-                <td>{{ nhanVien.id }}</td>
-                <td>{{ nhanVien.maNhanVien }}</td>
-                <td>{{ nhanVien.tenNhanVien }}</td>
-                <td>
-                    <button ng-click="editData(nhanVien)">Sửa</button>
-                    <button ng-click="deleteData(nhanVien.id)">Xóa</button>
-                </td>
-            </tr>
-        </tbody>
+
     </table>
 
     <h2>Thêm / Cập nhật nhân viên</h2>

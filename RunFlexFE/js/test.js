@@ -12,20 +12,6 @@ app.controller("MainController", function ($scope, $http) {
     }
   );
 
-  $http.get("http://localhost:8080/hoadon/doanhthu").then(
-    function (response) {
-      if (response.data.length > 0) {
-        $scope.TongTien = response.data[0].TongTien;
-      } else {
-        console.warn("Không có dữ liệu doanh thu.");
-      }
-      console.log(response.data);
-    },
-    function (error) {
-      console.error("Lỗi khi lấy dữ liệu:", error);
-    }
-  );
-
   $http.get("http://localhost:8080/nhanvien/quanly").then(
     function (response) {
       $scope.quanLys = response.data;

@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class ChiTietSanPhamService {
-       @Autowired
+    @Autowired
     private ChiTietSanPhamRepository chiTietSanPhamRepository;
 
     public List<ChiTietSanPham> getAll() {
@@ -31,21 +31,7 @@ public class ChiTietSanPhamService {
 
     public ChiTietSanPham update(long id, ChiTietSanPham chiTietSanPham) {
         ChiTietSanPham chiTietSanPhamUpdate = chiTietSanPhamRepository.findById(id).orElseThrow();
-
-        chiTietSanPham.setSanPham(chiTietSanPham.getSanPham());
-        chiTietSanPham.setNhanVien(chiTietSanPham.getNhanVien());
-        chiTietSanPham.setKichCo(chiTietSanPham.getKichCo());
-        chiTietSanPham.setMauSac(chiTietSanPham.getMauSac());
-        chiTietSanPham.setChatLieu(chiTietSanPham.getChatLieu());
-        chiTietSanPham.setDeGiay(chiTietSanPham.getDeGiay());
-        chiTietSanPham.setMaSanPham(chiTietSanPham.getMaSanPham());
-        chiTietSanPham.setTenChiTietSanPham(chiTietSanPham.getTenChiTietSanPham());
-        chiTietSanPham.setSoLuong(chiTietSanPham.getSoLuong());
-        chiTietSanPham.setGiaBan(chiTietSanPham.getGiaBan());
-        chiTietSanPham.setGiaNhap(chiTietSanPham.getGiaNhap());
-        chiTietSanPham.setSoLuong(chiTietSanPham.getSoLuong());
-        chiTietSanPham.setNgayTao(new Date());
-        chiTietSanPham.setMoTa(chiTietSanPham.getMoTa());
+        // Cập nhật các trường
         return chiTietSanPhamRepository.save(chiTietSanPhamUpdate);
     }
 
@@ -53,5 +39,13 @@ public class ChiTietSanPhamService {
         ChiTietSanPham chiTietSanPham = chiTietSanPhamRepository.findById(id).orElseThrow();
         chiTietSanPham.setTrangThai(0);
         chiTietSanPhamRepository.save(chiTietSanPham);
+    }
+
+    public List<Object[]> getTongSLSP() {
+        return chiTietSanPhamRepository.getTongSLSP();
+    }
+    
+    public List<ChiTietSanPham> getCTSPByID(long id){
+        return chiTietSanPhamRepository.getCTSPByID(id);
     }
 }

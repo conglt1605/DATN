@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SanPham</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="/js/sanPhamController.js"></script>
+    <style>
+        .input-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            /* Khoảng cách giữa các phần tử */
+        }
+        
+        .input-group input {
+            padding: 5px;
+            font-size: 14px;
+        }
+        
+        .input-group button {
+            padding: 5px 10px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body ng-controller="sanPhamController">
+    <h1>Danh sách sản phẩm</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Tên</th>
+                <th>Số lượng</th>
+                <th>Danh mục</th>
+                <th>Thương hiệu</th>
+                <th>Trạng thái</th>
+                <th>Thao tác</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="sanPham in sanPhams">
+                <td>{{ sanPham.id }}</td>
+                <td>{{ sanPham.tenSanPham }}</td>
+                <td>{{ soLuongData[sanPham.id] || 0 }}</td>
+                <td>{{ sanPham.danhMuc.tenDanhMuc }}</td>
+                <td>{{ sanPham.thuongHieu.tenThuongHieu }}</td>
+                <td>{{ sanPham.trangThai }}</td>
+                <td>
+                    <button><a href="/view/chitietsanpham.html">Chi tiết</a></button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <h2>Thêm / Cập nhật Sản phẩm</h2>
+    <form>
+        <div>
+            <label>Tên sản phẩm:</label>
+            <input type="text" ng-model="sanPham.tenSanPham">
+        </div>
+        <div class="input-row">
+            <label>Danh mục:</label>
+            <select ng-model="sanPham.danhMuc.id" ng-options="danhMuc.id as danhMuc.tenDanhMuc for danhMuc in danhMucs">
+                <option value="">Chọn danh mục</option>
+            </select>
+            <div class="input-group">
+                <input type="text" ng-model="danhMuc.tenDanhMuc" placeholder="Thêm danh mục">
+                <button ng-click="themDanhMuc()">+ Thêm</button>
+            </div>
+        </div>
+
+        <div class="input-row">
+            <label>Thương hiệu:</label>
+            <select ng-model="sanPham.thuongHieu.id" ng-options="thuongHieu.id as thuongHieu.tenThuongHieu for thuongHieu in thuongHieus">
+                <option value="">Chọn thương hiệu</option>
+            </select>
+            <div class="input-group">
+                <input type="text" ng-model="thuongHieu.tenThuongHieu" placeholder="Thêm thương hiệu">
+                <button ng-click="themThuongHieu()">+ Thêm</button>
+            </div>
+        </div>
+
+        <button type="button" ng-click="submitData()">Thêm mới</button>
+        <button type="button" ng-click="updateData()">Cập nhật</button>
+        <button type="button" ng-click="resetForm()">Làm mới</button>
+    </form>
+</body>
+
+
+
+</html>

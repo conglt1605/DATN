@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chi tiết sản phẩm</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="/js/chiTietSanPhamController.js"></script>
+    <script src="/js/sanPhamController.js"></script>
+</head>
+
+<body ng-controller="ChiTietSanPhamController">
+    <h1>CTSP</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Tên</th>
+                <th>Đế giày</th>
+                <th>Số lượng</th>
+                <th>Đơn giá</th>
+                <th>Hành động</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="chiTietSanPham in chiTietSanPhams">
+                <td>{{ chiTietSanPham.id }}</td>
+                <td>{{ chiTietSanPham.tenChiTietSanPham }}</td>
+                <td>{{ chiTietSanPham.deGiay.tenDeGiay }}</td>
+                <td>{{ chiTietSanPham.soLuong }}</td>
+                <td>{{ chiTietSanPham.donGia }}</td>
+                <td>
+                    <button ng-click="editData(nhanVien)">Sửa</button>
+                    <button ng-click="deleteData(nhanVien.id)">Xóa</button>
+                </td>
+            </tr>
+
+    </table>
+</body>
+
+</html>

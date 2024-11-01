@@ -1,57 +1,78 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en" ng-app="myApp">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thêm Sản Phẩm Mới - Admin</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Loại đế giày</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="/js/sanPhamController.js"></script>
+    <style>
+        .dropdown {
+            width: 200px;
+            margin-bottom: 10px;
+        }
+        
+        .input-group {
+            display: flex;
+            align-items: center;
+        }
+        
+        .input-group input {
+            flex: 1;
+        }
+        
+        .input-group button {
+            margin-left: 5px;
+        }
+    </style>
 </head>
 
-<body>
-    <h1>Thêm Sản Phẩm Mới</h1>
-    <form action="/admin/add-product" method="POST" enctype="multipart/form-data">
-        <!-- Tên Sản Phẩm -->
-        <label for="productName">Tên sản phẩm:</label>
-        <input type="text" id="productName" name="productName" required><br><br>
+<body ng-controller="deGiayController">
 
-        <!-- Giá Sản Phẩm -->
-        <label for="price">Giá sản phẩm (VNĐ):</label>
-        <input type="number" id="price" name="price" min="0" required><br><br>
+    <h2>Chọn loại đế giày</h2>
 
-        <!-- Mô Tả Sản Phẩm -->
-        <label for="description">Mô tả:</label>
-        <textarea id="description" name="description" rows="5" cols="50" placeholder="Mô tả sản phẩm..."></textarea><br><br>
+    <div class="dropdown">
+        <select ng-model="selectedDeGiay" ng-options="de as de.ten for de in danhSachDe">
+            <option value="">Chọn loại đế</option>
+        </select>
+    </div>
 
-        <!-- Danh Mục -->
-        <label for="category">Danh mục:</label>
-        <select id="category" name="category">
-            <option value="sneaker">Sneaker</option>
-            <option value="running">Chạy bộ</option>
-            <option value="formal">Giày tây</option>
-        </select><br><br>
+    <div class="input-group">
+        <input type="text" ng-model="newDeGiay" placeholder="Thêm đế giày">
+        <button ng-click="themDeGiay()">+ Thêm</button>
+    </div>
 
-        <!-- Số Lượng -->
-        <label for="quantity">Số lượng:</label>
-        <input type="number" id="quantity" name="quantity" min="1" required><br><br>
+    <script>
+        var app = angular.module("myApp", []);
 
-        <!-- Ngày Thêm -->
-        <label for="addDate">Ngày thêm:</label>
-        <input type="date" id="addDate" name="addDate" required><br><br>
+        app.controller("deGiayController", function($scope) {
+            // Danh sách các loại đế giày có sẵn
+            $scope.danhSachDe = [{
+                ten: "Cao su non"
+            }, {
+                ten: "Nhựa"
+            }, {
+                ten: "Gỗ"
+            }, {
+                ten: "Đặc"
+            }, {
+                ten: "Đinh"
+            }, {
+                ten: "Cao su"
+            }];
 
-        <!-- Ảnh Sản Phẩm -->
-        <label for="productImage">Hình ảnh:</label>
-        <input type="file" id="productImage" name="productImage" accept="image/*" required><br><br>
-
-        <!-- Trạng Thái Sản Phẩm -->
-        <label for="status">Trạng thái:</label>
-        <select id="status" name="status">
-            <option value="available">Còn hàng</option>
-            <option value="out_of_stock">Hết hàng</option>
-        </select><br><br>
-
-        <button type="submit">Thêm Sản Phẩm</button>
-    </form>
+            // Thêm loại đế giày mới
+            $scope.themDeGiay = function() {
+                if ($scope.newDeGiay) {
+                    $scope.danhSachDe.push({
+                        ten: $scope.newDeGiay
+                    });
+                    $scope.newDeGiay = ""; // Reset ô nhập sau khi thêm
+                }
+            };
+        });
+    </script>
 </body>
 
 </html>
