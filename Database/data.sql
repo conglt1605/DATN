@@ -64,21 +64,8 @@ VALUES
 ('Mizuno', 1),
 ('Hoka One One', 1);
 
--- Chèn dữ liệu vào bảng Thuộc Tính
-INSERT INTO ThuocTinh (TenThuocTinh, MoTa, NgayTao, TrangThai) VALUES
-(N'Màu sắc', N'Phân loại theo màu', GETDATE(), 1),
-(N'Chất liệu', N'Phân loại theo chất liệu', GETDATE(), 1),
-(N'Kiểu dáng', N'Phân loại theo kiểu dáng', GETDATE(), 1);
 
--- Chèn dữ liệu vào bảng Chi Tiết Thuộc Tính
-INSERT INTO ChiTietThuocTinh (ID_ThuocTinh, Loai, TrangThai) VALUES
-(1, N'Đỏ', 1),
-(1, N'Xanh', 1),
-(1, N'Đen', 1),
-(2, N'Da', 1),
-(2, N'Vải', 1),
-(3, N'Cổ thấp', 1),
-(3, N'Cổ cao', 1);
+
 
 INSERT INTO SanPham (ID_ThuongHieu, ID_DanhMuc, TenSanPham, TrangThai) VALUES
 (1, 1, 'Nike Air Max 270', 1),
@@ -208,7 +195,7 @@ VALUES
 (3, 5, 10, 'Ví điện tử', 'Mua online', '35000', '2024-10-05', NULL, '2024-10-07', '200 Đường H, Quận 7', '2700000', 'Thanh toán thành công', 2);
 
 
-INSERT INTO ChiTietSanPham (ID_SanPham, ID_NhanVien, ID_KichCo, ID_MauSac, ID_DeGiay, ID_ChatLieu, MaSanPham, TenChiTietSanPham, GiaBan, GiaNhap, SoLuong, MoTa, NgayTao, TrangThai) 
+INSERT INTO ChiTietSanPham (ID_SanPham, ID_NhanVien, ID_KichCo, ID_MauSac, ID_DeGiay, ID_ChatLieu, MaChiTietSanPham, TenChiTietSanPham, GiaBan, GiaNhap, SoLuong, MoTa, NgayTao, TrangThai) 
 VALUES
 (1, 1, 1, 1, 1, 1, 'NIKE270-BLK', 'Nike Air Max 270 - Đen', 4500000, 3000000, 50, 'Giày thể thao êm ái cho chạy bộ', '2024-10-30', 1),
 (1, 2, 2, 2, 1, 1, 'NIKE270-WHT', 'Nike Air Max 270 - Trắng', 4500000, 3000000, 30, 'Giày thể thao phong cách', '2024-10-30', 1),
@@ -257,36 +244,43 @@ VALUES
 (10, 6, '3', 1),
 (10, 7, '1', 1);
 
--- Chèn dữ liệu vào bảng Thuộc Tính Sản Phẩm
-INSERT INTO ThuocTinhSanPham (ID_ChiTietSanPham, ID_ChiTietThuocTinh, TrangThai) VALUES
-(1, 1, 1),  -- Chi tiết sản phẩm 1 (Nike Air Max - Đỏ) có màu sắc Đỏ
-(1, 2, 1),  -- Chi tiết sản phẩm 1 (Nike Air Max - Đỏ) có màu sắc Xanh
-(1, 3, 1),  -- Chi tiết sản phẩm 1 (Nike Air Max - Đỏ) có chất liệu Da
-(2, 1, 1),  -- Chi tiết sản phẩm 2 (Nike Air Max - Xanh) có màu sắc Đỏ
-(2, 3, 1),  -- Chi tiết sản phẩm 2 (Nike Air Max - Xanh) có chất liệu Da
-(3, 1, 1),  -- Chi tiết sản phẩm 3 (Nike Air Force 1 - Trắng) có màu sắc Đỏ
-(3, 2, 1),  -- Chi tiết sản phẩm 3 (Nike Air Force 1 - Trắng) có màu sắc Xanh
-(4, 1, 1),  -- Chi tiết sản phẩm 4 (Adidas UltraBoost - Đen) có màu sắc Đỏ
-(4, 3, 1)  -- Chi tiết sản phẩm 4 (Adidas UltraBoost - Đen) có chất liệu Da
 
-INSERT INTO AnhGiay (ID_ChiTietSanPham, TenURL, TrangThai) VALUES
-(1, 'https://example.com/image1.jpg', 1),
-(2, 'https://example.com/image2.jpg', 1),
-(3, 'https://example.com/image3.jpg', 1),
-(4, 'https://example.com/image4.jpg', 0),
-(5, 'https://example.com/image5.jpg', 1),
-(6, 'https://example.com/image6.jpg', 1),
-(7, 'https://example.com/image7.jpg', 0),
-(8, 'https://example.com/image8.jpg', 1),
-(9, 'https://example.com/image9.jpg', 1),
-(10, 'https://example.com/image10.jpg', 0);
+-- Insert data into AnhGiay
+INSERT INTO AnhGiay (TenURL, TrangThai) VALUES
+('url_image_shoe_1.jpg', 1),
+('url_image_shoe_2.jpg', 1),
+('url_image_shoe_3.jpg', 1),
+('url_image_shoe_4.jpg', 1),
+('url_image_shoe_5.jpg', 1),
+('url_image_shoe_6.jpg', 1),
+('url_image_shoe_7.jpg', 1),
+('url_image_shoe_8.jpg', 1),
+('url_image_shoe_9.jpg', 1),
+('url_image_shoe_10.jpg', 1);
 
-INSERT INTO ChiTietDanhMuc (ID_ChiTietSanPham, ID_DanhMuc, TrangThai) 
-VALUES 
+-- Insert data into ChiTietAnhGiay
+INSERT INTO ChiTietAnhGiay (ID_ChiTietSanPham, ID_AnhGiay, TrangThai) VALUES
 (1, 1, 1),
 (1, 2, 1),
-(2, 1, 1),
-(3, 1, 1),
-(2, 2, 1);
+(2, 3, 1),
+(2, 4, 1),
+(3, 5, 1),
+(3, 6, 1),
+(4, 7, 1),
+(4, 8, 1),
+(5, 9, 1),
+(5, 10, 1);
 
+-- Insert data into ChiTietChinhSua
+INSERT INTO ChiTietChinhSua (ID_ChiTietSanPham, ID_NhanVien, NgayChinhSua, MoTa, TrangThai) VALUES
+(1, 1, '2024-10-10', N'Sửa màu sắc giày thể thao', 1),
+(2, 2, '2024-10-12', N'Thêm kích cỡ mới', 1),
+(3, 3, '2024-10-15', N'Sửa kiểu dáng', 1),
+(4, 4, '2024-10-18', N'Thêm thuộc tính chống trơn', 1),
+(5, 1, '2024-10-20', N'Chỉnh sửa giá bán', 1),
+(1, 2, '2024-10-22', N'Cập nhật thông tin sản phẩm', 1),
+(2, 3, '2024-10-25', N'Thêm màu mới', 1),
+(3, 4, '2024-10-27', N'Chỉnh sửa chi tiết mô tả', 1),
+(4, 1, '2024-10-29', N'Thêm ảnh mới', 1),
+(5, 2, '2024-10-30', N'Thêm size mới', 1);
 

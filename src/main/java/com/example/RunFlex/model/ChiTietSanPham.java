@@ -10,7 +10,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 /**
  *
@@ -22,14 +22,15 @@ public class ChiTietSanPham {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String maSanPham;
+    private String maChiTietSanPham;
     private String tenChiTietSanPham;
     private int soLuong;
     private int giaBan;
     private int giaNhap;
     private String moTa;
-    private Date ngayTao;
+    private LocalDateTime ngayTao;
     private int trangThai;
+    
     @ManyToOne
     @JoinColumn(name = "ID_SanPham")
     private SanPham sanPham;
@@ -37,7 +38,7 @@ public class ChiTietSanPham {
     @ManyToOne
     @JoinColumn(name = "ID_NhanVien")
     private NhanVien nhanVien;
-
+    
     @ManyToOne
     @JoinColumn(name = "ID_KichCo")
     private KichCo kichCo;
@@ -57,9 +58,9 @@ public class ChiTietSanPham {
     public ChiTietSanPham() {
     }
 
-    public ChiTietSanPham(Long id, String maSanPham, String tenChiTietSanPham, int soLuong, int giaBan, int giaNhap, String moTa, Date ngayTao, int trangThai, SanPham sanPham, NhanVien nhanVien, KichCo kichCo, DeGiay deGiay, MauSac mauSac, ChatLieu chatLieu) {
+    public ChiTietSanPham(Long id, String maChiTietSanPham, String tenChiTietSanPham, int soLuong, int giaBan, int giaNhap, String moTa, LocalDateTime ngayTao, int trangThai, SanPham sanPham, NhanVien nhanVien, KichCo kichCo, DeGiay deGiay, MauSac mauSac, ChatLieu chatLieu) {
         this.id = id;
-        this.maSanPham = maSanPham;
+        this.maChiTietSanPham = maChiTietSanPham;
         this.tenChiTietSanPham = tenChiTietSanPham;
         this.soLuong = soLuong;
         this.giaBan = giaBan;
@@ -75,8 +76,6 @@ public class ChiTietSanPham {
         this.chatLieu = chatLieu;
     }
 
-
-
     public Long getId() {
         return id;
     }
@@ -85,13 +84,15 @@ public class ChiTietSanPham {
         this.id = id;
     }
 
-    public String getMaSanPham() {
-        return maSanPham;
+    public String getMaChiTietSanPham() {
+        return maChiTietSanPham;
     }
 
-        public void setMaSanPham(String maSanPham) {
-        this.maSanPham = maSanPham;
+    public void setMaChiTietSanPham(String maChiTietSanPham) {
+        this.maChiTietSanPham = maChiTietSanPham;
     }
+
+
 
     public int getSoLuong() {
         return soLuong;
@@ -125,14 +126,14 @@ public class ChiTietSanPham {
         this.moTa = moTa;
     }
 
-    public Date getNgayTao() {
+    public LocalDateTime getNgayTao() {
         return ngayTao;
     }
 
-    public void setNgayTao(Date ngayTao) {
+    public void setNgayTao(LocalDateTime ngayTao) {
         this.ngayTao = ngayTao;
     }
-
+    
     public int getTrangThai() {
         return trangThai;
     }

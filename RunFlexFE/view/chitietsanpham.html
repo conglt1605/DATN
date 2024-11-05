@@ -6,30 +6,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chi tiết sản phẩm</title>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="/js/app.module.js"></script>
+    <!-- Khởi tạo module -->
     <script src="/js/chiTietSanPhamController.js"></script>
+    <!-- Controller ChiTietSanPham -->
     <script src="/js/sanPhamController.js"></script>
+    <!-- Controller SanPham -->
 </head>
 
-<body ng-controller="ChiTietSanPhamController">
+<body ng-controller="chiTietSanPhamController">
     <h1>CTSP</h1>
     <table border="1">
         <thead>
             <tr>
                 <th>ID</th>
+                <th>Mã</th>
                 <th>Tên</th>
                 <th>Đế giày</th>
                 <th>Số lượng</th>
+                <th>Giá nhập</th>
                 <th>Đơn giá</th>
+                <th>Ngày tạo</th>
                 <th>Hành động</th>
             </tr>
         </thead>
         <tbody>
             <tr ng-repeat="chiTietSanPham in chiTietSanPhams">
                 <td>{{ chiTietSanPham.id }}</td>
+                <td>{{ chiTietSanPham.maSanPham }}</td>
                 <td>{{ chiTietSanPham.tenChiTietSanPham }}</td>
                 <td>{{ chiTietSanPham.deGiay.tenDeGiay }}</td>
                 <td>{{ chiTietSanPham.soLuong }}</td>
-                <td>{{ chiTietSanPham.donGia }}</td>
+                <td>{{ chiTietSanPham.giaNhap }}</td>
+                <td>{{ chiTietSanPham.giaBan }}</td>
+                <td>{{ chiTietSanPham.ngayTao }}</td>
                 <td>
                     <button ng-click="editData(nhanVien)">Sửa</button>
                     <button ng-click="deleteData(nhanVien.id)">Xóa</button>
@@ -37,6 +47,7 @@
             </tr>
 
     </table>
+
 </body>
 
 </html>

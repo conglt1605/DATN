@@ -23,19 +23,15 @@ public class AnhGiay {
     public long id;
     public String tenURL;
     public int trangThai;
-    
-    @ManyToOne
-    @JoinColumn(name = "ID_ChiTietSanPham")
-    private ChiTietSanPham chiTietSanPham;
+
 
     public AnhGiay() {
     }
 
-    public AnhGiay(long id, String tenURL, int trangThai, ChiTietSanPham chiTietSanPham) {
+    public AnhGiay(long id, String tenURL, int trangThai) {
         this.id = id;
         this.tenURL = tenURL;
         this.trangThai = trangThai;
-        this.chiTietSanPham = chiTietSanPham;
     }
 
 
@@ -64,13 +60,6 @@ public class AnhGiay {
         this.trangThai = trangThai;
     }
 
-    public ChiTietSanPham getChiTietSanPham() {
-        return chiTietSanPham;
-    }
-
-    public void setChiTietSanPham(ChiTietSanPham chiTietSanPham) {
-        this.chiTietSanPham = chiTietSanPham;
-    }
     
 
 }

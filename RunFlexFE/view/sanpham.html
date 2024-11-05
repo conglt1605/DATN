@@ -6,7 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SanPham</title>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="/js/app.module.js"></script>
+    <!-- Khởi tạo module -->
+    <script src="/js/chiTietSanPhamController.js"></script>
+    <!-- Controller ChiTietSanPham -->
     <script src="/js/sanPhamController.js"></script>
+    <!-- Controller SanPham -->
     <style>
         .input-row {
             display: flex;
@@ -50,7 +55,7 @@
                 <td>{{ sanPham.thuongHieu.tenThuongHieu }}</td>
                 <td>{{ sanPham.trangThai }}</td>
                 <td>
-                    <button><a href="/view/chitietsanpham.html">Chi tiết</a></button>
+                    <a ng-href="/view/chitietsanpham.html?id={{ sanPham.id }}">Chi tiết</a>
                 </td>
             </tr>
         </tbody>

@@ -36,23 +36,9 @@ TenDeGiay nvarchar(255) not null,
 TrangThai int not null
 )
 
--- Bảng Danh mục
-CREATE TABLE ThuocTinh (
-    ID INT PRIMARY KEY identity(1,1),
-    TenThuocTinh NVARCHAR(255) NOT NULL,
-    MoTa NVARCHAR(255),
-    NgayTao DATE NOT NULL,
-    TrangThai int NOT NULL
-);
 
--- Bảng Chi tiết danh mục
-CREATE TABLE ChiTietThuocTinh (
-    ID INT PRIMARY KEY identity(1,1),
-    ID_ThuocTinh INT,
-    Loai NVARCHAR(255) NOT NULL,
-    TrangThai int NOT NULL,
-    FOREIGN KEY (ID_ThuocTinh) REFERENCES ThuocTinh(ID)
-);
+
+
 
 -- Bảng Sản phẩm
 CREATE TABLE SanPham (
@@ -72,15 +58,6 @@ ID int primary key identity(1,1),
 SoKichCo varchar(2) not null,
 TrangThai int not null
 )
-
-
-
-
-
-
-
-
-
 
 
 create table KhuyenMai(
@@ -166,13 +143,13 @@ CREATE TABLE ChiTietSanPham (
 	ID_MauSac INT,
 	ID_DeGiay INT,
 	ID_ChatLieu INT,
-	MaSanPham varchar(50) unique,
+	MaChiTietSanPham varchar(50) unique,
     TenChiTietSanPham VARCHAR(255) NOT NULL,
     GiaBan DECIMAL(10, 2) NOT NULL,
     GiaNhap DECIMAL(10, 2) NOT NULL,
     SoLuong INT NOT NULL,
     MoTa Nvarchar(255),
-    NgayTao DATE NOT NULL,
+    NgayTao DATE ,
     TrangThai int NOT NULL,
     FOREIGN KEY (ID_SanPham) REFERENCES SanPham(ID),
 	FOREIGN KEY (ID_KichCo) REFERENCES KichCo(ID),
@@ -203,31 +180,29 @@ foreign key (ID_HoaDon) references HoaDon(ID),
 foreign key (ID_ChiTietSanPham) references ChiTietSanPham(ID)
 )
 
--- Bảng Thuộc tính sản phẩm
-CREATE TABLE ThuocTinhSanPham (
-    ID INT PRIMARY KEY identity(1,1) NOT NULL,
-    ID_ChiTietSanPham INT NOT NULL,
-    ID_ChiTietThuocTinh INT NOT NULL,
-    TrangThai int NOT NULL,
-    FOREIGN KEY (ID_ChiTietSanPham) REFERENCES ChiTietSanPham(ID),
-    FOREIGN KEY (ID_ChiTietThuocTinh) REFERENCES ChiTietThuocTinh(ID),
-	UNIQUE (ID_ChiTietSanPham, ID_ChiTietThuocTinh)
-);
-
-create table ChiTietDanhMuc(
-ID INT PRIMARY KEY identity(1,1) NOT NULL,
-    ID_ChiTietSanPham INT NOT NULL,
-    ID_DanhMuc INT NOT NULL,
-	    TrangThai int NOT NULL
-		    FOREIGN KEY (ID_ChiTietSanPham) REFERENCES ChiTietSanPham(ID),
-    FOREIGN KEY (ID_DanhMuc) REFERENCES DanhMuc(ID),
-		UNIQUE (ID_ChiTietSanPham, ID_DanhMuc)
-)
 
 create table AnhGiay(
 ID int primary key identity(1,1),
-ID_ChiTietSanPham int not null,
 TenURL nvarchar(255) not null,
 TrangThai int not null
+)
+
+create table ChiTietAnhGiay(
+ID int primary key identity(1,1),
+ID_ChiTietSanPham int not null,
+ID_AnhGiay int not null,
+TrangThai int not null
 FOREIGN KEY (ID_ChiTietSanPham) REFERENCES ChiTietSanPham(ID),
+FOREIGN KEY (ID_AnhGiay) REFERENCES AnhGiay(ID)
+)
+
+create table ChiTietChinhSua(
+ID int primary key identity(1,1),
+ID_ChiTietSanPham int not null,
+ID_NhanVien int not null,
+NgayChinhSua date not null,
+MoTa nvarchar(255) not null,
+TrangThai int not null
+FOREIGN KEY (ID_ChiTietSanPham) REFERENCES ChiTietSanPham(ID),
+FOREIGN KEY (ID_NhanVien) REFERENCES NhanVien(ID)
 )

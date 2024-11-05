@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thêm CTSP</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="/js/app.module.js"></script>
+    <script src="/js/chiTietSanPhamController.js"></script>
+    <script src="/js/sanPhamController.js"></script>
+    <script src="/js/kichCoController.js"></script>
+
+    <style>
+        .size-container {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .size-list {
+            display: none;
+            position: absolute;
+            background-color: white;
+            border: 1px solid #ccc;
+            padding: 10px;
+            z-index: 1;
+        }
+        
+        .size-container:hover .size-list {
+            display: block;
+        }
+        
+        .size-option {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+
+<body ng-controller="chiTietSanPhamController" ng-controller="kichCoController">
+    <h2>Thêm chi tiết sản phẩm</h2>
+    <form action="">
+        <div>
+            <label>Tên sản phẩm:</label>
+            <select ng-model="chiTietSanPham.sanPham.id" ng-options="chiTietSanPham.sanPham.id as chiTietSanPham.sanPham.tenSanPham for chiTietSanPham in chiTietSanPhams">
+                <option value="">Chọn tên sản phẩm</option>
+            </select>
+        </div>
+
+        <div>
+            <label>Kích cỡ:</label>
+            <select ng-model="chiTietSanPham.kichCo.id" ng-options="chiTietSanPham.kichCo.id as chiTietSanPham.kichCo.soKichCo for chiTietSanPham in chiTietSanPhams">
+                <option value="">Chọn kích cỡ</option>
+            </select>
+        </div>
+
+
+        <div>
+            <label>Màu sắc:</label>
+            <select ng-model="chiTietSanPham.mauSac.id" ng-options="chiTietSanPham.mauSac.id as chiTietSanPham.mauSac.tenMauSac for chiTietSanPham in chiTietSanPhams">
+                <option value="">Chọn màu sắc</option>
+            </select>
+        </div>
+
+        <div>
+            <label>Đế giày:</label>
+            <select ng-model="chiTietSanPham.deGiay.id" ng-options="chiTietSanPham.deGiay.id as chiTietSanPham.deGiay.tenDeGiay for chiTietSanPham in chiTietSanPhams">
+                <option value="">Chọn đế giày</option>
+            </select>
+        </div>
+
+
+        <div>
+            <label>Chất liệu:</label>
+            <select ng-model="chiTietSanPham.chatLieu.id" ng-options="chiTietSanPham.chatLieu.id as chiTietSanPham.chatLieu.tenChatLieu for chiTietSanPham in chiTietSanPhams">
+                <option value="">Chọn chất liệu</option>
+            </select>
+        </div>
+
+        <div>
+            <label>Mã:</label>
+            <input type="text" ng-model="chiTietSanPham.maChiTietSanPham">
+        </div>
+
+
+        <div>
+            <label>Số lượng:</label>
+            <input type="number" ng-model="chiTietSanPham.soLuong">
+        </div>
+
+        <div>
+            <label>Giá bán:</label>
+            <input type="number" ng-model="chiTietSanPham.giaBan">
+        </div>
+
+        <div>
+            <label>Giá nhập:</label>
+            <input type="number" ng-model="chiTietSanPham.giaNhap">
+        </div>
+
+        <div>
+            <label>Mô tả:</label>
+            <input type="text" ng-model="chiTietSanPham.moTa">
+        </div>
+        <button type="button" ng-click="submitData()">Thêm mới</button>
+    </form>
+</body>
+
+</html>
