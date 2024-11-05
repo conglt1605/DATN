@@ -143,7 +143,7 @@ CREATE TABLE ChiTietSanPham (
 	ID_MauSac INT,
 	ID_DeGiay INT,
 	ID_ChatLieu INT,
-	MaChiTietSanPham varchar(50) unique,
+	MaChiTietSanPham varchar(50) ,
     TenChiTietSanPham VARCHAR(255) NOT NULL,
     GiaBan DECIMAL(10, 2) NOT NULL,
     GiaNhap DECIMAL(10, 2) NOT NULL,
@@ -206,3 +206,22 @@ TrangThai int not null
 FOREIGN KEY (ID_ChiTietSanPham) REFERENCES ChiTietSanPham(ID),
 FOREIGN KEY (ID_NhanVien) REFERENCES NhanVien(ID)
 )
+
+--mã ctsp tự tăng
+drop trigger trg_MaChiTietSanPham
+go
+CREATE TRIGGER trg_MaChiTietSanPham
+ON ChiTietSanPham
+AFTER INSERT
+AS
+BEGIN
+    UPDATE ctsp
+    SET ctsp.MaChiTietSanPham = CONCAT('SP', ctsp.ID)
+    FROM ChiTietSanPham AS ctsp
+    INNER JOIN inserted AS ins ON ctsp.ID = ins.ID
+    WHERE ctsp.MaChiTietSanPham IS NULL; -- Chỉ cập nhật nếu giá trị hiện tại là NULL
+END;
+GO
+
+
+

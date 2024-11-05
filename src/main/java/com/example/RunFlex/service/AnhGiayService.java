@@ -30,8 +30,6 @@ public class AnhGiayService {
 
     public AnhGiay update(long id, AnhGiay anhGiay) {
         AnhGiay anhGiayUpdate = anhGiayRepository.findById(id).orElseThrow();
-
-        anhGiayUpdate.setChiTietSanPham(anhGiay.getChiTietSanPham());
         anhGiayUpdate.setTenURL(anhGiay.getTenURL());
         return anhGiayRepository.save(anhGiayUpdate);
     }
