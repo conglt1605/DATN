@@ -1,150 +1,138 @@
 ﻿-- Dữ liệu bảng DanhMuc (Danh mục sản phẩm giày thể thao)
 INSERT INTO DanhMuc (TenDanhMuc, TrangThai)
 VALUES
-('Chạy Bộ', 1),
-('Tập Gym', 1),
-('Bóng Đá', 1),
-('Bóng Rổ', 1),
-('Tennis', 1),
-('Cầu Lông', 1),
-('Đi Bộ', 1),
-('Thời Trang', 1),
-('Dã Ngoại', 1),
-('Leo Núi', 1);
+(N'Chạy Bộ', 1),
+(N'Tập Gym', 1),
+(N'Bóng Đá', 1),
+(N'Bóng Rổ', 1),
+(N'Tennis', 1),
+(N'Cầu Lông', 1),
+(N'Đi Bộ', 1),
+(N'Thời Trang', 1),
+(N'Dã Ngoại', 1),
+(N'Leo Núi', 1);
 
-
+-- Dữ liệu bảng MauSac (Màu sắc giày thể thao)
 INSERT INTO MauSac (TenMauSac, TrangThai) VALUES
-('Đen', 1),
-('Trắng', 1),
-('Đỏ', 1),
-('Xanh dương', 1),
-('Xanh lá', 1),
-('Vàng', 1),
-('Cam', 1),
-('Xám', 1),
-('Tím', 1),
-('Hồng', 1);
+(N'Đen', 1),
+(N'Trắng', 1),
+(N'Đỏ', 1),
+(N'Xanh dương', 1),
+(N'Xanh lá', 1),
+(N'Vàng', 1),
+(N'Cam', 1),
+(N'Xám', 1),
+(N'Tím', 1),
+(N'Hồng', 1);
 
+-- Dữ liệu bảng ChatLieu (Chất liệu giày thể thao)
 INSERT INTO ChatLieu (TenChatLieu, TrangThai) VALUES
-('Vải lưới', 1),
-('Da tổng hợp', 1),
-('Vải cotton', 1),
-('Da lộn', 1),
-('Cao su', 1),
-('PU Leather', 1),
-('Canvas', 1),
-('Nylon', 1),
-('Polyester', 1),
-('EVA Foam', 1);
+(N'Vải lưới', 1),
+(N'Da tổng hợp', 1),
+(N'Vải cotton', 1),
+(N'Da lộn', 1),
+(N'Cao su', 1),
+(N'PU Leather', 1),
+(N'Canvas', 1),
+(N'Nylon', 1),
+(N'Polyester', 1),
+(N'EVA Foam', 1);
 
+-- Dữ liệu bảng DeGiay (Đế giày thể thao)
 INSERT INTO DeGiay (TenDeGiay, TrangThai) VALUES
-('Đế cao su non', 1),
-('Đế PU Foam', 1),
-('Đế Boost', 1),
-('Đế EVA', 1),
-('Đế Vibram', 1),
-('Đế Flyknit', 1),
-('Đế TPU', 1),
-('Đế Carbon Fiber', 1),
-('Đế Air Max', 1),
-('Đế React', 1);
-
+(N'Đế cao su non', 1),
+(N'Đế PU Foam', 1),
+(N'Đế Boost', 1),
+(N'Đế EVA', 1),
+(N'Đế Vibram', 1),
+(N'Đế Flyknit', 1),
+(N'Đế TPU', 1),
+(N'Đế Carbon Fiber', 1),
+(N'Đế Air Max', 1),
+(N'Đế React', 1);
 
 -- Dữ liệu bảng ThuongHieu (Thương hiệu giày thể thao)
 INSERT INTO ThuongHieu (TenThuongHieu, TrangThai)
 VALUES
-('Nike', 1),
-('Adidas', 1),
-('Puma', 1),
-('New Balance', 1),
-('Reebok', 1),
-('Asics', 1),
-('Under Armour', 1),
-('Saucony', 1),
-('Mizuno', 1),
-('Hoka One One', 1);
+(N'Nike', 1),
+(N'Adidas', 1),
+(N'Puma', 1),
+(N'New Balance', 1),
+(N'Reebok', 1),
+(N'Asics', 1),
+(N'Under Armour', 1),
+(N'Saucony', 1),
+(N'Mizuno', 1),
+(N'Hoka One One', 1);
 
-
-
-
+-- Dữ liệu bảng SanPham (Sản phẩm)
 INSERT INTO SanPham (ID_ThuongHieu, ID_DanhMuc, TenSanPham, TrangThai) VALUES
-(1, 1, 'Nike Air Max 270', 1),
-(2, 2, 'Adidas Ultraboost 22', 1),
-(3, 1, 'Puma RS-X', 1),
-(4, 2, 'New Balance 574', 1),
-(1, 1, 'Nike Jordan 1', 1),
-(2, 2, 'Adidas NMD R1', 1),
-(5, 3, 'Asics Gel-Kayano 28', 1),
-(6, 3, 'Reebok Zig Kinetica', 1),
-(7, 4, 'Converse Chuck Taylor', 1),
-(8, 4, 'Vans Old Skool', 1);
-
-
-
+(1, 1, N'Nike Air Max 270', 1),
+(2, 2, N'Adidas Ultraboost 22', 1),
+(3, 1, N'Puma RS-X', 1),
+(4, 2, N'New Balance 574', 1),
+(1, 1, N'Nike Jordan 1', 1),
+(2, 2, N'Adidas NMD R1', 1),
+(5, 3, N'Asics Gel-Kayano 28', 1),
+(6, 3, N'Reebok Zig Kinetica', 1),
+(7, 4, N'Converse Chuck Taylor', 1),
+(8, 4, N'Vans Old Skool', 1);
 
 -- Dữ liệu bảng KichCo (Kích cỡ giày thể thao)
 INSERT INTO KichCo (SoKichCo, TrangThai)
 VALUES
-('36', 1),
-('37', 1),
-('38', 1),
-('39', 1),
-('40', 1),
-('41', 1),
-('42', 1),
-('43', 1),
-('44', 1),
-('45', 1);
-
-
-
-
-
-
-
-
+(N'36', 1),
+(N'37', 1),
+(N'38', 1),
+(N'39', 1),
+(N'40', 1),
+(N'41', 1),
+(N'42', 1),
+(N'43', 1),
+(N'44', 1),
+(N'45', 1);
 
 -- Dữ liệu bảng KhuyenMai (Khuyến mãi)
 INSERT INTO KhuyenMai (MaKhuyenMai, TenKhuyenMai, NgayBatDau, NgayKetThuc, MoTa, TrangThai)
 VALUES
-('KM01', 'Giảm giá 10%', '2024-01-01', '2024-01-31', 'Giảm giá 10% cho đơn hàng từ 1 triệu', 1),
-('KM02', 'Giảm giá 15%', '2024-02-01', '2024-02-28', 'Giảm giá 15% cho giày Nike', 1),
-('KM03', 'Giảm giá 20%', '2024-03-01', '2024-03-31', 'Giảm giá 20% cho giày Adidas', 1),
-('KM04', 'Mua 1 tặng 1', '2024-04-01', '2024-04-30', 'Mua 1 tặng 1 cho giày Puma', 1),
-('KM05', 'Giảm giá 25%', '2024-05-01', '2024-05-31', 'Giảm giá 25% cho đơn hàng từ 2 triệu', 1),
-('KM06', 'Tặng Voucher', '2024-06-01', '2024-06-30', 'Tặng voucher cho khách hàng mới', 1),
-('KM07', 'Giảm giá 5%', '2024-07-01', '2024-07-31', 'Giảm giá 5% cho đơn hàng bất kỳ', 1),
-('KM08', 'Giảm giá 50%', '2024-08-01', '2024-08-31', 'Giảm giá 50% cho giày Under Armour', 1),
-('KM09', 'Giảm giá 30%', '2024-09-01', '2024-09-30', 'Giảm giá 30% cho giày Reebok', 1),
-('KM10', 'Miễn phí vận chuyển', '2024-10-01', '2024-10-31', 'Miễn phí vận chuyển cho đơn hàng trên 500k', 1);
+(N'KM01', N'Giảm giá 10%', '2024-01-01', '2024-01-31', N'Giảm giá 10% cho đơn hàng từ 1 triệu', 1),
+(N'KM02', N'Giảm giá 15%', '2024-02-01', '2024-02-28', N'Giảm giá 15% cho giày Nike', 1),
+(N'KM03', N'Giảm giá 20%', '2024-03-01', '2024-03-31', N'Giảm giá 20% cho giày Adidas', 1),
+(N'KM04', N'Mua 1 tặng 1', '2024-04-01', '2024-04-30', N'Mua 1 tặng 1 cho giày Puma', 1),
+(N'KM05', N'Giảm giá 25%', '2024-05-01', '2024-05-31', N'Giảm giá 25% cho đơn hàng từ 2 triệu', 1),
+(N'KM06', N'Tặng Voucher', '2024-06-01', '2024-06-30', N'Tặng voucher cho khách hàng mới', 1),
+(N'KM07', N'Giảm giá 5%', '2024-07-01', '2024-07-31', N'Giảm giá 5% cho đơn hàng bất kỳ', 1),
+(N'KM08', N'Giảm giá 50%', '2024-08-01', '2024-08-31', N'Giảm giá 50% cho giày Under Armour', 1),
+(N'KM09', N'Giảm giá 30%', '2024-09-01', '2024-09-30', N'Giảm giá 30% cho giày Reebok', 1),
+(N'KM10', N'Miễn phí vận chuyển', '2024-10-01', '2024-10-31', N'Miễn phí vận chuyển cho đơn hàng trên 500k', 1);
 
 -- Dữ liệu bảng Voucher
 INSERT INTO Voucher (TenVoucher, GiaTri, TrangThai)
 VALUES
-('Voucher100K', '100000', 1),
-('Voucher200K', '200000', 1),
-('Voucher300K', '300000', 1),
-('Voucher400K', '400000', 1),
-('Voucher500K', '500000', 1),
-('Voucher600K', '600000', 1),
-('Voucher700K', '700000', 1),
-('Voucher800K', '800000', 1),
-('Voucher900K', '900000', 1),
-('Voucher1M', '1000000', 1);
+(N'Voucher100K', '100000', 1),
+(N'Voucher200K', '200000', 1),
+(N'Voucher300K', '300000', 1),
+(N'Voucher400K', '400000', 1),
+(N'Voucher500K', '500000', 1),
+(N'Voucher600K', '600000', 1),
+(N'Voucher700K', '700000', 1),
+(N'Voucher800K', '800000', 1),
+(N'Voucher900K', '900000', 1),
+(N'Voucher1M', '1000000', 1);
 
 -- Dữ liệu bảng KhachHang (Khách hàng)
 INSERT INTO KhachHang (MaKhachHang, TenKhachHang, MatKhau, TenTaiKhoan, Email, SoDienThoai, DiaChi, NgaySinh, NgayTao, TrangThai)
 VALUES
-('KH01', 'Nguyen Van A', 'password123', 'nguyenvana', 'nguyenvana@example.com', '0912345678', 'Hà Nội', '1990-01-01', '2024-01-01', 1),
-('KH02', 'Tran Thi B', 'password123', 'tranthib', 'tranthib@example.com', '0912345679', 'Hồ Chí Minh', '1992-02-02', '2024-02-01', 1),
-('KH03', 'Le Van C', 'password123', 'levanc', 'levanc@example.com', '0912345680', 'Đà Nẵng', '1994-03-03', '2024-03-01', 1),
-('KH04', 'Pham Thi D', 'password123', 'phamthid', 'phamthid@example.com', '0912345681', 'Cần Thơ', '1996-04-04', '2024-04-01', 1),
-('KH05', 'Hoang Van E', 'password123', 'hoangvane', 'hoangvane@example.com', '0912345682', 'Nha Trang', '1998-05-05', '2024-05-01', 1),
-('KH06', 'Vu Thi F', 'password123', 'vuthif', 'vuthif@example.com', '0912345683', 'Huế', '1991-06-06', '2024-06-01', 1),
-('KH07', 'Nguyen Van G', 'password123', 'nguyenvang', 'nguyenvang@example.com', '0912345684', 'Hà Nội', '1993-07-07', '2024-07-01', 1),
-('KH08', 'Tran Thi H', 'password123', 'tranthih', 'tranthih@example.com', '0912345685', 'Hồ Chí Minh', '1995-08-08', '2024-08-01', 1),
-('KH09', 'Le Van I', 'password123', 'levani', 'levani@example.com', '0912345686', 'Đà Nẵng', '1997-09-09', '2024-09-01', 1),
-('KH10', 'Pham Thi J', 'password123', 'phamthij', 'phamthij@example.com', '0912345687', 'Cần Thơ', '1999-10-10', '2024-10-01', 1);
+(N'KH01', N'Nguyen Van A', N'password123', N'nguyenvana', 'nguyenvana@example.com', '0912345678', N'Hà Nội', '1990-01-01', '2024-01-01', 1),
+(N'KH02', N'Tran Thi B', N'password123', N'tranthib', 'tranthib@example.com', '0912345679', N'Hồ Chí Minh', '1992-02-02', '2024-02-01', 1),
+(N'KH03', N'Le Van C', N'password123', N'levanc', 'levanc@example.com', '0912345680', N'Đà Nẵng', '1994-03-03', '2024-03-01', 1),
+(N'KH04', N'Pham Thi D', N'password123', N'phamthid', 'phamthid@example.com', '0912345681', N'Cần Thơ', '1996-04-04', '2024-04-01', 1),
+(N'KH05', N'Hoang Van E', N'password123', N'hoangvane', 'hoangvane@example.com', '0912345682', N'Nha Trang', '1998-05-05', '2024-05-01', 1),
+(N'KH06', N'Vu Thi F', N'password123', N'vuthif', 'vuthif@example.com', '0912345683', N'Huế', '1991-06-06', '2024-06-01', 1),
+(N'KH07', N'Nguyen Van G', N'password123', N'nguyenvang', 'nguyenvang@example.com', '0912345684', N'Quảng Ninh', '1993-07-07', '2024-07-01', 1),
+(N'KH08', N'Tran Thi H', N'password123', N'tranthih', 'tranthih@example.com', '0912345685', N'Lâm Đồng', '1995-08-08', '2024-08-01', 1),
+(N'KH09', N'Le Van I', N'password123', N'levani', 'levani@example.com', '0912345686', N'Quảng Bình', '1997-09-09', '2024-09-01', 1),
+(N'KH10', N'Pham Thi K', N'password123', N'phamthik', 'phamthik@example.com', '0912345687', N'Hải Phòng', '1999-10-10', '2024-10-01', 1);
 
 INSERT INTO NhanVien (MaNhanVien, TenNhanVien, MatKhau, TenTaiKhoan, CCCD, Email, SoDienThoai, DiaChi, NgaySinh, NgayTuyenDung, NgayNghiViec, VaiTro, TrangThai)
 VALUES 

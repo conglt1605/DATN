@@ -3,7 +3,7 @@
 use master
 drop database RunFlex
 
-create database RunFlex
+create database RunFlex 
 use RunFlex
 
 
@@ -208,7 +208,7 @@ FOREIGN KEY (ID_NhanVien) REFERENCES NhanVien(ID)
 )
 
 --mã ctsp tự tăng
-drop trigger trg_MaChiTietSanPham
+
 go
 CREATE TRIGGER trg_MaChiTietSanPham
 ON ChiTietSanPham

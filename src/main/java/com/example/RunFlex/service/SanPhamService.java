@@ -4,12 +4,15 @@
  */
 package com.example.RunFlex.service;
 
+import com.example.RunFlex.model.DanhMuc;
 import com.example.RunFlex.model.SanPham;
+import com.example.RunFlex.repository.DanhMucRepository;
 import com.example.RunFlex.repository.SanPhamRepository;
 import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
@@ -20,6 +23,8 @@ public class SanPhamService {
 
     @Autowired
     private SanPhamRepository sanPhamRepository;
+    @Autowired
+    private DanhMucRepository danhMucRepository;
 
     public List<SanPham> getAll() {
         return sanPhamRepository.getAll();
@@ -44,5 +49,12 @@ public class SanPhamService {
         
         sanPhamUpdate.setTrangThai(0);
         sanPhamRepository.save(sanPhamUpdate);
+    }
+    
+        public List<SanPham> locSanPhamTheoDanhMuc(List<Long> danhMucIds) {
+        // Lấy danh sách danh mục từ các id
+        List<DanhMuc> danhMucs = danhMucRepository.findAllById(danhMucIds);
+        // Tìm tất cả sản phẩm thuộc các danh mục
+        return sanPhamRepository.findByDanhMucIn(danhMucs);
     }
 }
