@@ -7,6 +7,8 @@ create database RunFlex
 use RunFlex
 
 
+
+
 create table DanhMuc(
 ID int primary key identity(1,1),
 TenDanhMuc nvarchar(255) not null,
@@ -45,6 +47,7 @@ CREATE TABLE SanPham (
     ID INT PRIMARY KEY identity(1,1),
     ID_ThuongHieu INT,
     ID_DanhMuc INT,
+	--GioiTinh int not null,
     TenSanPham NVARCHAR(255) NOT NULL,
     TrangThai int NOT NULL,
     FOREIGN KEY (ID_ThuongHieu) REFERENCES ThuongHieu(ID),
@@ -146,7 +149,6 @@ CREATE TABLE ChiTietSanPham (
 	MaChiTietSanPham varchar(50) ,
     TenChiTietSanPham VARCHAR(255) NOT NULL,
     GiaBan DECIMAL(10, 2) NOT NULL,
-    GiaNhap DECIMAL(10, 2) NOT NULL,
     SoLuong INT NOT NULL,
     MoTa Nvarchar(255),
     NgayTao DATE ,
@@ -156,7 +158,7 @@ CREATE TABLE ChiTietSanPham (
 		FOREIGN KEY (ID_NhanVien) REFERENCES NhanVien(ID),
 		FOREIGN KEY (ID_MauSac) REFERENCES MauSac(ID),
 		FOREIGN KEY (ID_DeGiay) REFERENCES DeGiay(ID),
-		FOREIGN KEY (ID_ChatLieu) REFERENCES ChatLieu(ID)
+		FOREIGN KEY (ID_ChatLieu) REFERENCES ChatLieu(ID),
 );
 
 create table ChiTietGioHang(

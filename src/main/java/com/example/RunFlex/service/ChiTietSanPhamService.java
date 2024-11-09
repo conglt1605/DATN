@@ -13,6 +13,7 @@ import com.example.RunFlex.repository.KichCoRepository;
 import com.example.RunFlex.repository.MauSacRepository;
 import com.example.RunFlex.repository.SanPhamRepository;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,15 +38,30 @@ public class ChiTietSanPhamService {
         return chiTietSanPhamRepository.getAll();
     }
 
-    public ChiTietSanPham add(ChiTietSanPham chiTietSanPham) {
-        SanPham sanPham = sanPhamRepository.findById(chiTietSanPham.getSanPham().getId()).orElseThrow();
-        MauSac mauSac = mauSacRepository.findById(chiTietSanPham.getMauSac().getId()).orElseThrow();
-        KichCo kichCo = kichCoRepository.findById(chiTietSanPham.getKichCo().getId()).orElseThrow();
+public List<ChiTietSanPham> add(List<ChiTietSanPham> chiTietSanPhams) {
+    List<ChiTietSanPham> savedChiTietSanPhams = new ArrayList<>();
+    
+    for (ChiTietSanPham chiTietSanPham : chiTietSanPhams) {
+        SanPham sanPham = sanPhamRepository.findById(chiTietSanPham.getSanPham().getId())
+                .orElseThrow(() -> new RuntimeException("Sản phẩm không tồn tại"));
+        MauSac mauSac = mauSacRepository.findById(chiTietSanPham.getMauSac().getId())
+                .orElseThrow(() -> new RuntimeException("Màu sắc không tồn tại"));
+        KichCo kichCo = kichCoRepository.findById(chiTietSanPham.getKichCo().getId())
+                .orElseThrow(() -> new RuntimeException("Kích cỡ không tồn tại"));
+        
         chiTietSanPham.setTrangThai(1);
         chiTietSanPham.setNgayTao(LocalDateTime.now());
-        chiTietSanPham.setTenChiTietSanPham(sanPham.tenSanPham + ", Màu " + mauSac.getTenMauSac() + ", Size " + kichCo.getSoKichCo());
-        return chiTietSanPhamRepository.save(chiTietSanPham);
+        
+        // Tạo tên chi tiết sản phẩm theo định dạng yêu cầu
+        chiTietSanPham.setTenChiTietSanPham(sanPham.getTenSanPham() + ", Màu " + mauSac.getTenMauSac() + ", Size " + kichCo.getSoKichCo());
+        
+        // Lưu chi tiết sản phẩm
+        savedChiTietSanPhams.add(chiTietSanPhamRepository.save(chiTietSanPham));
     }
+    
+    return savedChiTietSanPhams;
+}
+
 
     public ChiTietSanPham update(long id, ChiTietSanPham chiTietSanPham) {
         ChiTietSanPham chiTietSanPhamUpdate = chiTietSanPhamRepository.findById(id).orElseThrow();

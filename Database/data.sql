@@ -1,4 +1,6 @@
-﻿-- Dữ liệu bảng DanhMuc (Danh mục sản phẩm giày thể thao)
+﻿
+
+-- Dữ liệu bảng DanhMuc (Danh mục sản phẩm giày thể thao)
 INSERT INTO DanhMuc (TenDanhMuc, TrangThai)
 VALUES
 (N'Chạy Bộ', 1),
@@ -183,18 +185,18 @@ VALUES
 (3, 5, 10, 'Ví điện tử', 'Mua online', '35000', '2024-10-05', NULL, '2024-10-07', '200 Đường H, Quận 7', '2700000', 'Thanh toán thành công', 2);
 
 
-INSERT INTO ChiTietSanPham (ID_SanPham, ID_NhanVien, ID_KichCo, ID_MauSac, ID_DeGiay, ID_ChatLieu,TenChiTietSanPham, GiaBan, GiaNhap, SoLuong, MoTa, NgayTao, TrangThai) 
+INSERT INTO ChiTietSanPham (ID_SanPham, ID_NhanVien, ID_KichCo, ID_MauSac, ID_DeGiay, ID_ChatLieu,TenChiTietSanPham, GiaBan,  SoLuong, MoTa, NgayTao, TrangThai) 
 VALUES
-(1, 1, 1, 1, 1, 1,  'Nike Air Max 270 - Đen', 4500000, 3000000, 50, 'Giày thể thao êm ái cho chạy bộ', '2024-10-30', 1),
-(1, 2, 2, 2, 1, 1,  'Nike Air Max 270 - Trắng', 4500000, 3000000, 30, 'Giày thể thao phong cách', '2024-10-30', 1),
-(2, 3, 1, 3, 2, 2,  'Adidas Ultraboost 22 - Đỏ', 5200000, 3200000, 40, 'Giày chạy bộ chuyên nghiệp', '2024-10-30', 1),
-(3, 1, 3, 4, 3, 2, 'Puma RS-X - Xanh dương', 3500000, 2000000, 25, 'Giày thời trang thể thao', '2024-10-30', 1),
-(4, 2, 4, 5, 2, 3,  'New Balance 574 - Xanh lá', 3200000, 1800000, 20, 'Thiết kế cổ điển', '2024-10-30', 1),
-(5, 3, 5, 6, 4, 3,  'Nike Jordan 1 - Vàng', 6000000, 4000000, 15, 'Giày bóng rổ huyền thoại', '2024-10-30', 1),
-(6, 4, 3, 7, 5, 4,  'Adidas NMD R1 - Cam', 4900000, 3100000, 35, 'Giày công nghệ Boost', '2024-10-30', 1),
-(7, 1, 6, 8, 6, 4,  'Asics Gel-Kayano 28 - Xám', 3800000, 2500000, 45, 'Hỗ trợ chân tối đa', '2024-10-30', 1),
-(8, 2, 4, 9, 7, 5,  'Reebok Zig Kinetica - Tím', 3300000, 2100000, 30, 'Công nghệ đế Zig', '2024-10-30', 1),
-(9, 3, 5, 10, 8, 5, 'Converse Chuck Taylor - Hồng', 2500000, 1500000, 60, 'Giày vải cổ cao', '2024-10-30', 1);
+(1, 1, 1, 1, 1, 1,  'Nike Air Max 270 - Đen', 4500000, 50, 'Giày thể thao êm ái cho chạy bộ', '2024-10-30', 1),
+(1, 2, 2, 2, 1, 1,  'Nike Air Max 270 - Trắng', 4500000,  30, 'Giày thể thao phong cách', '2024-10-30', 1),
+(2, 3, 1, 3, 2, 2,  'Adidas Ultraboost 22 - Đỏ', 5200000,  40, 'Giày chạy bộ chuyên nghiệp', '2024-10-30', 1),
+(3, 1, 3, 4, 3, 2, 'Puma RS-X - Xanh dương', 3500000, 25, 'Giày thời trang thể thao', '2024-10-30', 1),
+(4, 2, 4, 5, 2, 3,  'New Balance 574 - Xanh lá', 3200000, 20, 'Thiết kế cổ điển', '2024-10-30', 1),
+(5, 3, 5, 6, 4, 3,  'Nike Jordan 1 - Vàng', 6000000,  15, 'Giày bóng rổ huyền thoại', '2024-10-30', 1),
+(6, 4, 3, 7, 5, 4,  'Adidas NMD R1 - Cam', 49000, 35, 'Giày công nghệ Boost', '2024-10-30', 1),
+(7, 1, 6, 8, 6, 4,  'Asics Gel-Kayano 28 - Xám', 3800000,  45, 'Hỗ trợ chân tối đa', '2024-10-30', 1),
+(8, 2, 4, 9, 7, 5,  'Reebok Zig Kinetica - Tím', 3300000,  30, 'Công nghệ đế Zig', '2024-10-30', 1),
+(9, 3, 5, 10, 8, 5, 'Converse Chuck Taylor - Hồng', 2500000, 60, 'Giày vải cổ cao', '2024-10-30', 1);
 
 
 -- Dữ liệu bảng ChiTietGioHang (Chi tiết giỏ hàng)

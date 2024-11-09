@@ -33,9 +33,9 @@ public class ChiTietSanPhamController {
         return chiTietSanPhamService.getAll();
     }
 
-    @PostMapping()
-    public ChiTietSanPham add(@RequestBody ChiTietSanPham chiTietSanPham) {
-        return chiTietSanPhamService.add(chiTietSanPham);
+    @PostMapping
+    public List<ChiTietSanPham> add(@RequestBody List<ChiTietSanPham> chiTietSanPhams) {
+        return chiTietSanPhamService.add(chiTietSanPhams);
     }
 
     @PutMapping("/{id}")
