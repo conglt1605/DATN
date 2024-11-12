@@ -17,32 +17,36 @@ import jakarta.persistence.ManyToOne;
  */
 @Entity
 public class SanPham {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public long id;
+    public String maSanPham;
     public String tenSanPham;
+    public int gioiTinh;
     public int trangThai;
-    
+
     @ManyToOne
     @JoinColumn(name = "ID_ThuongHieu")
     private ThuongHieu thuongHieu;
-    
+
     @ManyToOne
     @JoinColumn(name = "ID_DanhMuc")
     private DanhMuc danhMuc;
 
-    
-
     public SanPham() {
     }
 
-    public SanPham(long id, String tenSanPham, int trangThai, ThuongHieu thuongHieu, DanhMuc danhMuc) {
+    public SanPham(long id, String maSanPham, String tenSanPham, int gioiTinh, int trangThai, ThuongHieu thuongHieu, DanhMuc danhMuc) {
         this.id = id;
+        this.maSanPham = maSanPham;
         this.tenSanPham = tenSanPham;
+        this.gioiTinh = gioiTinh;
         this.trangThai = trangThai;
         this.thuongHieu = thuongHieu;
         this.danhMuc = danhMuc;
     }
+
 
 
     public long getId() {
@@ -84,7 +88,22 @@ public class SanPham {
     public void setDanhMuc(DanhMuc danhMuc) {
         this.danhMuc = danhMuc;
     }
+
+    public String getMaSanPham() {
+        return maSanPham;
+    }
+
+    public void setMaSanPham(String maSanPham) {
+        this.maSanPham = maSanPham;
+    }
+
+    public int getGioiTinh() {
+        return gioiTinh;
+    }
+
+    public void setGioiTinh(int gioiTinh) {
+        this.gioiTinh = gioiTinh;
+    }
     
-    
-    
+
 }

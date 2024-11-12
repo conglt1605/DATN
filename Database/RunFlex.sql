@@ -47,8 +47,8 @@ CREATE TABLE SanPham (
     ID INT PRIMARY KEY identity(1,1),
     ID_ThuongHieu INT,
     ID_DanhMuc INT,
-	MaSanPham varchar(20),
-	GioiTinh int not null,
+	MaSanPham varchar(20), --Mã tự tạo
+	GioiTinh int not null, --1:nam, 2: nữ
     TenSanPham NVARCHAR(255) NOT NULL,
     TrangThai int NOT NULL,
     FOREIGN KEY (ID_ThuongHieu) REFERENCES ThuongHieu(ID),
@@ -83,7 +83,7 @@ TrangThai int not null
 
 create table KhachHang(
 ID int primary key identity(1,1),
-MaKhachHang varchar(20) ,
+MaKhachHang varchar(20) , --Mã tự tạo
 TenKhachHang nvarchar(255) not null,
 MatKhau varchar(20) not null,
 TenTaiKhoan varchar(20) not null,
@@ -97,7 +97,7 @@ TrangThai int not null
 
 create table NhanVien(
 ID int primary key identity(1,1),
-MaNhanVien varchar(20) ,
+MaNhanVien varchar(20) , --Mã tự tạo
 TenNhanVien nvarchar(255) not null,
 MatKhau varchar(20) not null,
 TenTaiKhoan varchar(20) not null,
@@ -147,7 +147,7 @@ CREATE TABLE ChiTietSanPham (
 	ID_MauSac INT,
 	ID_DeGiay INT,
 	ID_ChatLieu INT,
-	MaChiTietSanPham varchar(50) ,
+	MaChiTietSanPham varchar(50) , --Mã tự tạo
     TenChiTietSanPham VARCHAR(255) NOT NULL,
     GiaBan DECIMAL(10, 2) NOT NULL,
     SoLuong INT NOT NULL,
@@ -226,6 +226,7 @@ END;
 
 GO
 
+--mã mã sp tự tăng
 CREATE TRIGGER trg_MaSanPham
 ON SanPham
 AFTER INSERT
@@ -240,6 +241,7 @@ END;
 
 GO
 
+--mã nv tự tăng
 CREATE TRIGGER trg_MaNhanVien
 ON NhanVien
 AFTER INSERT
@@ -254,6 +256,7 @@ END;
 
 GO
 
+--mã mã kh tự tăng
 CREATE TRIGGER trg_MaKhachHang
 ON KhachHang
 AFTER INSERT

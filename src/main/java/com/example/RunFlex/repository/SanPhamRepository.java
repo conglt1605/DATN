@@ -8,6 +8,7 @@ import com.example.RunFlex.model.DanhMuc;
 import com.example.RunFlex.model.SanPham;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
@@ -16,7 +17,7 @@ import org.springframework.stereotype.Repository;
  * @author Cong
  */
 @Repository
-public interface SanPhamRepository extends JpaRepository<SanPham, Long>{
+public interface SanPhamRepository extends JpaRepository<SanPham, Long>, JpaSpecificationExecutor<SanPham> {
     @Query(value = "Select sp.* From SanPham sp join ThuongHieu th on sp.ID_ThuongHieu=th.id where sp.TrangThai = 1",nativeQuery = true)
     List<SanPham> getAll();
     

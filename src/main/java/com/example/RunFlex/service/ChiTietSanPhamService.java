@@ -12,9 +12,12 @@ import com.example.RunFlex.repository.ChiTietSanPhamRepository;
 import com.example.RunFlex.repository.KichCoRepository;
 import com.example.RunFlex.repository.MauSacRepository;
 import com.example.RunFlex.repository.SanPhamRepository;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -81,5 +84,37 @@ public List<ChiTietSanPham> add(List<ChiTietSanPham> chiTietSanPhams) {
 
     public List<ChiTietSanPham> getCTSPByID(long id) {
         return chiTietSanPhamRepository.getCTSPByID(id);
+    }
+    
+    //Lấy (giá thấp nhất) - (Giá cao nhất) trong ctsp theo id sản phẩm
+    public Map<String, String> getPriceRangeBySanPhamId(Long sanPhamId) {
+        List<Object[]> result = chiTietSanPhamRepository.findMinMaxPriceBySanPhamId(sanPhamId);
+
+Map<String, String> priceRange = new HashMap<>();
+        if (result != null && !result.isEmpty()) {
+            Object[] range = result.get(0);
+            BigDecimal minPrice = (BigDecimal) range[0];
+            BigDecimal maxPrice = (BigDecimal) range[1];
+
+            // Nếu minPrice và maxPrice bằng nhau, chỉ trả về 1 giá duy nhất
+            if (minPrice.compareTo(maxPrice) == 0) {
+                priceRange.put("price", formatPrice(minPrice));  // Trả về 1 giá duy nhất
+            } else {
+                priceRange.put("minPrice", formatPrice(minPrice));
+                priceRange.put("maxPrice", formatPrice(maxPrice));
+            }
+        } else {
+            // Trường hợp không tìm thấy giá, trả về null cho minPrice và maxPrice
+            priceRange.put("minPrice", "0");
+            priceRange.put("maxPrice", "0");
+        }
+        return priceRange;
+    }
+    //Hàm loại bỏ phần thập phân nếu không có
+    private String formatPrice(BigDecimal price) {
+        if (price != null) {
+            return price.stripTrailingZeros().toPlainString();
+        }
+        return "null";  
     }
 }

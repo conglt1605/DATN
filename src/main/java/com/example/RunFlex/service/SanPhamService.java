@@ -4,6 +4,7 @@
  */
 package com.example.RunFlex.service;
 
+import com.example.RunFlex.Specification.SanPhamSpecification;
 import com.example.RunFlex.model.DanhMuc;
 import com.example.RunFlex.model.SanPham;
 import com.example.RunFlex.repository.DanhMucRepository;
@@ -11,6 +12,7 @@ import com.example.RunFlex.repository.SanPhamRepository;
 import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -57,5 +59,13 @@ public class SanPhamService {
         List<DanhMuc> danhMucs = danhMucRepository.findAllById(danhMucIds);
         // Tìm tất cả sản phẩm thuộc các danh mục
         return sanPhamRepository.findByDanhMucIn(danhMucs);
+    }
+        
+            public List<SanPham> filterSanPham(Long danhMucId, Long thuongHieuId, Integer gioiTinh) {
+        Specification<SanPham> spec = Specification.where(SanPhamSpecification.hasDanhMuc(danhMucId))
+                                                   .and(SanPhamSpecification.hasThuongHieu(thuongHieuId))
+                                                   .and(SanPhamSpecification.hasGioiTinh(gioiTinh));
+
+        return sanPhamRepository.findAll(spec);
     }
 }

@@ -63,5 +63,11 @@ public ResponseEntity<List<SanPham>> locSanPham(@RequestParam List<Long> danhMuc
     return ResponseEntity.ok(sanPhams);
 }
 
+    @GetMapping("/filterSanPham")
+    public List<SanPham> filterSanPham(@RequestParam(required = false) Long danhMucId,
+                                       @RequestParam(required = false) Long thuongHieuId,
+                                       @RequestParam(required = false) Integer gioiTinh) {
+        return sanPhamService.filterSanPham(danhMucId, thuongHieuId, gioiTinh);
+    }
 
 }

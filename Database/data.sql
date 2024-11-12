@@ -78,7 +78,8 @@ INSERT INTO SanPham (ID_ThuongHieu, ID_DanhMuc ,GioiTinh, TenSanPham, TrangThai)
 (5, 3, 1, N'Asics Gel-Kayano 28', 1),
 (6, 3, 2, N'Reebok Zig Kinetica', 1),
 (7, 4, 2, N'Converse Chuck Taylor', 1),
-(8, 4, 2, N'Vans Old Skool', 1);
+(8, 4, 2, N'Vans Old Skool', 1),
+(8, 4, 2, N'Thuong dinh', 1);
 
 -- Dữ liệu bảng KichCo (Kích cỡ giày thể thao)
 INSERT INTO KichCo (SoKichCo, TrangThai)
@@ -188,7 +189,7 @@ VALUES
 INSERT INTO ChiTietSanPham (ID_SanPham, ID_NhanVien, ID_KichCo, ID_MauSac, ID_DeGiay, ID_ChatLieu,TenChiTietSanPham, GiaBan,  SoLuong, MoTa, NgayTao, TrangThai) 
 VALUES
 (1, 1, 1, 1, 1, 1,  'Nike Air Max 270 - Đen', 4500000, 50, 'Giày thể thao êm ái cho chạy bộ', '2024-10-30', 1),
-(1, 2, 2, 2, 1, 1,  'Nike Air Max 270 - Trắng', 4500000,  30, 'Giày thể thao phong cách', '2024-10-30', 1),
+(1, 2, 2, 2, 1, 1,  'Nike Air Max 270 - Trắng', 9000000,  30, 'Giày thể thao phong cách', '2024-10-30', 1),
 (2, 3, 1, 3, 2, 2,  'Adidas Ultraboost 22 - Đỏ', 5200000,  40, 'Giày chạy bộ chuyên nghiệp', '2024-10-30', 1),
 (3, 1, 3, 4, 3, 2, 'Puma RS-X - Xanh dương', 3500000, 25, 'Giày thời trang thể thao', '2024-10-30', 1),
 (4, 2, 4, 5, 2, 3,  'New Balance 574 - Xanh lá', 3200000, 20, 'Thiết kế cổ điển', '2024-10-30', 1),
