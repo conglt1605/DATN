@@ -68,17 +68,17 @@ VALUES
 (N'Hoka One One', 1);
 
 -- Dữ liệu bảng SanPham (Sản phẩm)
-INSERT INTO SanPham (ID_ThuongHieu, ID_DanhMuc, TenSanPham, TrangThai) VALUES
-(1, 1, N'Nike Air Max 270', 1),
-(2, 2, N'Adidas Ultraboost 22', 1),
-(3, 1, N'Puma RS-X', 1),
-(4, 2, N'New Balance 574', 1),
-(1, 1, N'Nike Jordan 1', 1),
-(2, 2, N'Adidas NMD R1', 1),
-(5, 3, N'Asics Gel-Kayano 28', 1),
-(6, 3, N'Reebok Zig Kinetica', 1),
-(7, 4, N'Converse Chuck Taylor', 1),
-(8, 4, N'Vans Old Skool', 1);
+INSERT INTO SanPham (ID_ThuongHieu, ID_DanhMuc ,GioiTinh, TenSanPham, TrangThai) VALUES
+(1, 1, 1, N'Nike Air Max 270', 1),
+(2, 2, 1, N'Adidas Ultraboost 22', 1),
+(3, 1, 1, N'Puma RS-X', 1),
+(4, 2, 1, N'New Balance 574', 1),
+(1, 1,1,  N'Nike Jordan 1', 1),
+(2, 2, 1, N'Adidas NMD R1', 1),
+(5, 3, 1, N'Asics Gel-Kayano 28', 1),
+(6, 3, 2, N'Reebok Zig Kinetica', 1),
+(7, 4, 2, N'Converse Chuck Taylor', 1),
+(8, 4, 2, N'Vans Old Skool', 1);
 
 -- Dữ liệu bảng KichCo (Kích cỡ giày thể thao)
 INSERT INTO KichCo (SoKichCo, TrangThai)
@@ -123,34 +123,34 @@ VALUES
 (N'Voucher1M', '1000000', 1);
 
 -- Dữ liệu bảng KhachHang (Khách hàng)
-INSERT INTO KhachHang (MaKhachHang, TenKhachHang, MatKhau, TenTaiKhoan, Email, SoDienThoai, DiaChi, NgaySinh, NgayTao, TrangThai)
+INSERT INTO KhachHang ( TenKhachHang, MatKhau, TenTaiKhoan, Email, SoDienThoai, DiaChi, NgaySinh, NgayTao, TrangThai)
 VALUES
-(N'KH01', N'Nguyen Van A', N'password123', N'nguyenvana', 'nguyenvana@example.com', '0912345678', N'Hà Nội', '1990-01-01', '2024-01-01', 1),
-(N'KH02', N'Tran Thi B', N'password123', N'tranthib', 'tranthib@example.com', '0912345679', N'Hồ Chí Minh', '1992-02-02', '2024-02-01', 1),
-(N'KH03', N'Le Van C', N'password123', N'levanc', 'levanc@example.com', '0912345680', N'Đà Nẵng', '1994-03-03', '2024-03-01', 1),
-(N'KH04', N'Pham Thi D', N'password123', N'phamthid', 'phamthid@example.com', '0912345681', N'Cần Thơ', '1996-04-04', '2024-04-01', 1),
-(N'KH05', N'Hoang Van E', N'password123', N'hoangvane', 'hoangvane@example.com', '0912345682', N'Nha Trang', '1998-05-05', '2024-05-01', 1),
-(N'KH06', N'Vu Thi F', N'password123', N'vuthif', 'vuthif@example.com', '0912345683', N'Huế', '1991-06-06', '2024-06-01', 1),
-(N'KH07', N'Nguyen Van G', N'password123', N'nguyenvang', 'nguyenvang@example.com', '0912345684', N'Quảng Ninh', '1993-07-07', '2024-07-01', 1),
-(N'KH08', N'Tran Thi H', N'password123', N'tranthih', 'tranthih@example.com', '0912345685', N'Lâm Đồng', '1995-08-08', '2024-08-01', 1),
-(N'KH09', N'Le Van I', N'password123', N'levani', 'levani@example.com', '0912345686', N'Quảng Bình', '1997-09-09', '2024-09-01', 1),
-(N'KH10', N'Pham Thi K', N'password123', N'phamthik', 'phamthik@example.com', '0912345687', N'Hải Phòng', '1999-10-10', '2024-10-01', 1);
+( N'Nguyen Van A', N'password123', N'nguyenvana', 'nguyenvana@example.com', '0912345678', N'Hà Nội', '1990-01-01', '2024-01-01', 1),
+( N'Tran Thi B', N'password123', N'tranthib', 'tranthib@example.com', '0912345679', N'Hồ Chí Minh', '1992-02-02', '2024-02-01', 1),
+( N'Le Van C', N'password123', N'levanc', 'levanc@example.com', '0912345680', N'Đà Nẵng', '1994-03-03', '2024-03-01', 1),
+( N'Pham Thi D', N'password123', N'phamthid', 'phamthid@example.com', '0912345681', N'Cần Thơ', '1996-04-04', '2024-04-01', 1),
+( N'Hoang Van E', N'password123', N'hoangvane', 'hoangvane@example.com', '0912345682', N'Nha Trang', '1998-05-05', '2024-05-01', 1),
+( N'Vu Thi F', N'password123', N'vuthif', 'vuthif@example.com', '0912345683', N'Huế', '1991-06-06', '2024-06-01', 1),
+( N'Nguyen Van G', N'password123', N'nguyenvang', 'nguyenvang@example.com', '0912345684', N'Quảng Ninh', '1993-07-07', '2024-07-01', 1),
+( N'Tran Thi H', N'password123', N'tranthih', 'tranthih@example.com', '0912345685', N'Lâm Đồng', '1995-08-08', '2024-08-01', 1),
+( N'Le Van I', N'password123', N'levani', 'levani@example.com', '0912345686', N'Quảng Bình', '1997-09-09', '2024-09-01', 1),
+( N'Pham Thi K', N'password123', N'phamthik', 'phamthik@example.com', '0912345687', N'Hải Phòng', '1999-10-10', '2024-10-01', 1);
 
-INSERT INTO NhanVien (MaNhanVien, TenNhanVien, MatKhau, TenTaiKhoan, CCCD, Email, SoDienThoai, DiaChi, NgaySinh, NgayTuyenDung, NgayNghiViec, VaiTro, TrangThai)
+INSERT INTO NhanVien ( TenNhanVien, MatKhau, TenTaiKhoan, CCCD, Email, SoDienThoai, DiaChi, NgaySinh, NgayTuyenDung, NgayNghiViec, VaiTro, TrangThai)
 VALUES 
 -- Admin
-('NV001', 'Nguyen Van Admin', 'admin123', 'admin', '012345678901', 'admin@example.com', '0909123456', '123 Nguyen Trai, Ha Noi', '1980-01-01', '2010-01-01', NULL, 0, 1),
+( 'Nguyen Van Admin', 'admin123', 'admin', '012345678901', 'admin@example.com', '0909123456', '123 Nguyen Trai, Ha Noi', '1980-01-01', '2010-01-01', NULL, 0, 1),
 
 -- Nhân viên
-('NV002', 'Tran Thi B', 'password123', 'nv_b', '098765432109', 'tranthib@example.com', '0912345678', '456 Le Loi, TP HCM', '1992-07-20', '2019-05-01', NULL, 1, 1),
-('NV003', 'Le Van C', 'matkhau456', 'nv_c', '123456789012', 'levanc@example.com', '0932123456', '789 Tran Phu, Da Nang', '1995-10-10', '2021-03-01', NULL, 1, 1),
-('NV004', 'Nguyen Thi D', 'pass789', 'nv_d', '234567890123', 'nguyenthid@example.com', '0922345678', '12 Ly Thuong Kiet, Ha Noi', '1988-11-15', '2018-08-01', NULL, 1, 1),
-('NV005', 'Pham Van E', 'mk123456', 'nv_e', '345678901234', 'phamvane@example.com', '0945123456', '23 Phan Chu Trinh, HCM', '1990-03-10', '2020-02-15', NULL, 1, 1),
-('NV006', 'Do Thi F', 'mypass789', 'nv_f', '456789012345', 'dothif@example.com', '0912123123', '789 Cach Mang Thang Tam, HCM', '1993-05-25', '2022-07-01', NULL, 1, 1),
-('NV007', 'Hoang Van G', 'pass999', 'nv_g', '567890123456', 'hoangvang@example.com', '0987897890', '456 Ngo Gia Tu, Ha Noi', '1985-09-09', '2017-12-20', NULL, 1, 1),
-('NV008', 'Nguyen Van H', 'password111', 'nv_h', '678901234567', 'nguyenvanh@example.com', '0901234567', '15 Bach Mai, Ha Noi', '1989-06-30', '2019-11-11', NULL, 1, 1),
-('NV009', 'Le Thi I', 'lethi333', 'nv_i', '789012345678', 'lethii@example.com', '0949988776', '98 Hai Ba Trung, Da Nang', '1991-12-05', '2020-03-15', NULL, 1, 1),
-('NV010', 'Tran Van J', 'pass444', 'nv_j', '890123456789', 'tranvanj@example.com', '0933001122', '17 Dinh Tien Hoang, Ha Noi', '1994-04-20', '2021-06-10', NULL, 1, 1);
+( 'Tran Thi B', 'password123', 'nv_b', '098765432109', 'tranthib@example.com', '0912345678', '456 Le Loi, TP HCM', '1992-07-20', '2019-05-01', NULL, 1, 1),
+( 'Le Van C', 'matkhau456', 'nv_c', '123456789012', 'levanc@example.com', '0932123456', '789 Tran Phu, Da Nang', '1995-10-10', '2021-03-01', NULL, 1, 1),
+( 'Nguyen Thi D', 'pass789', 'nv_d', '234567890123', 'nguyenthid@example.com', '0922345678', '12 Ly Thuong Kiet, Ha Noi', '1988-11-15', '2018-08-01', NULL, 1, 1),
+( 'Pham Van E', 'mk123456', 'nv_e', '345678901234', 'phamvane@example.com', '0945123456', '23 Phan Chu Trinh, HCM', '1990-03-10', '2020-02-15', NULL, 1, 1),
+( 'Do Thi F', 'mypass789', 'nv_f', '456789012345', 'dothif@example.com', '0912123123', '789 Cach Mang Thang Tam, HCM', '1993-05-25', '2022-07-01', NULL, 1, 1),
+( 'Hoang Van G', 'pass999', 'nv_g', '567890123456', 'hoangvang@example.com', '0987897890', '456 Ngo Gia Tu, Ha Noi', '1985-09-09', '2017-12-20', NULL, 1, 1),
+( 'Nguyen Van H', 'password111', 'nv_h', '678901234567', 'nguyenvanh@example.com', '0901234567', '15 Bach Mai, Ha Noi', '1989-06-30', '2019-11-11', NULL, 1, 1),
+( 'Le Thi I', 'lethi333', 'nv_i', '789012345678', 'lethii@example.com', '0949988776', '98 Hai Ba Trung, Da Nang', '1991-12-05', '2020-03-15', NULL, 1, 1),
+( 'Tran Van J', 'pass444', 'nv_j', '890123456789', 'tranvanj@example.com', '0933001122', '17 Dinh Tien Hoang, Ha Noi', '1994-04-20', '2021-06-10', NULL, 1, 1);
 
 -- Dữ liệu bảng GioHang (Giỏ hàng)
 INSERT INTO GioHang (ID_KhachHang, TrangThai)

@@ -41,6 +41,7 @@ public class SanPhamService {
         sanPhamUpdate.setThuongHieu(sanPham.getThuongHieu());
         sanPhamUpdate.setDanhMuc(sanPham.getDanhMuc());
         sanPhamUpdate.setTenSanPham(sanPham.getTenSanPham());
+        sanPhamUpdate.setGioiTinh(sanPham.getGioiTinh());
         return sanPhamRepository.save(sanPhamUpdate);
     }
 

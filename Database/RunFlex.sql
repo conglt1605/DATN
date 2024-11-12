@@ -47,7 +47,8 @@ CREATE TABLE SanPham (
     ID INT PRIMARY KEY identity(1,1),
     ID_ThuongHieu INT,
     ID_DanhMuc INT,
-	--GioiTinh int not null,
+	MaSanPham varchar(20),
+	GioiTinh int not null,
     TenSanPham NVARCHAR(255) NOT NULL,
     TrangThai int NOT NULL,
     FOREIGN KEY (ID_ThuongHieu) REFERENCES ThuongHieu(ID),
@@ -82,7 +83,7 @@ TrangThai int not null
 
 create table KhachHang(
 ID int primary key identity(1,1),
-MaKhachHang varchar(20) not null,
+MaKhachHang varchar(20) ,
 TenKhachHang nvarchar(255) not null,
 MatKhau varchar(20) not null,
 TenTaiKhoan varchar(20) not null,
@@ -96,7 +97,7 @@ TrangThai int not null
 
 create table NhanVien(
 ID int primary key identity(1,1),
-MaNhanVien varchar(20) not null,
+MaNhanVien varchar(20) ,
 TenNhanVien nvarchar(255) not null,
 MatKhau varchar(20) not null,
 TenTaiKhoan varchar(20) not null,
@@ -210,7 +211,6 @@ FOREIGN KEY (ID_NhanVien) REFERENCES NhanVien(ID)
 )
 
 --mã ctsp tự tăng
-
 go
 CREATE TRIGGER trg_MaChiTietSanPham
 ON ChiTietSanPham
@@ -218,11 +218,54 @@ AFTER INSERT
 AS
 BEGIN
     UPDATE ctsp
-    SET ctsp.MaChiTietSanPham = CONCAT('SP', ctsp.ID)
+    SET ctsp.MaChiTietSanPham = CONCAT('CTSP', ctsp.ID)
     FROM ChiTietSanPham AS ctsp
     INNER JOIN inserted AS ins ON ctsp.ID = ins.ID
     WHERE ctsp.MaChiTietSanPham IS NULL; -- Chỉ cập nhật nếu giá trị hiện tại là NULL
 END;
+
+GO
+
+CREATE TRIGGER trg_MaSanPham
+ON SanPham
+AFTER INSERT
+AS
+BEGIN
+    UPDATE sp
+    SET sp.MaSanPham = CONCAT('SP', sp.ID)
+    FROM SanPham AS sp
+    INNER JOIN inserted AS ins ON sp.ID = ins.ID
+    WHERE sp.MaSanPham IS NULL; -- Chỉ cập nhật nếu giá trị hiện tại là NULL
+END;
+
+GO
+
+CREATE TRIGGER trg_MaNhanVien
+ON NhanVien
+AFTER INSERT
+AS
+BEGIN
+    UPDATE nv
+    SET nv.MaNhanVien = CONCAT('NV', nv.ID)
+    FROM NhanVien AS nv
+    INNER JOIN inserted AS ins ON nv.ID = ins.ID
+    WHERE nv.MaNhanVien IS NULL; -- Chỉ cập nhật nếu giá trị hiện tại là NULL
+END;
+
+GO
+
+CREATE TRIGGER trg_MaKhachHang
+ON KhachHang
+AFTER INSERT
+AS
+BEGIN
+    UPDATE kh
+    SET kh.MaKhachHang = CONCAT('KH', kh.ID)
+    FROM KhachHang AS kh
+    INNER JOIN inserted AS ins ON kh.ID = ins.ID
+    WHERE kh.MaKhachHang IS NULL; -- Chỉ cập nhật nếu giá trị hiện tại là NULL
+END;
+
 GO
 
 
