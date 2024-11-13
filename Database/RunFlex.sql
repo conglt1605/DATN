@@ -149,7 +149,7 @@ CREATE TABLE ChiTietSanPham (
 	ID_ChatLieu INT,
 	MaChiTietSanPham varchar(50) , --Mã tự tạo
     TenChiTietSanPham VARCHAR(255) NOT NULL,
-    GiaBan DECIMAL(10, 2) NOT NULL,
+    GiaBan DECIMAL(18, 0) NOT NULL,
     SoLuong INT NOT NULL,
     MoTa Nvarchar(255),
     NgayTao DATE ,

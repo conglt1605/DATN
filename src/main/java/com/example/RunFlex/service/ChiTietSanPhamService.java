@@ -41,35 +41,45 @@ public class ChiTietSanPhamService {
         return chiTietSanPhamRepository.getAll();
     }
 
-public List<ChiTietSanPham> add(List<ChiTietSanPham> chiTietSanPhams) {
-    List<ChiTietSanPham> savedChiTietSanPhams = new ArrayList<>();
-    
-    for (ChiTietSanPham chiTietSanPham : chiTietSanPhams) {
-        SanPham sanPham = sanPhamRepository.findById(chiTietSanPham.getSanPham().getId())
-                .orElseThrow(() -> new RuntimeException("Sản phẩm không tồn tại"));
-        MauSac mauSac = mauSacRepository.findById(chiTietSanPham.getMauSac().getId())
-                .orElseThrow(() -> new RuntimeException("Màu sắc không tồn tại"));
-        KichCo kichCo = kichCoRepository.findById(chiTietSanPham.getKichCo().getId())
-                .orElseThrow(() -> new RuntimeException("Kích cỡ không tồn tại"));
-        
-        chiTietSanPham.setTrangThai(1);
-        chiTietSanPham.setNgayTao(LocalDateTime.now());
-        
-        // Tạo tên chi tiết sản phẩm theo định dạng yêu cầu
-        chiTietSanPham.setTenChiTietSanPham(sanPham.getTenSanPham() + ", Màu " + mauSac.getTenMauSac() + ", Size " + kichCo.getSoKichCo());
-        
-        // Lưu chi tiết sản phẩm
-        savedChiTietSanPhams.add(chiTietSanPhamRepository.save(chiTietSanPham));
+    public List<ChiTietSanPham> add(List<ChiTietSanPham> chiTietSanPhams) {
+        List<ChiTietSanPham> savedChiTietSanPhams = new ArrayList<>();
+
+        for (ChiTietSanPham chiTietSanPham : chiTietSanPhams) {
+            SanPham sanPham = sanPhamRepository.findById(chiTietSanPham.getSanPham().getId())
+                    .orElseThrow(() -> new RuntimeException("Sản phẩm không tồn tại"));
+            MauSac mauSac = mauSacRepository.findById(chiTietSanPham.getMauSac().getId())
+                    .orElseThrow(() -> new RuntimeException("Màu sắc không tồn tại"));
+            KichCo kichCo = kichCoRepository.findById(chiTietSanPham.getKichCo().getId())
+                    .orElseThrow(() -> new RuntimeException("Kích cỡ không tồn tại"));
+
+            chiTietSanPham.setTrangThai(1);
+            chiTietSanPham.setNgayTao(LocalDateTime.now());
+
+            // Tạo tên chi tiết sản phẩm theo định dạng yêu cầu
+            chiTietSanPham.setTenChiTietSanPham(sanPham.getTenSanPham() + ", Màu " + mauSac.getTenMauSac() + ", Size " + kichCo.getSoKichCo());
+
+            // Lưu chi tiết sản phẩm
+            savedChiTietSanPhams.add(chiTietSanPhamRepository.save(chiTietSanPham));
+        }
+
+        return savedChiTietSanPhams;
     }
-    
-    return savedChiTietSanPhams;
-}
 
-
-    public ChiTietSanPham update(long id, ChiTietSanPham chiTietSanPham) {
-        ChiTietSanPham chiTietSanPhamUpdate = chiTietSanPhamRepository.findById(id).orElseThrow();
-        // Cập nhật các trường
-        return chiTietSanPhamRepository.save(chiTietSanPhamUpdate);
+    public List<ChiTietSanPham> update(List<ChiTietSanPham> chiTietSanPhams) {
+        for (ChiTietSanPham chiTietSanPham : chiTietSanPhams) {
+            ChiTietSanPham chiTietSanPhamUpdate = chiTietSanPhamRepository.findById(chiTietSanPham.getId()).orElseThrow();
+            
+            chiTietSanPhamUpdate.setChatLieu(chiTietSanPham.getChatLieu());
+            chiTietSanPhamUpdate.setDeGiay(chiTietSanPham.getDeGiay());
+            chiTietSanPhamUpdate.setGiaBan(chiTietSanPham.getGiaBan());
+            chiTietSanPhamUpdate.setKichCo(chiTietSanPham.getKichCo());
+            chiTietSanPhamUpdate.setMauSac(chiTietSanPham.getMauSac());
+            chiTietSanPhamUpdate.setMoTa(chiTietSanPham.getMoTa());
+            chiTietSanPhamUpdate.setSoLuong(chiTietSanPham.getSoLuong());
+            chiTietSanPhamUpdate.setTrangThai(chiTietSanPham.getTrangThai());
+            chiTietSanPhamRepository.save(chiTietSanPhamUpdate);
+        }
+        return chiTietSanPhams;
     }
 
     public void delete(long id) {
@@ -85,12 +95,12 @@ public List<ChiTietSanPham> add(List<ChiTietSanPham> chiTietSanPhams) {
     public List<ChiTietSanPham> getCTSPByID(long id) {
         return chiTietSanPhamRepository.getCTSPByID(id);
     }
-    
+
     //Lấy (giá thấp nhất) - (Giá cao nhất) trong ctsp theo id sản phẩm
     public Map<String, String> getPriceRangeBySanPhamId(Long sanPhamId) {
         List<Object[]> result = chiTietSanPhamRepository.findMinMaxPriceBySanPhamId(sanPhamId);
 
-Map<String, String> priceRange = new HashMap<>();
+        Map<String, String> priceRange = new HashMap<>();
         if (result != null && !result.isEmpty()) {
             Object[] range = result.get(0);
             BigDecimal minPrice = (BigDecimal) range[0];
@@ -110,11 +120,12 @@ Map<String, String> priceRange = new HashMap<>();
         }
         return priceRange;
     }
+
     //Hàm loại bỏ phần thập phân nếu không có
     private String formatPrice(BigDecimal price) {
         if (price != null) {
             return price.stripTrailingZeros().toPlainString();
         }
-        return "null";  
+        return "null";
     }
 }

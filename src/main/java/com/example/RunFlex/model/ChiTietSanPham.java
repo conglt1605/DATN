@@ -25,7 +25,7 @@ public class ChiTietSanPham {
     private String maChiTietSanPham;
     private String tenChiTietSanPham;
     private int soLuong;
-    private int giaBan;
+    private Long giaBan;
     private String moTa;
     private LocalDateTime ngayTao;
     private int trangThai;
@@ -57,7 +57,7 @@ public class ChiTietSanPham {
     public ChiTietSanPham() {
     }
 
-    public ChiTietSanPham(Long id, String maChiTietSanPham, String tenChiTietSanPham, int soLuong, int giaBan,  String moTa, LocalDateTime ngayTao, int trangThai, SanPham sanPham, NhanVien nhanVien, KichCo kichCo, DeGiay deGiay, MauSac mauSac, ChatLieu chatLieu) {
+    public ChiTietSanPham(Long id, String maChiTietSanPham, String tenChiTietSanPham, int soLuong, Long giaBan,  String moTa, LocalDateTime ngayTao, int trangThai, SanPham sanPham, NhanVien nhanVien, KichCo kichCo, DeGiay deGiay, MauSac mauSac, ChatLieu chatLieu) {
         this.id = id;
         this.maChiTietSanPham = maChiTietSanPham;
         this.tenChiTietSanPham = tenChiTietSanPham;
@@ -100,13 +100,15 @@ public class ChiTietSanPham {
         this.soLuong = soLuong;
     }
 
-    public int getGiaBan() {
+    public Long getGiaBan() {
         return giaBan;
     }
 
-    public void setGiaBan(int giaBan) {
+    public void setGiaBan(Long giaBan) {
         this.giaBan = giaBan;
     }
+
+
 
 
     public String getMoTa() {

@@ -44,9 +44,9 @@ public class ChiTietSanPhamController {
         return chiTietSanPhamService.add(chiTietSanPhams);
     }
 
-    @PutMapping("/{id}")
-    public ChiTietSanPham update(@RequestBody ChiTietSanPham chiTietSanPham, @PathVariable Long id) {
-        return chiTietSanPhamService.update(id, chiTietSanPham);
+    @PutMapping("/updateList")
+    public List<ChiTietSanPham> update(@RequestBody List<ChiTietSanPham> chiTietSanPhams) {
+        return chiTietSanPhamService.update(chiTietSanPhams);
     }
 
     @DeleteMapping("/{id}")
