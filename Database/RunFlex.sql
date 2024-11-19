@@ -1,4 +1,4 @@
-﻿ALTER DATABASE RunFlex SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
+﻿	ALTER DATABASE RunFlex SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
 
 use master
 drop database RunFlex
@@ -121,18 +121,18 @@ foreign key (ID_KhachHang) references KhachHang(ID)
 
 create table HoaDon(
 ID int primary key identity(1,1),
-ID_NhanVien int not null,
+ID_NhanVien int null,
 ID_Voucher int null,
-ID_KhachHang int null,
-PhuongThucThanhToan nvarchar(255) not null,
-HinhThucMuaHang nvarchar(255) not null,
-PhiShip varchar(20) ,
+ID_KhachHang int null,	
+PhuongThucThanhToan int null, --1:tiền mặt, 2:tiền tài khoản
+HinhThucMuaHang int not null, --1:tại quầy, 2:online 
+PhiShip DECIMAL(18, 0) null,
 NgayTao date not null,
-NgayHoanTra date ,
-NgayGiaoHang date ,
-DiaChiGiaoHang nvarchar(255) ,
+NgayHoanTra date null,
+NgayGiaoHang date null,
+DiaChiGiaoHang nvarchar(255) null,
 TongSoTien varchar(20) not null,
-MoTa nvarchar(255) not null,
+MoTa nvarchar(255) null,
 TrangThai int not null --1:chưa thanh toán, 2:đã thanh toán, 3:đã hoàn tiền
 foreign key (ID_NhanVien) references NhanVien(ID),
 foreign key (ID_Voucher) references Voucher(ID),

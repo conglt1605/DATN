@@ -26,15 +26,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class ChiTietHoaDonController {
     @Autowired
     private ChiTietHoaDonService chiTietHoaDonService;
+                                        
 
-    @GetMapping()
-    public List<ChiTietHoaDon> getAll() {
-        return chiTietHoaDonService.getAll();
-    }
 
     @PostMapping()
-    public ChiTietHoaDon add(@RequestBody ChiTietHoaDon chiTietHoaDon) {
-        return chiTietHoaDonService.add(chiTietHoaDon);
+    public List<ChiTietHoaDon> add(@RequestBody List<ChiTietHoaDon> chiTietHoaDons) {
+        return chiTietHoaDonService.add(chiTietHoaDons);
     }
 
     @PutMapping("/{id}")
@@ -45,5 +42,10 @@ public class ChiTietHoaDonController {
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) {
         chiTietHoaDonService.delete(id);
+    }
+    
+    @GetMapping("/CTSPByIdHoaDon/{id}")
+        public List<ChiTietHoaDon> getCTSPById(@PathVariable("id") Long id){
+        return chiTietHoaDonService.getCTSPById(id);
     }
 }

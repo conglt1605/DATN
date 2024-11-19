@@ -5,7 +5,9 @@
 package com.example.RunFlex.service;
 
 import com.example.RunFlex.model.ChiTietHoaDon;
+import com.example.RunFlex.model.ChiTietSanPham;
 import com.example.RunFlex.repository.ChiTietHoaDonRepository;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,13 +22,17 @@ public class ChiTietHoaDonService {
     @Autowired
     private ChiTietHoaDonRepository chiTietHoaDonRepository;
 
-    public List<ChiTietHoaDon> getAll() {
-        return chiTietHoaDonRepository.getAll();
-    }
+    
 
-    public ChiTietHoaDon add(ChiTietHoaDon chiTietHoaDon) {
-        chiTietHoaDon.setTrangThai(1);
-        return chiTietHoaDonRepository.save(chiTietHoaDon);
+    public List<ChiTietHoaDon> add(List<ChiTietHoaDon> chiTietHoaDons) {
+        List<ChiTietHoaDon> savedChiTietHoaDons = new ArrayList<>();
+        for (ChiTietHoaDon chiTietHoaDon : chiTietHoaDons) {
+            chiTietHoaDon.setTrangThai(1);
+            
+            savedChiTietHoaDons.add(chiTietHoaDonRepository.save(chiTietHoaDon));
+        }
+        
+        return savedChiTietHoaDons;
     }
 
     public ChiTietHoaDon update(long id, ChiTietHoaDon chiTietHoaDon) {
@@ -43,5 +49,9 @@ public class ChiTietHoaDonService {
         ChiTietHoaDon chiTietHoaDonUpdate = chiTietHoaDonRepository.findById(id).orElseThrow();
         chiTietHoaDonUpdate.setTrangThai(0);
         chiTietHoaDonRepository.save(chiTietHoaDonUpdate);
+    }
+    
+    public List<ChiTietHoaDon> getCTSPById(Long id){
+        return chiTietHoaDonRepository.getChiTietHoaDonById(id);
     }
 }

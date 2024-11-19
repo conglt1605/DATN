@@ -10,7 +10,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
 import java.util.Date;
 
 /**
@@ -19,12 +18,13 @@ import java.util.Date;
  */
 @Entity
 public class HoaDon {
-        @Id
+
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String phuongThucThanhToan;
-    private String hinhThucMuaHang;
-    private int phiShip;
+    private int phuongThucThanhToan;
+    private int hinhThucMuaHang;
+    private Long phiShip;
     private Date ngayTao;
     private Date ngayHoanTra;
     private Date ngayGiaoHang;
@@ -32,25 +32,22 @@ public class HoaDon {
     private int tongSoTien;
     private String moTa;
     private int trangThai;
-        @ManyToOne
+    @ManyToOne
     @JoinColumn(name = "ID_NhanVien")
     private NhanVien nhanVien;
-    
-        @ManyToOne
+
+    @ManyToOne
     @JoinColumn(name = "ID_KhachHang")
     private KhachHang khachHang;
-    
+
     @ManyToOne
     @JoinColumn(name = "ID_Voucher")
     private Voucher voucher;
-    
-
-    
 
     public HoaDon() {
     }
 
-    public HoaDon(Long id, String phuongThucThanhToan, String hinhThucMuaHang, int phiShip, Date ngayTao, Date ngayHoanTra, Date ngayGiaoHang, String diaChiGiaoHang, int tongSoTien, String moTa, int trangThai, NhanVien nhanVien, KhachHang khachHang, Voucher voucher) {
+    public HoaDon(Long id, int phuongThucThanhToan, int hinhThucMuaHang, long phiShip, Date ngayTao, Date ngayHoanTra, Date ngayGiaoHang, String diaChiGiaoHang, int tongSoTien, String moTa, int trangThai, NhanVien nhanVien, KhachHang khachHang, Voucher voucher) {
         this.id = id;
         this.phuongThucThanhToan = phuongThucThanhToan;
         this.hinhThucMuaHang = hinhThucMuaHang;
@@ -67,9 +64,21 @@ public class HoaDon {
         this.voucher = voucher;
     }
 
+    public int getPhuongThucThanhToan() {
+        return phuongThucThanhToan;
+    }
 
+    public void setPhuongThucThanhToan(int phuongThucThanhToan) {
+        this.phuongThucThanhToan = phuongThucThanhToan;
+    }
 
+    public int getHinhThucMuaHang() {
+        return hinhThucMuaHang;
+    }
 
+    public void setHinhThucMuaHang(int hinhThucMuaHang) {
+        this.hinhThucMuaHang = hinhThucMuaHang;
+    }
 
     public Long getId() {
         return id;
@@ -79,30 +88,15 @@ public class HoaDon {
         this.id = id;
     }
 
-    public String getPhuongThucThanhToan() {
-        return phuongThucThanhToan;
-    }
-
-    public void setPhuongThucThanhToan(String phuongThucThanhToan) {
-        this.phuongThucThanhToan = phuongThucThanhToan;
-    }
-
-    public String getHinhThucMuaHang() {
-        return hinhThucMuaHang;
-    }
-
-    public void setHinhThucMuaHang(String hinhThucMuaHang) {
-        this.hinhThucMuaHang = hinhThucMuaHang;
-    }
-
-    public int getPhiShip() {
+    public Long getPhiShip() {
         return phiShip;
     }
 
-    public void setPhiShip(int phiShip) {
+    public void setPhiShip(Long phiShip) {
         this.phiShip = phiShip;
     }
 
+   
     public Date getNgayTao() {
         return ngayTao;
     }
@@ -183,5 +177,4 @@ public class HoaDon {
         this.khachHang = khachHang;
     }
 
-    
 }

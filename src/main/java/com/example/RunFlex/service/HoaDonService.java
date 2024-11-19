@@ -24,7 +24,7 @@ public class HoaDonService {
      @Autowired 
     private HoaDonRepository hoaDonRepository;
    
-   public List<Map<String,Object>> getAll(){
+   public List<HoaDon> getAll(){
        return hoaDonRepository.getAll();
    }
    
@@ -32,10 +32,29 @@ public class HoaDonService {
        return hoaDonRepository.getDoanhThu();
    }
    
-   public HoaDon add(HoaDon hoaDon){
-       hoaDon.setTrangThai(1);
-       hoaDon.setNgayTao(new Date());
-       return hoaDonRepository.save(hoaDon);
+   public HoaDon taoHoaDonTrong(){
+       HoaDon hoaDonTrong = new HoaDon();
+       hoaDonTrong.setHinhThucMuaHang(1);
+       hoaDonTrong.setTrangThai(1);
+       hoaDonTrong.setNgayTao(new Date());
+       return hoaDonRepository.save(hoaDonTrong);
    }
    
+   public HoaDon updateHoaDon(Long id, HoaDon hd) {
+    HoaDon existingHoaDon = hoaDonRepository.findById(id).orElseThrow();
+
+    // Cập nhật các thuộc tính của thực thể
+    existingHoaDon.setVoucher(hd.getVoucher());
+    existingHoaDon.setPhuongThucThanhToan(hd.getPhuongThucThanhToan());
+    existingHoaDon.setHinhThucMuaHang(hd.getHinhThucMuaHang());
+    existingHoaDon.setPhiShip(hd.getPhiShip());
+    existingHoaDon.setNgayHoanTra(hd.getNgayHoanTra());
+    existingHoaDon.setNgayGiaoHang(hd.getNgayGiaoHang());
+    existingHoaDon.setDiaChiGiaoHang(hd.getDiaChiGiaoHang());
+    existingHoaDon.setTongSoTien(hd.getTongSoTien());
+    existingHoaDon.setMoTa(hd.getMoTa());
+    existingHoaDon.setTrangThai(hd.getTrangThai());
+    
+    return hoaDonRepository.save(existingHoaDon);
+   }
 }

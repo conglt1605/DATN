@@ -5,9 +5,8 @@
 package com.example.RunFlex.service;
 
 import com.example.RunFlex.model.ChiTietAnhGiay;
-import com.example.RunFlex.model.ChiTietDanhMuc;
 import com.example.RunFlex.repository.ChiTietAnhGiayRepository;
-import com.example.RunFlex.repository.ChiTietDanhMucRepoSitory;
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,9 +24,13 @@ public class ChiTietAnhGiayService {
         return chiTietAnhGiayRepository.getAll();
     }
 
-    public ChiTietAnhGiay add(ChiTietAnhGiay chiTietAnhGiay) {
-        chiTietAnhGiay.setTrangThai(1);
-        return chiTietAnhGiayRepository.save(chiTietAnhGiay);
+    public List<ChiTietAnhGiay> add(List<ChiTietAnhGiay> chiTietAnhGiays) {
+        List<ChiTietAnhGiay> addChiTietAnhGiay = new ArrayList<>();
+        for (ChiTietAnhGiay chiTietAnhGiay : chiTietAnhGiays) {
+            chiTietAnhGiay.setTrangThai(1);
+            addChiTietAnhGiay.add(chiTietAnhGiayRepository.save(chiTietAnhGiay));
+        }
+        return addChiTietAnhGiay;
     }
 
     public ChiTietAnhGiay update(long id, ChiTietAnhGiay chiTietAnhGiay) {
@@ -42,5 +45,9 @@ public class ChiTietAnhGiayService {
         ChiTietAnhGiay chiTietAnhGiayUpdate = chiTietAnhGiayRepository.findById(id).orElseThrow();
         chiTietAnhGiayUpdate.setTrangThai(0);
         chiTietAnhGiayRepository.save(chiTietAnhGiayUpdate);
+    }
+    
+    public List<ChiTietAnhGiay> getAllByIdCTSP(Long id){
+        return chiTietAnhGiayRepository.getAllByIdCTSP(id);
     }
 }

@@ -36,8 +36,8 @@ public class ChiTietAnhGiayController {
     }
 
     @PostMapping()
-    public ChiTietAnhGiay add(@RequestBody ChiTietAnhGiay chiTietAnhGiay) {
-        return chiTietAnhGiayService.add(chiTietAnhGiay);
+    public List<ChiTietAnhGiay> add(@RequestBody List<ChiTietAnhGiay> chiTietAnhGiays) {
+        return chiTietAnhGiayService.add(chiTietAnhGiays);
     }
 
     @PutMapping("/{id}")
@@ -48,5 +48,10 @@ public class ChiTietAnhGiayController {
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) {
         chiTietAnhGiayService.delete(id);
+    }
+    
+    @GetMapping("/byIdCTSP/{id}")
+        public List<ChiTietAnhGiay> getAllByIdCTSP(@PathVariable Long id){
+        return chiTietAnhGiayService.getAllByIdCTSP(id);
     }
 }

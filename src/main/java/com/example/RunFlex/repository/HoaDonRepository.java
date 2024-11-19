@@ -18,11 +18,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface HoaDonRepository extends JpaRepository<HoaDon, Long> {
 
-    @Query(value = "Select hd.ID,phuongthucthanhtoan,hinhthucmuahang,phiship,ngaytao,ngayhoantra,ngaygiaohang,diachigiaohang,tongsotien,mota,hd.trangthai,tennhanvien,tenvoucher,giatri "
-            + "from hoadon hd "
-            + "join nhanvien nv on hd.ID_NhanVien=nv.ID "
-            + "join voucher vc on hd.ID_Voucher=vc.ID", nativeQuery = true)
-    List<Map<String, Object>> getAll();
+    @Query(value = "Select * from HoaDon", nativeQuery = true)
+    List<HoaDon> getAll();
 
     @Query(value = "SELECT \n"
             + "YEAR(NgayTao) AS Nam, \n"
@@ -32,4 +29,6 @@ public interface HoaDonRepository extends JpaRepository<HoaDon, Long> {
             + "GROUP BY YEAR(NgayTao), MONTH(NgayTao)\n "
             + "ORDER BY Nam, Thang;", nativeQuery = true)
     List<Map<String, Object>> getDoanhThu();
+    
+    
 }

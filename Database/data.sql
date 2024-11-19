@@ -1,4 +1,4 @@
-﻿
+﻿	
 
 -- Dữ liệu bảng DanhMuc (Danh mục sản phẩm giày thể thao)
 INSERT INTO DanhMuc (TenDanhMuc, TrangThai)
@@ -174,16 +174,16 @@ INSERT INTO HoaDon (
     DiaChiGiaoHang, TongSoTien, MoTa, TrangThai
 ) 
 VALUES
-(1, 1, 1, 'Thẻ tín dụng', 'Mua online', '30000', '2024-10-30', NULL, '2024-11-02', '123 Đường A, Quận 1', '4800000', 'Đơn hàng thanh toán online', 2),
-(2, NULL, 2, 'Tiền mặt', 'Mua tại cửa hàng', NULL, '2024-10-28', NULL, '2024-10-28', NULL, '6000000', 'Mua trực tiếp', 2),
-(3, 2, 3, 'Ví điện tử', 'Mua online', '50000', '2024-10-27', '2024-10-29', NULL, '456 Đường B, Quận 2', '5300000', 'Đơn hàng bị hoàn trả', 3),
-(1, NULL, 4, 'Chuyển khoản', 'Mua online', '40000', '2024-10-25', NULL, '2024-10-27', '789 Đường C, Quận 3', '3200000', 'Đơn hàng giao nhanh', 2),
-(2, 3, 5, 'Tiền mặt', 'Mua tại cửa hàng', NULL, '2024-10-24', NULL, '2024-10-24', NULL, '3500000', 'Mua trực tiếp', 2),
-(3, NULL, 6, 'Ví Momo', 'Mua online', '30000', '2024-10-20', NULL, '2024-10-23', '102 Đường D, Quận 4', '2900000', 'Đã giao hàng', 2),
-(4, 4, 7, 'Thẻ ATM', 'Mua online', '45000', '2024-10-18', NULL, '2024-10-21', '150 Đường E, Quận 5', '4200000', 'Giao hàng nhanh', 2),
-(1, NULL, 8, 'Chuyển khoản', 'Mua online', NULL, '2024-10-15', '2024-10-16', NULL, '50 Đường G, Quận 6', '5100000', 'Bị hoàn trả', 3),
-(5, NULL, 9, 'Tiền mặt', 'Mua tại cửa hàng', NULL, '2024-10-10', NULL, '2024-10-10', NULL, '2200000', 'Mua trực tiếp', 2),
-(3, 5, 10, 'Ví điện tử', 'Mua online', '35000', '2024-10-05', NULL, '2024-10-07', '200 Đường H, Quận 7', '2700000', 'Thanh toán thành công', 2);
+(1, 1, 1, '1', '1', '30000', '2024-10-30', NULL, '2024-11-02', '123 Đường A, Quận 1', '4800000', 'Đơn hàng thanh toán online', 2),
+(2, NULL, 2, '1', '1', NULL, '2024-10-28', NULL, '2024-10-28', NULL, '6000000', 'Mua trực tiếp', 2),
+(3, 2, 3, '2', '1', '50000', '2024-10-27', '2024-10-29', NULL, '456 Đường B, Quận 2', '5300000', 'Đơn hàng bị hoàn trả', 3),
+(1, NULL, 4, '1', '1', '40000', '2024-10-25', NULL, '2024-10-27', '789 Đường C, Quận 3', '3200000', 'Đơn hàng giao nhanh', 2),
+(2, 3, 5, '2', '1', NULL, '2024-10-24', NULL, '2024-10-24', NULL, '3500000', 'Mua trực tiếp', 2),
+(3, NULL, 6, '2', '1', '30000', '2024-10-20', NULL, '2024-10-23', '102 Đường D, Quận 4', '2900000', 'Đã giao hàng', 2),
+(4, 4, 7, '1', '2', '45000', '2024-10-18', NULL, '2024-10-21', '150 Đường E, Quận 5', '4200000', 'Giao hàng nhanh', 2),
+(1, NULL, 8, '2', '2', NULL, '2024-10-15', '2024-10-16', NULL, '50 Đường G, Quận 6', '5100000', 'Bị hoàn trả', 3),
+(5, NULL, 9, '1', '2', NULL, '2024-10-10', NULL, '2024-10-10', NULL, '2200000', 'Mua trực tiếp', 2),
+(3, 5, 10, '2', '2', '35000', '2024-10-05', NULL, '2024-10-07', '200 Đường H, Quận 7', '2700000', 'Thanh toán thành công', 2);
 
 
 INSERT INTO ChiTietSanPham (ID_SanPham, ID_NhanVien, ID_KichCo, ID_MauSac, ID_DeGiay, ID_ChatLieu,TenChiTietSanPham, GiaBan,  SoLuong, MoTa, NgayTao, TrangThai) 

@@ -9,6 +9,7 @@ import com.example.RunFlex.model.ChiTietAnhGiay;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -16,7 +17,11 @@ import org.springframework.stereotype.Repository;
  * @author Cong
  */
 @Repository
-public interface ChiTietAnhGiayRepository extends JpaRepository<ChiTietAnhGiay, Long>{
-        @Query(value = "select * from ChiTietAnhGiay where trangthai=1", nativeQuery = true)
+public interface ChiTietAnhGiayRepository extends JpaRepository<ChiTietAnhGiay, Long> {
+
+    @Query(value = "select * from ChiTietAnhGiay where trangthai=1", nativeQuery = true)
     List<ChiTietAnhGiay> getAll();
+
+    @Query(value = "select * from ChiTietAnhGiay where ID_ChiTietSanPham = :id", nativeQuery = true)
+    List<ChiTietAnhGiay> getAllByIdCTSP(@Param("id") Long id);
 }

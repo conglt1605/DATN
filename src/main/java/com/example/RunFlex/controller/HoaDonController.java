@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,7 +27,7 @@ public class HoaDonController {
     private HoaDonService hoaDonService;
     
     @GetMapping()
-    public List<Map<String,Object>> getAll(){
+    public List<HoaDon> getAll(){
         return hoaDonService.getAll();
     }
     
@@ -36,8 +37,13 @@ public class HoaDonController {
     }
     
     
-    @PostMapping()
-    public HoaDon add(@RequestBody HoaDon hoaDon){
-        return hoaDonService.add(hoaDon);
+    @GetMapping("/hoadontrong")
+    public HoaDon taoHoaDonTrong(){
+        return hoaDonService.taoHoaDonTrong();
+    }
+    
+    @PostMapping("/{id}")
+    public HoaDon update(@PathVariable("id") Long id,@RequestBody HoaDon hoaDon){
+        return hoaDonService.updateHoaDon(id, hoaDon);
     }
 }

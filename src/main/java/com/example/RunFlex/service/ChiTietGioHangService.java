@@ -6,6 +6,7 @@ package com.example.RunFlex.service;
 
 import com.example.RunFlex.model.ChiTietGioHang;
 import com.example.RunFlex.repository.ChiTietGioHangRepository;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,9 +25,14 @@ public class ChiTietGioHangService {
         return chiTietGioHangRepository.getAll();
     }
 
-    public ChiTietGioHang add(ChiTietGioHang chiTietGioHang) {
-        chiTietGioHang.setTrangThai(1);
-        return chiTietGioHangRepository.save(chiTietGioHang);
+    public List<ChiTietGioHang> add(List<ChiTietGioHang> chiTietGioHangs) {
+        List<ChiTietGioHang> addChiTietGioHang = new ArrayList<>();
+        for (ChiTietGioHang chiTietGioHang : chiTietGioHangs) {
+            chiTietGioHang.setTrangThai(1);
+            addChiTietGioHang.add(chiTietGioHangRepository.save(chiTietGioHang));
+        }
+        
+        return addChiTietGioHang;
     }
 
     public ChiTietGioHang update(long id, ChiTietGioHang chiTietGioHang) {

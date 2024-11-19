@@ -33,8 +33,8 @@ public class ChiTietGioHangController {
     }
 
     @PostMapping()
-    public ChiTietGioHang add(@RequestBody ChiTietGioHang chiTietGioHang) {
-        return chiTietGioHangService.add(chiTietGioHang);
+    public List<ChiTietGioHang> add(@RequestBody List<ChiTietGioHang> chiTietGioHangs) {
+        return chiTietGioHangService.add(chiTietGioHangs);
     }
 
     @PutMapping("/{id}")
