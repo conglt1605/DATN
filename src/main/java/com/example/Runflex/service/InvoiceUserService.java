@@ -4,9 +4,9 @@
  */
 package com.example.Runflex.service;
 
-import com.example.Runflex.entity.InvoiceDetail;
-import com.example.Runflex.repository.InvoiceDetailRepository;
-import com.example.Runflex.service.impl.IInvoiceDetailService;
+import com.example.Runflex.entity.InvoiceUser;
+import com.example.Runflex.repository.InvoiceUserRepository;
+import com.example.Runflex.service.impl.IInvoiceUserService;
 import com.example.Runflex.util.Status;
 import java.util.List;
 import java.util.Map;
@@ -19,41 +19,41 @@ import org.springframework.stereotype.Service;
  * @author ADMIN
  */
 @Service
-public class InvoiceDetailService implements IInvoiceDetailService{
+public class InvoiceUserService implements IInvoiceUserService{
     @Autowired
-    private InvoiceDetailRepository invoiceDetailRepository;
+    private InvoiceUserRepository invoiceUserRepository;
 
     @Override
     public ResponseEntity<?> getAll() {
-        List<InvoiceDetail> invoiceDetails = invoiceDetailRepository.findAll();
-        if (invoiceDetails.isEmpty()) {
+        List<InvoiceUser> invoiceUsers = invoiceUserRepository.findAll();
+        if (invoiceUsers.isEmpty()) {
             return ResponseEntity.badRequest().body(Map.of("error", "Danh Sach Trong"));
         }
-        return ResponseEntity.ok(Map.of("Succes", invoiceDetails));
+        return ResponseEntity.ok(Map.of("Succes", invoiceUsers));
     }
 
     @Override
-    public ResponseEntity<?> getInvoiceDetailWithStatusActive() {
-        List<InvoiceDetail> invoiceDetails = invoiceDetailRepository.getInvoiceDetailWithStatusActive();
-        if (invoiceDetails.isEmpty()) {
+    public ResponseEntity<?> getInvoiceUserWithStatusActive() {
+        List<InvoiceUser> invoiceUsers = invoiceUserRepository.getInvoiceUserWithStatusActive();
+        if (invoiceUsers.isEmpty()) {
             return ResponseEntity.badRequest().body(Map.of("error", "Danh sách trống"));
         }
-        return ResponseEntity.ok(Map.of("Succes", invoiceDetails));
+        return ResponseEntity.ok(Map.of("Succes", invoiceUsers));
     }
 
     @Override
-    public ResponseEntity<?> saveInvoiceDetail(InvoiceDetail invoiceDetail) {
-        if (invoiceDetail.getInvoice().equals("") || invoiceDetail.getInvoice()== null) {
+    public ResponseEntity<?> saveInvoiceUser(InvoiceUser invoiceUser) {
+        if (invoiceUser.getInvoice().equals("") || invoiceUser.getInvoice()== null) {
             return ResponseEntity.badRequest().body(Map.of("error", "Ten Hang K Duoc De Trong"));
         }
-        invoiceDetail.setStatus(Status.active);
-        invoiceDetailRepository.save(invoiceDetail);
+        invoiceUser.setStatus(Status.active);
+        invoiceUserRepository.save(invoiceUser);
         return ResponseEntity.ok(Map.of("Succes", "Them Thanh Cong"));
     }
 
     @Override
-    public ResponseEntity<?> deleteInvoiceDetail(Long id) {
-        InvoiceDetail invoiceDetail = invoiceDetailRepository.findById(id).orElseThrow();
+    public ResponseEntity<?> deleteInvoiceUser(Long id) {
+        InvoiceUser invoiceUser = invoiceUserRepository.findById(id).orElseThrow();
         if (invoiceDetail == null) {
             return ResponseEntity.badRequest().body(Map.of("error", "Khong Tim Thay"));
         }
@@ -72,4 +72,5 @@ public class InvoiceDetailService implements IInvoiceDetailService{
         invoiceDetailRepository.save(existingInvoiceDetail);
         return ResponseEntity.ok(Map.of("Succes","Sua Thanh Cong"));
 }
+    
 }
