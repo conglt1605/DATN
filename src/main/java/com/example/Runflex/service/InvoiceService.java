@@ -48,7 +48,7 @@ public class InvoiceService implements IInvoiceService{
         }
         invoice.setStatus(Status.active);
         invoiceRepository.save(invoice);
-        return ResponseEntity.ok(Map.of("Succes", "Them Thanh Cong"));
+        return ResponseEntity.ok(Map.of("Succes", "Them Thanh Congs"));
     }
 
     @Override
