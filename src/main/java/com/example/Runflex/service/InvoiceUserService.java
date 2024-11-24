@@ -54,22 +54,22 @@ public class InvoiceUserService implements IInvoiceUserService{
     @Override
     public ResponseEntity<?> deleteInvoiceUser(Long id) {
         InvoiceUser invoiceUser = invoiceUserRepository.findById(id).orElseThrow();
-        if (invoiceDetail == null) {
+        if (invoiceUser == null) {
             return ResponseEntity.badRequest().body(Map.of("error", "Khong Tim Thay"));
         }
-        invoiceDetail.setStatus(Status.delete);
-        invoiceDetailRepository.save(invoiceDetail);
+        invoiceUser.setStatus(Status.delete);
+        invoiceUserRepository.save(invoiceUser);
         return ResponseEntity.ok(Map.of("Succes", "Xoa Thanh Cong"));
     }
 
     @Override
-    public ResponseEntity<?> updateInvoiceDetail(Long id, InvoiceDetail invoiceDetail) {
-        InvoiceDetail existingInvoiceDetail = invoiceDetailRepository.findById(id).orElseThrow();
-        if (invoiceDetail == null) {
+    public ResponseEntity<?> updateInvoiceUser(Long id, InvoiceUser invoiceUser) {
+        InvoiceUser existingInvoiceUser = invoiceUserRepository.findById(id).orElseThrow();
+        if (invoiceUser == null) {
             return ResponseEntity.badRequest().body(Map.of("error", "Khong Tim Thay"));
         }
-        existingInvoiceDetail.setId(invoiceDetail.getId());
-        invoiceDetailRepository.save(existingInvoiceDetail);
+        existingInvoiceUser.setId(invoiceUser.getId());
+        invoiceUserRepository.save(existingInvoiceUser);
         return ResponseEntity.ok(Map.of("Succes","Sua Thanh Cong"));
 }
     
