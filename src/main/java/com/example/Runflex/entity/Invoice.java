@@ -34,7 +34,6 @@ public class Invoice {
     private String invoiceCode;
     private int paymentMethod;
     private long phoneNumber;
-    private LocalDate createDate;
     private String deliveryAddress;
     private double totalAmount;
     private String description;

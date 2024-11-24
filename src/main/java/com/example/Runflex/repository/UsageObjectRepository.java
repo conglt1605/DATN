@@ -5,7 +5,9 @@
 package com.example.Runflex.repository;
 
 import com.example.Runflex.entity.UsageObject;
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -14,5 +16,6 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface UsageObjectRepository extends JpaRepository<UsageObject, Long>{
-    
+    @Query(value = "SELECT * FROM usageobject WHERE status = 1", nativeQuery = true)
+    List<UsageObject> getUsageObjectsWithStatusActive(); 
 }

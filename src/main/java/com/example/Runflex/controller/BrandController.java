@@ -26,26 +26,32 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/brand")
 public class BrandController {
+
     @Autowired
     private BrandService brandService;
-    
+
     @GetMapping("/all")
-    public ResponseEntity<?> findAll(){
+    public ResponseEntity<?> findAll() {
         return brandService.getAll();
     }
-    
+
+    @GetMapping("/active")
+    public ResponseEntity<?> getCategoryWithStatusActive() {
+        return brandService.getBrandWithStatusActive();
+    }
+
     @PostMapping("/add")
-    public ResponseEntity<?> add(@RequestBody Brand brand){
+    public ResponseEntity<?> add(@RequestBody Brand brand) {
         return brandService.saveBrand(brand);
     }
-    
+
     @PutMapping("/update/{id}")
-    public ResponseEntity<?> update(@PathVariable("id") Long id,@RequestBody Brand brand){
+    public ResponseEntity<?> update(@PathVariable("id") Long id, @RequestBody Brand brand) {
         return brandService.updateBrand(id, brand);
     }
-    
+
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> delete(@PathVariable("id") Long id){
+    public ResponseEntity<?> delete(@PathVariable("id") Long id) {
         return brandService.deleteBrand(id);
     }
 

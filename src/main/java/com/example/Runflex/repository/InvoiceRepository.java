@@ -5,7 +5,9 @@
 package com.example.Runflex.repository;
 
 import com.example.Runflex.entity.Invoice;
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -13,6 +15,8 @@ import org.springframework.stereotype.Repository;
  * @author Cong
  */
 @Repository
-public interface InvoiceRepository extends JpaRepository<Invoice, Long>{
-    
+public interface InvoiceRepository extends JpaRepository<Invoice, Long> {
+
+    @Query(value = "SELECT * FROM invoice WHERE status = 1", nativeQuery = true)
+    List<Invoice> getInvoicesWithStatusActive();
 }

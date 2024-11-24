@@ -5,6 +5,7 @@
 package com.example.Runflex.repository;
 
 import com.example.Runflex.entity.InvoiceUser;
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -14,5 +15,6 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface InvoiceUserRepository extends JpaRepository<InvoiceUser, Long>{
-    
+    List<InvoiceUser> findByStatus(int status);
+
 }

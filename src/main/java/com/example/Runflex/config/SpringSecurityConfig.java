@@ -42,7 +42,7 @@ public class SpringSecurityConfig {
                 // Các endpoint không yêu cầu xác thực
                 .requestMatchers(
                         "/user/authenticate",
-                        "/user/register"
+                        "/user/register"     
                 ).permitAll()
                 // Quyền của Customer
                 .requestMatchers(
@@ -52,7 +52,14 @@ public class SpringSecurityConfig {
                 // Quyền của Admin
                 .requestMatchers(
                         "/admin/**",
-                        "/Voucher/**"
+                        "/Voucher/**",
+                        "/category/**",
+                        "/brand/**",
+                        "/color/**",
+                        "/invoice/**",
+                        "/invoicedetail/**",
+                        "/color/**",
+                        "/invoicedetail/**"
                 ).hasAuthority("Admin")
                 .anyRequest().authenticated(); // Tất cả yêu cầu khác phải xác thực
 

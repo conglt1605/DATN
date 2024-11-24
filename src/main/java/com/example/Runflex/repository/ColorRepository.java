@@ -5,14 +5,14 @@
 package com.example.Runflex.repository;
 
 import com.example.Runflex.entity.Color;
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-/**
- *
- * @author Cong
- */
 @Repository
-public interface ColorRepository extends JpaRepository<Color, Object>{
-    
+public interface ColorRepository extends JpaRepository<Color, Long> {
+
+    @Query(value = "SELECT * FROM color WHERE status = 1", nativeQuery = true)
+    List<Color> getColorWithStatusActive();
 }
