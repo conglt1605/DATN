@@ -4,7 +4,10 @@
  */
 package com.example.Runflex.service.impl;
 
+import com.example.Runflex.dto.ProductDto;
 import com.example.Runflex.entity.Product;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 
 /**
@@ -17,5 +20,6 @@ public interface IProductService {
     ResponseEntity<?> saveProduct(Product product);
     ResponseEntity<?> updateProduct(Long id, Product product);
     ResponseEntity<?> deleteProduct(Long id);
+    Page<ProductDto> getPageProducts(Pageable pageable);
 }
 

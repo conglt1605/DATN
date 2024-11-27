@@ -15,4 +15,7 @@ public interface ColorRepository extends JpaRepository<Color, Long> {
 
     @Query(value = "SELECT * FROM color WHERE status = 1", nativeQuery = true)
     List<Color> getColorWithStatusActive();
+    
+
+    
 }

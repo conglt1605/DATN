@@ -14,11 +14,16 @@ import java.util.List;
  * @author Cong
  */
 public interface IProductDetailService {
-    ResponseEntity<?> getAll();
-    ResponseEntity<?> saveProductDetails(List<ProductDetail> productDetails);
-    ResponseEntity<?> updateProductDetails(List<ProductDetail> productDetails);
-    ResponseEntity<?> deleteProductDetails(List<Long> ids);
-    ResponseEntity<?> getProductDetailWithStatusActive();
-    
-}
 
+    ResponseEntity<?> getAll();
+
+    ResponseEntity<?> saveProductDetails(List<ProductDetail> productDetails);
+
+    ResponseEntity<?> updateProductDetails(List<ProductDetail> productDetails);
+
+    ResponseEntity<?> deleteProductDetails(List<Long> ids);
+
+    ResponseEntity<?> getProductDetailWithStatusActive();
+
+    ResponseEntity<?> getProductDetail(Long sizeId, Long productId, Long colorId, Long materialId);
+}

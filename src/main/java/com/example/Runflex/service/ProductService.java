@@ -4,6 +4,7 @@
  */
 package com.example.Runflex.service;
 
+import com.example.Runflex.dto.ProductDto;
 import com.example.Runflex.entity.Product;
 import com.example.Runflex.repository.ProductRepository;
 import com.example.Runflex.service.impl.IProductService;
@@ -14,6 +15,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 /**
  *
@@ -78,6 +81,11 @@ public class ProductService implements IProductService {
         existingProduct.setUsageObject(product.getUsageObject());
         productRepository.save(existingProduct);
         return ResponseEntity.ok(Map.of("Success", "Cập Nhật Thành Công"));
+    }
+
+    @Override
+    public Page<ProductDto> getPageProducts(Pageable pageable) {
+        return productRepository.getPageProducts(pageable);
     }
 }
 

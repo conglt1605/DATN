@@ -45,5 +45,9 @@ public class ProductDetailController {
     public ResponseEntity<?> delete(@RequestBody List<Long> ids) {
         return productDetailService.deleteProductDetails(ids);
     }
+    @GetMapping("/getProducDetail")
+    public ResponseEntity<?> getProducDetail(@RequestParam Long sizeId,@RequestParam Long productId,@RequestParam Long colorId,@RequestParam Long materialId) {
+        return productDetailService.getProductDetail(sizeId, productId, colorId, materialId);
+    }
 }
 

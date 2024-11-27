@@ -4,6 +4,7 @@
  */
 package com.example.Runflex.service;
 
+import com.example.Runflex.dto.ProductDetailDto;
 import com.example.Runflex.entity.ProductDetail;
 import com.example.Runflex.repository.ProductDetailRepository;
 import com.example.Runflex.service.impl.IProductDetailService;
@@ -95,6 +96,16 @@ public class ProductDetailService implements IProductDetailService {
             return ResponseEntity.badRequest().body(Map.of("error", "Danh sách trống"));
         }
         return ResponseEntity.ok(Map.of("Success", productDetails));
+    }
+
+    @Override
+    public ResponseEntity<?> getProductDetail(Long sizeId, Long productId, Long colorId, Long materialId) {
+        
+        ProductDetailDto productDetailDto = productDetailRepository.getProductDetail(sizeId, productId, colorId, materialId);
+        if(productDetailDto == null){
+            return ResponseEntity.badRequest().body(Map.of("error", "Loi khi lay productDetail"));
+        }
+        return ResponseEntity.ok(Map.of("Success", productDetailDto));
     }
 }
 

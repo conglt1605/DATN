@@ -42,7 +42,21 @@ public class SpringSecurityConfig {
                 // Các endpoint không yêu cầu xác thực
                 .requestMatchers(
                         "/user/authenticate",
-                        "/user/register"     
+                        "/user/register",
+                        "/admin/**",
+                        "/Voucher/**",
+                        "/category/**",
+                        "/brand/**",
+                        "/color/**",
+                        "/invoice/**",
+                        "/invoicedetail/**",
+                        "/color/**",
+                        "/invoicedetail/**",
+                        "/material/**",
+                        "/usageobject/**",
+                        "/product/**",
+                        "/size/**",
+                        "/productdetail/**"
                 ).permitAll()
                 // Quyền của Customer
                 .requestMatchers(

@@ -32,6 +32,7 @@ public class Invoice {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String invoiceCode;
+    private LocalDate createdDate;
     private int paymentMethod;
     private long phoneNumber;
     private String deliveryAddress;
