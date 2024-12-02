@@ -1,0 +1,8 @@
+<div>
+    <input type="file" id="fileInput" />
+    <button ng-click="uploadImage()">Upload</button>
+    <div ng-if="uploadedImageUrl">
+        <p>Ảnh đã upload:</p>
+        <img ng-src="{{uploadedImageUrl}}" alt="Uploaded Image" />
+    </div>
+</div>

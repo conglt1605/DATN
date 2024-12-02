@@ -5,7 +5,9 @@
 package com.example.Runflex.service;
 
 import com.example.Runflex.entity.Invoice;
+import com.example.Runflex.entity.InvoiceDetail;
 import com.example.Runflex.repository.InvoiceRepository;
+import com.example.Runflex.repository.ProductDetailRepository;
 import com.example.Runflex.service.impl.IInvoiceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +25,9 @@ public class InvoiceService implements IInvoiceService {
 
     @Autowired
     private InvoiceRepository invoiceRepository;
+    
+    @Autowired
+    private ProductDetailRepository productDetailRepository;
 
     @Override
     public ResponseEntity<?> getAll() {
@@ -78,5 +83,26 @@ public class InvoiceService implements IInvoiceService {
         invoiceRepository.save(existingInvoice);
         return ResponseEntity.ok(Map.of("Success", "Cập nhật hóa đơn thành công"));
     }
+
+    @Override
+    public ResponseEntity<?> saveInvoiceWithDetails(Invoice invoice) {
+                if (invoice.getInvoiceDetails() == null || invoice.getInvoiceDetails().isEmpty()) {
+            return ResponseEntity.badRequest().body(Map.of("error", "Danh sách chi tiết hóa đơn không được để trống"));
+        }
+
+        // Gắn hóa đơn cho từng chi tiết hóa đơn
+        for (InvoiceDetail detail : invoice.getInvoiceDetails()) {
+            detail.setInvoice(invoice);
+            // Kiểm tra sản phẩm tồn tại
+            if (productDetailRepository.findById(detail.getProductDetail().getId()).isEmpty()) {
+                return ResponseEntity.badRequest().body(Map.of("error", "Sản phẩm không tồn tại"));
+            }
+        }
+
+        // Lưu hóa đơn và các chi tiết hóa đơn
+        invoiceRepository.save(invoice);
+        return ResponseEntity.ok(Map.of("success", "Hóa đơn và chi tiết đã được lưu thành công"));
+    }
+
 }
 

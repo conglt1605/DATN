@@ -4,11 +4,16 @@
  */
 package com.example.Runflex.repository;
 
+import com.example.Runflex.dto.ColorDto;
+import com.example.Runflex.dto.MaterialDto;
 import com.example.Runflex.dto.ProductDetailDto;
+import com.example.Runflex.dto.SizeDto;
 import com.example.Runflex.entity.ProductDetail;
 import java.util.List;
+import java.util.Map;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -35,11 +40,31 @@ public interface ProductDetailRepository extends JpaRepository<ProductDetail, Lo
             + "WHERE s.id = :sizeId AND p.id = :productId AND c.id = :colorId AND m.id = :materialId")
     ProductDetailDto getProductDetail(Long sizeId, Long productId, Long colorId, Long materialId);
 
-//    @Query("SELECT new com.example.Runflex.dto.ProductDetailDto( "
-//            + "c.colorName) "
-//            + "FROM productdetail pd "
-//            + "JOIN color c ON pd.colorID = c.id "
-//            + "WHERE pd.productID = :productID;")
-//    List<ProductDetailDto> getProductDetailByID(Long productID);
+    //Gọi màu theo sản phẩm
+    @Query(value="SELECT pd.colorID, c.colorName "
+            + "FROM productdetail pd "
+            + "JOIN color c ON pd.colorID = c.id "
+            + "WHERE pd.productID = :productID "
+            + "GROUP BY pd.colorID, c.colorName",
+            nativeQuery = true)
+    List<Map<String, Object>> GetColorByProductID(@Param("productID") Long productID);
 
+    //Gọi kích cỡ theo sản phẩm
+        @Query(value="SELECT pd.sizeID, s.sizeNumber "
+            + "FROM productdetail pd "
+            + "JOIN size s ON pd.sizeID = s.id "
+            + "WHERE pd.productID = :productID "
+            + "GROUP BY pd.SizeID,s.sizeNumber",
+            nativeQuery = true)
+    List<Map<String, Object>> GetSizeByProductID(@Param("productID") Long productID);
+    
+    
+    //GỌi chất liệu theo sản phẩm
+        @Query(value="SELECT pd.materialID, m.materialName "
+            + "FROM productdetail pd "
+            + "JOIN material m ON pd.materialID = m.id "
+            + "WHERE pd.productID = :productID "
+            + "GROUP BY pd.materialID,m.materialName",
+            nativeQuery = true)
+    List<Map<String, Object>> GetMaterialByProductID(@Param("productID") Long productID);
 }

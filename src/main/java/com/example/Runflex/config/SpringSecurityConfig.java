@@ -56,7 +56,8 @@ public class SpringSecurityConfig {
                         "/usageobject/**",
                         "/product/**",
                         "/size/**",
-                        "/productdetail/**"
+                        "/productdetail/**",
+                        "/error","/images/**"
                 ).permitAll()
                 // Quyền của Customer
                 .requestMatchers(

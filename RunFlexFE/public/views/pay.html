@@ -1,0 +1,54 @@
+<div class="container my-5">
+    <h1 class="text-center">Thông tin thanh toán</h1>
+    <form>
+        <div class="form-group">
+            <label for="name">Họ và tên</label>
+            <input type="text" class="form-control" ng-model="consigneeName" required>
+        </div>
+        <div class="form-group">
+            <label for="phone">Số điện thoại</label>
+            <input type="tel" class="form-control" ng-model="phoneNumber" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Địa chỉ</label>
+            <input type="text" class="form-control" ng-model="deliveryAddress" required>
+        </div>
+        <div class="form-group">
+            <label for="">Phương thức thanh toán</label>
+            <select class="form-control" ng-model="paymentMethod" required>
+        <option value="">Chọn phương thức thanh toán</option>
+        <option value=1>Thanh toán khi nhận hàng</option>
+        <option value=2>Chuyển khoản</option>
+      </select>
+        </div>
+    </form>
+
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Sản phẩm</th>
+                <th>Số lượng</th>
+                <th>Đơn giá</th>
+                <th>Tạm tính</th>
+            </tr>
+        </thead>
+        <tbody ng-repeat="product in lstOrderProduct" ng-if="product.selected === true">
+            <tr>
+                <td>{{product.productDetai.productName}} - Size: {{product.productDetai.sizeNumber}} - {{product.productDetai.colorName}} - Chất liệu: {{product.productDetai.materialName}}</td>
+                <td>{{product.quantity}}</td>
+                <td>{{product.productDetai.price}} đ</td>
+                <td>{{product.quantity * product.productDetai.price}} đ</td>
+            </tr>
+
+        </tbody>
+        <tfoot>
+            <tr>
+                <th colspan="3" class="text-right">Tổng cộng:</th>
+                <td>{{ getTotal() }} đ</td>
+            </tr>
+        </tfoot>
+    </table>
+    <div class="text-center mt-4">
+        <button type="button" class="btn btn-primary" ng-click="submitPayment()">Xác nhận thanh toán</button>
+    </div>
+</div>

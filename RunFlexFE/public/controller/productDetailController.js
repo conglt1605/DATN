@@ -12,6 +12,7 @@ app.controller("ProductDetailController", function ($scope, $http) {
   $scope.productDetai = null;
   $scope.statusProduct = "Hết Hàng";
   $scope.quantityOder = 1;
+  $scope.selected = false;
   $scope.oderProduct = function (productDetai) {
     let existingProduct = $scope.lstOrderProduct.find(
       (order) => order.productDetai.id === productDetai.id
@@ -25,6 +26,7 @@ app.controller("ProductDetailController", function ($scope, $http) {
         id: `order-${productDetai.id}`, // Tạo id riêng biệt cho mỗi sản phẩm
         productDetai: productDetai,
         quantity: $scope.quantityOder || 1, // Mặc định quantity là 1 nếu không có giá trị
+        selected: $scope.selected, // Mặc định là không được chọn
       };
       $scope.lstOrderProduct.push(order);
     }
@@ -67,6 +69,7 @@ app.controller("ProductDetailController", function ($scope, $http) {
       .then(function (response) {
         $scope.productDetai = response.data.Success;
         $scope.statusProduct = "Còn Hàng";
+        console.log($scope.productDetai);
       })
       .catch(function (error) {
         console.error("Lỗi khi lấy dữ liệu sản phẩm:", error);
@@ -77,11 +80,14 @@ app.controller("ProductDetailController", function ($scope, $http) {
   // Get Sizes
   $scope.getSizes = function () {
     return $http
-      .get(apiSize + "active")
+      .get(apiProducDetail + "getSizeByProductID", {
+        params: { productID: $scope.product.id },
+      })
       .then(function (response) {
         $scope.sizes = response.data.Success;
-        $scope.selectedSize = $scope.sizes[0].id;
+        $scope.selectedSize = $scope.sizes[0].sizeID;
         console.log("sizes", $scope.sizes);
+        console.log("$scope.product:", $scope.product);
       })
       .catch(function (error) {
         console.error("Lỗi khi lấy dữ liệu kích cỡ:", error);
@@ -91,10 +97,12 @@ app.controller("ProductDetailController", function ($scope, $http) {
   // Get Colors
   $scope.getColers = function () {
     return $http
-      .get(apiColer + "active")
+      .get(apiProducDetail + "getColorByProductID", {
+        params: { productID: $scope.product.id },
+      })
       .then(function (response) {
         $scope.colors = response.data.Success;
-        $scope.selectedColor = $scope.colors[0].id;
+        $scope.selectedColor = $scope.colors[0].colorID;
         console.log("colors", $scope.colors);
       })
       .catch(function (error) {
@@ -105,10 +113,12 @@ app.controller("ProductDetailController", function ($scope, $http) {
   // Get Materials
   $scope.getMaterials = function () {
     return $http
-      .get(apiMaterial + "active")
+      .get(apiProducDetail + "getMaterialByProductID", {
+        params: { productID: $scope.product.id },
+      })
       .then(function (response) {
         $scope.materials = response.data.Success;
-        $scope.selectedMaterial = $scope.materials[0].id;
+        $scope.selectedMaterial = $scope.materials[0].materialID;
         console.log("materials", $scope.materials);
       })
       .catch(function (error) {
@@ -125,4 +135,22 @@ app.controller("ProductDetailController", function ($scope, $http) {
     .catch(function (error) {
       console.error("Lỗi khi tải dữ liệu ban đầu:", error);
     });
+
+  $scope.selectColor = function (colorId) {
+    $scope.selectedColor = colorId;
+    console.log("Selected color:", colorId);
+    $scope.getProductDetail();
+  };
+
+  $scope.selectSize = function (sizeId) {
+    $scope.selectedSize = sizeId;
+    console.log("Selected size:", sizeId);
+    $scope.getProductDetail();
+  };
+
+  $scope.selectMaterial = function (materialId) {
+    $scope.selectedMaterial = materialId;
+    console.log("Selected material:", materialId);
+    $scope.getProductDetail();
+  };
 });

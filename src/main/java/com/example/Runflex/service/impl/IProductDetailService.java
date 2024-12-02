@@ -26,4 +26,10 @@ public interface IProductDetailService {
     ResponseEntity<?> getProductDetailWithStatusActive();
 
     ResponseEntity<?> getProductDetail(Long sizeId, Long productId, Long colorId, Long materialId);
+    
+    ResponseEntity<?> GetColorByProductID(Long productID);
+    
+    ResponseEntity<?> GetSizeByProductID(Long productID);
+    
+    ResponseEntity<?> GetMaterialByProductID(Long productID);
 }

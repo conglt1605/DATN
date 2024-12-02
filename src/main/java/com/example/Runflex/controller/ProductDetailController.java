@@ -4,6 +4,7 @@
  */
 package com.example.Runflex.controller;
 
+import com.example.Runflex.dto.ColorDto;
 import com.example.Runflex.entity.ProductDetail;
 import com.example.Runflex.service.ProductDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/productdetail")
 public class ProductDetailController {
+
     @Autowired
     private ProductDetailService productDetailService;
 
@@ -26,6 +28,7 @@ public class ProductDetailController {
     public ResponseEntity<?> findAll() {
         return productDetailService.getAll();
     }
+
     @GetMapping("/active")
     public ResponseEntity<?> getProductDetailWithStatusActive() {
         return productDetailService.getProductDetailWithStatusActive();
@@ -45,9 +48,26 @@ public class ProductDetailController {
     public ResponseEntity<?> delete(@RequestBody List<Long> ids) {
         return productDetailService.deleteProductDetails(ids);
     }
+
     @GetMapping("/getProducDetail")
-    public ResponseEntity<?> getProducDetail(@RequestParam Long sizeId,@RequestParam Long productId,@RequestParam Long colorId,@RequestParam Long materialId) {
+    public ResponseEntity<?> getProducDetail(@RequestParam Long sizeId, @RequestParam Long productId, @RequestParam Long colorId, @RequestParam Long materialId) {
         return productDetailService.getProductDetail(sizeId, productId, colorId, materialId);
     }
-}
 
+    @GetMapping("/getColorByProductID")
+        public ResponseEntity<?> GetColorByProductID(@RequestParam Long productID) {
+        return productDetailService.GetColorByProductID(productID);
+    }
+    
+    @GetMapping("/getSizeByProductID")
+    public ResponseEntity<?> GetSizeByProductID(@RequestParam Long productID) {
+        return productDetailService.GetSizeByProductID(productID);
+    }
+    
+    @GetMapping("/getMaterialByProductID")
+    public ResponseEntity<?> GetMaterialByProductID(@RequestParam Long productID) {
+        return productDetailService.GetMaterialByProductID(productID);
+    }
+    
+    
+}

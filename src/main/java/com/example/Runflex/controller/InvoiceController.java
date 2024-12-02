@@ -44,5 +44,10 @@ public class InvoiceController {
     public ResponseEntity<?> delete(@PathVariable("id") Long id) {
         return invoiceService.deleteInvoice(id);
     }
+    
+        @PostMapping("/saveWithDetails")
+    public ResponseEntity<?> saveInvoiceWithDetails(@RequestBody Invoice invoice) {
+        return invoiceService.saveInvoiceWithDetails(invoice);
+    }
 }
 

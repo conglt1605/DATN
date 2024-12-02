@@ -24,7 +24,15 @@ app.config(function ($routeProvider, $locationProvider) {
     })
     .when("/cart", {
       templateUrl: "views/cart.html",
-      // controller: "ProductController",
+      controller: "CartController",
+    })
+    .when("/pay", {
+      templateUrl: "views/pay.html",
+      controller: "CartController",
+    })
+    .when("/demo", {
+      templateUrl: "views/demoUploadAnh.html",
+      controller: "ImageUploadController",
     })
     .otherwise({
       redirectTo: "/home",

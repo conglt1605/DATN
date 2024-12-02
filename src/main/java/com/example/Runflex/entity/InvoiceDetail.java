@@ -38,4 +38,8 @@ public class InvoiceDetail {
     @ManyToOne
     @JoinColumn(name = "InvoiceID")
     private Invoice invoice;
+    
+        @ManyToOne
+    @JoinColumn(name = "ProductDetailID")
+    private ProductDetail productDetail;
 }

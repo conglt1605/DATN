@@ -1,111 +1,82 @@
 <div class="colorlib-product">
-    <div class="container">
+    <div class="container-cart">
 
         <div class="row row-pb-lg">
-            <div class="col-md-12">
+            <div class="col-md-8">
                 <div class="product-name d-flex">
                     <div class="one-forth text-left px-4">
-                        <span>Product Details</span>
+                        <span>Sản phẩm</span>
                     </div>
                     <div class="one-eight text-center">
-                        <span>Price</span>
+                        <span>Kích cỡ</span>
                     </div>
                     <div class="one-eight text-center">
-                        <span>Quantity</span>
+                        <span>Màu sắc</span>
                     </div>
                     <div class="one-eight text-center">
-                        <span>Total</span>
+                        <span>Chất liệu</span>
+                    </div>
+                    <div class="one-eight text-center">
+                        <span>Đơn giá</span>
+                    </div>
+                    <div class="one-eight text-center">
+                        <span>Số lượng</span>
+                    </div>
+                    <div class="one-eight text-center">
+                        <span>Tổng giá</span>
                     </div>
                     <div class="one-eight text-center px-4">
-                        <span>Remove</span>
+                        <span>Xóa</span>
                     </div>
                 </div>
-                <div class="product-cart d-flex">
+                <div class="product-cart d-flex" ng-repeat="order in lstOrderProduct">
+                    <!-- Checkbox -->
+                    <div class="one-eight text-center">
+                        <div class="display-tc">
+                            <input type="checkbox" ng-model="order.selected">
+                        </div>
+                    </div>
                     <div class="one-forth">
-                        <div class="product-img" style="background-image: url(images/item-6.jpg);">
+                        <div class="product-img" style="background-image: url();">
+                            <img src="images/detailproduct/1.jpg" alt="">
                         </div>
                         <div class="display-tc">
-                            <h3>Product Name</h3>
+                            <h3>{{ order.productDetai.productName }} </h3>
                         </div>
                     </div>
                     <div class="one-eight text-center">
                         <div class="display-tc">
-                            <span class="price">$68.00</span>
+                            <span class="price">{{ order.productDetai.sizeNumber }}</span>
                         </div>
                     </div>
                     <div class="one-eight text-center">
                         <div class="display-tc">
-                            <input type="text" id="quantity" name="quantity" class="form-control input-number text-center" value="1" min="1" max="100">
+                            <span class="price">{{ order.productDetai.colorName }}</span>
                         </div>
                     </div>
                     <div class="one-eight text-center">
                         <div class="display-tc">
-                            <span class="price">$120.00</span>
+                            <span class="price">{{ order.productDetai.materialName }}</span>
                         </div>
                     </div>
                     <div class="one-eight text-center">
                         <div class="display-tc">
-                            <a href="#" class="closed"></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="product-cart d-flex">
-                    <div class="one-forth">
-                        <div class="product-img" style="background-image: url(images/item-7.jpg);">
-                        </div>
-                        <div class="display-tc">
-                            <h3>Product Name</h3>
+                            <span class="price">{{ order.productDetai.price }} đ</span>
                         </div>
                     </div>
                     <div class="one-eight text-center">
                         <div class="display-tc">
-                            <span class="price">$68.00</span>
+                            {{ order.quantity }}
                         </div>
                     </div>
                     <div class="one-eight text-center">
                         <div class="display-tc">
-                            <form action="#">
-                                <input type="text" name="quantity" class="form-control input-number text-center" value="1" min="1" max="100">
-                            </form>
+                            <span class="price">${{ order.productDetai.price * order.quantity }}</span>
                         </div>
                     </div>
                     <div class="one-eight text-center">
                         <div class="display-tc">
-                            <span class="price">$120.00</span>
-                        </div>
-                    </div>
-                    <div class="one-eight text-center">
-                        <div class="display-tc">
-                            <a href="#" class="closed"></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="product-cart d-flex">
-                    <div class="one-forth">
-                        <div class="product-img" style="background-image: url(images/item-8.jpg);">
-                        </div>
-                        <div class="display-tc">
-                            <h3>Product Name</h3>
-                        </div>
-                    </div>
-                    <div class="one-eight text-center">
-                        <div class="display-tc">
-                            <span class="price">$68.00</span>
-                        </div>
-                    </div>
-                    <div class="one-eight text-center">
-                        <div class="display-tc">
-                            <input type="text" id="quantity" name="quantity" class="form-control input-number text-center" value="1" min="1" max="100">
-                        </div>
-                    </div>
-                    <div class="one-eight text-center">
-                        <div class="display-tc">
-                            <span class="price">$120.00</span>
-                        </div>
-                    </div>
-                    <div class="one-eight text-center">
-                        <div class="display-tc">
-                            <a href="#" class="closed"></a>
+                            <a ng-click="removeProduct(order.productDetai.id)" href="#" class="closed"></a>
                         </div>
                     </div>
                 </div>
@@ -116,26 +87,29 @@
                 <div class="total-wrap">
                     <div class="row">
                         <div class="col-sm-8">
+                        </div>
+                        <div class="col-sm-4 text-center" style="top: -185px;">
                             <form action="#">
                                 <div class="row form-group">
                                     <div class="col-sm-9">
-                                        <input type="text" name="quantity" class="form-control input-number" placeholder="Your Coupon Number...">
+                                        <input type="text" name="quantity" class="form-control input-number" placeholder="Nhập mã giảm giá">
                                     </div>
                                     <div class="col-sm-3">
-                                        <input type="submit" value="Apply Coupon" class="btn btn-primary">
+                                        <input type="submit" value="Tìm mã" class="btn btn-primary">
                                     </div>
                                 </div>
                             </form>
-                        </div>
-                        <div class="col-sm-4 text-center">
                             <div class="total">
                                 <div class="sub">
-                                    <p><span>Subtotal:</span> <span>$200.00</span></p>
-                                    <p><span>Delivery:</span> <span>$0.00</span></p>
-                                    <p><span>Discount:</span> <span>$45.00</span></p>
+                                    <p><span>Giá:</span> <span>${{getTotal()}}</span></p>
+                                    <p><span>Giảm giá:</span> <span>0</span></p>
                                 </div>
                                 <div class="grand-total">
-                                    <p><span><strong>Total:</strong></span> <span>$450.00</span></p>
+                                    <p><span><strong>Tổng giá:</strong></span> <span>${{getTotal()}}</span></p>
+
+                                </div>
+                                <div class="col-sm-11">
+                                    <button type="button" class="buy-now button" style="display: block;" ng-click="pay()">Thanh toán</button>
                                 </div>
                             </div>
                         </div>
@@ -143,7 +117,7 @@
                 </div>
             </div>
         </div>
-
+        <!-- 
         <div class="row">
             <div class="col-sm-8 offset-sm-2 text-center colorlib-heading colorlib-heading-sm">
                 <h2>Related Products</h2>
@@ -194,6 +168,6 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
 </div>

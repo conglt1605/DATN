@@ -4,7 +4,10 @@
  */
 package com.example.Runflex.service;
 
+import com.example.Runflex.dto.ColorDto;
+import com.example.Runflex.dto.MaterialDto;
 import com.example.Runflex.dto.ProductDetailDto;
+import com.example.Runflex.dto.SizeDto;
 import com.example.Runflex.entity.ProductDetail;
 import com.example.Runflex.repository.ProductDetailRepository;
 import com.example.Runflex.service.impl.IProductDetailService;
@@ -29,7 +32,7 @@ public class ProductDetailService implements IProductDetailService {
     @Override
     public ResponseEntity<?> getAll() {
         List<ProductDetail> productDetails = productDetailRepository.findAll();
-        if (productDetails.isEmpty()) {
+        if (productDetails == null || productDetails.isEmpty()) {
             return ResponseEntity.badRequest().body(Map.of("error", "Danh Sách Trống"));
         }
         return ResponseEntity.ok(Map.of("Success", productDetails));
@@ -100,12 +103,38 @@ public class ProductDetailService implements IProductDetailService {
 
     @Override
     public ResponseEntity<?> getProductDetail(Long sizeId, Long productId, Long colorId, Long materialId) {
-        
+
         ProductDetailDto productDetailDto = productDetailRepository.getProductDetail(sizeId, productId, colorId, materialId);
         if(productDetailDto == null){
             return ResponseEntity.badRequest().body(Map.of("error", "Loi khi lay productDetail"));
         }
         return ResponseEntity.ok(Map.of("Success", productDetailDto));
     }
-}
 
+    @Override
+    public ResponseEntity<?> GetColorByProductID(Long productID) {
+        List<Map<String, Object>> colors = productDetailRepository.GetColorByProductID(productID);
+        if (colors.isEmpty()) {
+            return ResponseEntity.badRequest().body(Map.of("error", "Loi khi lay productDetail"));
+        }
+        return ResponseEntity.ok(Map.of("Success", colors));
+    }
+
+    @Override
+    public ResponseEntity<?> GetSizeByProductID(Long productID) {
+        List<Map<String, Object>> sizes = productDetailRepository.GetSizeByProductID(productID);
+        if (sizes == null) {
+            return ResponseEntity.badRequest().body(Map.of("error", "Loi khi lay productDetail"));
+        }
+        return ResponseEntity.ok(Map.of("Success", sizes));
+    }
+
+    @Override
+    public ResponseEntity<?> GetMaterialByProductID(Long productID) {
+        List<Map<String, Object>> materials = productDetailRepository.GetMaterialByProductID(productID);
+        if (materials == null) {
+            return ResponseEntity.badRequest().body(Map.of("error", "Loi khi lay productDetail"));
+        }
+        return ResponseEntity.ok(Map.of("Success", materials));
+    }
+}

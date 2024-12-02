@@ -17,21 +17,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class ProductDetailDto {
-
-    private Long id;
-    private String productCode;
-    private String productDetailCode;
-    private String productName;
-//    private String productDetailName;
-    private String brandName;
-    private String categoryName;
-    private String usageObjectName;
+public class MaterialDto {
+    private long id;
     private String materialName;
-    private int sizeNumber;
-    private String colorName;
-    private String imageURL;
-    private int quantity;
-    private double price;
-    private int status;
 }
