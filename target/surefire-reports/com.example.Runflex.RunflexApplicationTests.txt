@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.example.Runflex.RunflexApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 16.36 s -- in com.example.Runflex.RunflexApplicationTests
