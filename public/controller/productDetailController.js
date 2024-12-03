@@ -1,0 +1,128 @@
+app.controller("ProductDetailController", function ($scope, $http) {
+  $scope.product = JSON.parse(localStorage.getItem("selectedProduct"));
+  $scope.lstOrderProduct =
+    JSON.parse(localStorage.getItem("orderProduct")) || [];
+  const apiSize = "http://localhost:8080/api/size/";
+  const apiColer = "http://localhost:8080/api/color/";
+  const apiMaterial = "http://localhost:8080/api/material/";
+  const apiProducDetail = "http://localhost:8080/api/productdetail/";
+  $scope.sizes = null;
+  $scope.colors = null;
+  $scope.materials = null;
+  $scope.productDetai = null;
+  $scope.statusProduct = "Hết Hàng";
+  $scope.quantityOder = 1;
+  $scope.oderProduct = function (productDetai) {
+    let existingProduct = $scope.lstOrderProduct.find(
+      (order) => order.productDetai.id === productDetai.id
+    );
+    if (existingProduct) {
+      // Nếu sản phẩm đã có, cộng thêm số lượng
+      existingProduct.quantity += $scope.quantityOder || 1; // Mặc định quantity là 1 nếu không có giá trị
+    } else {
+      // Nếu sản phẩm chưa có, tạo mới đối tượng và thêm vào giỏ hàng
+      let order = {
+        id: `order-${productDetai.id}`, // Tạo id riêng biệt cho mỗi sản phẩm
+        productDetai: productDetai,
+        quantity: $scope.quantityOder || 1, // Mặc định quantity là 1 nếu không có giá trị
+      };
+      $scope.lstOrderProduct.push(order);
+    }
+    localStorage.setItem(
+      "orderProduct",
+      JSON.stringify($scope.lstOrderProduct)
+    );
+    console.log($scope.lstOrderProduct);
+  };
+  $scope.removeProduct = function (productDetai) {
+    // Tìm chỉ số của sản phẩm trong giỏ hàng dựa trên id
+    let index = $scope.lstOrderProduct.findIndex(
+      (order) => order.productDetai.id === productDetai.id
+    );
+
+    // Nếu tìm thấy sản phẩm, xóa nó khỏi giỏ hàng
+    if (index !== -1) {
+      $scope.lstOrderProduct.splice(index, 1); // Xóa 1 phần tử tại vị trí index
+    }
+
+    // Cập nhật lại giỏ hàng vào localStorage
+    localStorage.setItem(
+      "orderProduct",
+      JSON.stringify($scope.lstOrderProduct)
+    );
+
+    // In ra giỏ hàng để kiểm tra
+    console.log($scope.lstOrderProduct);
+  };
+  // Fetch product details after the other data is ready
+  $scope.getProductDetail = function () {
+    const params = {
+      sizeId: $scope.selectedSize,
+      productId: $scope.product.id,
+      colorId: $scope.selectedColor,
+      materialId: $scope.selectedMaterial,
+    };
+    $http
+      .get(apiProducDetail + "getProducDetail", { params: params })
+      .then(function (response) {
+        $scope.productDetai = response.data.Success;
+        $scope.statusProduct = "Còn Hàng";
+      })
+      .catch(function (error) {
+        console.error("Lỗi khi lấy dữ liệu sản phẩm:", error);
+        $scope.statusProduct = "Hết Hàng";
+      });
+  };
+
+  // Get Sizes
+  $scope.getSizes = function () {
+    return $http
+      .get(apiSize + "active")
+      .then(function (response) {
+        $scope.sizes = response.data.Success;
+        $scope.selectedSize = $scope.sizes[0].id;
+        console.log("sizes", $scope.sizes);
+      })
+      .catch(function (error) {
+        console.error("Lỗi khi lấy dữ liệu kích cỡ:", error);
+      });
+  };
+
+  // Get Colors
+  $scope.getColers = function () {
+    return $http
+      .get(apiColer + "active")
+      .then(function (response) {
+        $scope.colors = response.data.Success;
+        $scope.selectedColor = $scope.colors[0].id;
+        console.log("colors", $scope.colors);
+      })
+      .catch(function (error) {
+        console.error("Lỗi khi lấy dữ liệu màu sắc:", error);
+      });
+  };
+
+  // Get Materials
+  $scope.getMaterials = function () {
+    return $http
+      .get(apiMaterial + "active")
+      .then(function (response) {
+        $scope.materials = response.data.Success;
+        $scope.selectedMaterial = $scope.materials[0].id;
+        console.log("materials", $scope.materials);
+      })
+      .catch(function (error) {
+        console.error("Lỗi khi lấy dữ liệu chất liệu:", error);
+      });
+  };
+
+  // Wait for all data to load before calling getProductDetail
+  Promise.all([$scope.getSizes(), $scope.getColers(), $scope.getMaterials()])
+    .then(function () {
+      // Once all promises are resolved, fetch the product details
+      $scope.getProductDetail();
+    })
+    .catch(function (error) {
+      console.error("Lỗi khi tải dữ liệu ban đầu:", error);
+    });
+});

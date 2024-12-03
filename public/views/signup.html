@@ -1,0 +1,37 @@
+<!--Content-->
+<div class="content" ng-controller="AccountController">
+    <section class="signup">
+        <div class="container">
+            <div class="signin-left">
+                <div class="sign-title">
+                    <h1>Tạo tài khoản</h1>
+                </div>
+            </div>
+            <div class="signin-right ">
+                <form ng-submit="signup()">
+                    <div class="fullName form-control1 ">
+                        <input type="firstname" ng-model="form.fullName" placeholder="FullName">
+                    </div>
+                    <div class="email form-control1">
+                        <input type="email" ng-model="form.email" placeholder="Email">
+                    </div>
+                    <div class="username form-control1">
+                        <input type="username" ng-model="form.userName" placeholder="UserName">
+                    </div>
+                    <div class="password form-control1">
+                        <input type="password" ng-model="form.password" placeholder="Password">
+                    </div>
+                    <div class="recaptcha form-control1">This site is protected by reCAPTCHA and the Google <a href="">Privacy Policy</a> and <a href="">Terms of Service</a> apply.</div>
+                    <div class="">
+                        <input class="btn" type="submit" value="Đăng kí">
+
+                    </div>
+                    <div class="backto">
+                        <a href=""><i class="fa fa-long-arrow-alt-left"></i> Quay lại trang chủ</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+</div>
