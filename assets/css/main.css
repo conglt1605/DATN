@@ -1,0 +1,208 @@
+/* CSS để định dạng menu con */
+.submenu {
+  display: none; /* Ẩn menu con mặc định */
+  padding-left: 100px; /* Khoảng cách bên trái */
+}
+
+.sidebar-nav .sidebar-item a {
+  padding-left: 20px; /* Điều chỉnh khoảng cách bên trái */
+}
+
+.sidebar-nav .collapse .sidebar-submenu {
+  padding-left: 30px; /* Điều chỉnh khoảng cách cho submenu */
+}
+
+nav.navbar {
+  max-width: 1200px; /* Bạn có thể điều chỉnh giá trị này tùy ý */
+  margin: 0 auto; /* Để căn giữa thanh navbar */
+}
+#successMessage {
+  position: fixed;
+  top: 20px; /* Vị trí trên cùng */
+  right: 20px; /* Vị trí bên phải */
+  z-index: 1050; /* Đảm bảo nó hiển thị trên tất cả các phần tử khác */
+  display: none; /* Mặc định ẩn */
+}
+table {
+  width: 100%; /* Đảm bảo bảng chiếm toàn bộ chiều rộng */
+}
+
+td {
+  vertical-align: middle; /* Căn giữa nội dung trong ô */
+  min-height: 40px; /* Chiều cao tối thiểu cho tất cả các ô */
+  padding: 0 8px; /* Thêm khoảng cách bên trong cho các ô */
+}
+
+input[type="text"] {
+  width: 100%; /* Đảm bảo ô nhập chiếm toàn bộ chiều rộng của ô */
+  box-sizing: border-box; /* Bao gồm padding và border vào chiều rộng */
+  padding: 5px; /* Thêm padding cho ô nhập */
+  border: 1px solid #ced4da; /* Thêm viền cho ô nhập */
+  border-radius: 4px; /* Bo góc cho ô nhập */
+}
+/* Thêm đường viền cho sidebar */
+.left-sidebar {
+  border-right: 1px solid #dee2e6; /* Đường viền bên phải */
+}
+
+/* Thêm đường viền cho body-wrapper */
+.body-wrapper {
+  border: 1px solid #dee2e6; /* Đường viền cho body */
+  padding: 20px; /* Thêm khoảng cách bên trong */
+}
+
+/* Thêm đường viền cho bảng */
+.table-responsive {
+  border: 1px solid #dee2e6; /* Đường viền cho bảng */
+  border-radius: 5px; /* Bo góc cho bảng */
+}
+/* Thay đổi màu nền cho sidebar */
+.left-sidebar {
+  background-color: #f8f9fa; /* Màu nền nhạt cho sidebar */
+}
+
+/* Thay đổi màu nền cho body-wrapper */
+.body-wrapper {
+  background-color: #ffffff; /* Màu nền trắng cho body */
+}
+
+/* Thay đổi màu nền cho bảng */
+.table-responsive {
+  background-color: #eef2f3; /* Màu nền nhạt cho bảng */
+}
+/* Thêm bóng cho sidebar */
+.left-sidebar {
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Bóng nhẹ bên phải */
+}
+
+/* Thêm bóng cho bảng */
+.table-responsive {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Bóng nhẹ cho bảng */
+}
+/* Đặt mũi tên bên phải */
+.sidebar-item .arrow-icon {
+  margin-left: auto;
+  transition: transform 0.3s ease;
+}
+
+/* Mũi tên quay khi menu mở */
+.sidebar-item .collapse.show ~ .arrow-icon {
+  transform: rotate(90deg);
+}
+.toast-success {
+  background-color: #28a745 !important; /* Màu xanh lá cho thành công */
+}
+.toast-error {
+  background-color: #dc3545 !important; /* Màu đỏ cho lỗi */
+}
+.toast-warning {
+  background-color: #ffc107 !important; /* Màu vàng cho cảnh báo */
+}
+.toast-info {
+  background-color: #17a2b8 !important; /* Màu xanh dương cho thông tin */
+}
+/* Đặt vị trí của container để các danh sách hiển thị chính xác */
+        
+.dropdown-container {
+  position: relative;
+  display: inline-block;
+}
+/* Ẩn danh sách theo mặc định */
+
+.dropdown-list {
+  display: none;
+  position: absolute;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 100;
+  width: 200px;
+  /* Đặt chiều rộng tùy ý */
+}
+/* Hiển thị danh sách khi ng-show=true */
+
+.dropdown-container:hover .dropdown-list {
+  display: block;
+}
+.sidebar-item.active .submenu {
+  display: block; /* Hiển thị khi mục cha được chọn */
+}
+/* Container của mỗi trạng thái */
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  width: 100px; /* Điều chỉnh kích thước */
+}
+
+/* Biểu tượng trạng thái */
+.step-icon {
+  width: 50px; /* Kích thước biểu tượng */
+  height: 50px;
+  border-radius: 50%;
+  background-color: #e9ecef; /* Màu nền mặc định */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  color: #6c757d;
+  transition: all 0.3s ease-in-out; /* Hiệu ứng mượt mà */
+}
+
+/* Trạng thái đã hoàn thành */
+.step-icon.step-done {
+  background-color: #28a745; /* Màu xanh lá */
+  color: #fff;
+  transform: scale(1.2); /* Hiệu ứng phóng to */
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Thêm bóng */
+}
+
+/* Đường nối giữa các bước */
+.line {
+  flex: 1;
+  height: 6px; /* Dày hơn để nổi bật */
+  background-color: #e9ecef; /* Màu mặc định */
+  position: relative;
+  top: -25px;
+  margin: 0 10px; /* Khoảng cách ngang */
+  transition: background-color 0.3s ease-in-out;
+}
+
+/* Dòng nối khi hoàn thành */
+.line.line-done {
+  background-color: #28a745; /* Màu xanh lá */
+}
+
+/* Văn bản */
+.step p {
+  margin-top: 10px; /* Khoảng cách hợp lý */
+  font-size: 14px;
+  color: #6c757d;
+}
+
+.step-done p {
+  font-weight: bold;
+  color: #28a745; /* Màu xanh lá */
+}
+
+.step small {
+  font-size: 12px;
+  color: #6c757d;
+}
+
+/* Giảm kích thước chữ cho nội dung */
+.content-text {
+  font-size: 1rem; /* Chữ nhỏ lại */
+}
+
+/* Đậm các đối tượng như {{ hoaDon.phiShip | currency }} */
+.content-bold {
+  font-weight: bold;
+}
+
+/* Dữ liệu hiển thị màu đỏ */
+.content-red {
+  color: red;
+}

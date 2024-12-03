@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danh sách Chi Tiết Hóa Đơn</title>
+    <link rel="shortcut icon" type="image/png" href="../assets/images/logos/runflex.jpg" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <link rel="stylesheet" href="../assets/css/styles.min.css" />
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <script src="../assets/js/hoadon.js"></script>
+
+    <style>
+        .icon-status-1 {
+            color: orange;
+        }
+
+        .icon-status-2 {
+            color: blue;
+        }
+
+        .icon-status-3 {
+            color: purple;
+        }
+
+        .icon-status-4 {
+            color: green;
+        }
+
+        .icon-status-5 {
+            color: red;
+        }
+
+        .icon-status-6 {
+            color: gray;
+        }
+
+        .badge {
+            font-size: 0.5em;
+            padding: 3px 7px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body ng-controller="HoaDonController">
+    <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+        data-sidebar-position="fixed" data-header-position="fixed">
+        <div ng-include="'../Layout/Sidebar.html'"></div>
+
+        <div class="body-wrapper">
+            <div ng-include="'../Layout/Header.html'"></div>
+
+            <div class="container-fluid">
+                <div class="container mt-4">
+                    <h2 class="text-center">Danh sách Đơn Hàng</h2>
+
+                    <!-- Tabs -->
+                    <ul class="nav nav-tabs mb-3">
+                        <li class="nav-item">
+                            <a class="nav-link" ng-class="{'active': currentTab === 'all'}" href="#"
+                                ng-click="filterByStatus('all')">
+                                Tất cả
+                                <span class="badge bg-danger ms-1">{{invoices.length}}</span>
+                            </a>
+                        </li>
+                        <li class="nav-item" ng-repeat="status in statusList">
+                            <a class="nav-link" ng-class="{'active': currentTab === status.value}" href="#"
+                                ng-click="filterByStatus(status.value)">
+                                {{status.label}}
+                                <span class="badge bg-danger ms-1">{{getCountByStatus(status.value)}}</span>
+                            </a>
+                        </li>
+                    </ul>
+
+                    <!-- Table -->
+                    <table class="table table-bordered table-striped">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>#</th>
+                                <th>Mã Hóa Đơn</th>
+                                <th>Tên Người Nhận Hàng</th>
+                                <th>Số điện thoại</th>
+                                <th>Tổng tiền</th>
+                                <th>Ngày tạo</th>
+                                <th>Trạng thái</th>
+                                <th>Hành động</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="hd in filteredInvoices">
+                                <td>{{$index + 1}}</td>
+                                <td>{{hd.invoiceCode}}</td>
+                                <td>{{hd.consigneeName}}</td>
+                                <td>{{hd.phoneNumber}}</td>
+                                <td>{{hd.totalAmount | currency:'VND'}}</td>
+                                <td>{{hd.createdDate | date:'dd/MM/yyyy'}}</td>
+                                <td>
+                                    <span ng-class="getStatusClass(hd.status)">
+                                        <i ng-class="getStatusIconClass(hd.status)"></i>
+                                        {{getTrangThai(hd.status)}}
+                                    </span>
+                                </td>
+                                <td>
+                                    <a class="btn btn-info btn-sm" ng-href="chitietdonhang.html?id={{ hd.id }}"
+                                        title="Xem chi tiết hóa đơn">
+                                        <i class="fa fa-eye"></i> Xem chi tiết
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
+    <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/sidebarmenu.js"></script>
+    <script src="../assets/js/app.min.js"></script>
+    <script src="../assets/libs/apexcharts/dist/apexcharts.min.js"></script>
+    <script src="../assets/libs/simplebar/dist/simplebar.js"></script>
+    <script src="../assets/js/dashboard.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
+</body>
+
+</html>

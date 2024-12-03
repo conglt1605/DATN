@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RunFlex - Quản Lý Bán Giày Thể Thao</title>
+    <link rel="shortcut icon" type="image/png" href="../assets/images/logos/runflex.jpg" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <link rel="stylesheet" href="../assets/css/styles.min.css" />
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <style>
+        /* Làm cho chữ nhạt đi */
+        .custom-title {
+            font-weight: lighter;
+            /* Giảm độ đậm của chữ */
+            color: #6c757d;
+            /* Màu sắc nhạt (xám nhẹ) */
+        }
+
+        /* Tăng khoảng cách giữa tiêu đề và nội dung */
+        h5 {
+            margin-bottom: 15px;
+            /* Khoảng cách giữa tiêu đề và nội dung */
+        }
+
+        /* Đảm bảo khoảng cách giữa các cột */
+        .row>.col-md-6 {
+            margin-bottom: 10px;
+            /* Tạo khoảng cách giữa các cột */
+        }
+
+        /* Đảm bảo nút sửa không có viền và khoảng cách phù hợp */
+        button.btn-link {
+            padding: 0;
+            border: none;
+            background: transparent;
+        }
+
+        /* Tạo khoảng cách giữa icon và nội dung */
+        button .iconify-icon {
+            vertical-align: middle;
+            /* Giữ cho icon căn chỉnh với văn bản */
+        }
+
+        /* Khoảng cách bên trái nút sửa */
+        button.ms-2 {
+            margin-left: 8px;
+        }
+    </style>
+</head>
+
+<body ng-controller="chiTietSanPhamController">
+    <!-- Body Wrapper -->
+    <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+        data-sidebar-position="fixed" data-header-position="fixed">
+
+        <!-- Sidebar Start -->
+        <div ng-include="'../Layout/Sidebar.html'"></div>
+
+        <!-- Body Wrapper -->
+        <div class="body-wrapper">
+            <div ng-include="'../Layout/Header.html'"></div>
+            <div class="container-fluid">
+                <h1 class="my-4 text-center">Chi Tiết Sản Phẩm</h1>
+
+                <!-- Hiển thị thông tin chi tiết sản phẩm -->
+                <div class="mb-4 p-4 bg-light rounded border">
+                    <div class="row" ng-if="productdetail.length > 0">
+                        <div class="col-md-6">
+                            <h5>Thương Hiệu:
+                                <span class="custom-title">
+                                    {{ productdetail[0].product.brand.brandName }}
+                                </span>
+                            </h5>
+                        </div>
+                        <div class="col-md-6">
+                            <h5>Danh Mục:
+                                <span class="custom-title">
+                                    {{ productdetail[0].product.category.categoryName }}
+                                </span>
+                            </h5>
+                        </div>
+                        <div class="col-md-6">
+                            <h5>Đối tượng sử dụng:
+                                <span class="custom-title">
+                                    {{ productdetail[0].product.usageObject.usageObjectName }}
+                                </span>
+                            </h5>
+                        </div>
+                    </div>
+                    <div ng-if="productdetail.length === 0">
+                        <p>Không có dữ liệu chi tiết sản phẩm.</p>
+                    </div>
+
+                    <button class="btn btn-warning" ng-click="toggleEditMode(sanPham)">
+                        <i class="bi bi-pencil-square"></i> Sửa Sản Phẩm
+                    </button>
+
+                    <!-- Modal Sửa Sản Phẩm -->
+                    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="editModalLabel">Chỉnh sửa Sản phẩm</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form>
+                                        <div class="mb-3">
+                                            <label for="productName" class="form-label">Tên sản phẩm</label>
+                                            <input type="text" class="form-control" id="productName"
+                                                ng-model="editData.sanPham.tenSanPham">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="brand" class="form-label">Thương hiệu</label>
+                                            <select class="form-select" id="brand"
+                                                ng-model="editData.sanPham.thuongHieu.id">
+                                                <option ng-repeat="thuongHieu in thuongHieus" value="{{thuongHieu.id}}">
+                                                    {{thuongHieu.tenThuongHieu}}
+                                                </option>
+                                            </select>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="category" class="form-label">Danh mục</label>
+                                            <select class="form-select" id="category"
+                                                ng-model="editData.sanPham.danhMuc.id">
+                                                <option ng-repeat="danhMuc in danhMucs" value="{{danhMuc.id}}">
+                                                    {{danhMuc.tenDanhMuc}}
+                                                </option>
+                                            </select>
+                                        </div>
+                                        <!-- Thêm các trường dữ liệu khác cần sửa -->
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Đóng</button>
+                                    <button type="button" class="btn btn-primary" ng-click="saveChanges()">Lưu thay
+                                        đổi</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- Bảng chi tiết sản phẩm -->
+                    <!-- Bảng chi tiết sản phẩm -->
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>#</th>
+                                    <td>Ảnh</td>
+                                    <th>Tên</th>
+                                    <th>Chất liệu</th>
+                                    <th>Số lượng</th>
+                                    <th>Giá bán</th>
+                                    <th>Hành động</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="prd in productdetail">
+                                    <td>{{$index + 1}}</td>
+                                    <td>
+                                        <div class="image-container">
+                                            <img ng-src="/assets/images/Kho_Anh/{{prd.imageURL}}" alt="prd Image" />
+                                        </div>
+                                    </td>
+                                    <td>{{prd.product.productName}} [{{prd.color.colorName}} -
+                                        {{prd.size.sizeNumber}}]</td>
+                                    <td>{{ prd.material.materialName }}</td>
+
+                                    <!-- Chỉnh sửa số lượng -->
+                                    <td>
+                                        <input type="number" class="form-control" ng-model="prd.quantity"
+                                            ng-if="chiTietSanPham.isEditing">
+                                        <span ng-if="!chiTietSanPham.isEditing">{{ prd.quantity }}</span>
+                                    </td>
+
+                                    <!-- Chỉnh sửa giá bán -->
+                                    <td>
+                                        <input type="number" class="form-control" ng-model="prd.price"
+                                            ng-if="chiTietSanPham.isEditing">
+                                        <span ng-if="!chiTietSanPham.isEditing">{{ prd.price }}</span>
+                                    </td>
+
+                                    <!-- Nút hành động -->
+                                    <td>
+                                        <!-- Nút Sửa/Lưu -->
+                                        <button class="btn btn-warning btn-sm" ng-click="updateData(chiTietSanPham)">
+                                            {{ chiTietSanPham.isEditing ? 'Lưu' : 'Sửa' }}
+                                        </button>
+
+                                        <!-- Nút Xóa -->
+                                        <button class="btn btn-danger btn-sm"
+                                            ng-click="deleteData(chiTietSanPham.id)">Xóa</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+
+<script src="../assets/js/main.js"></script>
+<script src="../assets/js/chitietsanpham.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="../assets/js/main.js"></script>
+<script src="../assets/libs/jquery/dist/jquery.min.js"></script>
+<script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/sidebarmenu.js"></script>
+<script src="../assets/js/app.min.js"></script>
+<script src="../assets/libs/apexcharts/dist/apexcharts.min.js"></script>
+<script src="../assets/libs/simplebar/dist/simplebar.js"></script>
+<script src="../assets/js/dashboard.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
