@@ -45,10 +45,8 @@
                               aria-controls="collapseExample"></span></a>
                                                 <div class="collapse" id="collapseExample">
                                                     <div class="card card-body" style="border:0;padding-top:0;">
-                                                        <ul class="menu-product">
-                                                            <li><a href="detailproduct.html" title="Sản phẩm - Style 1">Sản phẩm - Style 1</a></li>
-                                                            <li><a href="detailproduct.html" title="Sản phẩm - Style 2">Sản phẩm - Style 2</a></li>
-                                                            <li><a href="detailproduct.html" title="Sản phẩm - Style 3">Sản phẩm - Style 3</a></li>
+                                                        <ul class="menu-product" ng-repeat="product in products">
+                                                            <li><a ng-click="selectProduct(product)">{{product.productName}}</a></li>
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -66,14 +64,11 @@
                                 </p>
                                 <div class="block_content collapse" id="collapseExample2">
                                     <div class="group-filter card card-body" style="border:0;padding:0" aria-expanded="true">
-                                        <div class="layered_subtitle dropdown-filter"><span>Thương hiệu</span><span class="icon-control"><i class="fa fa-minus"></i></span></div>
-                                        <div class="layered-content bl-filter filter-brand">
-                                            <ul class="check-box-list">
-                                                <li>
-                                                    <input type="checkbox" id="data-brand-p1" value="Khác">
-                                                    <label for="data-brand-p1">Khác</label>
-                                                </li>
-                                            </ul>
+                                        <div class="layered_subtitle dropdown-filter">
+                                            <span>Thương hiệu</span>
+                                            <span class="" ng-repeat="brand in brands">
+                                                <li><a href="">{{brand.brandName}}</a></li>
+                                            </span>
                                         </div>
                                     </div>
                                     <div class="group-filter" aria-expanded="true">
@@ -173,35 +168,12 @@
 
                                             <ul class="check-box-list clearfix">
 
-                                                <li>
+                                                <li ng-repeat="size in sizes">
                                                     <input type="checkbox" id="data-size-p1">
-                                                    <label for="data-size-p1">35</label>
+                                                    <label for="data-size-p1">{{size.sizeNumber}}</label>
                                                 </li>
 
-                                                <li>
-                                                    <input type="checkbox" id="data-size-p2">
-                                                    <label for="data-size-p2">36</label>
-                                                </li>
 
-                                                <li>
-                                                    <input type="checkbox" id="data-size-p3">
-                                                    <label for="data-size-p3">37</label>
-                                                </li>
-
-                                                <li>
-                                                    <input type="checkbox" id="data-size-p4">
-                                                    <label for="data-size-p4">38</label>
-                                                </li>
-
-                                                <li>
-                                                    <input type="checkbox" id="data-size-p5">
-                                                    <label for="data-size-p5">39</label>
-                                                </li>
-
-                                                <li>
-                                                    <input type="checkbox" id="data-size-p6">
-                                                    <label for="data-size-p6">40</label>
-                                                </li>
 
                                             </ul>
                                         </div>
@@ -249,8 +221,8 @@
                     <div class="product-block" ng-click="selectProduct(product)">
                         <div class="product-img fade-box">
                             <a href="#" title="Adidas EQT Cushion ADV" class="img-resize">
-                                <img src="images/shoes/1.jpg" alt="Adidas EQT Cushion ADV" class="lazyloaded">
-                                <img src="images/shoes/1-1.jpg" alt="Adidas EQT Cushion ADV" class="lazyloaded">
+                                <img src={{product.imgProduct}} class="lazyloaded">
+                                <img src={{product.imgProduct}} class="lazyloaded">
                             </a>
 
                         </div>
@@ -258,16 +230,16 @@
                             <div class="pro-text">
                                 <a style=" color: black;
                                                           font-size: 14px;text-decoration: none;" href="#" title="Adidas EQT Cushion ADV" inspiration pack>
-                    {{product.categoryName}}
-                    {{product.brandName}}
-                    {{product.productName}}
-                  </a>
+                                    <b>{{product.productName}}</b>
+                                    <!-- {{product.productName}}
+                    {{product.productName}} -->
+                                </a>
                             </div>
                             <div class="">
-                                <p class="">Đối Tượng Sử Dụng: {{product.usageObjectName}}</p>
+                                <p class="">Thương hiệu: {{product.brandName}}</p>
                             </div>
                             <div class="">
-                                <p class="">Đã Bán: 9999</p>
+                                <p class="">Loại giày: {{product.categoryName}} - {{product.usageObjectName}}</p>
                             </div>
                         </div>
                     </div>

@@ -4,6 +4,8 @@
  */
 package com.example.Runflex.entity;
 
+import com.example.Runflex.util.Status;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -41,7 +43,7 @@ public class User implements UserDetails {
     private String email;
     private String phoneNumber;
     private String address;
-    private int status;
+    private int status ;
 
     @ManyToOne
     @JoinColumn(name = "RoleID")
@@ -50,7 +52,7 @@ public class User implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority(role.getRoleName()));
-    }
+    }   
     @Override
     public boolean isAccountNonExpired() {
         return UserDetails.super.isAccountNonExpired();

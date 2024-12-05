@@ -6,6 +6,7 @@ app.controller("ProductDetailController", function ($scope, $http) {
   const apiColer = "http://localhost:8080/api/color/";
   const apiMaterial = "http://localhost:8080/api/material/";
   const apiProducDetail = "http://localhost:8080/api/productdetail/";
+
   $scope.sizes = null;
   $scope.colors = null;
   $scope.materials = null;
@@ -14,6 +15,23 @@ app.controller("ProductDetailController", function ($scope, $http) {
   $scope.quantityOder = 1;
   $scope.selected = false;
   $scope.oderProduct = function (productDetai) {
+    if ($scope.quantityOder === 0) {
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Vui lòng nhập số lượng",
+        showConfirmButton: true,
+        timer: 2000,
+      });
+      return; // Ngừng hàm nếu số lượng là 0
+    }
+    Swal.fire({
+      position: "center",
+      icon: "success",
+      title: "Đã thêm vào giỏ hàng",
+      showConfirmButton: false,
+      timer: 1500,
+    });
     let existingProduct = $scope.lstOrderProduct.find(
       (order) => order.productDetai.id === productDetai.id
     );
@@ -25,7 +43,7 @@ app.controller("ProductDetailController", function ($scope, $http) {
       let order = {
         id: `order-${productDetai.id}`, // Tạo id riêng biệt cho mỗi sản phẩm
         productDetai: productDetai,
-        quantity: $scope.quantityOder || 1, // Mặc định quantity là 1 nếu không có giá trị
+        quantity: $scope.quantityOder || 0, // Mặc định quantity là 1 nếu không có giá trị
         selected: $scope.selected, // Mặc định là không được chọn
       };
       $scope.lstOrderProduct.push(order);
@@ -69,11 +87,14 @@ app.controller("ProductDetailController", function ($scope, $http) {
       .then(function (response) {
         $scope.productDetai = response.data.Success;
         $scope.statusProduct = "Còn Hàng";
+        $scope.quantityDetail = response.data.Success.quantity;
         console.log($scope.productDetai);
       })
       .catch(function (error) {
         console.error("Lỗi khi lấy dữ liệu sản phẩm:", error);
         $scope.statusProduct = "Hết Hàng";
+        $scope.quantityDetail = 0;
+        return;
       });
   };
 
@@ -152,5 +173,25 @@ app.controller("ProductDetailController", function ($scope, $http) {
     $scope.selectedMaterial = materialId;
     console.log("Selected material:", materialId);
     $scope.getProductDetail();
+  };
+
+  $scope.checkStock = function (statusProduct) {
+    if (statusProduct === "Hết Hàng") {
+      // Nếu sản phẩm hết hàng, không cho thay đổi số lượng
+      $scope.quantityOder = 0; // Hoặc bất kỳ giá trị nào mà bạn muốn mặc định khi hết hàng
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Sản phẩm đã hết hàng!",
+        showConfirmButton: true,
+        timer: 2000,
+      });
+    } else if ($scope.quantityOder > $scope.quantityDetail) {
+      // Nếu số lượng vượt quá số lượng tối đa, chỉnh lại về số lượng tối đa
+      $scope.quantityOder = $scope.quantityDetail;
+    } else if ($scope.quantityOder < 0) {
+      // Nếu số lượng vượt quá số lượng tối đa, chỉnh lại về số lượng tối đa
+      $scope.quantityOder = 1;
+    }
   };
 });

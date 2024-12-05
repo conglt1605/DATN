@@ -30,4 +30,4 @@ public class Role {
     private Long id;
     private String roleName;
     private int status;
-}
+    }

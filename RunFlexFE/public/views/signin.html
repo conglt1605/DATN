@@ -8,26 +8,22 @@
                 </div>
             </div>
             <div class="signin-right " id="a-sign">
-                <form action="">
-                    <div class="username form-control1 ">
-                        <input type="email" id="username" placeholder="Email">
+                <form ng-submit="signin()">
+                    <!-- Thêm ng-submit để gọi signin -->
+                    <div class="username form-control1">
+                        <input type="username" ng-model="form.userName" placeholder="Tài khoản">
                     </div>
                     <div class="password form-control1">
-                        <input type="password" id="password" placeholder="Mật khẩu">
-                        <div class="error" style="position: absolute; bottom: 0;background: #fff; padding:10px; border:1px solid #ccc; color: red">Please fill out this field </div>
-
-
+                        <input type="password" id="password" ng-model="form.password" placeholder="Mật khẩu">
                     </div>
-
-                    <div class="recaptcha form-control1">This site is protected by reCAPTCHA and the Google <a href="">Privacy Policy</a> and <a href="">Terms of Service</a> apply.</div>
                     <div class="submit">
-                        <input class="btn" type="submit" id="dangnhap" value="Đăng Nhập">
-                        <div class="forgetpassword">
-                            <p id="quenmk">Quên mật khẩu?</p> hoặc <a href="">Đăng kí</a>
-                        </div>
-
+                        <input class="btn" type="submit" value="Đăng Nhập">
                     </div>
-
+                    <div class="signup-link" style="text-align: center; margin-top: 10px;">
+                        <span>
+                             Bạn chưa có tài khoản? <a href="/signup" style="text-decoration: none; color: #007bff; font-weight: bold;">Đăng ký</a>
+                         </span>
+                    </div>
                 </form>
             </div>
             <div class="signin-right " id="b-sign">
@@ -35,10 +31,6 @@
                     <div class="username form-control1 ">
                         <h2>Phục hồi mật khẩu</h2>
                     </div>
-                    <div class="password form-control1">
-                        <input type="text" id="password" placeholder="Mật khẩu">
-                    </div>
-
                     <div class="recaptcha form-control1">This site is protected by reCAPTCHA and the Google <a href="">Privacy Policy</a> and <a href="">Terms of Service</a> apply.</div>
                     <div class="submit">
                         <input class="btn" type="submit" value="Gửi">

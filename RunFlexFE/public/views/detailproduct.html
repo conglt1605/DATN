@@ -264,62 +264,64 @@
                             <span id="pro_sku">Mã Sản Phẩm: {{productDetai.productCode}}+{{productDetai.productDetailCode}}</span>
                         </div>
                         <div class="product-price" id="price-preview"><span class="pro-price">Giá: {{productDetai.price}} đ</span></div>
-                        <form id="add-item-form" action="/cart/add" method="post" class="variants clearfix">
 
+                        <form id="add-item-form" method="post" class="variants clearfix">
                             <!-- Chọn thuộc tính -->
                             <div class="select-swatch clearfix">
                                 <div id="variant-options">
-
-
                                     <div id="variant-options">
                                         <!-- Lựa chọn màu sắc -->
                                         <div class="mb-4">
-                                            <div>
+                                            <label for="colors" class="option-label">Chọn Màu Sắc:</label>
+                                            <div id="colors">
                                                 <button class="color-btn" ng-repeat="color in colors" ng-class="{'active': selectedColor === color.colorID}" ng-click="selectColor(color.colorID)" type="button">
-        {{color.colorName}}
-      </button>
+                {{color.colorName}}
+            </button>
                                             </div>
                                         </div>
 
                                         <!-- Lựa chọn kích cỡ -->
                                         <div class="mb-4">
-                                            <div>
+                                            <label for="sizes" class="option-label">Chọn Kích Cỡ:</label>
+                                            <div id="sizes">
                                                 <button class="size-btn" ng-repeat="size in sizes" ng-class="{'active': selectedSize === size.sizeID}" ng-click="selectSize(size.sizeID)" type="button">
-        {{size.sizeNumber}}
-      </button>
+                {{size.sizeNumber}}
+            </button>
                                             </div>
                                         </div>
 
                                         <!-- Lựa chọn chất liệu -->
                                         <div class="mb-4">
-                                            <div>
+                                            <label for="materials" class="option-label">Chọn Chất Liệu:</label>
+                                            <div id="materials">
                                                 <button class="material-btn" ng-repeat="material in materials" ng-class="{'active': selectedMaterial === material.materialID}" ng-click="selectMaterial(material.materialID)" type="button">
-        {{material.materialName}}
-      </button>
+                {{material.materialName}}
+            </button>
                                             </div>
                                         </div>
                                     </div>
 
+
                                 </div>
 
                                 <div class="status" ng-class="{'status-in-stock': statusProduct === 'Còn Hàng', 'status-out-of-stock': statusProduct === 'Hết Hàng'}">
+                                    <span>Số lượng: {{quantityDetail}}</span> <br>
                                     <span>{{statusProduct}}</span>
                                 </div>
                                 <div class="selector-actions">
-                                    <div class="quantity-area clearfix">
-                                        <input type="button" value="-" onclick="minusQuantity()" class="qty-btn">
-                                        <input type="number" id="quantity" name="quantity" value="1" min="1" class="quantity-selector" ng-model="quantityOder">
-                                        <input type="button" value="+" onclick="plusQuantity()" class="qty-btn">
+                                    <div class="">
+                                        <label for="">Số lượng: </label>
+                                        <input ng-disabled="statusProduct === 'Hết Hàng'" type="number" class="custom-quantity-input" ng-model="quantityOder" ng-change="checkStock(statusProduct)">
                                     </div>
+
+
                                     <div class="wrap-addcart clearfix">
                                         <div class="row-flex">
-                                            <button type="button" class="button btn-addtocart addtocart-modal" ng-click="oderProduct(productDetai)" ng-disabled="statusProduct === 'Hết Hàng'">
-  Thêm vào
-</button>
-                                            <button type="button" class="buy-now button" style="display: block;">Mua
-                          ngay</button>
-                                            <button ng-click="removeProduct(productDetai)">Xóa sản phẩm</button>
-
+                                            <button type="button" class="button btn-addtocart addtocart-modal" ng-click="oderProduct(productDetai)" ng-disabled="statusProduct === 'Hết Hàng'" ng-click="checkStock(statusProduct)">
+                                                Thêm vào
+                                            </button>
+                                            <button type="button" class="buy-now button" style="display: block;" ng-disabled="statusProduct === 'Hết Hàng'" ng-click="checkStock(statusProduct)">Mua ngay</button>
+                                            <!-- <button ng-click="removeProduct(productDetai)">Xóa sản phẩm</button> -->
                                         </div>
 
                                         <a href="" target="_blank" class="button btn-check" style="color: #ffffff;text-decoration:none;"><span>Click

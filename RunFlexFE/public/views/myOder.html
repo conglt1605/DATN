@@ -1,0 +1,63 @@
+<div class="colorlib-product">
+    <div class="container-cart">
+
+        <div class="row row-pb-lg">
+            <div class="col-md-8">
+                <div class="product-name d-flex">
+                    <div class="one-eight text-center">
+                        <span>Mã đơn hàng</span>
+                    </div>
+                    <div class="one-eight text-center">
+                        <span>Ngày đặt hàng</span>
+                    </div>
+                    <div class="one-eight text-center">
+                        <span>Tổng giá</span>
+                    </div>
+                    <div class="one-eight text-center">
+                        <span>Trạng thái</span>
+                    </div>
+                    <div class="one-eight text-center">
+                        <span>Chi tiết/span>
+                    </div>
+
+                </div>
+                <div class="product-cart d-flex" ng-repeat="order in lstOrderProduct">
+                    <div class="one-eight text-center">
+                        <div class="display-tc">
+                            <span class="price">{{ order.productDetai.sizeNumber }}</span>
+                    </div>
+                </div>
+                <div class="one-eight text-center">
+                    <div class="display-tc">
+                        <span class="price">{{ order.productDetai.colorName }}</span>
+                    </div>
+                </div>
+                <div class="one-eight text-center">
+                    <div class="display-tc">
+                        <span class="price">{{ order.productDetai.materialName }}</span>
+                    </div>
+                </div>
+                <div class="one-eight text-center">
+                    <div class="display-tc">
+                        <span class="price">{{ order.productDetai.price }} đ</span>
+                    </div>
+                </div>
+                <div class="one-eight text-center">
+                    <div class="display-tc">
+                        {{ order.quantity }}
+                    </div>
+                </div>
+                <div class="one-eight text-center">
+                    <div class="display-tc">
+                        <span class="price">${{ order.productDetai.price * order.quantity }}</span>
+                    </div>
+                </div>
+                <div class="one-eight text-center">
+                    <div class="display-tc">
+                        <a ng-click="removeProduct(order.productDetai.id)" href="#" class="closed"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

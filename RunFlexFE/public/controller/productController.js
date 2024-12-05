@@ -4,6 +4,7 @@ app.controller("ProductController", function ($scope, $http) {
   const apiBrand = "http://localhost:8080/api/brand/";
   const apiusageobject = "http://localhost:8080/api/usageobject/";
   const apiProduct = "http://localhost:8080/api/product/";
+  const apiSize = "http://localhost:8080/api/size/";
   $scope.categorys = null;
   $scope.brands = null;
   $scope.usageobjects = null;
@@ -26,6 +27,19 @@ app.controller("ProductController", function ($scope, $http) {
       })
       .catch(function (error) {
         console.error("Lỗi khi lấy dữ liệu sản phẩm:", error);
+      });
+  };
+
+  // //Hàm lấy kích cỡ
+  $scope.getSizes = function () {
+    $http
+      .get(apiSize + "active")
+      .then(function (response) {
+        $scope.sizes = response.data.Success;
+        console.log("Sizes", $scope.sizes);
+      })
+      .catch(function (error) {
+        console.error("Lỗi khi lấy dữ liệu kích cỡ:", error);
       });
   };
 
@@ -73,4 +87,5 @@ app.controller("ProductController", function ($scope, $http) {
   $scope.getBrands();
   $scope.getUsageObjects();
   $scope.getProducts(0, 12);
+  $scope.getSizes();
 });

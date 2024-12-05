@@ -1,4 +1,4 @@
-app.controller("CartController", function ($scope, $http) {
+app.controller("CartController", function ($scope, $http, $window, $location) {
   $scope.lstOrderProduct =
     JSON.parse(localStorage.getItem("orderProduct")) || [];
   //   console.log(localStorage.getItem("orderProduct"));
@@ -63,25 +63,36 @@ app.controller("CartController", function ($scope, $http) {
         })),
     };
     console.log($scope.invoice);
-    return;
+    // return;
     // Gửi yêu cầu thanh toán lên server
-    $http.post(apiInvoice + "saveWithDetails", $scope.invoice).then(
-      function (response) {
+    $http
+      .post(apiInvoice + "saveWithDetails", $scope.invoice)
+      .then(function (response) {
         // Xử lý kết quả thanh toán thành công
         Swal.fire({
           position: "center",
           icon: "success",
-          title: response.data.success,
+          title: response.data.success || "Thành công",
+          showConfirmButton: false,
+          timer: 1500,
+        }).then(() => {
+          console.log("Chuyển hướng tới /home");
+          $window.location.href = "/home"; // Đảm bảo URL hợp lệ
+        });
+        console.log(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+        // Xử lý lỗi thanh toán
+        Swal.fire({
+          position: "center",
+          icon: "error",
+          title: error.data.error,
           showConfirmButton: false,
           timer: 1500,
         });
-        console.log(response.data);
-      },
-      function (error) {
-        // Xử lý lỗi thanh toán
-        console.error(error);
-      }
-    );
+      });
+    localStorage.setItem("invoice", JSON.stringify($scope.lstOrderProduct));
   };
 
   // Tính tổng giá trị giỏ hàng

@@ -43,25 +43,19 @@ public class SpringSecurityConfig {
                 .requestMatchers(
                         "/user/authenticate",
                         "/user/register",
-                        "/admin/**",
-                        "/Voucher/**",
-                        "/category/**",
-                        "/brand/**",
-                        "/color/**",
-                        "/invoice/**",
-                        "/invoicedetail/**",
-                        "/color/**",
-                        "/invoicedetail/**",
-                        "/material/**",
-                        "/usageobject/**",
-                        "/product/**",
-                        "/size/**",
-                        "/productdetail/**",
-                        "/error","/images/**"
+                        "category/active",
+                        "usageobject/active",
+                        "size/active",
+                        "brand/active",
+                        "product/page",
+                        "productdetail/getProducDetail",
+                        "productdetail/getMaterialByProductID",
+                        "productdetail/getSizeByProductID",
+                        "productdetail/getColorByProductID"
                 ).permitAll()
                 // Quyền của Customer
                 .requestMatchers(
-                        "/product"
+                         "/invoice/saveWithDetails"
                 ).hasAnyAuthority("Customer") // Chỉ có Customer
 
                 // Quyền của Admin

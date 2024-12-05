@@ -43,12 +43,6 @@ public class ProductDetailService implements IProductDetailService {
         if (productDetails.isEmpty()) {
             return ResponseEntity.badRequest().body(Map.of("error", "Danh Sách Sản Phẩm Chi Tiết Trống"));
         }
-        for (ProductDetail productDetail : productDetails) {
-            if (productDetail.getProductDetailName() == null || productDetail.getProductDetailName().isEmpty()) {
-                return ResponseEntity.badRequest().body(Map.of("error", "Tên Sản Phẩm Chi Tiết Không Được Để Trống"));
-            }
-            productDetail.setStatus(Status.active);
-        }
         productDetailRepository.saveAll(productDetails);
         return ResponseEntity.ok(Map.of("Success", "Thêm Thành Công"));
     }
@@ -63,7 +57,6 @@ public class ProductDetailService implements IProductDetailService {
                 return ResponseEntity.badRequest().body(Map.of("error", "ID Sản Phẩm Chi Tiết Không Hợp Lệ"));
             }
             ProductDetail existingProductDetail = productDetailRepository.findById(productDetail.getId()).orElseThrow();
-            existingProductDetail.setProductDetailName(productDetail.getProductDetailName());
             existingProductDetail.setProductDetailCode(productDetail.getProductDetailCode());
             existingProductDetail.setImageURL(productDetail.getImageURL());
             existingProductDetail.setPrice(productDetail.getPrice());

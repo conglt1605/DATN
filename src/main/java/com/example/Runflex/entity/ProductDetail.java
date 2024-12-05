@@ -4,7 +4,11 @@
  */
 package com.example.Runflex.entity;
 
+import com.example.Runflex.util.Status;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -32,7 +36,6 @@ public class ProductDetail {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String productDetailCode;
-    private String productDetailName;
     private String imageURL;
     private double price;
     private int quantity;
@@ -51,4 +54,4 @@ public class ProductDetail {
     @ManyToOne
     @JoinColumn(name = "MaterialID")
     private Material material;
-}
+    }

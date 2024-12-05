@@ -3841,7 +3841,7 @@ div.item:hover {
 }
 
 .colorlib-product {
-    padding: 7em 0;
+    padding: 5em 0;
     clear: both;
 }
 
@@ -4049,4 +4049,64 @@ div.item:hover {
     margin-top: 10px;
     transform: scale(1.2);
     /* Tăng kích thước checkbox */
+}
+
+
+/* Kiểu nút chung */
+
+button {
+    font-family: 'Arial', sans-serif;
+    border: 2px solid #1e73be;
+    /* Viền xanh dương nhạt */
+    outline: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    margin: 5px;
+    cursor: pointer;
+    background-color: #ffffff;
+    /* Màu trắng mặc định */
+    color: #000000;
+    /* Chữ màu xanh dương nhạt */
+    transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+}
+
+
+/* Hiệu ứng hover */
+
+button:hover {
+    background-color: #e6f4fc;
+    /* Xanh nhạt khi hover */
+    box-shadow: 0px 4px 6px rgba(30, 115, 190, 0.3);
+    /* Hiệu ứng đổ bóng */
+}
+
+
+/* Khi nút được chọn (active) */
+
+button.active {
+    background-color: #1e73be;
+    /* Màu xanh chủ đạo khi được chọn */
+    color: #ffffff;
+    /* Chữ trắng khi active */
+    box-shadow: 0px 4px 8px rgba(30, 115, 190, 0.5);
+    /* Tạo cảm giác nổi bật */
+}
+
+
+/* Responsive (cho màn hình nhỏ hơn) */
+
+@media (max-width: 768px) {
+    button {
+        padding: 8px 12px;
+        font-size: 14px;
+    }
+}
+
+.custom-quantity-input {
+    width: 80px;
+    height: 40px;
+    font-size: 16px;
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
 }
