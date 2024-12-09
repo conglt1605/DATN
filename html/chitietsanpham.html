@@ -97,10 +97,12 @@
                         <p>Không có dữ liệu chi tiết sản phẩm.</p>
                     </div>
 
-                    <button class="btn btn-warning" ng-click="toggleEditMode(sanPham)">
+                    <button class="btn btn-warning" ng-click="toggleEditMode(product)">
                         <i class="bi bi-pencil-square"></i> Sửa Sản Phẩm
                     </button>
 
+                    <!-- Modal Sửa Sản Phẩm -->
+                    <!-- Modal Sửa Sản Phẩm -->
                     <!-- Modal Sửa Sản Phẩm -->
                     <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel"
                         aria-hidden="true">
@@ -116,26 +118,35 @@
                                         <div class="mb-3">
                                             <label for="productName" class="form-label">Tên sản phẩm</label>
                                             <input type="text" class="form-control" id="productName"
-                                                ng-model="editData.sanPham.tenSanPham">
+                                                ng-model="editData.productName" required>
                                         </div>
                                         <div class="mb-3">
                                             <label for="brand" class="form-label">Thương hiệu</label>
-                                            <select class="form-select" id="brand"
-                                                ng-model="editData.sanPham.thuongHieu.id">
-                                                <option ng-repeat="thuongHieu in thuongHieus" value="{{thuongHieu.id}}">
-                                                    {{thuongHieu.tenThuongHieu}}
-                                                </option>
+                                            <select class="form-select" id="brand" ng-model="editData.product.brand.id"
+                                                required>
+                                                <option ng-repeat="brand in brands" ng-value="brand.id">{{
+                                                    brand.brandName }}</option>
                                             </select>
                                         </div>
                                         <div class="mb-3">
                                             <label for="category" class="form-label">Danh mục</label>
                                             <select class="form-select" id="category"
-                                                ng-model="editData.sanPham.danhMuc.id">
-                                                <option ng-repeat="danhMuc in danhMucs" value="{{danhMuc.id}}">
-                                                    {{danhMuc.tenDanhMuc}}
+                                                ng-model="editData.product.category.id" required>
+                                                <option ng-repeat="category in categorys" ng-value="category.id">{{
+                                                    category.categoryName }}</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="usageobject" class="form-label">Đối tượng sử dụng</label>
+                                            <select class="form-select" id="usageobject"
+                                                ng-model="editData.product.usageObject.id">
+                                                <option ng-repeat="usage in usageobjects" ng-value="usage.id">
+                                                    {{ usage.usageObjectName }}
                                                 </option>
                                             </select>
                                         </div>
+
                                         <!-- Thêm các trường dữ liệu khác cần sửa -->
                                     </form>
                                 </div>
@@ -148,6 +159,8 @@
                             </div>
                         </div>
                     </div>
+
+
 
 
                     <!-- Bảng chi tiết sản phẩm -->
@@ -170,7 +183,8 @@
                                     <td>{{$index + 1}}</td>
                                     <td>
                                         <div class="image-container">
-                                            <img ng-src="/assets/images/Kho_Anh/{{prd.imageURL}}" alt="prd Image" />
+                                            <!-- Hiển thị ảnh từ Cloudinary với URL trả về từ server -->
+                                            <img ng-src="{{ product.imageURL }}" alt="Product Image" />
                                         </div>
                                     </td>
                                     <td>{{prd.product.productName}} [{{prd.color.colorName}} -

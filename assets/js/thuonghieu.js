@@ -54,23 +54,28 @@ app.controller("BrandController", function ($scope, $http) {
   $scope.updateBrand = function (brand) {
     if (!brand.brandName) {
       toastr.error("Vui lòng nhập tên thương hiệu", "Thông báo");
-      return;
-    }
+      brand.isEditing = true; // Giữ chế độ chỉnh sửa lại
+    } else {
+      var updatedBrand = {
+        brandName: brand.brandName,
+        status: brand.status,
+      };
 
-    $http({
-      method: "PUT",
-      url: "http://localhost:8080/api/brand/update/" + brand.id,
-      data: brand,
-    }).then(
-      function () {
-        toastr.success("Thương hiệu đã được cập nhật", "Thông báo");
-        $scope.getAllBrands();
-        brand.isEditing = false; // Tắt chế độ chỉnh sửa
-      },
-      function () {
-        toastr.error("Lỗi khi cập nhật thương hiệu", "Thông báo");
-      }
-    );
+      $http({
+        method: "PUT",
+        url: "http://localhost:8080/api/brand/update/" + brand.id,
+        data: updatedBrand,
+      }).then(
+        function () {
+          toastr.success("Thương hiệu đã được cập nhật", "Thông báo");
+          $scope.getAllBrands();
+          brand.isEditing = false; // Tắt chế độ chỉnh sửa
+        },
+        function () {
+          toastr.error("Lỗi khi cập nhật thương hiệu", "Thông báo");
+        }
+      );
+    }
   };
 
   // Xóa thương hiệu

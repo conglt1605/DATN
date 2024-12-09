@@ -14,6 +14,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+  <!-- Font Awesome -->
 </head>
 
 <body ng-controller="MaterialController">
@@ -30,8 +32,9 @@
       <!-- Content -->
       <div class="container-fluid">
         <h1 class="text-center mb-4">QUẢN LÝ CHẤT LIỆU</h1>
-        <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addModal">Thêm Chất
-          Liệu</button>
+        <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addModal">
+          <i class="fas fa-plus-circle"></i> Thêm Chất Liệu
+        </button>
 
         <!-- Modal Thêm Chất Liệu -->
         <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
@@ -42,12 +45,14 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
-                <form id="addMaterialForm" ng-submit="submitData()">
+                <form id="addMaterialForm" ng-submit="addMaterial()">
                   <div class="mb-3">
                     <label for="materialName" class="form-label">Tên Chất Liệu</label>
-                    <input type="text" class="form-control" id="materialName" ng-model="material.materialName" required>
+                    <input type="text" class="form-control" id="materialName" ng-model="newMaterial.materialName">
                   </div>
-                  <button type="submit" class="btn btn-primary">Lưu</button>
+                  <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-save"></i> Lưu
+                  </button>
                 </form>
               </div>
             </div>
@@ -61,6 +66,7 @@
               <tr>
                 <th scope="col">#</th>
                 <th scope="col">Tên Chất Liệu</th>
+                <th scope="col">Trạng Thái</th>
                 <th scope="col" class="text-center">Hành Động</th>
               </tr>
             </thead>
@@ -76,24 +82,35 @@
 
                 <!-- Hiển thị trạng thái -->
                 <td>
-                  <span ng-class="{'badge bg-success': material.status == 1, 'badge bg-danger': material.status != 1}">
+                  <span ng-if="!material.isEditing" class="badge"
+                    ng-class="{'bg-success': material.status == 1, 'bg-danger': material.status != 1}">
                     {{ material.status == 1 ? 'Hoạt Động' : 'Ngưng Hoạt Động' }}
                   </span>
+                  <select ng-if="material.isEditing" class="form-select" ng-model="material.status">
+                    <option value="1">Hoạt Động</option>
+                    <option value="0">Ngưng Hoạt Động</option>
+                  </select>
                 </td>
+
 
                 <!-- Hành động -->
                 <td class="text-center">
                   <!-- Nút Sửa -->
                   <button type="button" class="btn btn-warning btn-sm" ng-click="toggleEdit(material)">
+                    <i class="fas" ng-class="{'fa-save': material.isEditing, 'fa-edit': !material.isEditing}"></i>
                     {{ material.isEditing ? 'Lưu' : 'Sửa' }}
                   </button>
 
                   <!-- Nút Hủy nếu đang chỉnh sửa -->
-                  <button type="button" class="btn btn-secondary btn-sm" ng-if="chatLieu.isEditing"
-                    ng-click="cancelEdit(material)">Hủy</button>
+                  <button type="button" class="btn btn-secondary btn-sm" ng-if="material.isEditing"
+                    ng-click="cancelEdit(material)">
+                    <i class="fas fa-times"></i> Hủy
+                  </button>
 
                   <!-- Nút Xóa -->
-                  <button type="button" class="btn btn-danger btn-sm" ng-click="deleteData(material.id)">Xóa</button>
+                  <button type="button" class="btn btn-danger btn-sm" ng-click="deleteMaterial(material.id)">
+                    <i class="fas fa-trash"></i> Xóa
+                  </button>
                 </td>
               </tr>
             </tbody>
@@ -101,14 +118,8 @@
         </div>
       </div>
 
-
-
     </div>
   </div>
-
-
-
-
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <!-- Bootstrap JS and other scripts -->

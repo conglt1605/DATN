@@ -52,23 +52,28 @@ app.controller("CategoryController", function ($scope, $http) {
   $scope.updateCategory = function (category) {
     if (!category.categoryName) {
       toastr.error("Vui lòng nhập tên danh mục", "Thông báo");
-      return;
-    }
+      category.isEditing = true; // Giữ chế độ chỉnh sửa lại
+    } else {
+      var updatedcategory = {
+        categoryName: category.categoryName,
+        status: category.status,
+      };
 
-    $http({
-      method: "PUT",
-      url: "http://localhost:8080/api/category/update/" + category.id,
-      data: category,
-    }).then(
-      function () {
-        toastr.success("Danh mục đã được cập nhật", "Thông báo");
-        $scope.getAllCategories();
-        category.isEditing = false; // Tắt chế độ chỉnh sửa
-      },
-      function () {
-        toastr.error("Lỗi khi cập nhật danh mục", "Thông báo");
-      }
-    );
+      $http({
+        method: "PUT",
+        url: "http://localhost:8080/api/category/update/" + category.id,
+        data: category,
+      }).then(
+        function () {
+          toastr.success("Danh mục đã được cập nhật", "Thông báo");
+          $scope.getAllCategories();
+          category.isEditing = false; // Tắt chế độ chỉnh sửa
+        },
+        function () {
+          toastr.error("Lỗi khi cập nhật danh mục", "Thông báo");
+        }
+      );
+    }
   };
 
   // Xóa danh mục
@@ -98,6 +103,7 @@ app.controller("CategoryController", function ($scope, $http) {
   // Hủy chỉnh sửa
   $scope.cancelEdit = function (category) {
     category.isEditing = false;
+    $scope.getAllCategories();
   };
 
   // Khởi tạo - Gọi API khi trang được tải

@@ -6,19 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Thông Tin Đơn Hàng</title>
     <link rel="shortcut icon" type="image/png" href="../assets/images/logos/runflex.jpg" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="../assets/css/styles.min.css" />
-    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <link rel="stylesheet" href="../assets/libs/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-    <!-- Tải jsPDF từ CDN -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <!-- Tải jsPDF Autotable từ CDN -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.6/jspdf.plugin.autotable.min.js"></script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/plugins/roboto/Roboto.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/angular-utils-pagination@0.11.1/dirPagination.js"></script>
+    <link rel="stylesheet" href="../assets/css/styles.min.css" />
+    <link rel="stylesheet" href="../assets/css/main.css" />
 
 
     <script src="../assets/js/chitietdonhang.js"></script>
@@ -184,15 +182,51 @@
                                 <iconify-icon icon="twemoji:printer" width="16" height="16"
                                     style="vertical-align: middle; margin-right: 5px;"></iconify-icon> In hóa đơn
                             </button>
+                            <button class="btn btn-danger btn-sm px-4 py-2" ng-click="cancelInvoice(invoice)">
+                                <iconify-icon icon="twemoji:cross-mark" width="16" height="16"
+                                    style="vertical-align: middle; margin-right: 5px;"></iconify-icon> Hủy đơn
+                            </button>
                         </div>
                     </div>
                 </div>
             </div>
 
 
-
-
-
+            <!-- moldal sửa thông tin đơn hàng -->
+            <div class="modal fade" id="editInvoiceModal" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Sửa Thông Tin Đơn Hàng</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <div class="mb-3">
+                                    <label for="consigneeName" class="form-label">Tên Người Nhận</label>
+                                    <input type="text" class="form-control" id="consigneeName"
+                                        ng-model="invoice.consigneeName">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="deliveryAddress" class="form-label">Địa Chỉ</label>
+                                    <input type="text" class="form-control" id="deliveryAddress"
+                                        ng-model="invoice.deliveryAddress">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="phoneNumber" class="form-label">Số Điện Thoại</label>
+                                    <input type="text" class="form-control" id="phoneNumber"
+                                        ng-model="invoice.phoneNumber">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                            <button type="button" class="btn btn-primary" ng-click="updateInvoice()">Lưu Thay
+                                Đổi</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
 
 
@@ -203,58 +237,61 @@
 
             <!-- Invoice Details -->
             <div class="container mt-4">
-                <h4 class="mb-4">Thông Tin Đơn Hàng</h4>
+                <h4 class="mb-4 text-center">Thông Tin Đơn Hàng</h4>
+
+                <button class="btn btn-primary mb-3" ng-click="openEditInvoiceModal()"
+                    ng-if="invoice.status === 1 || invoice.status === 2">
+                    Sửa Đơn Hàng
+                </button>
+
+                <!-- Card hiển thị thông tin đơn hàng -->
                 <div ng-if="invoice" class="card p-4 shadow-sm">
-                    <div class="row">
-                        <div class="col-md-4 mb-3">
-                            <p><strong>Trạng Thái:</strong> <span>{{ getStatus(invoice.status) }}</span></p>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <p><strong>Trạng Thái:</strong> <span class="badge bg-info text-dark">{{
+                                    getStatus(invoice.status) }}</span></p>
                         </div>
-                        <div class="col-md-4 mb-3">
-                            <p><strong>Tiền Phải Trả (Sau khi cộng trừ phí khoản khác):</strong>
-                                <span>{{ calculateAmountToPay(invoicedetail) | currency }}</span>
+                        <div class="col-md-6">
+                            <p><strong>Tiền Phải Trả:</strong>
+                                <span class="text-success fw-bold">{{ calculateAmountToPay(invoicedetail) | currency
+                                    }}</span>
                             </p>
                         </div>
-
                     </div>
-                    <div class="row">
-                        <div class="col-md-4 mb-3">
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
                             <p><strong>Mã Hóa Đơn:</strong> <span>{{ invoice.invoiceCode }}</span></p>
                         </div>
-                        <div class="col-md-4 mb-3">
+                        <div class="col-md-6">
                             <p><strong>Ngày Đặt Hàng:</strong> <span>{{ invoice.createdDate | date: 'dd/MM/yyyy'
                                     }}</span></p>
                         </div>
                     </div>
-                </div>
 
-                <div ng-if="!invoice">
-                    <p class="text-danger">Không tìm thấy thông tin đơn hàng!</p>
-                </div>
-            </div>
-
-            <div class="container mt-4">
-                <h4 class="mb-4">Thông Tin Khách Hàng</h4>
-                <div ng-if="invoice" class="card p-4 shadow-sm">
-                    <div class="row">
-                        <div class="col-md-4 mb-3">
+                    <div class="row mb-3">
+                        <div class="col-md-6">
                             <p><strong>Tên Người Nhận:</strong> <span>{{ invoice.consigneeName }}</span></p>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4 mb-3">
-                            <p><strong>Địa chỉ:</strong> <span>{{ invoice.deliveryAddress }}</span></p>
+                        <div class="col-md-6">
+                            <p><strong>Địa Chỉ:</strong> <span>{{ invoice.deliveryAddress }}</span></p>
                         </div>
-                        <div class="col-md-4 mb-3">
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
                             <p><strong>Số Điện Thoại:</strong> <span>{{ invoice.phoneNumber }}</span></p>
                         </div>
                     </div>
                 </div>
-                <div ng-if="!invoice">
-                    <p class="text-danger">Không tìm thấy thông tin đơn hàng!</p>
+
+                <!-- Thông báo nếu không tìm thấy thông tin đơn hàng -->
+                <div ng-if="!invoice" class="alert alert-danger text-center">
+                    Không tìm thấy thông tin đơn hàng!
                 </div>
             </div>
 
-            <h4 class="mb-4">Lịch Sử Thanh Toán</h4>
+            <!-- <h4 class="mb-4">Lịch Sử Thanh Toán</h4>
             <div class="table-responsive mt-4">
                 <table class="table table-bordered table-hover table-striped">
                     <thead class="table-dark">
@@ -267,41 +304,65 @@
                             <th>Ghi chú</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <!-- Nội dung bảng sẽ được chèn vào đây -->
-                    </tbody>
+                    <tbody> -->
+            <!-- Nội dung bảng sẽ được chèn vào đây -->
+            <!-- </tbody>
                 </table>
-            </div>
+            </div> -->
 
             <!-- Nút Xác nhận thanh toán -->
-            <div class="d-flex justify-content-end mt-3">
+            <!-- <div class="d-flex justify-content-end mt-3">
                 <button class="btn btn-success">Xác nhận thanh toán</button>
-            </div>
+            </div> -->
 
 
             <h4 class="mb-4">Thông Tin Sản Phẩm</h4>
+            <button class="btn btn-success mb-3" ng-click="openAddProductModal()"
+                ng-if="invoice.status === 1 || invoice.status === 2">
+                Thêm sản phẩm vào giỏ hàng
+            </button>
+
             <div class="table-responsive mt-4">
                 <table class="table table-bordered table-hover table-striped">
                     <thead class="table-dark">
                         <tr>
                             <th>#</th>
+                            <th>Ảnh</th>
                             <th>Tên Sản Phẩm</th>
                             <th>Giá Bán</th>
                             <th>Số Lượng</th>
-                            <th>Giá Hiện Tại</th>
                             <th>Voucher</th>
                             <th>% Voucher</th>
                             <th>Tổng Tiền Sản Phẩm</th>
+                            <td>Hành Động</td>
                         </tr>
                     </thead>
                     <tbody>
                         <tr ng-repeat="cthd in invoicedetail">
                             <td>{{$index + 1}}</td>
+                            <td>
+                                <div class="image-container">
+                                    <img ng-src="{{ cthd.productDetail.product.imageURL }}" alt="Product Image" />
+                                </div>
+                            </td>
                             <td>{{ cthd.productDetail.product.productName }} [{{ cthd.productDetail.color.colorName
                                 }} - {{ cthd.productDetail.size.sizeNumber }}]</td>
                             <td>{{ cthd.productDetail.price | currency:'VND' }}</td>
-                            <td>{{ cthd.quantity }}</td>
-                            <td>{{ cthd.currentPrice | currency:'VND'}}</td>
+                            <td>
+                                <!-- Chỉ hiển thị input khi trạng thái hóa đơn là 1 hoặc 2 -->
+                                <input type="number" class="form-control" ng-model="newQuantityFromUser"
+                                    ng-change="updateProductQuantity(cthd, newQuantityFromUser)" min="1"
+                                    max="{{ cthd.productDetail.quantity }}"
+                                    ng-if="invoice.status === 1 || invoice.status === 2"
+                                    ng-init="newQuantityFromUser = cthd.quantity || 1" />
+
+                                <div ng-if="!(invoice.status === 1 || invoice.status === 2)">
+                                    {{ cthd.quantity }}
+                                </div>
+                            </td>
+
+
+
                             <td>{{ cthd.invoice.voucher ? cthd.invoice.voucher.voucherCode : 'Không áp dụng' }}</td>
                             <td>{{ cthd.invoice.voucher ? cthd.invoice.voucher.discountPercentage + '(%)' : 'Không
                                 áp dụng' }}</td>
@@ -309,11 +370,83 @@
                                 {{ cthd.productDetail.price * cthd.quantity * (cthd.invoice.voucher ? (1 -
                                 cthd.invoice.voucher.discountPercentage / 100) : 1) | currency:'VND' }}
                             </td>
-
+                            <td>
+                                <button ng-click="deleteProductFromInvoice(cthd)"
+                                    ng-if="invoice.status === 1 || invoice.status === 2">
+                                    Xóa sản phẩm
+                                </button>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
+
+
+            <!-- Modal chọn sản phẩm -->
+            <div class="modal fade" id="addProductModal" tabindex="-1" aria-labelledby="addProductModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-xl">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="addProductModalLabel">Chọn Sản Phẩm</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <!-- Tìm kiếm và lọc -->
+                            <div class="row mb-3">
+                                <!-- Tìm kiếm sản phẩm -->
+                                <div class="col-md-4">
+                                    <input type="text" class="form-control" ng-model="searchQuery"
+                                        placeholder="Tìm kiếm sản phẩm">
+                                </div>
+                            </div>
+
+                            <!-- Bảng sản phẩm -->
+                            <table class="table-light">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Ảnh</th>
+                                        <th>Tên Sản Phẩm</th>
+                                        <th>Số Lượng</th>
+                                        <th>Giá</th>
+                                        <th>Chọn</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Lặp qua sản phẩm có trạng thái là 1 và áp dụng lọc -->
+                                    <tr
+                                        ng-repeat="productdetail in filteredProductdetails = (availableProductdetails | filter:{ product: { brandId: selectedBrand, categoryId: selectedCategory } } | filter:searchQuery)">
+                                        <td>{{$index + 1}}</td>
+                                        <td>
+                                            <div class="image-container">
+                                                <img ng-src="{{ productdetail.product.imageURL }}"
+                                                    alt="Product Image" />
+                                            </div>
+                                        </td>
+                                        <td>{{ productdetail.product.productName }} [{{ productdetail.color.colorName }}
+                                            - {{ productdetail.size.sizeNumber }}]</td>
+                                        <td>
+                                            <input type="number" class="form-control"
+                                                ng-model="productdetail.selectedQuantity" min="1"
+                                                max="{{ productdetail.quantity }}"
+                                                ng-init="productdetail.selectedQuantity = 1" />
+                                            <div>{{ productdetail.quantity }} có trong giỏ hàng</div>
+                                        </td>
+                                        <td>{{ productdetail.price | currency: 'VND' }}</td>
+                                        <td>
+                                            <button class="btn btn-primary"
+                                                ng-click="addProductToInvoice(productdetail)">Thêm sản phẩm</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
 
 
 

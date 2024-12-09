@@ -26,7 +26,24 @@ app.controller("SizeController", function ($scope, $http) {
       toastr.error("Vui lòng nhập kích cỡ", "Thông báo");
       return;
     }
-
+    if ($scope.newSize.sizeNumber <= 0 || $scope.newSize.sizeNumber > 100) {
+      toastr.error(
+        "Kích cỡ phải lớn hơn 0 và nhỏ hơn hoặc bằng 100",
+        "Thông báo"
+      );
+      return;
+    }
+    // Kiểm tra kích cỡ trùng lặp
+    var duplicate = $scope.sizes.some(
+      (size) => size.sizeNumber === $scope.newSize.sizeNumber
+    );
+    if (duplicate) {
+      toastr.error(
+        "Kích cỡ đã tồn tại, vui lòng nhập kích cỡ khác",
+        "Thông báo"
+      );
+      return;
+    }
     var newSize = {
       sizeNumber: $scope.newSize.sizeNumber,
       status: 1,
@@ -53,17 +70,46 @@ app.controller("SizeController", function ($scope, $http) {
   $scope.updateSize = function (size) {
     if (!size.sizeNumber) {
       toastr.error("Vui lòng nhập kích cỡ", "Thông báo");
+      size.isEditing = true;
       return;
     }
+
+    // Kiểm tra kích cỡ phải nằm trong khoảng 0 - 100
+    if (size.sizeNumber <= 0 || size.sizeNumber > 100) {
+      toastr.error(
+        "Kích cỡ phải lớn hơn 0 và nhỏ hơn hoặc bằng 100",
+        "Thông báo"
+      );
+      size.isEditing = true;
+      return;
+    }
+
+    // Kiểm tra kích cỡ trùng lặp (trừ chính kích cỡ đang chỉnh sửa)
+    var duplicate = $scope.sizes.some(
+      (s) => s.sizeNumber === size.sizeNumber && s.id !== size.id
+    );
+    if (duplicate) {
+      toastr.error(
+        "Kích cỡ đã tồn tại, vui lòng nhập kích cỡ khác",
+        "Thông báo"
+      );
+      size.isEditing = true;
+      return;
+    }
+
+    var updatedSize = {
+      sizeNumber: size.sizeNumber,
+      status: size.status,
+    };
 
     $http({
       method: "PUT",
       url: "http://localhost:8080/api/size/update/" + size.id,
-      data: size,
+      data: updatedSize,
     }).then(
       function () {
         toastr.success("Kích cỡ đã được cập nhật", "Thông báo");
-        $scope.getAllSizes();
+        $scope.getAllSizes(); // Cập nhật lại danh sách sau khi chỉnh sửa
         size.isEditing = false; // Tắt chế độ chỉnh sửa
       },
       function () {
@@ -99,6 +145,7 @@ app.controller("SizeController", function ($scope, $http) {
   // Hủy chỉnh sửa
   $scope.cancelEdit = function (size) {
     size.isEditing = false;
+    $scope.getAllSizes();
     // Bạn có thể tải lại dữ liệu gốc nếu cần
   };
 

@@ -55,30 +55,36 @@ app.controller("ColorController", function ($scope, $http) {
 
   // Cập nhật màu sắc
   $scope.updateColor = function (color) {
+    // Kiểm tra nếu tên màu sắc trống
     if (!color.colorName) {
       toastr.error("Vui lòng nhập tên màu sắc", "Thông báo");
-      return;
+      // Không sử dụng return, chỉ thông báo lỗi và giữ chế độ chỉnh sửa
+      color.isEditing = true; // Giữ chế độ chỉnh sửa lại
+    } else {
+      var updatedColor = {
+        colorName: color.colorName,
+        status: color.status,
+      };
+
+      // Thực hiện PUT request để cập nhật màu sắc
+      $http({
+        method: "PUT",
+        url: "http://localhost:8080/api/color/update/" + color.id,
+        data: updatedColor,
+        headers: { Authorization: "Bearer " + token },
+      }).then(
+        function (response) {
+          toastr.success("Màu sắc đã được cập nhật", "Thông báo");
+          $scope.getAllColors();
+          // Sau khi cập nhật thành công, tắt chế độ chỉnh sửa
+          color.isEditing = false;
+        },
+        function (error) {
+          toastr.error("Lỗi khi cập nhật màu sắc", "Thông báo");
+          // Giữ chế độ chỉnh sửa nếu có lỗi trong quá trình PUT
+        }
+      );
     }
-
-    var updatedColor = {
-      colorName: color.colorName,
-      status: color.status,
-    };
-
-    $http({
-      method: "PUT",
-      url: "http://localhost:8080/api/color/update/" + color.id,
-      data: updatedColor,
-      headers: { Authorization: "Bearer " + token },
-    }).then(
-      function (response) {
-        toastr.success("Màu sắc đã được cập nhật", "Thông báo");
-        $scope.getAllColors();
-      },
-      function (error) {
-        toastr.error("Lỗi khi cập nhật màu sắc", "Thông báo");
-      }
-    );
   };
 
   // Xóa màu sắc
@@ -109,6 +115,7 @@ app.controller("ColorController", function ($scope, $http) {
   // Hủy chỉnh sửa
   $scope.cancelEdit = function (color) {
     color.isEditing = false;
+    $scope.getAllColors();
     // Lấy lại thông tin màu sắc ban đầu nếu cần
   };
 

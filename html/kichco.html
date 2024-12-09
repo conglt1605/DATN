@@ -5,15 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kích Cỡ Management</title>
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <link rel="shortcut icon" type="image/png" href="../assets/images/logos/runflex.jpg" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="../assets/css/styles.min.css" />
     <link rel="stylesheet" href="../assets/css/main.css">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script src="../assets/js/kichco.js"></script>
 
     <!-- Add FontAwesome for icons -->
@@ -43,7 +42,8 @@
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h5 class="modal-title">Thêm kích cỡ mới</h5>
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                </button>
                             </div>
                             <div class="modal-body">
                                 <input type="number" class="form-control" ng-model="newSize.sizeNumber"
@@ -53,68 +53,70 @@
                                 <button class="btn btn-primary" ng-click="addSize()">
                                     <i class="fas fa-save"></i> Lưu
                                 </button>
-                                <button class="btn btn-secondary" data-dismiss="modal">
-                                    <i class="fas fa-times"></i> Đóng
-                                </button>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Bảng Kích Cỡ -->
-            <div class="table-responsive mt-3">
-                <table class="table table-striped table-bordered">
-                    <thead class="table-dark">
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Tên Kích Cỡ</th>
-                            <th scope="col">Trạng Thái</th>
-                            <th scope="col" class="text-center">Hành Động</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr ng-repeat="size in sizes | orderBy:'sizeNumber'">
-                            <td>{{$index + 1}}</td>
-                            <td>
-                                <span ng-if="!size.isEditing">{{ size.sizeNumber }}</span>
-                                <input ng-if="size.isEditing" type="text" ng-model="size.sizeNumber" />
-                            </td>
-                            <td>
-                                <span
-                                    ng-class="{'badge bg-success': size.status == 1, 'badge bg-danger': size.status != 1}">
-                                    {{ size.status == 1 ? 'Hoạt Động' : 'Ngưng Hoạt Động' }}
-                                </span>
-                            </td>
-                            <td>
-                                <button ng-click="toggleEdit(size)" class="btn btn-warning btn-sm">
-                                    <i class="fas fa-edit"></i> {{ size.isEditing ? 'Lưu' : 'Sửa' }}
-                                </button>
-                                <button ng-if="size.isEditing" ng-click="cancelEdit(size)"
-                                    class="btn btn-secondary btn-sm">
-                                    <i class="fas fa-times"></i> Hủy
-                                </button>
-                                <button ng-click="deleteSize(size.id)" class="btn btn-danger btn-sm">
-                                    <i class="fas fa-trash-alt"></i> Xóa
-                                </button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+
+                <!-- Bảng Kích Cỡ -->
+                <div class="table-responsive mt-3">
+                    <table class="table table-striped table-bordered">
+                        <thead class="table-dark">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Tên Kích Cỡ</th>
+                                <th scope="col">Trạng Thái</th>
+                                <th scope="col" class="text-center">Hành Động</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="size in sizes | orderBy:'sizeNumber'">
+                                <td>{{$index + 1}}</td>
+                                <td>
+                                    <span ng-if="!size.isEditing">{{ size.sizeNumber }}</span>
+                                    <input ng-if="size.isEditing" type="text" ng-model="size.sizeNumber" />
+                                </td>
+                                <td>
+                                    <span ng-if="!size.isEditing" class="badge"
+                                        ng-class="{'badge bg-success': size.status == 1, 'badge bg-danger': size.status != 1}">
+                                        {{ size.status == 1 ? 'Hoạt Động' : 'Ngưng Hoạt Động' }}
+                                    </span>
+                                    <select ng-if="size.isEditing" class="form-select" ng-model="size.status">
+                                        <option value="1">Hoạt Động</option>
+                                        <option value="0">Ngưng Hoạt Động</option>
+                                    </select>
+                                </td>
+
+                                <td>
+                                    <button ng-click="toggleEdit(size)" class="btn btn-warning btn-sm">
+                                        <i class="fas fa-edit"></i> {{ size.isEditing ? 'Lưu' : 'Sửa' }}
+                                    </button>
+                                    <button ng-if="size.isEditing" ng-click="cancelEdit(size)"
+                                        class="btn btn-secondary btn-sm">
+                                        <i class="fas fa-times"></i> Hủy
+                                    </button>
+                                    <button ng-click="deleteSize(size.id)" class="btn btn-danger btn-sm">
+                                        <i class="fas fa-trash-alt"></i> Xóa
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
-    </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="../assets/js/main.js"></script>
-    <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
-    <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../assets/js/sidebarmenu.js"></script>
-    <script src="../assets/js/app.min.js"></script>
-    <script src="../assets/libs/apexcharts/dist/apexcharts.min.js"></script>
-    <script src="../assets/libs/simplebar/dist/simplebar.js"></script>
-    <script src="../assets/js/dashboard.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="../assets/js/main.js"></script>
+        <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
+        <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="../assets/js/sidebarmenu.js"></script>
+        <script src="../assets/js/app.min.js"></script>
+        <script src="../assets/libs/apexcharts/dist/apexcharts.min.js"></script>
+        <script src="../assets/libs/simplebar/dist/simplebar.js"></script>
+        <script src="../assets/js/dashboard.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
 </body>
 
 </html>

@@ -1,14 +1,20 @@
 const app = angular.module("myApp", []);
 
 app.controller("ProductController", function ($scope, $http) {
-  // Lấy danh sách sản phẩm
+  // Các giá trị mặc định của bộ lọc
+  $scope.searchName = "";
+  $scope.statusFilter = "";
+  $scope.categoryFilter = "";
+  $scope.brandFilter = "";
+
+  // Lấy danh sách sản phẩm và áp dụng bộ lọc
   $scope.getAllProducts = function () {
     $http
       .get("http://localhost:8080/api/product/all")
       .then(function (response) {
         if (response.data) {
-          $scope.products = response.data.Success;
-          console.log($scope.products);
+          $scope.products = response.data.Success || [];
+          $scope.applyFilters(); // Áp dụng lọc sau khi nhận được dữ liệu
         } else {
           toastr.error("Không có dữ liệu sản phẩm", "Thông báo");
         }
@@ -17,6 +23,38 @@ app.controller("ProductController", function ($scope, $http) {
         toastr.error("Lỗi khi lấy danh sách sản phẩm", "Thông báo");
       });
   };
+
+  // Áp dụng các bộ lọc tìm kiếm và lọc
+  $scope.applyFilters = function () {
+    $scope.filteredProducts = $scope.products.filter(function (prd) {
+      // Kiểm tra theo tên sản phẩm
+      const matchName =
+        !$scope.searchName ||
+        prd.productName.toLowerCase().includes($scope.searchName.toLowerCase());
+
+      // Kiểm tra theo trạng thái
+      const matchStatus =
+        !$scope.statusFilter || prd.status == $scope.statusFilter;
+
+      // Kiểm tra theo danh mục
+      const matchCategory =
+        !$scope.categoryFilter || prd.category.id == $scope.categoryFilter;
+
+      // Kiểm tra theo thương hiệu
+      const matchBrand =
+        !$scope.brandFilter || prd.brand.id == $scope.brandFilter;
+
+      return matchName && matchStatus && matchCategory && matchBrand;
+    });
+  };
+
+  // Quan sát thay đổi các giá trị lọc và tìm kiếm
+  $scope.$watchGroup(
+    ["searchName", "statusFilter", "categoryFilter", "brandFilter"],
+    function () {
+      $scope.applyFilters();
+    }
+  );
 
   $http
     .get("http://localhost:8080/api/product/active")
@@ -91,61 +129,88 @@ app.controller("ProductController", function ($scope, $http) {
     .catch(function () {
       toastr.error("Lỗi khi lấy danh sách đối tượng sử dụng", "Thông báo");
     });
+
   $scope.submitProduct = function (event) {
-    event.preventDefault(); // Ngăn chặn hành động mặc định của form
-    var formData = new FormData();
-
-    // Dữ liệu sản phẩm
-    var productData = {
-      productName: $scope.product.productName,
-      category: { id: $scope.product.category.id },
-      brand: { id: $scope.product.brand.id },
-      usageObject: { id: $scope.product.usageObject.id },
-      status: $scope.product.status,
-    };
-
-    // Thêm dữ liệu sản phẩm vào FormData
-    formData.append(
-      "product",
-      new Blob([JSON.stringify(productData)], { type: "application/json" })
-    );
-
-    // Thêm file ảnh vào FormData
     if ($scope.product.imageFile) {
-      formData.append("image", $scope.product.imageFile);
-    }
+      var imageFile = $scope.product.imageFile;
+      var imageFormData = new FormData();
+      imageFormData.append("file", imageFile);
 
-    // Gửi yêu cầu POST
-    $http
-      .post("http://localhost:8080/api/product/add", formData, {
-        transformRequest: angular.identity,
-        headers: { "Content-Type": undefined },
-      })
-      .then(
-        function (response) {
+      $http
+        .post("http://localhost:8080/api/images/upload", imageFormData, {
+          transformRequest: angular.identity,
+          headers: { "Content-Type": undefined },
+        })
+        .then(function (response) {
+          var imageURL = response.data.imageUrl;
+          var productData = {
+            productName: $scope.product.productName,
+            category: { id: $scope.product.category.id },
+            brand: { id: $scope.product.brand.id },
+            usageObject: { id: $scope.product.usageObject.id },
+            status: $scope.product.status,
+            imageURL: imageURL,
+          };
+          $http
+            .post("http://localhost:8080/api/product/add", productData)
+            .then(function (response) {
+              toastr.success("Sản phẩm đã được thêm thành công", "Thông báo");
+
+              // Đóng modal
+              var modal = bootstrap.Modal.getInstance(
+                document.getElementById("detailsModal")
+              );
+              modal.hide();
+
+              // Reset form
+              $scope.resetForm();
+
+              // Load lại danh sách sản phẩm
+              $scope.getAllProducts();
+            })
+            .catch(function (error) {
+              toastr.error("Lỗi khi thêm sản phẩm", "Thông báo");
+            });
+        })
+        .catch(function (error) {
+          toastr.error("Lỗi khi upload ảnh", "Thông báo");
+          console.log(error);
+        });
+    } else {
+      var productData = {
+        productName: $scope.product.productName,
+        category: { id: $scope.product.category.id },
+        brand: { id: $scope.product.brand.id },
+        usageObject: { id: $scope.product.usageObject.id },
+        status: $scope.product.status,
+      };
+
+      $http
+        .post("http://localhost:8080/api/product/add", productData)
+        .then(function (response) {
           toastr.success("Sản phẩm đã được thêm thành công", "Thông báo");
-        },
-        function (error) {
+
+          // Đóng modal
+          var modal = bootstrap.Modal.getInstance(
+            document.getElementById("detailsModal")
+          );
+          modal.hide();
+
+          // Reset form
+          $scope.resetForm();
+
+          // Load lại danh sách sản phẩm
+          $scope.getAllProducts();
+        })
+        .catch(function (error) {
           toastr.error("Lỗi khi thêm sản phẩm", "Thông báo");
-        }
-      );
+        });
+    }
   };
 
-  // Phương thức xử lý khi người dùng chọn file
-  $scope.fileChanged = function (element) {
-    var file = element.files[0];
-    if (file) {
-      if (file.size > 10 * 1024 * 1024) {
-        // Giới hạn 10MB
-        toastr.error(
-          "File quá lớn! Vui lòng chọn file nhỏ hơn 10MB",
-          "Thông báo"
-        );
-        $scope.product.imageFile = null;
-      } else {
-        $scope.product.imageFile = file;
-      }
-    }
+  $scope.fileChanged = function (input) {
+    var file = input.files[0]; // Lấy file từ input
+    $scope.product.imageFile = file; // Cập nhật imageFile trong scope
   };
 
   // Reset form
@@ -158,18 +223,22 @@ app.controller("ProductController", function ($scope, $http) {
       brand: { id: null },
       category: { id: null },
       usageObject: { id: null },
+      imageFile: null,
     };
+    document.querySelector("input[type='file']").value = ""; // Xóa file đã chọn
   };
 
   // Thêm mới danh mục
   $scope.addCategory = function () {
-    $http.post("http://localhost:8080/danhmuc", $scope.category).then(
+    $http.post("http://localhost:8080/api/category/add", $scope.category).then(
       function (response) {
         console.log("Tạo thành công");
+        toastr.success("Danh mục đã được thêm thành công", "Thông báo");
         $scope.categories.push(response.data);
         $scope.resetForm();
       },
       function (error) {
+        toastr.error("Lỗi khi thêm danh mục", "Thông báo");
         console.error("Lỗi khi tạo:", error);
       }
     );
@@ -177,13 +246,15 @@ app.controller("ProductController", function ($scope, $http) {
 
   // Thêm mới thương hiệu
   $scope.addBrand = function () {
-    $http.post("http://localhost:8080/thuonghieu", $scope.brand).then(
+    $http.post("http://localhost:8080/api/brand/add", $scope.brand).then(
       function (response) {
         console.log("Tạo thành công");
+        toastr.success("Danh mục đã được thêm thành công", "Thông báo");
         $scope.brands.push(response.data);
         $scope.resetForm();
       },
       function (error) {
+        toastr.error("Lỗi khi thêm thương hiệu", "Thông báo");
         console.error("Lỗi khi tạo:", error);
       }
     );

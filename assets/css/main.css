@@ -206,3 +206,84 @@ input[type="text"] {
 .content-red {
   color: red;
 }
+.image-container {
+    width: 120px;
+    /* Chiều rộng cố định */
+    height: 130px;
+    /* Chiều cao cố định */
+    overflow: hidden;
+    /* Ẩn phần thừa của ảnh nếu vượt quá container */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #ddd;
+    /* Tùy chọn: thêm viền cho ảnh */
+    border-radius: 5px;
+    /* Tùy chọn: bo góc */
+    background-color: #f8f9fa;
+    /* Tùy chọn: nền để xử lý khi không có ảnh */
+}
+
+.image-container img {
+    width: 100%;
+    /* Ảnh sẽ tự động co dãn chiều rộng */
+    height: 100%;
+    /* Ảnh sẽ tự động co dãn chiều cao */
+    object-fit: cover;
+    /* Giữ tỉ lệ và cắt ảnh nếu cần */
+}
+/* Hiệu ứng hover nút */
+button.btn:hover, a.btn:hover {
+  transform: scale(1.05);
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Nút với viền gradient */
+button.btn-primary, a.btn-primary {
+  background: linear-gradient(45deg, #0abee2, #2255d8);
+  border: none;
+  color: #fff;
+}
+
+button.btn-primary:hover, a.btn-primary:hover {
+  background: linear-gradient(45deg, #0abee2, #2255d8);
+}
+
+/* Nút với hiệu ứng ánh sáng VIP */
+button.btn-vip {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+
+button.btn-vip::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0) 60%);
+  animation: shine 2s infinite linear;
+}
+
+@keyframes shine {
+  0% {
+      transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+      transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+input.form-control,
+select.form-select {
+    border: 2px solid #ccc;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+input.form-control:focus,
+select.form-select:focus {
+    border-color: #007bff;
+    box-shadow: 0px 0px 5px rgba(0, 123, 255, 0.5);
+}

@@ -26,7 +26,8 @@
 
       <div class="container-fluid">
         <h1 class="text-center mb-4">QUẢN LÝ DANH MỤC</h1>
-        <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addModal">Thêm Danh
+        <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addModal"><i
+            class="fas fa-plus-circle"></i> Thêm Danh
           Mục</button>
 
         <!-- Modal Thêm Danh Mục -->
@@ -41,8 +42,7 @@
                 <form id="addCategoryForm" ng-submit="addCategory()">
                   <div class="mb-3">
                     <label for="categoryName" class="form-label">Tên Danh Mục</label>
-                    <input type="text" class="form-control" id="tenDanhMuc" ng-model="newCategory.categoryName"
-                      required>
+                    <input type="text" class="form-control" id="tenDanhMuc" ng-model="newCategory.categoryName">
                   </div>
                   <button type="submit" class="btn btn-primary">Lưu</button>
                 </form>
@@ -71,10 +71,16 @@
                   <span ng-if="!category.isEditing">{{ category.categoryName }}</span>
                   <input ng-if="category.isEditing" type="text" ng-model="category.categoryName" />
                 </td>
+
                 <td>
-                  <span ng-class="{'badge bg-success': category.status == 1, 'badge bg-danger': category.status != 1}">
+                  <span ng-if="!category.isEditing" class="badge"
+                    ng-class="{'bg-success': category.status == 1, 'bg-danger': category.status != 1}">
                     {{ category.status == 1 ? 'Hoạt Động' : 'Ngưng Hoạt Động' }}
                   </span>
+                  <select ng-if="category.isEditing" class="form-select" ng-model="category.status">
+                    <option value="1">Hoạt Động</option>
+                    <option value="0">Ngưng Hoạt Động</option>
+                  </select>
                 </td>
 
                 <!-- Hành động -->

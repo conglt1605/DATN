@@ -10,10 +10,12 @@
   <link rel="stylesheet" href="../assets/css/styles.min.css" />
   <link rel="stylesheet" href="../assets/css/main.css">
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
-  <script src="../assets/js/thuonghieu.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+  <script src="../assets/js/thuonghieu.js"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+  <!-- Font Awesome -->
 </head>
 
 <body ng-controller="BrandController">
@@ -28,8 +30,9 @@
       <div ng-include="'../Layout/Header.html'"></div>
       <div class="container-fluid">
         <h1 class="text-center mb-4">QUẢN LÝ THƯƠNG HIỆU</h1>
-        <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addModal">Thêm Thương
-          Hiệu</button>
+        <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addModal">
+          <i class="fas fa-plus-circle"></i> Thêm Thương Hiệu
+        </button>
 
         <!-- Modal Thêm Thương Hiệu -->
         <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
@@ -43,9 +46,11 @@
                 <form id="addBrandForm" ng-submit="addBrand()">
                   <div class="mb-3">
                     <label for="brandName" class="form-label">Tên Thương Hiệu</label>
-                    <input type="text" class="form-control" ng-model="newBrand.brandName" required>
+                    <input type="text" class="form-control" ng-model="newBrand.brandName">
                   </div>
-                  <button type="submit" class="btn btn-primary">Lưu</button>
+                  <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-save"></i> Lưu
+                  </button>
                 </form>
               </div>
             </div>
@@ -75,21 +80,31 @@
 
                 <!-- Hiển thị trạng thái -->
                 <td>
-                  <span ng-class="{'badge bg-success': brand.status == 1, 'badge bg-danger': brand.status != 1}">
+                  <span ng-if="!brand.isEditing" class="badge"
+                    ng-class="{'bg-success': brand.status == 1, 'bg-danger': brand.status != 1}">
                     {{ brand.status == 1 ? 'Hoạt Động' : 'Ngưng Hoạt Động' }}
                   </span>
+                  <select ng-if="brand.isEditing" class="form-select" ng-model="brand.status">
+                    <option value="1">Hoạt Động</option>
+                    <option value="0">Ngưng Hoạt Động</option>
+                  </select>
                 </td>
 
                 <!-- Hành động -->
                 <td class="text-center">
                   <button type="button" class="btn btn-warning btn-sm" ng-click="toggleEdit(brand)">
+                    <i class="fas" ng-class="{'fa-save': brand.isEditing, 'fa-edit': !brand.isEditing}"></i>
                     {{ brand.isEditing ? 'Lưu' : 'Sửa' }}
                   </button>
 
                   <button type="button" class="btn btn-secondary btn-sm" ng-if="brand.isEditing"
-                    ng-click="cancelEdit(brand)">Hủy</button>
+                    ng-click="cancelEdit(brand)">
+                    <i class="fas fa-times"></i> Hủy
+                  </button>
 
-                  <button type="button" class="btn btn-danger btn-sm" ng-click="deleteBrand(brand.id)">Xóa</button>
+                  <button type="button" class="btn btn-danger btn-sm" ng-click="deleteBrand(brand.id)">
+                    <i class="fas fa-trash"></i> Xóa
+                  </button>
                 </td>
               </tr>
             </tbody>
@@ -108,7 +123,6 @@
   <script src="../assets/libs/apexcharts/dist/apexcharts.min.js"></script>
   <script src="../assets/libs/simplebar/dist/simplebar.js"></script>
   <script src="../assets/js/dashboard.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
 </body>
 
 </html>

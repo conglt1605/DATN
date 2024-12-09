@@ -85,6 +85,66 @@ app.controller("chiTietDonHangController", function ($scope, $http) {
     }
   };
 
+  $scope.updateProductQuantity = function (cthd, newQuantityFromUser) {
+    if (newQuantityFromUser !== undefined) {
+      // Kiểm tra nếu số lượng mới được nhập
+      const oldQuantity = cthd.quantity; // Lưu lại số lượng cũ trước khi thay đổi
+      const updatedQuantity = newQuantityFromUser; // Số lượng mới nhập từ người dùng
+
+      // Tính toán sự thay đổi số lượng
+      const quantityChange = updatedQuantity - oldQuantity;
+
+      // Cập nhật số lượng trong chi tiết sản phẩm
+      const updatedProductDetail = {
+        id: cthd.productDetail.id, // ID chi tiết sản phẩm
+        quantity: cthd.productDetail.quantity - quantityChange, // Điều chỉnh số lượng chi tiết sản phẩm
+      };
+
+      // Kiểm tra nếu số lượng chi tiết sản phẩm không âm
+      if (updatedProductDetail.quantity < 0) {
+        toastr.error("Số lượng sản phẩm không đủ để cập nhật.");
+        return;
+      }
+
+      // Gửi yêu cầu PUT để cập nhật số lượng trong chi tiết sản phẩm
+      $http
+        .put(
+          `http://localhost:8080/api/productdetail/update/quantity/${cthd.productDetail.id}`,
+          updatedProductDetail // Gửi một đối tượng ProductDetail thay vì mảng
+        )
+        .then(function (response) {
+          toastr.success("Số lượng trong chi tiết sản phẩm đã được cập nhật!");
+
+          // Cập nhật số lượng trong chi tiết hóa đơn
+          const updatedInvoiceDetail = {
+            id: cthd.id,
+            quantity: updatedQuantity,
+            currentPrice: cthd.currentPrice,
+            totalPrice: updatedQuantity * cthd.currentPrice, // Cập nhật tổng tiền
+          };
+
+          // Gửi yêu cầu PUT để cập nhật số lượng trong chi tiết hóa đơn
+          $http
+            .put(
+              `http://localhost:8080/api/invoicedetail/update/${cthd.id}`,
+              updatedInvoiceDetail
+            )
+            .then(function (response) {
+              toastr.success("Số lượng trong hóa đơn đã được cập nhật!");
+              $scope.loadChiTietHoaDon(); // Tải lại chi tiết hóa đơn để phản ánh thay đổi
+            })
+            .catch(function (error) {
+              toastr.error("Lỗi khi cập nhật số lượng trong hóa đơn.");
+              console.error(error);
+            });
+        })
+        .catch(function (error) {
+          toastr.error("Lỗi khi cập nhật số lượng chi tiết sản phẩm.");
+          console.error(error);
+        });
+    }
+  };
+
   $scope.printInvoice = function () {
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF();
@@ -253,6 +313,167 @@ app.controller("chiTietDonHangController", function ($scope, $http) {
         toastr.error(errorMessage);
         console.error(error);
       });
+  };
+
+  $scope.cancelInvoice = function (invoice) {
+    const confirmCancel = confirm(
+      `Bạn có chắc chắn muốn hủy đơn hàng với mã: ${invoice.invoiceCode}?`
+    );
+
+    if (!confirmCancel) {
+      toastr.info("Bạn đã hủy thao tác hủy đơn.");
+      return;
+    }
+
+    // Gửi yêu cầu cập nhật trạng thái hủy lên server
+    $http
+      .put(`http://localhost:8080/api/invoice/updateStatus/${invoice.id}`, {
+        status: 5, // Trạng thái hủy
+      })
+      .then(function (response) {
+        toastr.success("Đơn hàng đã được hủy thành công!");
+        invoice.status = 5; // Cập nhật trạng thái trong giao diện
+      })
+      .catch(function (error) {
+        const errorMessage = error.data?.error || "Lỗi khi hủy đơn hàng.";
+        toastr.error(errorMessage);
+        console.error(error);
+      });
+  };
+
+  $scope.openEditInvoiceModal = function () {
+    const modal = new bootstrap.Modal(
+      document.getElementById("editInvoiceModal")
+    );
+    modal.show();
+  };
+
+  $scope.updateInvoice = function () {
+    $http
+      .put(
+        `http://localhost:8080/api/invoice/update/${$scope.invoice.id}`,
+        $scope.invoice
+      )
+      .then(function (response) {
+        toastr.success("Cập nhật thông tin đơn hàng thành công!");
+        const modal = bootstrap.Modal.getInstance(
+          document.getElementById("editInvoiceModal")
+        );
+        modal.hide();
+      })
+      .catch(function (error) {
+        toastr.error("Lỗi khi cập nhật đơn hàng.");
+        console.error(error);
+      });
+  };
+
+  // Hàm mở modal thêm sản phẩm
+  $scope.openAddProductModal = function () {
+    // Lấy danh sách sản phẩm có trạng thái là 1
+    $http
+      .get("http://localhost:8080/api/productdetail/all")
+      .then(function (response) {
+        if (response.data.Success) {
+          // Lọc sản phẩm có trạng thái là 1
+          $scope.availableProductdetails = response.data.Success.filter(
+            (productdetail) => productdetail.status === 1
+          );
+          // Mở modal
+          console.log(response);
+          const modal = new bootstrap.Modal(
+            document.getElementById("addProductModal")
+          );
+          modal.show();
+        } else {
+          toastr.error("Không có dữ liệu sản phẩm", "Thông báo");
+        }
+      })
+      .catch(function () {
+        toastr.error("Lỗi khi lấy danh sách sản phẩm", "Thông báo");
+      });
+  };
+
+  $scope.addProductToInvoice = function (selectedProduct) {
+    // Khởi tạo mặc định nếu chưa có invoiceDetails
+    if (!$scope.invoiceDetails) {
+      $scope.invoiceDetails = [];
+    }
+
+    // Lấy số lượng đã nhập từ ô nhập liệu (hoặc giá trị mặc định là 1)
+    const selectedQuantity = selectedProduct.selectedQuantity || 1;
+
+    // Kiểm tra số lượng có hợp lệ không
+    if (selectedQuantity < 1 || selectedQuantity > selectedProduct.quantity) {
+      toastr.error(
+        "Số lượng không hợp lệ hoặc vượt quá số lượng sản phẩm trong kho",
+        "Thông báo"
+      );
+      return;
+    }
+
+    // Tìm trong chi tiết hóa đơn xem sản phẩm này đã có chưa
+    const existingProduct = $scope.invoiceDetails.find(function (detail) {
+      return detail.productDetail.id === selectedProduct.id;
+    });
+
+    if (existingProduct) {
+      // Nếu đã có sản phẩm này trong chi tiết hóa đơn, cộng số lượng
+      existingProduct.quantity += selectedQuantity;
+      existingProduct.totalPrice =
+        existingProduct.quantity * existingProduct.currentPrice;
+
+      // Cập nhật lại chi tiết hóa đơn trong backend
+      $http
+        .put(
+          `http://localhost:8080/api/invoicedetail/update/${existingProduct.id}`,
+          existingProduct
+        )
+        .then(function (response) {
+          toastr.success("Sản phẩm đã được cập nhật số lượng!");
+          $scope.loadChiTietHoaDon(); // Tải lại chi tiết hóa đơn
+        })
+        .catch(function (error) {
+          toastr.error("Lỗi khi cập nhật sản phẩm trong chi tiết hóa đơn.");
+          console.error(error.data); // In lỗi chi tiết từ backend
+        });
+    } else {
+      // Nếu chưa có sản phẩm này trong chi tiết hóa đơn, thêm mới
+      const newProductDetail = {
+        productDetailId: selectedProduct.productDetailId || selectedProduct.id,
+        quantity: selectedQuantity,
+        currentPrice: selectedProduct.price,
+        totalPrice: selectedQuantity * selectedProduct.price,
+        status: 1, // Bạn có thể sửa status tùy theo yêu cầu
+        invoiceId: $scope.invoice.id,
+      };
+
+      // Gọi API để thêm sản phẩm vào chi tiết hóa đơn
+      $http
+        .post(
+          `http://localhost:8080/api/invoicedetail/add/${$scope.invoice.id}`,
+          newProductDetail
+        )
+        .then(function (response) {
+          toastr.success("Sản phẩm đã được thêm vào chi tiết hóa đơn!");
+          $scope.loadChiTietHoaDon(); // Tải lại chi tiết hóa đơn
+          const modal = bootstrap.Modal.getInstance(
+            document.getElementById("addProductModal")
+          );
+          modal.hide(); // Ẩn modal sau khi thêm sản phẩm
+        })
+        .catch(function (error) {
+          toastr.error("Lỗi khi thêm sản phẩm vào chi tiết hóa đơn.");
+          console.error(error.data); // In lỗi chi tiết từ backend
+        });
+    }
+
+    // Cập nhật số lượng còn lại trong giỏ hàng
+    selectedProduct.quantity -= selectedQuantity;
+
+    // Nếu số lượng còn lại < 0, thông báo lỗi để người dùng chỉnh sửa lại số lượng
+    if (selectedProduct.quantity < 0) {
+      toastr.error("Số lượng sản phẩm trong giỏ hàng không đủ.", "Lỗi");
+    }
   };
 
   // Khởi chạy

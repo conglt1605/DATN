@@ -51,23 +51,29 @@ app.controller("MaterialController", function ($scope, $http) {
   $scope.updateMaterial = function (material) {
     if (!material.materialName) {
       toastr.error("Vui lòng nhập tên chất liệu", "Thông báo");
-      return;
-    }
+      material.isEditing = true; // Giữ chế độ chỉnh sửa lại
+    } else {
+      var updatedMaterial = {
+        materialName: material.materialName,
+        status: material.status,
+      };
 
-    $http({
-      method: "PUT",
-      url: "http://localhost:8080/api/material/update/" + material.id,
-      data: material,
-    }).then(
-      function () {
-        toastr.success("Chất liệu đã được cập nhật", "Thông báo");
-        $scope.getAllMaterials();
-        material.isEditing = false; // Tắt chế độ chỉnh sửa
-      },
-      function () {
-        toastr.error("Lỗi khi cập nhật chất liệu", "Thông báo");
-      }
-    );
+      // Gửi dữ liệu cập nhật lên API
+      $http({
+        method: "PUT",
+        url: "http://localhost:8080/api/material/update/" + material.id,
+        data: updatedMaterial,
+      }).then(
+        function () {
+          toastr.success("Chất liệu đã được cập nhật", "Thông báo");
+          $scope.getAllMaterials(); // Tải lại danh sách chất liệu
+          material.isEditing = false; // Tắt chế độ chỉnh sửa
+        },
+        function () {
+          toastr.error("Lỗi khi cập nhật chất liệu", "Thông báo");
+        }
+      );
+    }
   };
 
   // Xóa chất liệu
@@ -97,6 +103,7 @@ app.controller("MaterialController", function ($scope, $http) {
   // Hủy chỉnh sửa
   $scope.cancelEdit = function (material) {
     material.isEditing = false;
+    $scope.getAllMaterials();
   };
 
   // Khởi tạo - Gọi API khi trang được tải
