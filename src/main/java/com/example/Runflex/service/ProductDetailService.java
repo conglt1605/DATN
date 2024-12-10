@@ -130,4 +130,37 @@ public class ProductDetailService implements IProductDetailService {
         }
         return ResponseEntity.ok(Map.of("Success", materials));
     }
+
+@Override
+public ResponseEntity<?> findPriceMinMax(Long productID) {
+    // Lấy danh sách giá trị từ repository
+    List<Map<String, Object>> prices = productDetailRepository.findPriceMinMax(productID);
+
+    // Kiểm tra nếu không có dữ liệu
+    if (prices == null || prices.isEmpty()) {
+        return ResponseEntity.badRequest()
+                .body(Map.of("error", "Không tìm thấy chi tiết sản phẩm với ProductID: " + productID));
+    }
+
+    // Lấy giá trị đầu tiên từ danh sách
+    Map<String, Object> priceData = prices.get(0);
+
+    // Kiểm tra các trường trả về từ database
+    if (!priceData.containsKey("MinPrice") || !priceData.containsKey("MaxPrice")) {
+        return ResponseEntity.badRequest()
+                .body(Map.of("error", "Dữ liệu trả về từ cơ sở dữ liệu không hợp lệ"));
+    }
+
+    // Chuyển đổi giá trị
+    Double minPrice = ((Number) priceData.get("MinPrice")).doubleValue();
+    Double maxPrice = ((Number) priceData.get("MaxPrice")).doubleValue();
+
+    // Trả về giá trị phù hợp
+    if (minPrice.equals(maxPrice)) {
+        return ResponseEntity.ok(Map.of("Success", Map.of("Price", minPrice)));
+    }
+
+    return ResponseEntity.ok(Map.of("Success", Map.of("MinPrice", minPrice, "MaxPrice", maxPrice)));
+}
+
 }

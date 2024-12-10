@@ -4110,3 +4110,139 @@ button.active {
     border: 1px solid #ccc;
     border-radius: 4px;
 }
+
+.sidebar-fix {
+    position: sticky;
+    top: 50px;
+}
+
+.process-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.process-item {
+    cursor: pointer;
+    padding: 10px 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 0 10px;
+}
+
+.process-item.active {
+    background-color: #f0f0f0;
+}
+
+.order-table {
+    margin-top: 30px;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.order-table th,
+.order-table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.order-table th {
+    background-color: #f2f2f2;
+}
+
+.order-table .view-btn {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.sidebar {
+    width: 200px;
+    background-color: #f1f1f1;
+    padding: 20px;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    overflow-x: hidden;
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.name {
+    font-weight: bold;
+}
+
+.menu-items {
+    list-style-type: none;
+    padding: 0;
+}
+
+.menu-items li {
+    margin-bottom: 10px;
+}
+
+.menu-items a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #333;
+}
+
+.menu-items i {
+    margin-right: 10px;
+}
+
+
+/* Modal header cải tiến */
+
+.modal-header {
+    border-bottom: 1px solid #dee2e6;
+}
+
+.modal-header h5 {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+
+/* Body văn bản */
+
+.modal-body p {
+    font-size: 1rem;
+    margin: 0;
+}
+
+
+/* Giao diện nút */
+
+.modal-footer .btn {
+    border-radius: 5px;
+    font-size: 0.9rem;
+}
+
+
+/* Shadow */
+
+.modal-content {
+    border-radius: 10px;
+    border: none;
+}

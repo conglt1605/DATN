@@ -32,7 +32,7 @@
                 <th>Tạm tính</th>
             </tr>
         </thead>
-        <tbody ng-repeat="product in lstOrderProduct" ng-if="product.selected === true">
+        <tbody ng-repeat="product in lstOrderProduct track by product.productDetai.id" ng-if="product.selected === true">
             <tr>
                 <td>{{product.productDetai.productName}} - Size: {{product.productDetai.sizeNumber}} - {{product.productDetai.colorName}} - Chất liệu: {{product.productDetai.materialName}}</td>
                 <td>{{product.quantity}}</td>
@@ -49,6 +49,6 @@
         </tfoot>
     </table>
     <div class="text-center mt-4">
-        <button type="button" class="btn btn-primary" ng-click="submitPayment()">Xác nhận thanh toán</button>
+        <button type="button" class="btn btn-primary" ng-click="submitPayment()">Xác nhận đặt hàng</button>
     </div>
 </div>

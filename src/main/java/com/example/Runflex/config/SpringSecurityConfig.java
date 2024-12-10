@@ -41,21 +41,26 @@ public class SpringSecurityConfig {
                 .authorizeHttpRequests()
                 // Các endpoint không yêu cầu xác thực
                 .requestMatchers(
+                        "/error",
                         "/user/authenticate",
                         "/user/register",
-                        "category/active",
-                        "usageobject/active",
-                        "size/active",
-                        "brand/active",
-                        "product/page",
-                        "productdetail/getProducDetail",
-                        "productdetail/getMaterialByProductID",
-                        "productdetail/getSizeByProductID",
-                        "productdetail/getColorByProductID"
+                        "/user/logout",
+                        "/category/active",
+                        "/usageobject/active",
+                        "/size/active",
+                        "/brand/active",
+                        "/product/page",
+                        "/productdetail/getProducDetail",
+                        "/productdetail/getMaterialByProductID",
+                        "/productdetail/getSizeByProductID",
+                        "/productdetail/getColorByProductID",
+                        "/productdetail/priceMinMax"
                 ).permitAll()
                 // Quyền của Customer
                 .requestMatchers(
-                         "/invoice/saveWithDetails"
+                         "/invoice/saveWithDetails",
+                        "/invoice/invoiceWithUser",
+                        "/invoice/invoiceWithDetail"
                 ).hasAnyAuthority("Customer") // Chỉ có Customer
 
                 // Quyền của Admin

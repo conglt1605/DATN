@@ -41,7 +41,7 @@ public interface ProductDetailRepository extends JpaRepository<ProductDetail, Lo
     ProductDetailDto getProductDetail(Long sizeId, Long productId, Long colorId, Long materialId);
 
     //Gọi màu theo sản phẩm
-    @Query(value="SELECT pd.colorID, c.colorName "
+    @Query(value = "SELECT pd.colorID, c.colorName "
             + "FROM productdetail pd "
             + "JOIN color c ON pd.colorID = c.id "
             + "WHERE pd.productID = :productID "
@@ -50,21 +50,29 @@ public interface ProductDetailRepository extends JpaRepository<ProductDetail, Lo
     List<Map<String, Object>> GetColorByProductID(@Param("productID") Long productID);
 
     //Gọi kích cỡ theo sản phẩm
-        @Query(value="SELECT pd.sizeID, s.sizeNumber "
+    @Query(value = "SELECT pd.sizeID, s.sizeNumber "
             + "FROM productdetail pd "
             + "JOIN size s ON pd.sizeID = s.id "
             + "WHERE pd.productID = :productID "
             + "GROUP BY pd.SizeID,s.sizeNumber",
             nativeQuery = true)
     List<Map<String, Object>> GetSizeByProductID(@Param("productID") Long productID);
-    
-    
+
     //GỌi chất liệu theo sản phẩm
-        @Query(value="SELECT pd.materialID, m.materialName "
+    @Query(value = "SELECT pd.materialID, m.materialName "
             + "FROM productdetail pd "
             + "JOIN material m ON pd.materialID = m.id "
             + "WHERE pd.productID = :productID "
             + "GROUP BY pd.materialID,m.materialName",
             nativeQuery = true)
     List<Map<String, Object>> GetMaterialByProductID(@Param("productID") Long productID);
+
+    //tìm giá thấp nhất và cao nhất 
+    @Query(value = "SELECT ProductID, MIN(Price) AS MinPrice, MAX(Price) AS MaxPrice "
+            + "FROM productdetail "
+            + "WHERE ProductID = :productID "
+            + "GROUP BY ProductID", 
+            nativeQuery = true)
+    List<Map<String, Object>> findPriceMinMax(@Param("productID") Long productID);
+
 }

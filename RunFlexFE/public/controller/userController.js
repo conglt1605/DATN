@@ -1,0 +1,1 @@
+app.controller("UserController", function ($scope, $http, $location) {});

@@ -69,5 +69,8 @@ public class ProductDetailController {
         return productDetailService.GetMaterialByProductID(productID);
     }
     
-    
+        @GetMapping("/priceMinMax")
+    public ResponseEntity<?> getPriceMinMax(@RequestParam Long productID) {
+        return productDetailService.findPriceMinMax(productID);
+    }
 }

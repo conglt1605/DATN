@@ -5,6 +5,7 @@
 package com.example.Runflex.controller;
 
 import com.example.Runflex.dto.LoginDto;
+import com.example.Runflex.dto.LogoutDto;
 import com.example.Runflex.dto.RegisterDto;
 import com.example.Runflex.service.impl.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,5 +32,10 @@ public class UserController {
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody RegisterDto registerDto){
         return userService.register(registerDto);
+    }
+    
+        @PostMapping("/logout")
+    public ResponseEntity<?> logout(@RequestBody LogoutDto logoutDto) {
+        return userService.logout(logoutDto);
     }
 }

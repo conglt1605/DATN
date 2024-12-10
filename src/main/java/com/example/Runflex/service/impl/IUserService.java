@@ -5,6 +5,7 @@
 package com.example.Runflex.service.impl;
 
 import com.example.Runflex.dto.LoginDto;
+import com.example.Runflex.dto.LogoutDto;
 import com.example.Runflex.dto.RegisterDto;
 import org.springframework.http.ResponseEntity;
 
@@ -17,4 +18,5 @@ public interface IUserService {
     ResponseEntity<?> authenticate(LoginDto loginDto);
 
     ResponseEntity<?> register(RegisterDto registerDto);
+    ResponseEntity<?> logout(LogoutDto logoutDto);
 }

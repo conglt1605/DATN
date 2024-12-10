@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Sơ đồ quy trình</title>
+    <style>
+        .container {
+            margin-top: 50px;
+        }
+        
+        .sidebar-fix {
+            position: sticky;
+            top: 50px;
+        }
+        
+        .process-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        
+        .process-item {
+            cursor: pointer;
+            padding: 10px 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin: 0 10px;
+        }
+        
+        .process-item.active {
+            background-color: #f0f0f0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 col-sm-12 col-xs-12 sidebar-fix">
+                <!-- Sidebar content -->
+            </div>
+            <div class="col-md-9 col-sm-12 col-xs-12">
+                <div class="process-container">
+                    <div class="process-item" data-status="Tất cả">Tất cả</div>
+                    <div class="process-item" data-status="Chờ xác nhận">Chờ xác nhận</div>
+                    <div class="process-item" data-status="Chờ lấy hàng">Chờ lấy hàng</div>
+                    <div class="process-item" data-status="Đang giao">Đang giao</div>
+                    <div class="process-item" data-status="Đã giao">Đã giao</div>
+                    <div class="process-item" data-status="Đã Hủy">Đã Hủy</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Lấy tất cả các phần tử process-item
+        const processItems = document.querySelectorAll('.process-item');
+
+        // Thêm sự kiện click vào các phần tử
+        processItems.forEach((item) => {
+            item.addEventListener('click', handleProcessItemClick);
+        });
+
+        // Xử lý sự kiện click trên các phần tử
+        function handleProcessItemClick(event) {
+            const targetElement = event.currentTarget;
+            const targetStatus = targetElement.dataset.status;
+
+            // Xóa class 'active' từ tất cả các phần tử
+            processItems.forEach((item) => {
+                item.classList.remove('active');
+            });
+
+            // Thêm class 'active' vào phần tử được click
+            targetElement.classList.add('active');
+
+            // Xử lý chức năng dựa trên trạng thái
+            switch (targetStatus) {
+                case 'Tất cả':
+                    // Xử lý chức năng Tất cả
+                    console.log('Chức năng Tất cả');
+                    break;
+                case 'Chờ xác nhận':
+                    // Xử lý chức năng Chờ xác nhận
+                    console.log('Chức năng Chờ xác nhận');
+                    break;
+                case 'Chờ lấy hàng':
+                    // Xử lý chức năng Chờ lấy hàng
+                    console.log('Chức năng Chờ lấy hàng');
+                    break;
+                case 'Đang giao':
+                    // Xử lý chức năng Đang giao
+                    console.log('Chức năng Đang giao');
+                    break;
+                case 'Đã giao':
+                    // Xử lý chức năng Đã giao
+                    console.log('Chức năng Đã giao');
+                    break;
+                case 'Đã Hủy':
+                    // Xử lý chức năng Đã Hủy
+                    console.log('Chức năng Đã Hủy');
+                    break;
+                default:
+                    // Xử lý trường hợp khác
+                    console.log('Không có chức năng tương ứng');
+            }
+        }
+    </script>
+</body>
+
+</html>

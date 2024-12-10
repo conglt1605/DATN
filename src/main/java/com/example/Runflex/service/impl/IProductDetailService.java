@@ -32,4 +32,6 @@ public interface IProductDetailService {
     ResponseEntity<?> GetSizeByProductID(Long productID);
     
     ResponseEntity<?> GetMaterialByProductID(Long productID);
+    
+    ResponseEntity<?> findPriceMinMax(Long productID);
 }

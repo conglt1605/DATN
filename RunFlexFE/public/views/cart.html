@@ -32,7 +32,8 @@
                         <span>Xóa</span>
                     </div>
                 </div>
-                <div class="product-cart d-flex" ng-repeat="order in lstOrderProduct">
+                <div class="product-cart d-flex" ng-repeat="order in lstOrderProduct track by order.productDetai.id">
+
                     <!-- Checkbox -->
                     <div class="one-eight text-center">
                         <div class="display-tc">

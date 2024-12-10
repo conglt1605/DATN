@@ -1,5 +1,6 @@
 app.controller("ProductDetailController", function ($scope, $http) {
   $scope.product = JSON.parse(localStorage.getItem("selectedProduct"));
+  console.log(product);
   $scope.lstOrderProduct =
     JSON.parse(localStorage.getItem("orderProduct")) || [];
   const apiSize = "http://localhost:8080/api/size/";

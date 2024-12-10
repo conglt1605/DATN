@@ -14,5 +14,7 @@ public interface IInvoiceDetailService {
     ResponseEntity<?> saveInvoiceDetails(List<InvoiceDetail> invoiceDetail);
     ResponseEntity<?> updateInvoiceDetail(Long id, InvoiceDetail invoiceDetail);
     ResponseEntity<?> deleteInvoiceDetail(Long id);
+    
+    
 }
 

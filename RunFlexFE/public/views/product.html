@@ -217,7 +217,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-3 col-sm-6 col-xs-6 col-6" ng-repeat="product in products">
+                <div class="col-md-3 col-sm-6 col-xs-6 col-6" ng-repeat="product in products" ng-init="getPriceMinMax(product)">
                     <div class="product-block" ng-click="selectProduct(product)">
                         <div class="product-img fade-box">
                             <a href="#" title="Adidas EQT Cushion ADV" class="img-resize">
@@ -235,12 +235,24 @@
                     {{product.productName}} -->
                                 </a>
                             </div>
-                            <div class="">
-                                <p class="">Thương hiệu: {{product.brandName}}</p>
+                            <div>
+                                <p>
+                                    <!-- Kiểm tra nếu có cả MinPrice và MaxPrice -->
+                                    <span ng-if="product.priceMinMax.MinPrice && product.priceMinMax.MaxPrice">
+            {{ product.priceMinMax.MinPrice }}đ - {{ product.priceMinMax.MaxPrice }} đ
+        </span>
+                                    <!-- Nếu không có MinPrice và MaxPrice, chỉ hiển thị giá duy nhất -->
+                                    <span ng-if="!product.priceMinMax.MinPrice || !product.priceMinMax.MaxPrice">
+            {{ product.priceMinMax.Price }} đ
+        </span>
+                                </p>
                             </div>
                             <div class="">
-                                <p class="">Loại giày: {{product.categoryName}} - {{product.usageObjectName}}</p>
+                                <p class="">
+                                    Thương hiệu: {{product.brandName}} <br> Loại giày: {{product.categoryName}} - {{product.usageObjectName}}
+                                </p>
                             </div>
+
                         </div>
                     </div>
                 </div>

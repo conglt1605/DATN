@@ -5,6 +5,7 @@
 package com.example.Runflex.controller;
 
 import com.example.Runflex.entity.Invoice;
+import com.example.Runflex.entity.InvoiceUser;
 import com.example.Runflex.service.InvoiceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -48,6 +49,16 @@ public class InvoiceController {
         @PostMapping("/saveWithDetails")
     public ResponseEntity<?> saveInvoiceWithDetails(@RequestBody Invoice invoice) {
         return invoiceService.saveInvoiceWithDetails(invoice);
+    }
+    
+    @GetMapping("/invoiceWithUser")
+    public ResponseEntity<?> getInvoiceWithUserId(@RequestParam Long userId){
+        return invoiceService.getInvoiceWithUserId(userId);
+    }
+    
+    @GetMapping("/invoiceWithDetail")
+    public ResponseEntity<?> getInvoiceWithDetail(@RequestParam Long invoiceId){
+        return invoiceService.getInvoiceWithDetail(invoiceId);
     }
 }
 

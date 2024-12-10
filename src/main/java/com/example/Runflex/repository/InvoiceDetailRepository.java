@@ -12,7 +12,10 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface InvoiceDetailRepository extends JpaRepository<InvoiceDetail, Long> {
-    
+
     @Query(value = "SELECT * FROM invoicedetail WHERE status = 1", nativeQuery = true)
     List<InvoiceDetail> getActiveInvoiceDetails();
+
+
+
 }

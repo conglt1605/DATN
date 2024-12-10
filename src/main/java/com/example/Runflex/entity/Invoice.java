@@ -22,6 +22,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.ManyToAny;
 
 /**
  *
@@ -54,4 +55,7 @@ public class Invoice {
 
     @OneToMany(mappedBy = "invoice", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<InvoiceDetail> invoiceDetails = new ArrayList<>();
+    
+        @OneToMany(mappedBy = "invoice", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<InvoiceUser> invoiceUsers = new ArrayList<>(); // Mối quan hệ với InvoiceUser
 }

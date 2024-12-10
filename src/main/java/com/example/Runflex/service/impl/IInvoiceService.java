@@ -5,6 +5,7 @@
 package com.example.Runflex.service.impl;
 
 import com.example.Runflex.entity.Invoice;
+import com.example.Runflex.entity.InvoiceUser;
 import org.springframework.http.ResponseEntity;
 
 /**
@@ -17,5 +18,7 @@ public interface IInvoiceService {
     ResponseEntity<?> updateInvoice(Long id, Invoice invoice);
     ResponseEntity<?> deleteInvoice(Long id);
     ResponseEntity<?> saveInvoiceWithDetails(Invoice invoice);
+    ResponseEntity<?> getInvoiceWithUserId(Long userId);
+    ResponseEntity<?> getInvoiceWithDetail(Long invoiceId);
 }
 
