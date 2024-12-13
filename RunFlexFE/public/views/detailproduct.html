@@ -103,7 +103,7 @@
 
                                         <li class="product-gallery-item gallery-item
                         current " id="imgg1a">
-                                            <img class="product-image-feature " src={{product.imgProduct}} alt="Nike Air Max 90 Essential" grape="">
+                                            <img class="product-image-feature " src={{product.imageURL}} alt="Nike Air Max 90 Essential" grape="">
                                         </li>
                                         <!-- 
                                         <li class="product-gallery-item gallery-item " id="imgg2a">
@@ -274,9 +274,8 @@
                                         <div class="mb-4">
                                             <label for="colors" class="option-label">Chọn Màu Sắc:</label>
                                             <div id="colors">
-                                                <button class="color-btn" ng-repeat="color in colors" ng-class="{'active': selectedColor === color.colorID}" ng-click="selectColor(color.colorID)" type="button">
-                {{color.colorName}}
-            </button>
+                                                <button class="color-btn" ng-repeat="color in colors" ng-class="{'active': selectedColor === color.colorID}" ng-click="selectColor(color.colorID)" ng-style="{'background-color': color.hexCode}" type="button">
+                                                </button>
                                             </div>
                                         </div>
 

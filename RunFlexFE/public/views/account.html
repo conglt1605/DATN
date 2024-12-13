@@ -6,8 +6,8 @@
                     <div class="block left-module">
                         <div class=" filter_xs">
                             <div class="profile">
-                                <img src="https://via.placeholder.com/50" alt="Avatar" class="avatar">
-                                <span class="name">Sửa Hồ Sơ</span>
+                                <img src="https://res.cloudinary.com/dvdgvw0lj/image/upload/v1733900015/56c14bbb-e695-48cf-b5e2-011d4c73e399.png" alt="Avatar" class="avatar">
+                                <span class="name">Lương Thành Công</span>
                             </div>
                             <div class="layered">
                                 <ul class="menu-items">
@@ -97,6 +97,18 @@
                                 <div class="col-sm-12 d-flex">
                                     <strong class="mr-2">Phương thức thanh toán:</strong>
                                     <p class="mb-0">{{selectedInvoice.PaymentMethod==1?'Thanh toán khi nhận hàng':'Chuyển khoản';}}</p>
+                                </div>
+                                <div class="col-sm-12 d-flex">
+                                    <strong class="mr-2">Người nhận hàng:</strong>
+                                    <p class="mb-0">{{selectedInvoice.ConsigneeName}}</p>
+                                </div>
+                                <div class="col-sm-12 d-flex">
+                                    <strong class="mr-2">Số điện thoại:</strong>
+                                    <p class="mb-0">{{selectedInvoice.PhoneNumber}}</p>
+                                </div>
+                                <div class="col-sm-12 d-flex">
+                                    <strong class="mr-2">Địa chỉ:</strong>
+                                    <p class="mb-0">{{selectedInvoice.DeliveryAddress}}</p>
                                 </div>
                                 <div class="col-sm-6">
                                     <strong class="mr-2">Trạng thái:</strong>

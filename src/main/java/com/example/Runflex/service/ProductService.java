@@ -5,6 +5,7 @@
 package com.example.Runflex.service;
 
 import com.example.Runflex.dto.ProductDto;
+import com.example.Runflex.dto.ProductFilterDto;
 import com.example.Runflex.entity.Product;
 import com.example.Runflex.repository.ProductRepository;
 import com.example.Runflex.service.impl.IProductService;
@@ -87,5 +88,29 @@ public class ProductService implements IProductService {
     public Page<ProductDto> getPageProducts(Pageable pageable) {
         return productRepository.getPageProducts(pageable);
     }
-}
 
+    public Page<ProductFilterDto> filterProducts(
+            Pageable pageable,
+            List<Long> categoryIds,
+            List<Long> brandIds,
+            List<Long> usageObjectIds,
+            List<Long> sizeIds,
+            List<Long> colorIds,
+            List<Long> materialIds,
+            String productName) {
+
+        // Xử lý giá trị null hoặc rỗng thành null để phù hợp với câu query
+        categoryIds = (categoryIds == null || categoryIds.isEmpty()) ? null : categoryIds;
+        brandIds = (brandIds == null || brandIds.isEmpty()) ? null : brandIds;
+        usageObjectIds = (usageObjectIds == null || usageObjectIds.isEmpty()) ? null : usageObjectIds;
+        sizeIds = (sizeIds == null || sizeIds.isEmpty()) ? null : sizeIds;
+        colorIds = (colorIds == null || colorIds.isEmpty()) ? null : colorIds;
+        materialIds = (materialIds == null || materialIds.isEmpty()) ? null : materialIds;
+        productName = (productName == null || productName.isBlank()) ? null : productName;
+           
+        return productRepository.filterProducts(pageable,categoryIds, brandIds, usageObjectIds, sizeIds, colorIds, materialIds, productName);
+
+    }
+
+
+}

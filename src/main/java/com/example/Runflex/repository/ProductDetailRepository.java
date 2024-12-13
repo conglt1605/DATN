@@ -4,13 +4,13 @@
  */
 package com.example.Runflex.repository;
 
-import com.example.Runflex.dto.ColorDto;
-import com.example.Runflex.dto.MaterialDto;
 import com.example.Runflex.dto.ProductDetailDto;
-import com.example.Runflex.dto.SizeDto;
+import com.example.Runflex.entity.Category;
 import com.example.Runflex.entity.ProductDetail;
 import java.util.List;
 import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -41,7 +41,7 @@ public interface ProductDetailRepository extends JpaRepository<ProductDetail, Lo
     ProductDetailDto getProductDetail(Long sizeId, Long productId, Long colorId, Long materialId);
 
     //Gọi màu theo sản phẩm
-    @Query(value = "SELECT pd.colorID, c.colorName "
+    @Query(value = "SELECT pd.colorID, c.colorName, c.hexCode "
             + "FROM productdetail pd "
             + "JOIN color c ON pd.colorID = c.id "
             + "WHERE pd.productID = :productID "
@@ -75,4 +75,5 @@ public interface ProductDetailRepository extends JpaRepository<ProductDetail, Lo
             nativeQuery = true)
     List<Map<String, Object>> findPriceMinMax(@Param("productID") Long productID);
 
+    
 }

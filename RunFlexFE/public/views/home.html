@@ -25,7 +25,7 @@
         <!--Product-->
         <div class="container" style="padding-bottom: 50px;">
             <div class="row">
-                <div class="col-md-3 col-sm-6 col-xs-6 col-6" ng-repeat="product in products">
+                <div class="col-md-3 col-sm-6 col-xs-6 col-6" ng-repeat="product in products" ng-init="getPriceMinMax(product)">
                     <div class="product-block">
                         <div class="product-img fade-box">
                             <a href="#" title="Adidas EQT Cushion ADV" class="img-resize">
@@ -34,7 +34,7 @@
                             </a>
 
                         </div>
-                        <div class="product-detail clearfix">
+                        <div class="product-detail clearfix ">
                             <div class="pro-text">
                                 <a style=" color: black;
                                                     font-size: 14px;text-decoration: none;" href="#" title="Adidas EQT Cushion ADV" inspiration pack>
@@ -42,7 +42,16 @@
                   </a>
                             </div>
                             <div class="pro-price">
-                                <p class="">7,000,000₫</p>
+                                <p>
+                                    <!-- Kiểm tra nếu có cả MinPrice và MaxPrice -->
+                                    <span ng-if="product.priceMinMax.MinPrice && product.priceMinMax.MaxPrice">
+            {{ product.priceMinMax.MinPrice }}đ - {{ product.priceMinMax.MaxPrice }} đ
+        </span>
+                                    <!-- Nếu không có MinPrice và MaxPrice, chỉ hiển thị giá duy nhất -->
+                                    <span ng-if="!product.priceMinMax.MinPrice || !product.priceMinMax.MaxPrice">
+            {{ product.priceMinMax.Price }} đ
+        </span>
+                                </p>
                             </div>
                         </div>
                     </div>

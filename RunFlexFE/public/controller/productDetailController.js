@@ -108,7 +108,7 @@ app.controller("ProductDetailController", function ($scope, $http) {
       .then(function (response) {
         $scope.sizes = response.data.Success;
         $scope.selectedSize = $scope.sizes[0].sizeID;
-        console.log("sizes", $scope.sizes);
+        console.log("sizesbyPD", $scope.sizes);
         console.log("$scope.product:", $scope.product);
       })
       .catch(function (error) {
@@ -125,7 +125,7 @@ app.controller("ProductDetailController", function ($scope, $http) {
       .then(function (response) {
         $scope.colors = response.data.Success;
         $scope.selectedColor = $scope.colors[0].colorID;
-        console.log("colors", $scope.colors);
+        console.log("colorsByPD", $scope.colors);
       })
       .catch(function (error) {
         console.error("Lỗi khi lấy dữ liệu màu sắc:", error);
@@ -141,7 +141,7 @@ app.controller("ProductDetailController", function ($scope, $http) {
       .then(function (response) {
         $scope.materials = response.data.Success;
         $scope.selectedMaterial = $scope.materials[0].materialID;
-        console.log("materials", $scope.materials);
+        console.log("materialsByPD", $scope.materials);
       })
       .catch(function (error) {
         console.error("Lỗi khi lấy dữ liệu chất liệu:", error);

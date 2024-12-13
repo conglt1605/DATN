@@ -4,7 +4,6 @@
  */
 package com.example.Runflex.controller;
 
-import com.example.Runflex.dto.ColorDto;
 import com.example.Runflex.entity.ProductDetail;
 import com.example.Runflex.service.ProductDetailService;
 import org.springframework.beans.factory.annotation.Autowired;

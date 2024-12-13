@@ -5,9 +5,11 @@
 package com.example.Runflex.controller;
 
 import com.example.Runflex.dto.ProductDto;
+import com.example.Runflex.dto.ProductFilterDto;
 import com.example.Runflex.entity.Product;
 import com.example.Runflex.service.ProductService;
 import jakarta.websocket.server.PathParam;
+import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -60,7 +62,24 @@ public class ProductController {
         return ResponseEntity.ok(Map.of("Success",productDtos));
     }
     
-
+    @GetMapping("/filter")
+    public ResponseEntity<?> filterProducts(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "12") int size,
+            @RequestParam(required = false) List<Long> categoryIds,
+            @RequestParam(required = false) List<Long> brandIds,
+            @RequestParam(required = false) List<Long> usageObjectIds,
+            @RequestParam(required = false) List<Long> sizeIds,
+            @RequestParam(required = false) List<Long> colorIds,
+            @RequestParam(required = false) List<Long> materialIds,
+            @RequestParam(required = false) String productName) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<ProductFilterDto> productsFilterDto =  productService.filterProducts(pageable,categoryIds, brandIds, usageObjectIds, sizeIds, colorIds, materialIds, productName);
+                if(productsFilterDto.isEmpty()){
+            return ResponseEntity.ok(Map.of("error","Không tìm thấy sản phẩm","productsFilterDto",productsFilterDto));
+        }
+        return ResponseEntity.ok(Map.of("productsFilterDto",productsFilterDto));
+    }
     
 }
 

@@ -4,7 +4,7 @@ app.config(function($routeProvider, $locationProvider, $httpProvider) {
     $routeProvider
         .when("/home", {
             templateUrl: "views/home.html",
-            // controller: "ProductController",
+            controller: "ProductController",
         })
         .when("/detail", {
             templateUrl: "views/detailproduct.html",
@@ -30,6 +30,10 @@ app.config(function($routeProvider, $locationProvider, $httpProvider) {
         .when("/pay", {
             templateUrl: "views/pay.html",
             controller: "CartController",
+        })
+        .when("/test", {
+            templateUrl: "views/test.html",
+            // controller: "TestController",
         })
         .when("/account", {
             templateUrl: "views/account.html",
@@ -75,6 +79,7 @@ app.factory("AuthInterceptor", function($q, $window) {
                 "http://localhost:8080/api/productdetail/getProducDetail",
                 "http://localhost:8080/api/invoice/invoiceWithUser",
                 "http://localhost:8080/api/invoice/invoiceWithDetail",
+                "http://localhost:8080/api/color/active",
             ];
 
             if (token && protectedUrls.some((url) => config.url.includes(url))) {

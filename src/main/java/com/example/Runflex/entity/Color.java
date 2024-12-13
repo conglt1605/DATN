@@ -32,5 +32,6 @@ public class Color {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String colorName;
+    private String hexCode;
     private int status;
 }

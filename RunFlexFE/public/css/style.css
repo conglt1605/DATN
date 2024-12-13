@@ -4246,3 +4246,120 @@ button.active {
     border-radius: 10px;
     border: none;
 }
+
+.product-img {
+    position: relative;
+    text-align: center;
+    /* Căn giữa theo chiều ngang */
+}
+
+.product-img .pro-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* Căn giữa theo chiều dọc và ngang */
+    z-index: 2;
+    /* Đảm bảo chữ luôn ở trên hình */
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Nền mờ cho chữ */
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.product-img img {
+    width: 100%;
+    height: auto;
+    /* Giữ nguyên tỷ lệ hình ảnh */
+}
+
+
+/* Giới hạn kích thước ảnh */
+
+table img {
+    width: 50px;
+    /* Chiều rộng mong muốn (điều chỉnh theo ý bạn) */
+    height: 50px;
+    /* Chiều cao mong muốn */
+    object-fit: cover;
+    /* Cắt ảnh nếu cần để giữ tỷ lệ */
+    /* border-radius: 5px; */
+    /* Bo góc cho ảnh nếu cần */
+    display: block;
+    /* Đảm bảo ảnh không bị tràn */
+    margin: auto;
+    /* Căn giữa ảnh trong ô */
+}
+
+.check-box-list label {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    margin: 5px;
+    border: 2px solid transparent;
+    /* Viền mặc định không có */
+    border-radius: 5px;
+    /* Làm bo góc nếu cần */
+    cursor: pointer;
+    box-sizing: border-box;
+    transition: border 0.2s ease, transform 0.2s ease;
+    /* Hiệu ứng mượt */
+}
+
+
+/* Khi checkbox được chọn, thêm đường viền nổi bật */
+
+.check-box-list input[type="checkbox"]:checked+label {
+    border: 3px solid #000;
+    /* Đường viền đen */
+    transform: scale(1.1);
+    /* Phóng to nhẹ để nhấn mạnh */
+}
+
+
+/* Hiệu ứng hover (tùy chọn) */
+
+.check-box-list label:hover {
+    border: 2px solid rgba(0, 0, 0, 0.5);
+}
+
+
+/* Ẩn checkbox gốc */
+
+.check-box-list input[type="checkbox"] {
+    display: none;
+}
+
+.pagination ul {
+    display: flex;
+    list-style: none;
+    justify-content: center;
+    padding: 0;
+    margin: 20px 0;
+}
+
+.pagination li {
+    margin: 0 5px;
+}
+
+.pagination li a {
+    display: block;
+    padding: 5px 10px;
+    border: 1px solid #ddd;
+    text-decoration: none;
+    color: #333;
+}
+
+.pagination li.active a {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+
+.pagination li.disabled a {
+    pointer-events: none;
+    opacity: 0.5;
+}

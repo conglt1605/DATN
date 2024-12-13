@@ -36,7 +36,7 @@
                       href="#collapseExample1" role="button" aria-expanded="false"
                       aria-controls="collapseExample1"></i></span>
                                 </div>
-                                <div class="block_content layered-category collapse" id="collapseExample1">
+                                <!-- <div class="block_content layered-category collapse" id="collapseExample1">
                                     <div class="layered-content card card-body" style="border:0;padding:0">
                                         <ul class="menuList-links">
                                             <li class="has-submenu level0 ">
@@ -53,7 +53,7 @@
                                             </li>
                                         </ul>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                             <div class="layered">
                                 <p class="title_block d-block d-sm-none d-none d-sm-block d-md-none" data-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample2">
@@ -63,14 +63,51 @@
                       aria-controls="collapseExample2"></i></span>
                                 </p>
                                 <div class="block_content collapse" id="collapseExample2">
+
+                                    <!-- Mục thương hiệu  -->
                                     <div class="group-filter card card-body" style="border:0;padding:0" aria-expanded="true">
                                         <div class="layered_subtitle dropdown-filter">
-                                            <span>Thương hiệu</span>
+                                            <b>Thương hiệu</b><br>
                                             <span class="" ng-repeat="brand in brands">
-                                                <li><a href="">{{brand.brandName}}</a></li>
+                                                <input type="checkbox" id="brand-{{brand.id}}" ng-model="selectedBrands[brand.id]" ng-change="updateFilter()">
+                                                <label for="brand-{{brand.id}}">{{brand.brandName}}</label><br>
                                             </span>
                                         </div>
                                     </div>
+
+                                    <!-- Danh mục -->
+                                    <div class="group-filter card card-body" style="border:0;padding:0" aria-expanded="true">
+                                        <div class="layered_subtitle dropdown-filter">
+                                            <b>Danh mục</b><br>
+                                            <span class="" ng-repeat="category in categorys">
+                                                <input type="checkbox" id="category-{{category.id}}" ng-model="selectedUsageObjects[category.id]" ng-change="updateFilter()">
+                                                <label for="category-{{category.id}}">{{category.categoryName}}</label><br>
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    <!-- Đối tượng sử dụng -->
+                                    <div class="group-filter card card-body" style="border:0;padding:0" aria-expanded="true">
+                                        <div class="layered_subtitle dropdown-filter">
+                                            <b>Đối tượng sử dụng</b><br>
+                                            <span class="" ng-repeat="usageobject in usageobjects">
+                                                <input type="checkbox" id="usageobject-{{usageobject.id}}" ng-model="selectedUsageObjects[usageobject.id]" ng-change="updateFilter()">
+                                                <label for="usageobject-{{usageobject.id}}">{{usageobject.usageObjectName}}</label><br>
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    <!-- Chất liệu -->
+                                    <div class="group-filter card card-body" style="border:0;padding:0" aria-expanded="true">
+                                        <div class="layered_subtitle dropdown-filter">
+                                            <b>Chất liệu</b><br>
+                                            <span class="" ng-repeat="material in materials">
+                                                <input type="checkbox" id="material-{{material.id}}" ng-model="selectedMaterials[material.id]" ng-change="updateFilter()">
+                                                <label for="material-{{material.id}}">{{material.materialName}}</label><br>
+                                            </span>
+                                        </div>
+                                    </div>
+
                                     <div class="group-filter" aria-expanded="true">
                                         <div class="layered_subtitle dropdown-filter"><span>Giá sản phẩm</span><span class="icon-control"><i class="fa fa-minus"></i></span></div>
                                         <div class="layered-content bl-filter filter-price">
@@ -114,49 +151,9 @@
                             class="fa fa-minus"></i></span></div>
                                         <div class="layered-content filter-color s-filter">
                                             <ul class="check-box-list">
-                                                <li>
-                                                    <input type="checkbox" id="data-color-p1">
-                                                    <label for="data-color-p1" style="background-color: #fb4727"></label>
-                                                </li>
-                                                <li>
-                                                    <input type="checkbox" id="data-color-p2">
-                                                    <label for="data-color-p2" style="background-color: #fdfaef"></label>
-                                                </li>
-                                                <li>
-                                                    <input type="checkbox" id="data-color-p3">
-                                                    <label for="data-color-p3" style="background-color: #3e3473"></label>
-                                                </li>
-                                                <li>
-                                                    <input type="checkbox" id="data-color-p4">
-                                                    <label for="data-color-p4" style="background-color: #ffffff"></label>
-                                                </li>
-                                                <li>
-                                                    <input type="checkbox" id="data-color-p5">
-                                                    <label for="data-color-p5" style="background-color: #75e2fb"></label>
-                                                </li>
-                                                <li>
-                                                    <input type="checkbox" id="data-color-p6">
-                                                    <label for="data-color-p6" style="background-color: #cecec8"></label>
-                                                </li>
-                                                <li>
-                                                    <input type="checkbox" id="data-color-p7">
-                                                    <label for="data-color-p7" style="background-color: #6daef4"></label>
-                                                </li>
-                                                <li>
-                                                    <input type="checkbox" id="data-color-p8">
-                                                    <label for="data-color-p8" style="background-color: #000000"></label>
-                                                </li>
-                                                <li>
-                                                    <input type="checkbox" id="data-color-p9">
-                                                    <label for="data-color-p9" style="background-color: #e2262a"></label>
-                                                </li>
-                                                <li>
-                                                    <input type="checkbox" id="data-color-p10">
-                                                    <label for="data-color-p10" style="background-color: #ee8aa1"></label>
-                                                </li>
-                                                <li>
-                                                    <input type="checkbox" id="data-color-p11">
-                                                    <label for="data-color-p11" style="background-color: #4a5250"></label>
+                                                <li ng-repeat="color in colors">
+                                                    <input type="checkbox" id="color-{{color.id}}" ng-model="selectedColors[color.id]" ng-change="updateFilter()">
+                                                    <label for="color-{{color.id}}" ng-style="{'background-color': color.hexCode}"></label>
                                                 </li>
                                             </ul>
                                         </div>
@@ -169,8 +166,8 @@
                                             <ul class="check-box-list clearfix">
 
                                                 <li ng-repeat="size in sizes">
-                                                    <input type="checkbox" id="data-size-p1">
-                                                    <label for="data-size-p1">{{size.sizeNumber}}</label>
+                                                    <input type="checkbox" id="size-{{size.id}}" ng-model="selectedSizes[size.id]" ng-change="updateFilter()">
+                                                    <label for="size-{{size.id}}">{{size.sizeNumber}}</label>
                                                 </li>
 
 
@@ -216,13 +213,14 @@
                     </div>
                 </div>
             </div>
+
             <div class="row">
-                <div class="col-md-3 col-sm-6 col-xs-6 col-6" ng-repeat="product in products" ng-init="getPriceMinMax(product)">
+                <div class="col-md-3 col-sm-6 col-xs-6 col-6" ng-repeat="product in productsFilters" ng-init="getPriceMinMax(product)">
                     <div class="product-block" ng-click="selectProduct(product)">
                         <div class="product-img fade-box">
                             <a href="#" title="Adidas EQT Cushion ADV" class="img-resize">
-                                <img src={{product.imgProduct}} class="lazyloaded">
-                                <img src={{product.imgProduct}} class="lazyloaded">
+                                <img src={{product.imageURL}} class="lazyloaded">
+                                <img src={{product.imageURL}} class="lazyloaded">
                             </a>
 
                         </div>
@@ -257,18 +255,26 @@
                     </div>
                 </div>
             </div>
-            <div class="sortpagibar pagi clearfix text-center">
-                <div id="pagination" class="clearfix">
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <span class="page-node current">1</span>
-                        <a class="page-node" href="">2</a>
-                        <a class="next" href="">
-                            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 31 10" style="enable-background:new 0 0 31 10; width: 31px; height: 10px;" xml:space="preserve">
-                  <polygon points="31,5 25,0 25,4 0,4 0,6 25,6 25,10 "></polygon>
-                </svg> </a>
-                    </div>
-                </div>
+            <div class="pagination">
+                <ul class="pagination">
+                    <li ng-click="findProducts(0)" ng-class="{disabled: number === 0}">
+                        <a href="#"><i class="fas fa-angle-double-left"></i></a>
+                    </li>
+                    <li ng-click="findProducts(number-1)" ng-class="{disabled: number === 0}">
+                        <a href="#"><i class="fas fa-chevron-left"></i></a>
+                    </li>
+                    <li>
+                        <a href="#">{{number}}</a>
+                    </li>
+                    <li ng-click="findProducts(number+1)" ng-class="{disabled: number === totalPages-1}">
+                        <a href="#"><i class="fas fa-chevron-right"></i></a>
+                    </li>
+                    <li ng-click="findProducts(totalPages-1)" ng-class="{disabled: number === totalPages-1}">
+                        <a href="#"><i class="fas fa-angle-double-right"></i></a>
+                    </li>
+                </ul>
             </div>
+
         </div>
     </div>
 </div>

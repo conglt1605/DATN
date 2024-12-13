@@ -4,10 +4,7 @@
  */
 package com.example.Runflex.service;
 
-import com.example.Runflex.dto.ColorDto;
-import com.example.Runflex.dto.MaterialDto;
 import com.example.Runflex.dto.ProductDetailDto;
-import com.example.Runflex.dto.SizeDto;
 import com.example.Runflex.entity.ProductDetail;
 import com.example.Runflex.repository.ProductDetailRepository;
 import com.example.Runflex.service.impl.IProductDetailService;
