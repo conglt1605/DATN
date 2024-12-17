@@ -31,9 +31,17 @@ app.config(function($routeProvider, $locationProvider, $httpProvider) {
             templateUrl: "views/pay.html",
             controller: "CartController",
         })
+        .when("/buynow", {
+            templateUrl: "views/buyNow.html",
+            controller: "CartController",
+        })
         .when("/test", {
             templateUrl: "views/test.html",
             // controller: "TestController",
+        })
+        .when("/userinfo", {
+            templateUrl: "views/userInformation.html",
+            controller: "AccountController",
         })
         .when("/account", {
             templateUrl: "views/account.html",
@@ -80,6 +88,8 @@ app.factory("AuthInterceptor", function($q, $window) {
                 "http://localhost:8080/api/invoice/invoiceWithUser",
                 "http://localhost:8080/api/invoice/invoiceWithDetail",
                 "http://localhost:8080/api/color/active",
+                "http://localhost:8080/api/user/userById",
+                "http://localhost:8080/api/user/UpdateUser",
             ];
 
             if (token && protectedUrls.some((url) => config.url.includes(url))) {

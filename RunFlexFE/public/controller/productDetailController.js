@@ -15,6 +15,22 @@ app.controller("ProductDetailController", function ($scope, $http) {
   $scope.statusProduct = "Hết Hàng";
   $scope.quantityOder = 1;
   $scope.selected = false;
+
+  // Hàm mua ngay
+  $scope.buyNow = function (productDetai) {
+    productDetai.quantityOder = $scope.quantityOder;
+    // Kiểm tra xem có dữ liệu cũ trong localStorage không
+    if (localStorage.getItem("producBuyNow")) {
+      // Nếu có, thay thế dữ liệu cũ bằng dữ liệu mới
+      localStorage.setItem("producBuyNow", JSON.stringify(productDetai));
+    } else {
+      // Nếu chưa có, lưu dữ liệu mới vào localStorage
+      localStorage.setItem("producBuyNow", JSON.stringify(productDetai));
+    }
+    // Sau khi lưu vào localStorage, bạn có thể chuyển hướng người dùng đến trang chi tiết sản phẩm (nếu cần)
+    window.location.href = "/buynow";
+  };
+
   $scope.oderProduct = function (productDetai) {
     if ($scope.quantityOder === 0) {
       Swal.fire({

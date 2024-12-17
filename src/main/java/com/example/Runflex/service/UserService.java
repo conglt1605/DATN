@@ -132,4 +132,27 @@ public class UserService implements IUserService {
         return ResponseEntity.ok(Map.of("success", "Đăng xuất thành công."));
     }
 
+    @Override
+    public ResponseEntity<?> userById(long userId) {
+                User user = userRepository.findById(userId).orElseThrow();
+        if (user == null) {
+            return ResponseEntity.badRequest().body(Map.of("error", "Không tìm thấy tài khoản"));
+        }
+        return ResponseEntity.ok(Map.of("Success", user));
+    }
+
+    @Override
+    public ResponseEntity<?> updateUser(Long id,User user) {
+                User existingUser = userRepository.findById(id).orElse(null);
+        if (existingUser == null) {
+            return ResponseEntity.badRequest().body(Map.of("error", "Không tìm thấy người dùng"));
+        }
+        existingUser.setFullName(user.getFullName());
+        existingUser.setEmail(user.getEmail());
+        existingUser.setAddress(user.getAddress());
+        existingUser.setPhoneNumber(user.getPhoneNumber());
+        userRepository.save(existingUser);
+        return ResponseEntity.ok(Map.of("Success", "Cập nhật thông tin người dùng thành công"));
+    }
+
 }

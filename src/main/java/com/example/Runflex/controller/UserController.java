@@ -7,6 +7,7 @@ package com.example.Runflex.controller;
 import com.example.Runflex.dto.LoginDto;
 import com.example.Runflex.dto.LogoutDto;
 import com.example.Runflex.dto.RegisterDto;
+import com.example.Runflex.entity.User;
 import com.example.Runflex.service.impl.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -37,5 +39,15 @@ public class UserController {
         @PostMapping("/logout")
     public ResponseEntity<?> logout(@RequestBody LogoutDto logoutDto) {
         return userService.logout(logoutDto);
+    }
+    
+    @GetMapping("/userById")
+    public ResponseEntity<?> userById(@RequestParam("userId") long id){
+        return userService.userById(id);
+    }
+    
+    @PostMapping("/UpdateUser")
+    public ResponseEntity<?> updateUser(@RequestParam("userId") long userId, @RequestBody User user){
+        return userService.updateUser(userId, user);
     }
 }

@@ -1,17 +1,65 @@
 app.controller("AccountController", function($scope, $http, $location) {
     $scope.message = "Welcome to AccountController!";
     $scope.form = null;
-    const apiBaseUrl = "http://localhost:8080/api/user/";
+    const apiUser = "http://localhost:8080/api/user/";
     const apiInvoice = "http://localhost:8080/api/invoice/";
 
     ($scope.getInvoiceWithUserId = null),
     ($scope.userId = JSON.parse(localStorage.getItem("userId")));
     $scope.editMode = false;
 
+    $scope.userById = function() {
+        $http
+            .get(apiUser + "userById", { params: { userId: $scope.userId } })
+            .then(function(response) {
+                $scope.userById = response.data.Success;
+                console.log($scope.userById);
+            })
+            .catch(function(error) {
+                console.error("Lỗi khi tìm user", error);
+            });
+    };
+
+    $scope.updateUser = function() {
+        // Gửi yêu cầu POST với userId trong tham số truy vấn và đối tượng user trong body
+        $http
+            .post(
+                apiUser + "UpdateUser", // URL API
+                {
+                    // Body request chứa thông tin người dùng
+                    fullName: $scope.userById.fullName,
+                    email: $scope.userById.email,
+                    phoneNumber: $scope.userById.phoneNumber,
+                    address: $scope.userById.address,
+                }, {
+                    params: {
+                        // Truyền userId qua tham số truy vấn
+                        userId: $scope.userId,
+                    },
+                }
+            )
+            .then(function(response) {
+                $scope.success = response.data.Success;
+                console.log("Cập nhật thành công:", $scope.success);
+                if ($scope.success) {
+                    Swal.fire({
+                        icon: "success",
+                        title: "Cập nhật thành công!",
+                        text: "Thông tin người dùng đã được cập nhật.",
+                    }).then(() => {
+                        location.reload(); // Tải lại trang sau khi thông báo thành công
+                    });
+                }
+            })
+            .catch(function(error) {
+                console.error("Lỗi khi update người dùng:", error);
+            });
+    };
+
     $scope.signin = function() {
         // Gửi yêu cầu POST đến API
         $http
-            .post(apiBaseUrl + "authenticate", $scope.form)
+            .post(apiUser + "authenticate", $scope.form)
             .then(function(response) {
                 console.log("Signin successful", response.data);
                 // Xử lý token hoặc điều hướng sau khi đăng nhập
@@ -48,7 +96,7 @@ app.controller("AccountController", function($scope, $http, $location) {
         //   return;
         // }
         $http
-            .post(apiBaseUrl + "register", $scope.form)
+            .post(apiUser + "register", $scope.form)
             .then(function(response) {
                 console.log("Sign-up successful:", response.data);
                 Swal.fire({
@@ -83,7 +131,7 @@ app.controller("AccountController", function($scope, $http, $location) {
             return;
         }
         $http
-            .post(apiBaseUrl + "logout", { userId: userId, token: token })
+            .post(apiUser + "logout", { userId: userId, token: token })
             .then(function(response) {
                 console.log("Logged out:", response.data);
                 localStorage.removeItem("token");
@@ -224,5 +272,6 @@ app.controller("AccountController", function($scope, $http, $location) {
         $("#editModal").modal("show"); // Mở modal thêm nhân viên
     };
 
+    $scope.userById();
     $scope.getInvoiceWithUserId();
 });

@@ -62,10 +62,37 @@
                       href="#collapseExample2" role="button" aria-expanded="false"
                       aria-controls="collapseExample2"></i></span>
                                 </p>
+
+
+
+                                <!-- Bộ lọc thuộc tính -->
+                                <div class="group-filter card card-body" style="border:0;padding:0" ng-repeat="filter in filters">
+                                    <!-- Header -->
+                                    <div class="filter-header" ng-click="filter.isExpanded = !filter.isExpanded" style="cursor: pointer; padding: 10px; background-color: #f9f9f9; border: 1px solid #ddd;">
+                                        <b>{{filter.title}}</b>
+                                        <span style="float: right;">{{filter.isExpanded ? '-' : '+'}}</span>
+                                    </div>
+
+                                    <!-- Nội dung -->
+                                    <div class="filter-content" ng-show="filter.isExpanded" style="padding: 10px;">
+                                        <span ng-repeat="item in filter.items">
+            <input 
+                type="checkbox" 
+                id="{{filter.prefix}}-{{item.id}}" 
+                ng-model="filter.model[item.id]" 
+                ng-change="updateFilter()">
+            <label for="{{filter.prefix}}-{{item.id}}">
+                {{item.brandName || item.categoryName || item.usageObjectName || item.materialName}}  
+            </label><br>
+        </span>
+                                    </div>
+                                </div>
+
+
                                 <div class="block_content collapse" id="collapseExample2">
 
                                     <!-- Mục thương hiệu  -->
-                                    <div class="group-filter card card-body" style="border:0;padding:0" aria-expanded="true">
+                                    <!-- <div class="group-filter card card-body" style="border:0;padding:0" aria-expanded="true">
                                         <div class="layered_subtitle dropdown-filter">
                                             <b>Thương hiệu</b><br>
                                             <span class="" ng-repeat="brand in brands">
@@ -73,10 +100,10 @@
                                                 <label for="brand-{{brand.id}}">{{brand.brandName}}</label><br>
                                             </span>
                                         </div>
-                                    </div>
+                                    </div> -->
 
-                                    <!-- Danh mục -->
-                                    <div class="group-filter card card-body" style="border:0;padding:0" aria-expanded="true">
+                                    <!-- Danh mục   -->
+                                    <!-- <div class="group-filter card card-body" style="border:0;padding:0" aria-expanded="true">
                                         <div class="layered_subtitle dropdown-filter">
                                             <b>Danh mục</b><br>
                                             <span class="" ng-repeat="category in categorys">
@@ -84,10 +111,10 @@
                                                 <label for="category-{{category.id}}">{{category.categoryName}}</label><br>
                                             </span>
                                         </div>
-                                    </div>
+                                    </div> -->
 
                                     <!-- Đối tượng sử dụng -->
-                                    <div class="group-filter card card-body" style="border:0;padding:0" aria-expanded="true">
+                                    <!-- <div class="group-filter card card-body" style="border:0;padding:0" aria-expanded="true">
                                         <div class="layered_subtitle dropdown-filter">
                                             <b>Đối tượng sử dụng</b><br>
                                             <span class="" ng-repeat="usageobject in usageobjects">
@@ -95,10 +122,10 @@
                                                 <label for="usageobject-{{usageobject.id}}">{{usageobject.usageObjectName}}</label><br>
                                             </span>
                                         </div>
-                                    </div>
+                                    </div> -->
 
                                     <!-- Chất liệu -->
-                                    <div class="group-filter card card-body" style="border:0;padding:0" aria-expanded="true">
+                                    <!-- <div class="group-filter card card-body" style="border:0;padding:0" aria-expanded="true">
                                         <div class="layered_subtitle dropdown-filter">
                                             <b>Chất liệu</b><br>
                                             <span class="" ng-repeat="material in materials">
@@ -106,9 +133,10 @@
                                                 <label for="material-{{material.id}}">{{material.materialName}}</label><br>
                                             </span>
                                         </div>
-                                    </div>
+                                    </div> -->
 
-                                    <div class="group-filter" aria-expanded="true">
+                                    <!-- Lọc giá -->
+                                    <!-- <div class="group-filter" aria-expanded="true">
                                         <div class="layered_subtitle dropdown-filter"><span>Giá sản phẩm</span><span class="icon-control"><i class="fa fa-minus"></i></span></div>
                                         <div class="layered-content bl-filter filter-price">
                                             <ul class="check-box-list">
@@ -144,7 +172,7 @@
                                                 </li>
                                             </ul>
                                         </div>
-                                    </div>
+                                    </div> -->
 
                                     <div class="group-filter" aria-expanded="true">
                                         <div class="layered_subtitle dropdown-filter"><span>Màu sắc</span><span class="icon-control"><i

@@ -7,6 +7,7 @@ package com.example.Runflex.service.impl;
 import com.example.Runflex.dto.LoginDto;
 import com.example.Runflex.dto.LogoutDto;
 import com.example.Runflex.dto.RegisterDto;
+import com.example.Runflex.entity.User;
 import org.springframework.http.ResponseEntity;
 
 /**
@@ -19,4 +20,6 @@ public interface IUserService {
 
     ResponseEntity<?> register(RegisterDto registerDto);
     ResponseEntity<?> logout(LogoutDto logoutDto);
+    ResponseEntity<?> userById(long userId);
+    ResponseEntity<?> updateUser(Long id,User user);
 }

@@ -45,6 +45,7 @@ public class SpringSecurityConfig {
                         "/user/authenticate",
                         "/user/register",
                         "/user/logout",
+                        "/user/userById",
                         "/category/active",
                         "/usageobject/active",
                         "/size/active",
@@ -63,7 +64,8 @@ public class SpringSecurityConfig {
                 .requestMatchers(
                          "/invoice/saveWithDetails",
                         "/invoice/invoiceWithUser",
-                        "/invoice/invoiceWithDetail"
+                        "/invoice/invoiceWithDetail",
+                        "/user/UpdateUser"
                 ).hasAnyAuthority("Customer") // Chỉ có Customer
 
                 // Quyền của Admin
@@ -76,7 +78,8 @@ public class SpringSecurityConfig {
                         "/invoice/**",
                         "/invoicedetail/**",
                         "/color/**",
-                        "/invoicedetail/**"
+                        "/invoicedetail/**",
+                        "/user/**"
                 ).hasAuthority("Admin")
                 .anyRequest().authenticated(); // Tất cả yêu cầu khác phải xác thực
 

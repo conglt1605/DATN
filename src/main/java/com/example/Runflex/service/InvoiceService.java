@@ -94,6 +94,9 @@ public class InvoiceService implements IInvoiceService {
     @Override
     public ResponseEntity<?> saveInvoiceWithDetails(Invoice invoice) {
         // Kiểm tra danh sách chi tiết hóa đơn không rỗng
+        if (invoice.getConsigneeName() == null || invoice.getConsigneeName().isEmpty()) {
+            return ResponseEntity.badRequest().body(Map.of("error", "Vui lòng nhập địa chỉ nhận hàng !"));
+        }
         if (invoice.getInvoiceDetails() == null || invoice.getInvoiceDetails().isEmpty()) {
             return ResponseEntity.badRequest().body(Map.of("error", "Danh sách chi tiết hóa đơn không được để trống"));
         }
