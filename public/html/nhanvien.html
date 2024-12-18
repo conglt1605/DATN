@@ -1,0 +1,112 @@
+<div class="container mt-5">
+    <h1 class="text-center">Danh Sách Người Dùng</h1>
+    <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addModal">
+        Thêm Voucher
+    </button>
+
+    <!-- Table danh sách nhân viên -->
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Tên</th>
+                <th>Email</th>
+                <th>Số Điện Thoại</th>
+                <th>Địa Chỉ</th>
+                <th>Tên Tài Khoản</th>
+                <th>Mật Khẩu</th>
+                <th>Vai Trò</th>
+                <th>Trạng Thái</th>
+                <th>Hành Động</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="us in users">
+                <td>{{$index + 1}}</td>
+                <td>{{ us.fullName }}</td>
+                <td>{{ us.email }}</td>
+                <td>{{ us.phoneNumber }}</td>
+                <td>{{ us.address }}</td>
+                <td>{{ us.username }}</td>
+                <td>{{ us.password }}</td>
+                <td>{{ us.role.roleName }}</td>
+                <td>
+                    <span ng-class="{'badge bg-success': us.status == 1, 'badge bg-danger': us.status != 1}">
+                        {{ us.status == 1 ? 'Hoạt Động' : 'Ngưng Hoạt Động' }}
+                    </span>
+                </td>
+                <td>
+                    <button class="btn btn-info btn-sm btn-custom" ng-click="editUser(us)">
+                        <i class="fas fa-edit"></i> Sửa
+                    </button>
+                    <button class="btn btn-danger btn-sm btn-custom" ng-click="deleteUser(us.id)">
+                        <i class="fas fa-trash-alt"></i> Xóa
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Modal Thêm/Sửa Nhân Viên -->
+
+    <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">{{ editMode ? 'Sửa Nhân Viên' : 'Thêm Nhân Viên' }}</h5>
+                    <button type="button" class="btn-close" ng-click="closeModal()" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form ng-submit="submitData()">
+                        <div class="mb-3">
+                            <label for="fullName" class="form-label">Họ và tên</label>
+                            <input type="text" class="form-control" id="fullName" ng-model="user.fullName" required />
+                        </div>
+                        <div class="mb-3">
+                            <label for="fullName" class="form-label">Họ và tên</label>
+                            <input type="text" class="form-control" id="fullName" ng-model="user.fullName" required />
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="text" class="form-control" id="email" ng-model="user.email" required />
+                        </div>
+                        <div class="mb-3">
+                            <label for="phoneNumber" class="form-label">Số điện thoại</label>
+                            <input type="number" class="form-control" id="phoneNumber" ng-model="user.phoneNumber"
+                                required />
+                        </div>
+                        <div class="mb-3">
+                            <label for="address" class="form-label">Địa chỉ</label>
+                            <input type="text" class="form-control" id="address" ng-model="user.address" required />
+                        </div>
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Tên tài khoản</label>
+                            <input type="text" class="form-control" id="username" ng-model="user.username" required />
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Mật khẩu</label>
+                            <input type="text" class="form-control" id="password" ng-model="user.password" required />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Vai Trò:</label>
+                            <select class="form-select" ng-model="user.role.id"
+                                ng-options="role.id as role.roleName for role in roles">
+                                <option value="">Chọn Vai Trò</option>
+                            </select>
+                        </div>
+                        <div class="mb-3" ng-if="isEditing">
+                            <label for="status" class="form-label">Trạng Thái</label>
+                            <select class="form-control" id="status" ng-model="user.status" required>
+                                <option value="1">Hoạt động</option>
+                                <option value="0">Ngừng Hoạt động</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Lưu</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
