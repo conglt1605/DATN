@@ -43,7 +43,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             + "JOIN p.usageObject ub WHERE p.status = 1")
     Page<ProductDto> getPageProducts(Pageable pageable);
 
-    @Query("SELECT new com.example.Runflex.dto.ProductFilterDto(p.id, p.productCode, p.productName, c.categoryName,ub.usageObjectName,b.brandName,p.imageURL, p.status) FROM Product p "
+    @Query("SELECT new com.example.Runflex.dto.ProductFilterDto(p.id, p.productCode, p.productName, c.categoryName,ub.usageObjectName,b.brandName,p.imageURL,p.imageURL2, p.status) FROM Product p "
             + "JOIN p.productDetails pd "
             + "JOIN p.category c "
             + "JOIN p.brand b "

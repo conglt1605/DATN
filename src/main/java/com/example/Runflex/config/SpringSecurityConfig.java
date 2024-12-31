@@ -58,13 +58,15 @@ public class SpringSecurityConfig {
                         "/productdetail/getMaterialByProductID",
                         "/productdetail/getSizeByProductID",
                         "/productdetail/getColorByProductID",
-                        "/productdetail/priceMinMax"
+                        "/productdetail/priceMinMax",
+                        "/ProductDetailImage/imageWithID"
                 ).permitAll()
                 // Quyền của Customer
                 .requestMatchers(
                          "/invoice/saveWithDetails",
                         "/invoice/invoiceWithUser",
                         "/invoice/invoiceWithDetail",
+                        "/invoice/CancelOrder",
                         "/user/UpdateUser"
                 ).hasAnyAuthority("Customer") // Chỉ có Customer
 

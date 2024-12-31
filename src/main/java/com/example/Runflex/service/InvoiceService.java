@@ -13,12 +13,15 @@ import com.example.Runflex.repository.UserRepository;
 import com.example.Runflex.service.impl.IInvoiceService;
 import com.example.Runflex.util.Status;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
+import java.util.TimeZone;
 
 /**
  *
@@ -127,8 +130,9 @@ public class InvoiceService implements IInvoiceService {
         }
 
         // Thiết lập ngày tạo hóa đơn (nếu cần thiết)
-        invoice.setCreatedDate(LocalDate.now());
+        invoice.setCreatedDate(LocalDateTime.now());
         invoice.setStatus(Status.active); // Đặt trạng thái hóa đơn là active
+
 
         // Lưu hóa đơn và các chi tiết hóa đơn vào cơ sở dữ liệu
         invoiceRepository.save(invoice);
@@ -154,5 +158,16 @@ public class InvoiceService implements IInvoiceService {
         }
         return ResponseEntity.ok(Map.of("Success", invoices));
     }   
+
+    @Override
+    public ResponseEntity<?> cancelOrder(Long id) {
+        Invoice invoice = invoiceRepository.findById(id).orElseThrow();
+        if (invoice.getStatus() != 1 && invoice.getStatus() != 2) {
+            return ResponseEntity.badRequest().body(Map.of("error","Không thể hủy đơn hàng này"));
+        }
+        invoice.setStatus(5);
+        invoiceRepository.save(invoice);
+        return ResponseEntity.ok(Map.of("Success","Đã hủy đơn hàng thành công"));
+    }
 
 }

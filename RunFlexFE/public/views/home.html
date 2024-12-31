@@ -25,12 +25,12 @@
         <!--Product-->
         <div class="container" style="padding-bottom: 50px;">
             <div class="row">
-                <div class="col-md-3 col-sm-6 col-xs-6 col-6" ng-repeat="product in ProductFilter" ng-init="getPriceMinMax(product)">
+                <div class="col-md-3 col-sm-6 col-xs-6 col-6" ng-repeat="product in productsFilters" ng-init="getPriceMinMax(product)">
                     <div class="product-block">
                         <div class="product-img fade-box">
                             <a href="#" title="Adidas EQT Cushion ADV" class="img-resize">
                                 <img src={{product.imageURL}} alt="Adidas EQT Cushion ADV" class="lazyloaded">
-                                <img src={{product.imageURL}} alt="Adidas EQT Cushion ADV" class="lazyloaded">
+                                <img src={{product.imageURL2}} alt="Adidas EQT Cushion ADV" class="lazyloaded">
                             </a>
 
                         </div>

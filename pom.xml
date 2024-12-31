@@ -55,8 +55,7 @@
         </dependency>
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
-            <artifactId>jjwt-jackson
-            </artifactId> <!-- Hoặc jjwt-gson tùy thuộc vào cách bạn muốn xử lý JSON -->
+            <artifactId>jjwt-jackson</artifactId> <!-- Hoặc jjwt-gson tùy thuộc vào cách bạn muốn xử lý JSON -->
             <version>0.11.5</version>
         </dependency>
         <dependency>

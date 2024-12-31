@@ -12,13 +12,13 @@
                             <div class="layered">
                                 <ul class="menu-items">
                                     <li>
-                                        <a href="/userinfo">
+                                        <a href="/account">
                                             <i class="icon-user"></i>
                                             <span>Tài Khoản Của Tôi</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="/account">
+                                        <a href="/myorder">
                                             <i class="icon-shopping-cart"></i>
                                             <span>Đơn Mua</span>
                                         </a>
@@ -171,8 +171,8 @@
 
                     <!-- Footer -->
                     <div class="modal-footer justify-content-between">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">
-                    <i class="fas fa-times"></i> Đóng
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" ng-click="cancelOrder(selectedInvoice.ID)" ng-if="selectedInvoice.Status == 1 || selectedInvoice.Status == 2">
+                    <i class="fas fa-times"></i> Hủy đơn hàng
                 </button>
                         <button type="button" class="btn btn-success">
                     <i class="fas fa-check"></i> Xác nhận

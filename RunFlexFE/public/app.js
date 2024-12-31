@@ -30,21 +30,75 @@ app.config(function($routeProvider, $locationProvider, $httpProvider) {
         .when("/pay", {
             templateUrl: "views/pay.html",
             controller: "CartController",
+            resolve: {
+                // Kiểm tra xác thực trước khi vào trang account
+                checkAuth: function($q, $window, $location) {
+                    const token = $window.localStorage.getItem("token");
+                    if (!token) {
+                        Swal.fire({
+                            position: "center",
+                            icon: "error",
+                            title: "Vui lòng đăng nhập để đặt hàng",
+                            showConfirmButton: false,
+                            timer: 1500,
+                        });
+                        $location.path("/signin"); // Chuyển hướng đến trang login
+                        return $q.reject("Người dùng chưa đăng nhập"); // Ngăn chặn điều hướng
+                    }
+                    return $q.resolve();
+                },
+            },
         })
         .when("/buynow", {
             templateUrl: "views/buyNow.html",
             controller: "CartController",
+            resolve: {
+                // Kiểm tra xác thực trước khi vào trang account
+                checkAuth: function($q, $window, $location) {
+                    const token = $window.localStorage.getItem("token");
+                    if (!token) {
+                        Swal.fire({
+                            position: "center",
+                            icon: "error",
+                            title: "Vui lòng đăng nhập để đặt hàng",
+                            showConfirmButton: false,
+                            timer: 1500,
+                        });
+                        $location.path("/signin"); // Chuyển hướng đến trang login
+                        return $q.reject("Người dùng chưa đăng nhập"); // Ngăn chặn điều hướng
+                    }
+                    return $q.resolve();
+                },
+            },
         })
         .when("/test", {
             templateUrl: "views/test.html",
             // controller: "TestController",
         })
-        .when("/userinfo", {
-            templateUrl: "views/userInformation.html",
+        .when("/myorder", {
+            templateUrl: "views/myorder.html",
             controller: "AccountController",
+            resolve: {
+                // Kiểm tra xác thực trước khi vào trang account
+                checkAuth: function($q, $window, $location) {
+                    const token = $window.localStorage.getItem("token");
+                    if (!token) {
+                        Swal.fire({
+                            position: "center",
+                            icon: "error",
+                            title: "Vui lòng đăng nhập !",
+                            showConfirmButton: false,
+                            timer: 1500,
+                        });
+                        $location.path("/signin"); // Chuyển hướng đến trang login
+                        return $q.reject("Người dùng chưa đăng nhập"); // Ngăn chặn điều hướng
+                    }
+                    return $q.resolve();
+                },
+            },
         })
         .when("/account", {
-            templateUrl: "views/account.html",
+            templateUrl: "views/userInformation.html",
             controller: "AccountController",
             resolve: {
                 // Kiểm tra xác thực trước khi vào trang account
@@ -76,6 +130,7 @@ app.factory("AuthInterceptor", function($q, $window) {
             const token = $window.localStorage.getItem("token");
             const protectedUrls = [
                 "http://localhost:8080/api/invoice/saveWithDetails",
+                "http://localhost:8080/api/invoice/CancelOrder",
                 "http://localhost:8080/api/category/active",
                 "http://localhost:8080/api/usageobject/active",
                 "http://localhost:8080/api/size/active",
@@ -90,6 +145,7 @@ app.factory("AuthInterceptor", function($q, $window) {
                 "http://localhost:8080/api/color/active",
                 "http://localhost:8080/api/user/userById",
                 "http://localhost:8080/api/user/UpdateUser",
+                "http://localhost:8080/api/ProductDetailImage/imageWithID",
             ];
 
             if (token && protectedUrls.some((url) => config.url.includes(url))) {

@@ -70,9 +70,10 @@
                     </div>
                     <div class="one-eight text-center">
                         <div class="display-tc">
-                            {{ order.quantity }}
+                            <input type="number" class="form-control text-center" ng-model="order.quantity" ng-blur="validateQuantity(order)" />
                         </div>
                     </div>
+
                     <div class="one-eight text-center">
                         <div class="display-tc">
                             <span class="price">${{ order.productDetai.price * order.quantity }}</span>
@@ -112,6 +113,7 @@
                                     <p><span><strong>Tổng giá:</strong></span> <span>${{getTotal()}}</span></p>
 
                                 </div>
+
                                 <div class="col-sm-11">
                                     <button type="button" class="buy-now button" style="display: block;" ng-click="pay()">Thanh toán</button>
                                 </div>

@@ -60,5 +60,10 @@ public class InvoiceController {
     public ResponseEntity<?> getInvoiceWithDetail(@RequestParam Long invoiceId){
         return invoiceService.getInvoiceWithDetail(invoiceId);
     }
+    
+    @GetMapping("/CancelOrder")
+    public ResponseEntity<?> cancelOrder(@RequestParam long id){
+        return invoiceService.cancelOrder(id);
+    }
 }
 

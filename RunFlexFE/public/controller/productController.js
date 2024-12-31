@@ -15,6 +15,7 @@ app.controller("ProductController", function($scope, $http, $window) {
     $scope.selectedSizes = {}; // Kích cỡ đã chọn
     $scope.selectedColors = {}; // Màu sắc đã chọn
     $scope.selectedMaterials = {}; // Chất liệu đã chọn
+    $scope.productName = null;
     $scope.categorys = null;
     $scope.brands = null;
     $scope.usageobjects = null;

@@ -20,5 +20,6 @@ public interface IInvoiceService {
     ResponseEntity<?> saveInvoiceWithDetails(Invoice invoice);
     ResponseEntity<?> getInvoiceWithUserId(Long userId);
     ResponseEntity<?> getInvoiceWithDetail(Long invoiceId);
+    ResponseEntity<?> cancelOrder(Long id);
 }
 

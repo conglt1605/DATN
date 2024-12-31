@@ -41,76 +41,34 @@
                     <div class="row product-detail-main pr_style_01">
                         <div class="col-md-7 col-sm-12 col-xs-12">
                             <div class="product-gallery">
-                                <div class="product-gallery__thumbs-container hidden-sm
-                    hidden-xs">
-                                    <div class="product-gallery__thumbs thumb-fix">
+                                <div class="product-gallery__thumbs-container hidden-sm hidden-xs">
+                                    <div class="product-gallery__thumbs thumb-fix" ng-repeat="image in images">
 
-                                        <div class="product-gallery__thumb  active" id="imgg1">
-                                            <a class="product-gallery__thumb-placeholder" href="javascript:void(0);" data-image={{product.imgProduct}} data-zoom-image={{product.imgProduct}}>
-                                                <img src={{product.imgProduct}} data-image={{product.imgProduct}} alt="Nike Air Max 90 Essential" grape="">
+                                        <div class="product-gallery__thumb  active" id="{{image.id}}">
+                                            <a class="product-gallery__thumb-placeholder" href="javascript:void(0);" data-image="{{image.ImageURL}}" data-zoom-image="{{image.ImageURL}}">
+                                                <img src="{{image.ImageURL}}" data-image="{{image.ImageURL}}" alt="" grape="">
                                             </a>
                                         </div>
-
-                                        <!-- <div class="product-gallery__thumb " id="imgg2">
-                                            <a class="product-gallery__thumb-placeholder" href="javascript:void(0);" data-image="images/detailproduct/5.jpg" data-zoom-image="images/detailproduct/5.jpg">
-                                                <img src="images/detailproduct/5.jpg" data-image="images/detailproduct/5.jpg" alt="Nike Air Max 90 Essential" grape="">
-                                            </a>
-                                        </div>
-
-                                        <div class="product-gallery__thumb " id="imgg3">
-                                            <a class="product-gallery__thumb-placeholder" href="javascript:void(0);" data-image="images/detailproduct/2.jpg" data-zoom-image="images/detailproduct/2.jpg">
-                                                <img src="images/detailproduct/2.jpg" data-image="images/detailproduct/2.jpg" alt="Nike Air Max 90 Essential" grape="">
-                                            </a>
-                                        </div>
-
-                                        <div class="product-gallery__thumb " id="imgg4">
-                                            <a class="product-gallery__thumb-placeholder" href="javascript:void(0);" data-image="images/detailproduct/4.jpg" data-zoom-image="images/detailproduct/4.jpg">
-                                                <img src="images/detailproduct/4.jpg" data-image="images/detailproduct/4.jpg" alt="Nike Air Max 90 Essential" grape="">
-                                            </a>
-                                        </div>
-
-                                        <div class="product-gallery__thumb " id="imgg5">
-                                            <a class="product-gallery__thumb-placeholder" href="javascript:void(0);" data-image="images/detailproduct/7.jpg" data-zoom-image="images/detailproduct/7.jpg">
-                                                <img src="images/detailproduct/7.jpg" data-image="images/detailproduct/7.jpg" alt="Nike Air Max 90 Essential" grape="">
-                                            </a>
-                                        </div>
-
-                                        <div class="product-gallery__thumb " id="imgg6">
-                                            <a class="product-gallery__thumb-placeholder" href="javascript:void(0);" data-image="images/detailproduct/3.jpg" data-zoom-image="images/detailproduct/3.jpg">
-                                                <img src="images/detailproduct/3.jpg" data-image="images/detailproduct/3.jpg" alt="Nike Air Max 90 Essential" grape="">
-                                            </a>
-                                        </div> -->
-                                        <!-- 
-                                        <div class="product-gallery__thumb " id="imgg7">
-                                            <a class="product-gallery__thumb-placeholder" href="javascript:void(0);" data-image="images/detailproduct/8.jpg" data-zoom-image="images/detailproduct/8.jpg">
-                                                <img src="images/detailproduct/8.jpg" data-image="images/detailproduct/8.jpg" alt="Nike
-                            Air Max 90 Essential" grape="">
-                                            </a>
-                                        </div>
-
-                                        <div class="product-gallery__thumb " id="imgg8">
-                                            <a class="product-gallery__thumb-placeholder" href="javascript:void(0);" data-image="images/detailproduct/6.jpg" data-zoom-image="images/detailproduct/6.jpg">
-                                                <img src="images/detailproduct/6.jpg" data-image="images/detailproduct/6.jpg" alt="Nike Air Max 90 Essential" grape="">
-                                            </a>
-                                        </div> -->
 
                                     </div>
                                 </div>
                                 <div class="product-image-detail box__product-gallery
                     scroll hidden-xs">
-                                    <ul id="sliderproduct" class="site-box-content
-                      slide_product">
-
-                                        <li class="product-gallery-item gallery-item
-                        current " id="imgg1a">
-                                            <img class="product-image-feature " src={{product.imageURL}} alt="Nike Air Max 90 Essential" grape="">
+                                    <ul id="sliderproduct" class="site-box-content slide_product">
+                                        <li class="product-gallery-item gallery-item current" id="{{image.id}}" ng-if="!images || images.length === 0">
+                                            <img class="product-image-feature" src="https://res.cloudinary.com/dvdgvw0lj/image/upload/v1734704247/e4ed74ce-60df-4e49-849e-3679b173769d.png" alt="Default Image">
                                         </li>
-                                        <!-- 
+                                        <li class="product-gallery-item gallery-item current" id="{{image.id}}" ng-repeat="image in images">
+                                            <img class="product-image-feature" ng-src="{{image.ImageURL}}" alt="">
+                                        </li>
+                                    </ul>
+
+                                    <!-- 
                                         <li class="product-gallery-item gallery-item " id="imgg2a">
                                             <img class="product-image-feature" src="images/detailproduct/5.jpg" alt="Nike Air Max 90 Essential" grape="">
                                         </li> -->
 
-                                        <!-- <li class="product-gallery-item gallery-item " id="imgg3a">
+                                    <!-- <li class="product-gallery-item gallery-item " id="imgg3a">
                                             <img class="product-image-feature" src="images/detailproduct/2.jpg" alt="Nike Air Max 90 Essential" grape="">
                                         </li>
 

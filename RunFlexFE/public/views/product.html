@@ -62,6 +62,9 @@
                       href="#collapseExample2" role="button" aria-expanded="false"
                       aria-controls="collapseExample2"></i></span>
                                 </p>
+                                <div class="search-container">
+                                    <input type="text" placeholder="Tìm kiếm..." ng-model="productName" ng-change="updateFilter()" class="search-input">
+                                </div>
 
 
 
@@ -248,7 +251,7 @@
                         <div class="product-img fade-box">
                             <a href="#" title="Adidas EQT Cushion ADV" class="img-resize">
                                 <img src={{product.imageURL}} class="lazyloaded">
-                                <img src={{product.imageURL}} class="lazyloaded">
+                                <img src={{product.imageURL2}} class="lazyloaded">
                             </a>
 
                         </div>

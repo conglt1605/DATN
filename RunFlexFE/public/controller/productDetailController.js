@@ -7,6 +7,7 @@ app.controller("ProductDetailController", function ($scope, $http) {
   const apiColer = "http://localhost:8080/api/color/";
   const apiMaterial = "http://localhost:8080/api/material/";
   const apiProducDetail = "http://localhost:8080/api/productdetail/";
+  const apiProducDetailImage = "http://localhost:8080/api/ProductDetailImage/";
 
   $scope.sizes = null;
   $scope.colors = null;
@@ -54,7 +55,12 @@ app.controller("ProductDetailController", function ($scope, $http) {
     );
     if (existingProduct) {
       // Nếu sản phẩm đã có, cộng thêm số lượng
-      existingProduct.quantity += $scope.quantityOder || 1; // Mặc định quantity là 1 nếu không có giá trị
+      const maxQuantity = existingProduct.productDetai.quantity; // Lấy giá trị tối đa
+      const newQuantity = existingProduct.quantity + ($scope.quantityOder || 1);
+
+      // Giới hạn số lượng không vượt quá maxQuantity
+      existingProduct.quantity =
+        newQuantity > maxQuantity ? maxQuantity : newQuantity;
     } else {
       // Nếu sản phẩm chưa có, tạo mới đối tượng và thêm vào giỏ hàng
       let order = {
@@ -103,14 +109,21 @@ app.controller("ProductDetailController", function ($scope, $http) {
       .get(apiProducDetail + "getProducDetail", { params: params })
       .then(function (response) {
         $scope.productDetai = response.data.Success;
-        $scope.statusProduct = "Còn Hàng";
         $scope.quantityDetail = response.data.Success.quantity;
-        console.log($scope.productDetai);
+        $scope.imageURL = response.data.Success.imageURL;
+        console.log("productdetail", $scope.productDetai);
+        if ($scope.quantityDetail > 0) {
+          $scope.statusProduct = "Còn Hàng";
+        } else {
+          $scope.statusProduct = "Hết Hàng";
+        }
+        $scope.productDetailImage();
       })
       .catch(function (error) {
         console.error("Lỗi khi lấy dữ liệu sản phẩm:", error);
         $scope.statusProduct = "Hết Hàng";
         $scope.quantityDetail = 0;
+        $scope.images = [];
         return;
       });
   };
@@ -210,5 +223,19 @@ app.controller("ProductDetailController", function ($scope, $http) {
       // Nếu số lượng vượt quá số lượng tối đa, chỉnh lại về số lượng tối đa
       $scope.quantityOder = 1;
     }
+  };
+
+  $scope.productDetailImage = function () {
+    $http
+      .get(apiProducDetailImage + "imageWithID", {
+        params: { id: $scope.productDetai.id },
+      })
+      .then(function (response) {
+        $scope.images = response.data.Success || [];
+        console.log("images", $scope.images);
+      })
+      .catch(function (error) {
+        console.log("Lỗi khi lấy ảnh :", error);
+      });
   };
 });

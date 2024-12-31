@@ -12,6 +12,7 @@
   "description": "",
   "dependencies": {
     "express": "^4.21.1",
-    "ngx-color-picker": "^17.0.0"
+    "ngx-color-picker": "^17.0.0",
+    "qrcode": "^1.5.4"
   }
 }

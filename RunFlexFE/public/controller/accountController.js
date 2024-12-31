@@ -8,12 +8,35 @@ app.controller("AccountController", function($scope, $http, $location) {
     ($scope.userId = JSON.parse(localStorage.getItem("userId")));
     $scope.editMode = false;
 
+    $scope.cancelOrder = function(invoiceID) {
+        $http
+            .get(apiInvoice + "CancelOrder", { params: { id: invoiceID } })
+            .then(function(response) {
+                $scope.success = response.data.Success;
+                Swal.fire({
+                    icon: "success",
+                    title: "Hủy đơn hàng",
+                    text: $scope.success,
+                }).then(() => {
+                    location.reload(); // Tải lại trang sau khi thông báo thành công
+                });
+            })
+            .catch(function(error) {
+                $scope.error = error.data.error;
+                Swal.fire({
+                    icon: "error",
+                    title: "Lỗi khi hủy đơn hàng",
+                    text: $scope.error,
+                });
+            });
+    };
+
     $scope.userById = function() {
         $http
             .get(apiUser + "userById", { params: { userId: $scope.userId } })
             .then(function(response) {
                 $scope.userById = response.data.Success;
-                console.log($scope.userById);
+                console.log("UserById", $scope.userById);
             })
             .catch(function(error) {
                 console.error("Lỗi khi tìm user", error);
@@ -260,6 +283,7 @@ app.controller("AccountController", function($scope, $http, $location) {
 
     $scope.viewDetails = function(invoice) {
         $scope.selectedInvoice = angular.copy(invoice);
+        console.log("Select invoice:", $scope.selectedInvoice);
         $scope.getInvoiceWithDetail(invoice.ID);
         $("#detailsModal").modal("show"); // Đảm bảo rằng ID modal là #detailsModal
     };

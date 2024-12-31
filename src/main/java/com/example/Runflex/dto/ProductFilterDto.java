@@ -26,5 +26,6 @@ public class ProductFilterDto {
     private String usageObjectName;
     private String brandName;
     private String imageURL;
+    private String imageURL2;
     private int status;
 }

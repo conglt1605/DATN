@@ -37,6 +37,7 @@ public class Product {
     private String productCode;
     private String productName;
     private String imageURL;
+    private String imageURL2;
     private int status;
 
     @ManyToOne

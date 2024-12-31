@@ -16,6 +16,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.AllArgsConstructor;
@@ -40,7 +41,7 @@ public class Invoice {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String invoiceCode;
-    private LocalDate createdDate;
+    private LocalDateTime createdDate;
     private int paymentMethod;
     private long phoneNumber;
     private String deliveryAddress;
